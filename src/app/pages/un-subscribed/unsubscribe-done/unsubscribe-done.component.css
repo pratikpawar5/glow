@@ -1,0 +1,27 @@
+.un-subscribe-card
+{
+  width: 65%;
+  margin: auto;
+  margin-top: 6%;
+}
+.heading
+{
+    color: #ff3f12;
+    font-size: 36px;
+    display: inline-block;
+    margin-bottom: 24px;
+    font-weight: bold;
+}
+hr
+{
+    border: 0 solid #dbdedf;
+    height: 1px;
+    width: 100%;
+    margin: 20px 0;
+    border-bottom-width: 1px;
+}
+.email-box
+{
+  font-size: 24px;
+  line-height: 35px;
+}

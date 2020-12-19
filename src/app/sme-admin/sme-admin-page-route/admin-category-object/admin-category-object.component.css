@@ -1,0 +1,16 @@
+.sticky
+{
+    top: 66px;
+    position: sticky;
+}
+.p{
+    padding: 15px;
+    margin-bottom: 10px;
+    width: 100%;
+}
+@media(max-width:823px) and (min-width:768px){
+   .d
+   {
+       width: 150%;
+   }
+}

@@ -1,0 +1,22 @@
+<i class="material-icons close-icon" (click)="close()">close</i>
+
+<div class="text-center">
+  <h5>Reject Reason</h5>
+  <form>
+    <div class="mb-3 mt-2">
+      <mat-form-field appearance="outline">
+        <mat-label>Write a reason</mat-label>
+        <textarea matInput [formControl]="feedbackMessage" required autocomplete="off" rows="2"></textarea>
+        <mat-error *ngIf="feedbackMessage.hasError('required')">
+          Reason is required
+        </mat-error>
+        <mat-error *ngIf="feedbackMessage.hasError('maxlength')">
+          Max 255 characters allowed
+        </mat-error>
+      </mat-form-field>
+      <button type="submit" mat-stroked-button class="text-red" (click)="reject()">
+        Reject
+      </button>
+    </div>
+  </form>
+</div>

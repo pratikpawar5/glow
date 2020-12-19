@@ -1,0 +1,153 @@
+<div class="f-18 filter-menu">
+  Filters
+  <div *ngIf="selectedFilters?.length > 0" class="div-link text-uppercase float-right f-12" (click)="removeAll()">
+    clear all
+  </div>
+  <div *ngIf="selectedPrice">
+    <div class="selected-filter f-10" (click)="removeSelectedPrice()">
+      {{selectedPrice}} <b>X</b>
+    </div>
+  </div>
+  <div *ngIf="selectedFilters?.length > 0">
+    <div *ngFor="let filter of selectedFilters;let i=index">
+      <div class="selected-filter f-10" (click)="removeSmeName(filter)" *ngIf="i <5;else viewMore">
+        {{filter | namePipe}} <b>X</b>
+      </div>
+      <ng-template #viewMore>
+        <div id="demo" class="collapse">
+          <div class="selected-filter f-10" (click)="removeSmeName(filter)">
+            {{filter | namePipe}} <b>X</b>
+          </div>
+        </div>
+      </ng-template>
+    </div>
+    <div *ngIf="selectedFilters?.length > 5" class="f-12">
+      <div class="div-link" data-toggle="collapse" aria-expanded="false" data-target="#demo">
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div id="accordion">
+  <div class="card">
+    <div class="card-header" data-toggle="collapse" href="#collapseOne">
+      Price
+      <i class="material-icons cust-icon">
+        keyboard_arrow_down
+      </i>
+    </div>
+    <div id="collapseOne" class="collapse show col-margin" *ngIf="isDesktop || isTablet">
+      <div class="card-body">
+        <div *ngIf="selectedPrice">
+          <div class="selected-filter f-10" (click)="removeSelectedPrice()">
+            Clear <b>X</b>
+          </div>
+        </div>
+
+        <ng5-slider [(value)]="minPrice" [(highValue)]="maxPrice" [options]="options" (userChangeEnd)="valueChange($event)"></ng5-slider>
+
+        <div class="margin">
+          <mat-form-field appearance="outline">
+            <mat-label>Min Price</mat-label>
+            <input matInput [formControl]="minPriceControl" [value]="minPrice">
+          </mat-form-field>
+          <span class="spacing"></span>
+          <mat-form-field appearance="outline">
+            <mat-label>Max Price</mat-label>
+            <input matInput [formControl]="maxPriceControl" [value]="maxPrice">
+          </mat-form-field>
+        </div>
+
+      </div>
+    </div>
+    <div id="collapseOne" class="collapse col-margin" *ngIf="isMobile">
+      <div class="card-body">
+        <ng5-slider [(value)]="minPrice" [(highValue)]="maxPrice" [options]="options" (userChangeEnd)="valueChange($event)"></ng5-slider>
+
+        <div class="margin">
+          <mat-form-field appearance="outline">
+            <mat-label>Min Price</mat-label>
+            <input matInput [formControl]="minPriceControl" [value]="minPrice">
+          </mat-form-field>
+          <span class="spacing"></span>
+          <mat-form-field appearance="outline">
+            <mat-label>Max Price</mat-label>
+            <input matInput [formControl]="maxPriceControl" [value]="maxPrice">
+          </mat-form-field>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="card" *ngIf="smeFilter">
+    <div class="card-header" data-toggle="collapse" href="#collapseTwo">
+      SME
+      <i class="material-icons cust-icon">
+        keyboard_arrow_down
+      </i>
+    </div>
+    <div id="collapseTwo" class="collapse show col-margin " *ngIf="isDesktop || isTablet">
+      <div class="search-control">
+        <div class="selected-filter f-10" *ngIf="selectedFilters?.length > 0" (click)="removeAllSmeNameFilter()">
+          Clear all <b>X</b>
+        </div>
+        <input [formControl]="smeSearchControl" class="form-control filter-search-input" placeholder="Search SME ">
+      </div>
+      <div class="card-body scrollbar">
+        <div *ngIf="smeFilter?.length > 0 ;else noresult">
+          <div *ngFor="let sme of smeFilter;let i=index">
+            <mat-checkbox (click)="smeNameClick(i)" [checked]="sme.selected" matTooltip="{{sme.smeName}}">
+              <div class="smeName">{{sme.smeName}}</div>
+            </mat-checkbox>
+            <div class="float-right f-12">
+              ({{sme.count}})
+            </div>
+          </div>
+        </div>
+        <ng-template #noresult>
+          <span>No results found..</span>
+        </ng-template>
+      </div>
+    </div>
+    <div id="collapseTwo" class="collapse col-margin " *ngIf="isMobile">
+      <div class="search-control">
+        <input [formControl]="smeSearchControl" class="form-control filter-search-input" placeholder="Search SME ">
+      </div>
+      <div class="card-body scrollbar">
+        <div *ngIf="smeFilter?.length > 0 ;else noresult">
+          <div *ngFor="let sme of smeFilter;let i=index">
+            <mat-checkbox (click)="smeNameClick(i)" [checked]="sme.selected" matTooltip="{{sme.smeName}}">
+              <div class="smeName">{{sme.smeName}}</div>
+            </mat-checkbox>
+            <div class="float-right f-12">
+              ({{sme.count}})
+            </div>
+          </div>
+        </div>
+        <ng-template #noresult>
+          <span>No results found..</span>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="card" *ngIf="filter.discountFilter">
+    <div class="card-header" data-toggle="collapse" href="#collapseThree">
+      Discount
+      <i class="material-icons cust-icon">
+        keyboard_arrow_down
+      </i>
+    </div>
+    <div id="collapseThree" class="collapse show col-margin">
+      <div class="card-body">
+        <div *ngFor="let disc of filter.discountFilter | keyvalue;let i=index">
+          <mat-checkbox [checked]="disc.value.selected" (click)="discountClick(disc.value.value,disc.value.selected)">
+            {{disc.key}} ({{disc.value.count}})
+          </mat-checkbox>
+        </div>
+      </div>
+    </div>
+  </div> -->
+</div>

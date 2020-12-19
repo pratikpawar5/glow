@@ -1,0 +1,75 @@
+@import'../../../../../app/css/super-admin.css';
+
+.address-section{
+  color: black;
+    font-size: 19px;
+    margin-top: 32px;
+    margin-bottom: 10px;
+}
+
+.title
+{
+    font-weight: bold;
+    font-size: 14px;
+}
+.approve-button
+{
+  margin-bottom: 80px;
+  margin-left: 86%;
+}
+.basic-detail-card
+{
+    margin: auto;
+}
+.home-page-image  
+{
+    object-fit: contain;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: 5% 0 10% 0%;
+    transform: translate(-50%, -50%);
+}
+.sub-content
+{
+    font-size: 12px;
+    text-align: justify;
+}
+.slider-images
+{
+  height: 200px;
+  width: 250px;
+}
+.logo
+{
+  height: 150px;
+  width: 150px;
+}
+.mat-raised-button
+{
+  width: auto;
+}
+::ng-deep .mat-form-field-flex > .mat-form-field-infix { 
+    padding: 5px 0px;
+  }
+  ::ng-deep .mat-form-field-label-wrapper { 
+    top: -1.5em; 
+  }
+  
+  ::ng-deep .mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+    transform: translateY(-1.1em) scale(.75);
+    width: 133.33333%;
+  }
+  ::ng-deep .mat-form-field-appearance-outline .mat-form-field-prefix, .mat-form-field-appearance-outline .mat-form-field-suffix{
+    top:-3px !important;
+  }
+.imageLocationOne
+{
+  width: 200px;
+  height: 200px;
+}
+.imageLocationTwo
+{
+  width: 200px;
+  height: 200px;
+}

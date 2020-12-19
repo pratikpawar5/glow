@@ -1,0 +1,243 @@
+<div class="job-seeker-basic-details-dialog">
+    <i class="material-icons close-icon" (click)="onClickClose()">close</i>
+    <p class="main-title mb-2">Basic Details:</p>
+    <div class="container">
+        <form [formGroup]="jobSeekerBasicDetailsForm">
+            <div class="full-name mb-2">
+                <div class="row">
+                    <div class="col-md-12">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Full Name</mat-label>
+                            <input matInput placeholder="Full Name" formControlName="fullName" autocomplete="off"
+                                required #fullName>
+                            <mat-hint align="end">{{fullName.value?.length || 0}}/100</mat-hint>
+
+                            <mat-error *ngIf="jobSeekerBasicDetailsForm.get('fullName').hasError('required')">
+                                Full Name is
+                                required
+                            </mat-error>
+                            <mat-error *ngIf="jobSeekerBasicDetailsForm.get('fullName').hasError('maxlength')">
+                                Full Name should be maximum 100 Characters
+                            </mat-error>
+                            <mat-error *ngIf="jobSeekerBasicDetailsForm.get('fullName').hasError('pattern')">
+                                Numbers and special characters not
+                                allowed
+                            </mat-error>
+                            <mat-error *ngIf="jobSeekerBasicDetailsForm.get('fullName').hasError('cannotbeblank')">
+                                Invalid Inputs
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+
+            <div class="email-id mb-2">
+                <div class="row">
+                    <div class="col-md-6">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Email Id</mat-label>
+                            <input matInput placeholder="Email Id" formControlName="emailId" autocomplete="off">
+                            <mat-error *ngIf="jobSeekerBasicDetailsForm.get('emailId').hasError('pattern')">
+                                Please enter a
+                                valid email address
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-6">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Mobile Number</mat-label>
+                            <input matInput placeholder="Mobile Number" formControlName="mobileNumber" #mobile
+                                autocomplete="off" maxlength="10" required>
+                            <mat-hint align="end">{{mobile.value?.length || 0}}/10</mat-hint>
+
+                            <mat-error *ngIf="jobSeekerBasicDetailsForm.get('mobileNumber').hasError('pattern')">
+                                Only Numbers are allowed
+                            </mat-error>
+                            <mat-error *ngIf="jobSeekerBasicDetailsForm.get('mobileNumber').hasError('required')">
+                                Mobile Number is
+                                required
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <ul class="type-of-jobs-list">
+                        <li>
+                            <p class="titile">Gender:</p>
+                        </li>
+                        <li>&nbsp;
+                            <mat-radio-group class="col-md-6" formControlName="gender" [(ngModel)]="gender">
+                                <mat-radio-button class="" value="MALE">
+                                    <span class="radio-btn-text">Male</span>
+                                </mat-radio-button>
+                                &nbsp;&nbsp;
+                                <mat-radio-button class="example-margin" value="FEMALE">
+                                    <span class="radio-btn-text">Female</span>
+                                </mat-radio-button>
+                                &nbsp;&nbsp;
+                            </mat-radio-group>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="date-of-birth mb-2">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p class="titile">DOB <span style="color: red">*</span></p>
+                        <mat-form-field appearance="outline">
+                            <input matInput [max]="currentDate" [matDatepicker]="picker" placeholder="DOB (MM/DD/YYYY)"
+                                formControlName="dob" required>
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker disabled="false"></mat-datepicker>
+
+                        </mat-form-field>
+                        <div *ngIf="isDob" class="age-error">
+                            DOB is
+                            required
+                        </div>
+                        <span *ngIf="dobNotAllowed" class="age-error">Age not in range 18-70</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="Experience mb-2">
+                <p class="titile">Total Experience</p>
+                <div class="row">
+                    <div class="col-md-3">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Experience In Year</mat-label>
+                            <mat-select formControlName="totalExpsYear">
+                                <mat-option *ngFor="let y of experienceInYear" [value]="y.value">
+                                    {{y.viewValue}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-3" *ngIf=expInMonth>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Experience In Month</mat-label>
+                            <mat-select formControlName="totalExpsMonth">
+                                <mat-option *ngFor="let m of experienceInMonth" [value]="m.value">
+                                    {{m.viewValue}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+            <div class="salary mb-2" *ngIf="expInMonth">
+                <p class="titile mb-2">Salary</p>
+                <div class="row">
+                    <div class="col-md-4">
+                        <mat-radio-group class="col-md-6" formControlName="INR" [(ngModel)]="indianRupees">
+                            <mat-radio-button class="" value="INR">
+                                <span class="radio-btn-text">Indian Rupees</span>
+                            </mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                    <div class="col-md-4">
+                    </div>
+                    <div class="col-md-4">
+                    </div>
+                </div>
+            </div>
+            <div class="annual-salary" *ngIf="expInMonth">
+                <div class="row">
+                    <div class="col-md-3">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Salary Type</mat-label>
+                            <mat-select formControlName="salaryType">
+                                <mat-option *ngFor="let i of salaryName" [value]="i.value"
+                                    (click)="onClickSalaryType()">
+                                    {{i.viewValue}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Salary</mat-label>
+                            <input matInput placeholder="Salary" formControlName="salary" autocomplete="off"
+                                maxlength="10">
+                            <mat-error
+                                *ngIf="jobSeekerBasicDetailsForm.get('salary').hasError('pattern') ||  jobSeekerBasicDetailsForm.get('salary').hasError('maxLength') || jobSeekerBasicDetailsForm.get('min') || jobSeekerBasicDetailsForm.get('max')">
+                                Please Enter Valid Inputs
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="location mb-2">
+                <p class="titile">Location <span style="color: red">*</span></p>
+                <div class="row mb-3">
+                    <div class="col-md-4">
+                        <mat-form-field appearance="outline">
+                            <mat-select formControlName="currentCountry" required placeholder="Country">
+                                <mat-option>--</mat-option>
+                                <mat-option *ngFor="let country of countries" [value]="country.countryName"
+                                    (click)="onStates(country)">
+                                    {{country.countryName}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="jobSeekerBasicDetailsForm.get('currentCountry').hasError('required')">
+                                Please choose Country
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-4">
+                        <mat-form-field appearance="outline">
+                            <mat-select formControlName="currentState" required placeholder="State">
+                                <mat-option>--</mat-option>
+                                <mat-option *ngFor="let state of states" [value]="state.stateName"
+                                    (click)="onCities(state)">
+                                    {{state.stateName}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="jobSeekerBasicDetailsForm.get('currentState').hasError('required')">
+                                Please choose State
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-4">
+                        <mat-form-field appearance="outline">
+                            <mat-select formControlName="currentCity" required placeholder="City">
+                                <mat-option>--</mat-option>
+                                <mat-option *ngFor="let city of cities" [value]="city.cityName">
+                                    {{city.cityName}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="jobSeekerBasicDetailsForm.get('currentCity').hasError('required')">
+                                Please choose City
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+
+            <div class="action-button" *ngIf="showButton;else disabled">
+                <div class="row">
+                    <div class="cancel-button">
+                        <button type="button" class="btn cancel" (click)="onClickClose()">CANCEL</button>
+                    </div>
+                    <div class="save-button">
+                        <button type="submit" class="btn save" (click)="onSave()">SAVE</button>
+                    </div>
+                </div>
+            </div>
+            <ng-template #disabled>
+                <div class="text-center">
+                    <button disabled type="button" class="btn btn-default ">
+                        <mat-spinner class="spinner" strokeWidth="4" [diameter]="15">
+                        </mat-spinner> Saving...please wait
+                    </button>
+                </div>
+            </ng-template>
+        </form>
+    </div>
+</div>

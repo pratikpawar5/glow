@@ -1,0 +1,102 @@
+::ng-deep .mat-form-field-flex > .mat-form-field-infix { 
+  padding: 5px 0px;
+}
+::ng-deep .mat-form-field-label-wrapper { 
+  top: -1.5em; 
+}
+
+::ng-deep .mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+  transform: translateY(-1.1em) scale(.75);
+  width: 133.33333%;
+}
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-prefix, .mat-form-field-appearance-outline .mat-form-field-suffix{
+  top:-3px !important;
+}
+
+/* .sme-object-form{
+    margin: 40px;
+  } */
+  .card{
+    width: 100%;
+    margin-bottom: 10px !important;
+  }
+  mat-form-field{
+    width: 100%;  
+  }
+  
+  .business-post-checkbox{
+    width: 30%;
+    padding-left: 12px;
+    margin-top:20px; 
+  }
+  .business-post-error-msg{
+    margin-top:5px; 
+    color: red;
+  }
+  .business-post-error-msg a{
+    margin-left: 10px;
+    color: #007bff;
+  }
+  .select-image label{
+    margin-right: 40px;
+  }
+  .select-image label span{
+    color: red;
+  }
+  .image-types{
+    color: grey;
+    font-size: 13px;
+    margin: 10px
+  }
+  .image-uploaded{
+    margin: 10px;
+  }
+  .image-display{
+    padding: 10px;
+  }
+  .default-image img{
+    padding: 30px;
+    background-color: #f1f1f1;
+  }
+  .upload-progress{
+    width: 87%;
+  }
+  .upload-fail{
+    color: red;
+  }
+  .mat-progress-bar {
+    height: 10px;
+  }
+
+.mat-raised-button
+{
+  width: auto;
+}
+   .spec-error{
+    color: red;
+    font-size: 10px;
+  }
+  .mat-primary{
+    color: black
+  }
+  .save-as-draft
+  {
+      font-size: 16px;
+      font-weight: 500;
+      color:#7c8186e4;
+      cursor: pointer;
+      position: absolute;
+      right: 16px;
+  }
+  .draft-button:hover
+  {
+      color: #0073b6;
+  }
+  mat-label
+  {
+      font-size: 15px;
+  }
+  .image-display
+  {
+    margin-top: 22px;
+  }

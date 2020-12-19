@@ -1,0 +1,23 @@
+.wrap{
+    margin: 15px 0;
+}
+.job-card
+{
+    margin: 10px;
+}
+.jobTitle{
+    color: #0073b6;
+    }
+.icons
+{
+    color: #6d7781;
+    font-size: 14px;
+} 
+.jobDesc{
+    color: #272727;
+    word-break: break-word;
+    font-size: 13px;
+  }   
+.a:hover{
+    color: #ed2301
+}  

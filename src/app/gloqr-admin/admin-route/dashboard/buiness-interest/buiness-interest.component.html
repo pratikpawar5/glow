@@ -1,0 +1,156 @@
+<div infinite-scroll [infiniteScrollDistance]="scrollDistance" [infiniteScrollUpDistance]="scrollUpDistance"
+  [infiniteScrollThrottle]="throttle" [scrollWindow]="true" (scrolled)="onScrollDown()">
+  <div class="table">
+    <div class="row">
+      <div class="col-md-6">
+        <h4>{{count}} Records found for last {{biDaysFormControl.value}} days since now</h4>
+      </div>
+      <div class="col-md-3">
+        <mat-form-field>
+          <mat-label>Days</mat-label>
+          <mat-select [formControl]="biDaysFormControl">
+            <mat-option *ngFor="let day of filterDays" [value]="day.value">
+              {{day.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-md-3">
+        <mat-form-field>
+          <mat-label>Cart Stage</mat-label>
+          <mat-select [formControl]="biStagesFormControl">
+            <mat-option *ngFor="let cartStage of cartStages" [value]="cartStage.value">
+              {{cartStage.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <mat-accordion *ngFor="let cartItem of cartItems;let i=index">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title class="text-bold" [ngClass]="{
+              'cart-active':cartItem.cartState === 'ACTIVE',
+              'text-success':cartItem.cartState === 'COMPLETED',
+              'text-danger':(cartItem.cartState === 'REJECTED'|| cartItem.cartState === 'AUTO_CLOSED')}
+              ">
+            {{i+1}}. BI generated for
+            {{cartItem.itemData.itemName}}
+            ({{cartItem.itemData.itemType}}) on&nbsp;
+            <span *ngIf="biStagesFormControl.value === 'ALL' || biStagesFormControl.value === 'ACTIVE';else updatedAt">
+              {{cartItem.createdAt | date:'dd/MM/yyyy'}}</span>
+            <ng-template #updatedAt>
+              <span>
+                {{cartItem.updatedAt | date:'dd/MM/yyyy'}}
+              </span>
+            </ng-template>
+            [{{cartItem.cartState}}]
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <div class="row">
+          <div class="col-md-6 border">
+            <h4 class="text-center">Sent Interest Details</h4>
+            <hr>
+            <ul *ngIf="cartItem.viewStatus;else viewDetails">
+              <li *ngIf="cartItem.userDetails">
+                <span class="text-bold">User Name:</span>
+                {{cartItem.userDetails.userFullName}}
+              </li>
+              <li *ngIf="cartItem.userDetails?.userEmail">
+                <span class="text-bold">User Email:</span>
+                {{cartItem.userDetails.userEmail}}
+              </li>
+              <li *ngIf="cartItem.userDetails?.userMobile">
+                <span class="text-bold">User Mobile:</span>
+                {{cartItem.userDetails.userMobile}}
+              </li>
+              <li>
+                <span class="text-bold">View Status:</span>
+                <span *ngIf="cartItem.viewStatus; else close" style="margin-left: 10px;">
+                  <i class="fa fa-check" aria-hidden="true"></i>
+
+                </span>
+                <ng-template #close>
+                  <i class="fa fa-times" aria-hidden="true"></i>
+                </ng-template>
+              </li>
+            </ul>
+            <ng-template #viewDetails>
+              <img src="../../../../../assets/action/userdetails.png ">
+            </ng-template>
+          </div>
+
+          <div class="col-md-6 border">
+            <h4 class="text-center">Receive Interest Details</h4>
+            <hr>
+            <ul>
+              <li>
+                <span class="text-bold">SME Name:</span> {{cartItem.itemData.smeName}}
+              </li>
+              <li>
+                <span class="text-bold">SME Email:</span>
+                {{cartItem.smeDetails.contactEmail}}
+              </li>
+              <li>
+                <span class="text-bold">SME Phone:</span>
+                {{cartItem.smeDetails.contactPhone}}
+              </li>
+              <li *ngIf="cartItem.smeDetails.smeAddress">
+                <span class="text-bold">SME Address:</span>
+                {{cartItem.smeDetails.smeAddress.locality}},
+                {{cartItem.smeDetails.smeAddress.city}},
+                {{cartItem.smeDetails.smeAddress.state}}
+              </li>
+              <li *ngIf="cartItem.itemData">
+                <span class="text-bold">Item Type:</span> {{cartItem.itemData.itemType}}
+              </li>
+              <li *ngIf="cartItem.itemData">
+                <span class="text-bold">Item Name:</span> {{cartItem.itemData.itemName}}
+              </li>
+              <li>
+                <span class="text-bold">Cart State:</span> {{cartItem.cartState}}
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="order-progress">
+          <ul class="progressbar">
+
+            <li [ngClass]="{'active':(cartItem.firstStage.status === 'ORDERED'),
+            'inactive':(cartItem.firstStage?.status === 'REJECTED')}">
+              <p>ORDERED</p>
+            </li>
+
+            <li [ngClass]="{'active':(cartItem.secondStage?.status === 'QUOTATION'),
+            'inactive':(cartItem.secondStage?.status === 'REJECTED')}">
+              <p>QUOTATION</p>
+            </li>
+
+            <li [ngClass]="{'active':(cartItem.thirdStage?.status === 'PURCHASE_ORDER'),
+            'inactive':(cartItem.thirdStage?.status === 'REJECTED')}">
+              <p>PURCHASE ORDER</p>
+            </li>
+
+            <li [ngClass]="{'active':cartItem.fourthStage?.status === 'DELIVERED'}">
+              <p>DELIVERED</p>
+            </li>
+
+          </ul>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+
+  <div *ngIf="noDataAvailable">
+    <div class="text-center">
+      <h1>No Data Available</h1>
+    </div>
+  </div>
+  <div *ngIf="noMoreDataAvailable">
+    <div class="text-center">
+      <h1>No More Data Available</h1>
+    </div>
+  </div>
+</div>

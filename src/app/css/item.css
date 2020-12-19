@@ -1,0 +1,48 @@
+img:hover{
+    transform: scale(1.02)
+}
+.mat-card-lg-image {
+    width: 150px;
+    height: 150px;
+    object-fit: scale-down;
+}
+.item{
+    padding: 10px;
+}
+.item-img{
+    margin-bottom: 10px;
+    display: inline-block;
+}
+.item-img a{
+    display: inline-block;
+}
+.item-name, .item-sme-name{
+    white-space: nowrap;
+    /* width: 160px;  */
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    letter-spacing: 1px;
+}
+.item-name a{
+    font-size: 14px;
+    color: #000000;
+    text-decoration: none;
+}
+.item-sme-name a{
+    font-size: 12px;
+    padding: 5px 0;
+    color: #666666;
+}
+.line-through-price{
+    color: #ff0000;
+    text-decoration: line-through;
+    font-size: 14px;
+}
+.original-price{
+    font-size: 14px;
+    padding-bottom: 5px;
+    width: 160px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

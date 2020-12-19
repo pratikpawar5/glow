@@ -1,0 +1,33 @@
+<div class="container">
+
+  <div class="pt-5 mb-3 sent-on">
+    OTP sent on
+    <span *ngIf="otpData?.username"> {{otpData.username}}</span>
+  </div>
+
+  <form [formGroup]="otpVerifyForm" (ngSubmit)="onVerify()">
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-10">
+        <mat-form-field>
+          <input formControlName="otp" matInput placeholder="Enter OTP" maxlength="3" autocomplete="off">
+          <div class="div-link" (click)="resendOtp()" matSuffix>Resend?</div>
+          <mat-error *ngIf="otpVerifyForm.get('otp').hasError('required')">
+            please enter OTP
+          </mat-error>
+          <mat-error *ngIf="otpVerifyForm.get('otp').hasError('pattern')">
+            only numbers are allowed
+          </mat-error>
+          <mat-error *ngIf="otpVerifyForm.get('otp').hasError('invalidOtp')">
+            {{invalidOtpErrorMsg}}
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="btn-parent">
+      <button mat-raised-button class="verify-btn">Verify OTP</button>
+    </div>
+
+  </form>
+</div>

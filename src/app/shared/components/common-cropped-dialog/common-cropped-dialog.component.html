@@ -1,0 +1,54 @@
+<i class="material-icons close-icon" (click)="onClickClose()">close</i>
+<div class="specialization-dialog-box">
+  <div class="heading-choose">
+    <p class="sub-heading">Edit {{data.user}} Photo</p>
+    <hr>
+  </div>
+
+  <div class="specialization scrollbar-sml scrollbar">
+    <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="1 / 1"
+      [resizeToWidth]="128" [cropperMinWidth]="128" [onlyScaleDown]="true" backgroundColor="#000000"
+      [roundCropper]="true" format="png" outputType="file" (imageCropped)="imageCropped($event)"
+      (imageLoaded)="imageLoaded()" (cropperReady)="cropperReady()" (loadImageFailed)="loadImageFailed()"
+      [style.display]="showCropper ? null : 'none'" [alignImage]="'center'"></image-cropper>
+    <p class="preview">Preview:</p>
+    <img alt="Cropped" [src]="croppedImage" class="crop-img" />
+  </div>
+
+  <hr>
+
+  <div class="photo-rotate-key">
+    <ul class="type-of-jobs-list">
+      <li>
+        <i class="material-icons" (click)="rotateLeft()" matTooltip="Rotate Left">
+          rotate_left
+        </i>
+      </li>
+      <li>
+        <i class="material-icons" (click)="rotateRight()" matTooltip="Rotate Right">
+          rotate_right
+        </i>
+      </li>
+      <li>
+        <i class="material-icons" (click)="flipHorizontal()" matTooltip="Flip Horizontal">
+          flip
+        </i>
+      </li>
+
+      <li>
+        <i class="material-icons" (click)="flipVertical()" matTooltip="Flip Vertical">
+          vertical_align_center
+        </i>
+      </li>
+    </ul>
+  </div>
+
+  <hr>
+
+  <div class="action-button">
+    <mat-chip-list class="mat-chips">
+      <mat-chip (click)="onClickClose()">Cancel</mat-chip>
+      <mat-chip color="primary" selected (click)="UploadToServer()">Save Changes</mat-chip>
+    </mat-chip-list>
+  </div>
+</div>

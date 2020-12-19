@@ -1,0 +1,454 @@
+<div infinite-scroll [infiniteScrollDistance]="scrollDistance" [infiniteScrollUpDistance]="scrollUpDistance"
+  [infiniteScrollThrottle]="throttle" (scrolled)="onScrollDown()">
+  <div class="wrap">
+    <div class="title no-margin">
+      <div class="no-padding">
+        <h4>Dashboard</h4>
+      </div>
+    </div>
+    <mat-accordion>
+      <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <div class="widget-box widget-color-blue2">
+              <div class="widget-header widget-header-small">
+                <h6 class="widget-title lighter">
+                  <i class="ace-icon fa fa-bar-chart-o">
+                  </i>
+                  GMV (Gross Merchandise Value)
+                </h6>
+              </div>
+            </div>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <div *ngIf="pieChartValue">
+          <div class="row f-20 text-center text-bold">
+            <div class="col-md-4">
+              <a href routerLink="/cart/received" [queryParams]="{by:'ACTIVE'}" target="_blank">
+                <mat-card class="value-card">
+                  <p class="amount">
+                    {{pieChartValue.totalAmount | DecimalPrice}}
+                  </p>
+                  <img src="../../../../assets/dashboard/India_rupee_bag.png" class="value-card-icon">
+                  <p class="mt-2 value-text">Total BI Amount</p>
+                </mat-card>
+              </a>
+
+            </div>
+            <div class="col-md-4">
+              <a href routerLink="/cart/received" [queryParams]="{by:'ACTIVE'}" target="_blank">
+                <mat-card class="value-card">
+                  <p class="amount">
+                    {{pieChartValue.quotationAmount | DecimalPrice}}
+                  </p>
+                  <img src="../../../../assets/dashboard/Quotation Amount (1).png" class="value-card-icon">
+                  <p class="mt-2 value-text">Quotation Amount</p>
+                </mat-card>
+              </a>
+            </div>
+            <div class="col-md-4">
+              <a href routerLink="/cart/received" [queryParams]="{by:'COMPLETED'}" target="_blank">
+                <mat-card class="value-card">
+                  <p class="amount">
+                    {{pieChartValue.deliveredAmount | DecimalPrice}}
+                  </p>
+                  <img src="../../../../assets/dashboard/delivery-icon-62.png" class="value-card-icon">
+                  <p class="mt-2 value-text"> Delivered Amount</p>
+                </mat-card>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <br>
+        <div class="row" *ngIf="pieChartValue">
+          <div class="col-md-6">
+            <div *ngIf="pieChartValue.totalAmount > 0;else noData">
+              <p-chart type="pie" [data]="cartData"></p-chart>
+              <br>
+              <p class="text-center">Overall Business Interest Details
+                <i class="fa fa-question-circle-o question-mark"
+                  matTooltip="Overall Business Interest Details until now is displayed"></i>
+              </p>
+            </div>
+            <ng-template #noData>
+              <img src="../../../../assets/not-found/not-found-chart-min.png">
+            </ng-template>
+          </div>
+          <br>
+          <div class="col-md-6">
+            <p-chart type="bar" [data]="data"></p-chart>
+            <br>
+            <p class="text-center">Monthly Business Interest Conversion <i class="fa fa-question-circle-o question-mark"
+                matTooltip="Details of past 6 months including current one are displayed on monthly basis."></i> </p>
+          </div>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+    <br>
+    <mat-accordion>
+      <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <div class="widget-box widget-color-blue2">
+              <div class="widget-header widget-header-small">
+                <h6 class="widget-title lighter">
+                  <i class="fa fa-id-card-o" aria-hidden="true"></i>
+                  Profile Strength and Business Circle
+                </h6>
+              </div>
+            </div>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="profile-panel">
+          <div class="row">
+            <div class="col-md-4" *ngIf="editModeItemsPercentage">
+              <div class="text-center">
+                <p> Overall Progress</p>
+                <circle-progress [percent]="editModeItemsPercentage.overAllPercentage" [radius]="90"
+                  [outerStrokeWidth]="8" [innerStrokeWidth]="6" [outerStrokeColor]="'#78C000'"
+                  [innerStrokeColor]="'#C7E596'" [animation]="true" [animationDuration]="300">
+                </circle-progress>
+                <p (click)="onClickViewMoreDetail()" style="cursor: pointer;font-size: 14px;color:#0073b6">
+                  View Details
+                </p>
+              </div>
+            </div>
+            <div class="col-md-8">
+              <div class="text-center">
+                <p> Business Circle</p>
+                <div class=" circle-privacy">
+                  <a class="privacy" matTooltip="Circle Privacy">
+                    <i class="fa fa-cog" aria-hidden="true" (click)="onClickSetting()" style="cursor: pointer"></i>
+                    ({{circlePrivacy}})
+                  </a>
+                </div>
+                <br>
+                <div class="button">
+                  <ul class="type-of-jobs-list">
+                    <li>
+                      <a routerLink="/social/{{sUuid}}/my-connection-home" target="_blank">
+                        <div class="cursor-pointer">
+                          <button class="btn btn-success count-btn">{{myconnectionCount}}</button>
+                        </div>
+                        <br>
+                        <p class="text-center">Circle
+                        </p>
+                      </a>
+                    </li>
+                    <li>
+                      <a routerLink="/social/{{sUuid}}/pending-request-home" target="_blank">
+                        <div class="cursor-pointer">
+                          <button class="btn btn-warning count-btn">{{pendingCount}}</button>
+                        </div>
+                        <br>
+                        <p class="text-center">Receive
+                        </p>
+                      </a>
+                    </li>
+                    <li>
+                      <a routerLink="/social/{{sUuid}}/sent-request-home" target="_blank">
+                        <div class="cursor-pointer">
+                          <button class="btn btn-info count-btn">{{sentCount}}</button>
+                        </div>
+                        <br>
+                        <p class="text-center">Sent
+                        </p>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </mat-expansion-panel>
+    </mat-accordion>
+    <br>
+    <mat-accordion *ngIf="editModeItemsCount"> 
+      <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <div class="widget-box widget-color-blue2">
+              <div class="widget-header widget-header-small">
+                <h6 class="widget-title lighter">
+                  <i class="fa fa-snowflake-o" aria-hidden="true"></i>
+                  SME Objects
+                </h6>
+              </div>
+            </div>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <table class="table table-hover table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col" class="heading">SME Object</th>
+              <th scope="col" class="heading">Active</th>
+              <th scope="col" class="heading">De-active</th>
+              <th scope="col" class="heading">Total</th>
+              <th scope="col" class="heading">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>Product</td>
+              <td>{{editModeItemsCount.activeApprovedProducts}}</td>
+              <td>{{editModeItemsCount.totalProducts-editModeItemsCount.activeApprovedProducts}}</td>
+              <td>{{editModeItemsCount.totalProducts}}</td>
+              <td>
+                <a href [routerLink]="['../add-product']" target="_blank">
+                  <button mat-stroked-button color="primary"><i class="fa fa-plus" aria-hidden="true"></i>
+                    Add</button> &nbsp;
+                </a>
+                <a href [routerLink]="['../products']" target="_blank">
+                  <button mat-stroked-button><i class="fa fa-eye" aria-hidden="true"></i>
+                    View</button>
+                </a>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td>Service</td>
+              <td>{{editModeItemsCount.activeApprovedServices}}</td>
+              <td>{{editModeItemsCount.totalServices-editModeItemsCount.activeApprovedServices}}</td>
+              <td>{{editModeItemsCount.totalServices}}</td>
+              <td>
+                <a href [routerLink]="['../add-service']" target="_blank">
+                  <button mat-stroked-button color="primary"><i class="fa fa-plus" aria-hidden="true"></i>
+                    Add</button> &nbsp;
+                </a>
+
+                <a href [routerLink]="['../services']" target="_blank">
+                  <button mat-stroked-button><i class="fa fa-eye" aria-hidden="true"></i>
+                    View</button>
+                </a>
+
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">3</th>
+              <td>Certificate</td>
+              <td>{{editModeItemsCount.activeApprovedCertificates}}</td>
+              <td>{{editModeItemsCount.totalCertificates-editModeItemsCount.activeApprovedCertificates}}</td>
+              <td>{{editModeItemsCount.totalCertificates}}</td>
+              <td>
+                <a href [routerLink]="['../add-certificate']" target="_blank">
+                  <button mat-stroked-button color="primary"><i class="fa fa-plus" aria-hidden="true"></i>
+                    Add</button> &nbsp;
+                </a>
+                <a href [routerLink]="['../certificates']" target="_blank">
+                  <button mat-stroked-button><i class="fa fa-eye" aria-hidden="true"></i>
+                    View</button>
+                </a>
+
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">4</th>
+              <td>Infrastructure</td>
+              <td>{{editModeItemsCount.activeApprovedInfras}}</td>
+              <td>{{editModeItemsCount.totalInfras-editModeItemsCount.activeApprovedInfras}}</td>
+              <td>{{editModeItemsCount.totalInfras}}</td>
+              <td>
+                <a href [routerLink]="['../add-infrastructure']" target="_blank">
+                  <button mat-stroked-button color="primary"><i class="fa fa-plus" aria-hidden="true"></i>
+                    Add</button> &nbsp;
+                </a>
+
+                <a href [routerLink]="['../infrastrcutures']" target="_blank">
+                  <button mat-stroked-button><i class="fa fa-eye" aria-hidden="true"></i>
+                    View</button>
+                </a>
+
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">5</th>
+              <td>Management-Team</td>
+              <td>{{editModeItemsCount.activeApprovedTeams}}</td>
+              <td>{{editModeItemsCount.totalTeams-editModeItemsCount.activeApprovedTeams}}</td>
+              <td>{{editModeItemsCount.totalTeams}}</td>
+              <td>
+                <a href [routerLink]="['../add-management-team']" target="_blank">
+                  <button mat-stroked-button color="primary"><i class="fa fa-plus" aria-hidden="true"></i>
+                    Add</button> &nbsp;
+                </a>
+                <a href [routerLink]="['../management-teams']" target="_blank">
+                  <button mat-stroked-button><i class="fa fa-eye" aria-hidden="true"></i>
+                    View</button>
+                </a>
+
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">6</th>
+              <td>Gallery</td>
+              <td>{{editModeItemsCount.activeApprovedGalleries}}</td>
+              <td>{{editModeItemsCount.totalGalleries-editModeItemsCount.activeApprovedGalleries}}</td>
+              <td>{{editModeItemsCount.totalGalleries}}</td>
+              <td>
+                <a href [routerLink]="['../add-gallery']" target="_blank">
+                  <button mat-stroked-button color="primary"><i class="fa fa-plus" aria-hidden="true"></i>
+                    Add</button> &nbsp;
+                </a>
+                <a href [routerLink]="['../galleries']" target="_blank">
+                  <button mat-stroked-button><i class="fa fa-eye" aria-hidden="true"></i>
+                    View</button>
+                </a>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">7</th>
+              <td>Jobs</td>
+              <td>{{editModeItemsCount.activeApprovedVacancies}}</td>
+              <td>{{editModeItemsCount.totalVacancies-editModeItemsCount.activeApprovedVacancies}}</td>
+              <td>{{editModeItemsCount.totalVacancies}}</td>
+              <td>
+                <a href [routerLink]="['../add-job']" target="_blank">
+                  <button mat-stroked-button color="primary"><i class="fa fa-plus" aria-hidden="true"></i>
+                    Add</button> &nbsp;
+                </a>
+                <a href [routerLink]="['../jobs']" target="_blank">
+                  <button mat-stroked-button><i class="fa fa-eye" aria-hidden="true"></i>
+                    View</button>
+                </a>
+
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">8</th>
+              <td> Social Post</td>
+              <td>{{editModeItemsCount.activeApprovedBusinessPosts}}</td>
+              <td>{{editModeItemsCount.totalBusinessPosts-editModeItemsCount.activeApprovedBusinessPosts}}</td>
+              <td>{{editModeItemsCount.totalBusinessPosts}}</td>
+              <td>
+                <a href routerLink="/social/{{sUuid}}" target="_blank">
+                  <button mat-stroked-button color="primary"><i class="fa fa-plus" aria-hidden="true"></i>
+                    Add</button> &nbsp;
+                </a>
+                <a href routerLink="/social/{{sUuid}}" target="_blank">
+                  <button mat-stroked-button><i class="fa fa-eye" aria-hidden="true"></i>
+                    View</button>
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </mat-expansion-panel>
+    </mat-accordion>
+    <br>
+    <mat-accordion *ngIf="vacancyApplicantCountVo">
+      <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <div class="widget-box widget-color-blue2">
+              <div class="widget-header widget-header-small">
+                <h6 class="widget-title lighter">
+                  <i class="fa fa-briefcase" aria-hidden="true"></i>
+                  Job Applicant Status
+                </h6>
+              </div>
+            </div>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <table class="table table-hover table-bordered text-center">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col" class="heading">Job Title</th>
+              <th scope="col" class="heading">Creation Date</th>
+              <th scope="col" class="heading">gloqr Status</th>
+              <th scope="col" class="heading">User Status</th>
+              <th scope="col" class="heading">Total Applicant</th>
+              <th scope="col" class="heading">Shortlisted</th>
+              <th scope="col" class="heading">Rejected</th>
+              <th scope="col" class="heading">Pending for Action</th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let vacancy of vacancyApplicantCountVo;let i=index" class="text-center">
+            <tr>
+              <th scope="row">{{i+1}}</th>
+
+
+              <td>
+                <a href="/vacancies/{{vacancy.vacancyUrl}}/v/{{vacancy.vacancyUuid}}" target="_blank"
+                  matTooltip="{{vacancy.vacancyTitle}}">
+
+                  {{vacancy.vacancyTitle | namePipe}}
+                </a>
+              </td>
+
+              <td>
+                {{vacancy.creationDate | date:'dd/MM/yyyy'}}
+              </td>
+
+              <td>
+                {{vacancy.vacancyState | titlecase}}
+              </td>
+
+              <td *ngIf="vacancy.vacancyActive;else elseBlock">
+                Activated
+              </td>
+              <ng-template #elseBlock>
+                <td>
+                  Deactivated
+                </td>
+              </ng-template>
+
+              <td *ngIf="vacancy.totalApplicant > 0; else noValue">
+                <a (click)="onClickView(vacancy.vacancyUuid)">
+                  <button mat-raised-button color="primary"> {{vacancy.totalApplicant}} No's </button>
+                </a>
+              </td>
+              <td *ngIf="vacancy.shortListedApplicant > 0; else noValue">
+                <a (click)="onClickView(vacancy.vacancyUuid,'shortlisted')">
+                  <button type="button" class="btn btn-success f-14">{{vacancy.shortListedApplicant}} No's </button>
+                </a>
+              </td>
+              <td *ngIf="vacancy.rejectedApplicant > 0; else noValue">
+                <a (click)="onClickView(vacancy.vacancyUuid,'rejected')">
+                  <button type="button" class="btn btn-danger f-14">{{vacancy.rejectedApplicant}} No's </button>
+                </a>
+              </td>
+              <td *ngIf="vacancy.pendingApplicant > 0; else noValue">
+                <a (click)="onClickView(vacancy.vacancyUuid,'pending')">
+                  <button type="button" class="btn btn-warning f-14">{{vacancy.pendingApplicant}} No's </button>
+                </a>
+              </td>
+
+              <ng-template #noValue>
+                <td>No Applicant</td>
+              </ng-template>
+            </tr>
+          </tbody>
+        </table>
+
+      </mat-expansion-panel>
+    </mat-accordion>
+    <br>
+    <mat-accordion *ngIf="businessCredit">
+      <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <div class="widget-box widget-color-blue2">
+              <div class="widget-header widget-header-small">
+                <h6 class="widget-title lighter">
+                  <i class="fa fa-money" aria-hidden="true"></i>
+
+                  Business Credits
+                </h6>
+              </div>
+            </div>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <app-business-credits></app-business-credits>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+</div>

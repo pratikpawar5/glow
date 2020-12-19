@@ -1,0 +1,24 @@
+@import'../../../../css/cart-stages.css';
+.table{
+    margin-top: 20px;
+}
+::ng-deep .mat-tab-label {
+    min-width: 220px !important;
+}
+.job-container
+{
+  width: 60%;
+  margin: 0 auto;
+  padding: 20px;
+  background: #f9f4c9;
+}
+.heading
+{
+    color:#7d7d7d
+}
+.status-block
+{
+    margin-top: 20px;
+}
+  
+        

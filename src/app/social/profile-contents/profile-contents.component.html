@@ -1,0 +1,50 @@
+<div [ngClass]="{'sme-profile-wrap':isDesktopDevice}">
+    <div *ngIf="smes">
+
+        <mat-card>
+
+            <div class="text-center">
+                <a title="{{smes.smeName}}" routerLink="/sme/{{smes.sUuid}}" target="_blank">
+                    <img mat-card-lg-image [src]="contentServer + smes.logoImage"
+                        onError="this.src='../assets/not-found/no_image.png';">
+                    <div class="sme-name">
+                        {{smes.smeName}}
+                    </div>
+                    <div class="sme-address">
+                        {{smes.smeAddress.locality}}, {{smes.smeAddress.city}}
+                    </div>
+                </a>
+            </div>
+
+            <div class="social_count">
+                <div class="text-center">
+                    <button type="button" mat-flat-button routerLink="/social/{{sUuid}}/people-you-may-know">Build
+                        Business Circle</button>
+                </div>
+
+                <div class="circle-objects">
+                    <div class="cursor-pointer" routerLink="/social/{{sUuid}}/my-connection-home">
+                        <button class="btn btn-success count-btn">{{myconnectionCount}}</button>
+                        My Business Circle
+                    </div>
+                    <div class="cursor-pointer" routerLink="/social/{{sUuid}}/pending-request-home">
+                        <button class="btn btn-warning count-btn">{{pendingCount}}</button>
+                        Circle Invites Receive
+                    </div>
+                    <div class="cursor-pointer" routerLink="/social/{{sUuid}}/sent-request-home">
+                        <button class="btn btn-info count-btn">{{sentCount}}</button>
+                        Circle Invites Sent
+                    </div>
+                </div>
+                <div>
+                    <button class="btn w-b-p" routerLink="/social/{{sUuid}}">
+                        Write Business Post
+                    </button>
+                </div>
+            </div>
+
+        </mat-card>
+
+    </div>
+
+</div>

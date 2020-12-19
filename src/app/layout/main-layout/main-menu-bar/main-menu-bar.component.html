@@ -1,0 +1,204 @@
+<div class="navbar">
+  <ul class="navbar-nav">
+    <li class="nav-item" *ngIf="productCategories?.length > 0">
+      <div class="dropdown">
+        <div class="menu-header">
+          <a class="nav-link">Products
+            <i class="fa fa-angle-down"></i>
+          </a>
+        </div>
+        <div class="dropdown-content">
+          <div class="row menu-content no-margin">
+            <div class="list-column">
+              <div class="row no-margin">
+                <div class="category-block borderRight" *ngFor="let c of productCategories;let i=index">
+                  <div class="category-title">
+                    <a href [routerLink]="['/','products',c.urlName]" [queryParams]="{c:c.categoryUuid }">
+                      {{c.categoryName}}
+                    </a>
+                  </div>
+
+                  <div class="sub-categories" *ngFor="let s of c.subCategories;let i=index">
+                    <a *ngIf="i < 4" href [routerLink]="['/','products',c.urlName,s.urlName]" [queryParams]="{c:s.subCategoryUuid }">
+                      {{s.subCategoryName}}
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="image-column">
+              <img alt="Product" class="menu-bar-img" src="../../../../assets/menu-bar/products.jpg">
+            </div>
+          </div>
+        </div>
+      </div>
+    </li>
+
+
+    <li class="nav-item" *ngIf="serviceCategories?.length > 0">
+      <div class="dropdown">
+        <div class="menu-header">
+          <a class="nav-link">Services
+            <i class="fa fa-angle-down"></i>
+          </a>
+        </div>
+        <div class="dropdown-content">
+          <div class="row menu-content no-margin">
+            <div class="list-column">
+              <div class="row no-margin">
+                <div class="category-block borderRight" *ngFor="let c of serviceCategories;let i=index">
+                  <div class="category-title">
+                    <a [routerLink]="['/','services',c.urlName]" [queryParams]="{c:c.categoryUuid }">
+                      {{c.categoryName}}
+                    </a>
+                  </div>
+
+                  <div class="sub-categories" *ngFor="let s of c.subCategories;let i=index">
+                    <a *ngIf="i < 4" href [routerLink]="['/','services',c.urlName,s.urlName]" [queryParams]="{c:s.subCategoryUuid }">
+                      {{s.subCategoryName}}
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="column image-column">
+              <img alt="Service" class="menu-bar-img" src="../../../../assets/menu-bar/services.jpg">
+            </div>
+          </div>
+        </div>
+      </div>
+    </li>
+
+
+    <li class="nav-item" *ngIf="homepageSMEFilterCategories">
+      <div class="dropdown">
+        <div class="menu-header">
+          <a class="nav-link">SME
+            <i class="fa fa-angle-down"></i>
+          </a>
+        </div>
+        <div class="dropdown-content">
+          <div class="row no-margin">
+            <div class="column borderRight">
+              <div *ngFor="let categories of smeCategoryMenu|keyvalue">
+                <div class="category-title">
+                  <a href [routerLink]="['/','smes','fetch']">
+                    {{categories.key}}
+                  </a>
+                </div>
+                <div class="sub-categories" *ngFor="let category of categories.value;let i=index">
+                  <a *ngIf="i < 16" href [routerLink]="['/','smes','fetch']" matTooltip="{{category.categoryName}}" [queryParams]="{categoriesFilterParam: category.categoryName}">
+                    {{category.categoryName}} ({{category.totalSmesCount}})
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="column">
+              <div *ngFor="let cities of smeCityMenu|keyvalue">
+                <div class="category-title">
+                  <a href [routerLink]="['/','smes','fetch']">
+                    {{cities.key}}
+                  </a>
+                </div>
+                <div class="sub-categories" *ngFor="let city of cities.value;let i=index;">
+                  <a href [routerLink]="['/','smes','fetch']" [queryParams]="{citiesFilterParam: city.city}">
+                    {{city.city}} ({{city.totalSmesCount}})
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="column"></div>
+            <div class="column"></div>
+            <div class="column image-column">
+              <img alt="SME" class="menu-bar-img" src="../../../../assets/menu-bar/sme.jpg">
+            </div>
+          </div>
+        </div>
+      </div>
+    </li>
+
+
+    <li class="nav-item" *ngIf="homePageVacancyCategories">
+      <div class="dropdown menu1=4">
+        <div class="menu-header">
+          <a class="nav-link">Job
+            <i class="fa fa-angle-down"></i>
+          </a>
+        </div>
+        <div class="dropdown-content">
+          <div class="row">
+
+            <div class="column borderRight" *ngFor="let smes of vacancySMEMenu|keyvalue">
+              <div class="category-title">
+                <a href [routerLink]="['/','vacancies','jobs']" onclick="return false">
+                  {{smes.key}}
+                </a>
+              </div>
+              <div class="sub-categories" *ngFor="let sme of smes.value;let i=index">
+                <a href onclick="return false" [routerLink]="['/','vacancies','jobs']" [queryParams]="{filterBySmes: sme.sUuid}">
+                  {{sme.smeName}} ({{sme.totalVacancies}})
+                </a>
+              </div>
+            </div>
+
+            <div class="column borderRight" *ngFor="let jobRoles of vacancyJobRoleMenu|keyvalue">
+              <div class="category-title">
+                <a class="nav-title" [routerLink]="['/','vacancies','jobs']" href onclick="return false">
+                  {{jobRoles.key}}
+                </a>
+              </div>
+              <div class="sub-categories" *ngFor="let jobRole of jobRoles.value;let i=index">
+                <a href onclick="return false" [routerLink]="['/','vacancies','jobs']" [queryParams]="{filterByJobRoles: jobRole.jobRole}">
+                  {{jobRole.jobRole}} ({{jobRole.totalVacancies}})
+                </a>
+              </div>
+            </div>
+
+
+            <div class="column borderRight" *ngFor="let locations of vacancyLocationMenu|keyvalue">
+              <div class="category-title">
+                <a class="nav-title" [routerLink]="['/','vacancies','jobs']" href onclick="return false">
+                  {{locations.key}}
+                </a>
+              </div>
+              <div class="sub-categories" *ngFor="let location of locations.value;let i=index;">
+                <div *ngIf="i < 12">
+                  <a href onclick="return false" [routerLink]="['/','vacancies','jobs']" [queryParams]="{filterByLocations: location.location}">
+                    {{location.location}} ({{location.totalVacancies}})
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="column" *ngFor="let salaries of vacancySalaryMenu|keyvalue">
+              <div class="category-title">
+                <a class="nav-title" [routerLink]="['/','vacancies','jobs']" href onclick="return false">
+                  {{salaries.key}}
+                </a>
+              </div>
+              <div class="sub-categories" *ngFor="let salary of salaries.value;let i=index">
+                <a href onclick="return false" [routerLink]="['/','vacancies','jobs']" [queryParams]="{filterBySalaries: salary.formattedSalary}">
+                  {{salary.formattedSalary}} ({{salary.totalVacancies}})
+                </a>
+              </div>
+            </div>
+            <div class="column image-column">
+              <img alt="Job" class="menu-bar-img" src="../../../../assets/menu-bar/job.jpg">
+            </div>
+          </div>
+        </div>
+      </div>
+    </li>
+
+    <!-- <li class="nav-item" *ngIf="isLoggedIn && isSME">
+      <div class="dropdown menu1=4">
+        <div class="menu-header">
+          <a class="nav-link">Job-Seeker
+            <i class="fa fa-angle-down"></i>
+          </a>
+        </div>
+      </div>
+    </li> -->
+  </ul>
+
+</div>

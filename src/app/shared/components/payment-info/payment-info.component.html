@@ -1,0 +1,18 @@
+<div class="text-center">
+  <i class="material-icons close-icon" (click)="close()">close</i>
+
+  <div class="msg">
+    {{data.message}}
+  </div>
+  <form>
+    <button *ngIf="data.firstPayment;else ok" style="width: 40%;" mat-raised-button class="global-btn" (click)="continue()">
+      Continue
+    </button>
+
+    <ng-template #ok>
+      <button style="width: 50%;" mat-raised-button class="global-btn" (click)="close()">
+        Ok
+      </button>
+    </ng-template>
+  </form>
+</div>

@@ -1,0 +1,73 @@
+<mat-card>
+  <div>
+    <h4 class="slider-title">Top Jobs
+      <a href class="view-all" routerLink="/vacancies/jobs">View More</a>
+    </h4>
+  </div>
+  <hr>
+  <ngu-carousel [inputs]="carousel" [dataSource]="jobs">
+    <div NguCarouselItem class="item" *nguCarouselDef="let job;let i=index">
+      <mat-card class="vacancy-card">
+        <div class="text-center">
+          <div>
+            <a href="/vacancies/{{job.vacancyUrl}}/v/{{job.vacancyUuid}}" target="_blank" matTooltip="{{job.vacancyTitle}}">
+              <div class="job-name">
+
+                {{job.vacancyTitle | namePipe}}
+
+              </div>
+              <div class="novacancy">
+                <span class="jobDesc"> {{job.noOfVacancy}} Vacancies</span>
+              </div>
+              <div class="job-info">
+                <div class="exp">
+                  <span class="jobDesc">Experince: </span>
+                  <span class="jobDesc">{{job.minExp}}</span>
+                  <span class="jobDesc"> to </span>
+                  <span class="jobDesc">{{job.maxExp}}</span>
+                  <span class="jobDesc"> yrs </span>
+                </div>
+                <div class="salary">
+                  <span class="jobDesc">Salary: </span>
+                  <span class="jobDesc">{{job.minSalary}} - {{job.maxSalary}}</span>
+                </div>
+                <div>
+                  <span class="f-14 jobDesc" *ngIf="job.creationDate">Posted
+                    {{job.creationDate | dateAgo}}</span>
+                </div>
+              </div>
+            </a>
+            <div class="sme-info mb-3">
+              <a href="/sme/{{job.smeInfo.sUuid}}" target="_blank" matTooltip="{{job.smeInfo.smeName}}">
+                <span class="sme-name">{{job.smeInfo.smeName | smeNamePipe}}</span>
+              </a>
+            </div>
+          </div>
+          <div class="mb-2">
+            <div *ngIf="loginSmeUuid === job.smeInfo.sUuid;else check">
+
+            </div>
+            <ng-template #check>
+              <div *ngIf="!job.applied;">
+                <button mat-flat-button (click)="jobApply(i,job)">Apply</button>
+              </div>
+              <div *ngIf="job.applied" class="already-appiled-btn">
+                <button mat-raised-button>
+                  Applied
+                </button>
+              </div>
+            </ng-template>
+
+          </div>
+        </div>
+      </mat-card>
+    </div>
+    <button NguCarouselPrev class="arrow-left">
+      <i class="fa fa-angle-left arrow-icon-size"></i>
+    </button>
+
+    <button NguCarouselNext class="arrow-right">
+      <i class="fa fa-angle-right arrow-icon-size"></i>
+    </button>
+  </ngu-carousel>
+</mat-card>

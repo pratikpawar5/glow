@@ -1,0 +1,54 @@
+<div class="main">
+    <i class="material-icons close-icon" (click)="close()">close</i>
+    <h5>Share with Only Specific Person</h5>
+    <input type="checkbox" [checked]="selectedAll" (change)="selectAll($event);">
+    <span class="selection" *ngIf="!selectedAll">Select All</span>
+    <span class="selection" *ngIf="selectedAll">Deselect All</span>
+    <span class="total-selection">({{connectionIds?.length}} sme's selected)</span>
+</div>
+<div class="private-connection-dialog" *ngIf="countAndData">
+    <div class="row">
+        <mat-card class="connection-card" *ngFor="let connection of countAndData.data;let i=index">
+            <div class="sme-image text-center">
+                <a class="border" routerLink="/sme/{{connection.sUuid}}" target="_blank">
+                    <img mat-card-image [src]="contentServer + connection.logoImage"
+                        onError="this.src='../assets/not-found/no_image.png';" alt="sme-logo" class="profile-img">
+                </a>
+            </div>
+            <div class="sme-info text-center">
+                <div class="sme-name">
+                    <a routerLink="/sme/{{connection.sUuid}}" class="sme-name" target="_blank"
+                        matTooltip="{{connection.smeName}}" matTooltip="{{connection.smeName}}">
+                        {{connection.smeName | smeNamePipe}}
+                    </a>
+                </div>
+                <span class="sme-address">{{connection.smeAddress.locality}},
+                    {{connection.smeAddress.city}}</span>
+
+                <div *ngIf="connectionIds!=null && connectionIds.indexOf(connection.sUuid) >= 0;else not">
+                    <button type="button" class="btn btn-light text-green"
+                        (click)="onClickButton(connection.sUuid)">Selected <i class="fa fa-check-square-o"
+                            aria-hidden="true"></i>
+                    </button>
+                </div>
+                
+                <ng-template #not>
+                    <div>
+                        <button type="button" class="btn btn-light" (click)="onClickButton(connection.sUuid)">Select
+                        </button>
+                    </div>
+                </ng-template>
+
+
+            </div>
+        </mat-card>
+    </div>
+</div>
+<div class="action-button text-center" *ngIf="countAndData">
+    <button mat-stroked-button class="default-btn" (click)="close()">
+        Cancel
+    </button>
+    <button mat-raised-button class="global-btn" (click)="onSave()">
+        Save
+    </button>
+</div>

@@ -1,0 +1,161 @@
+<div class="row">
+  <div class="col-md-6">
+
+  </div>
+  <div class="col-md-6" *ngIf="cartFilterCount">
+    <ul class="nav nav-tabs">
+      <li class="mr-3 padding-T5">Filter by</li>
+      <li [ngClass]="(cartState === ACTIVE)?'processing':'inactive'">
+        <div class="div-link" (click)="filterBy(ACTIVE)">
+          Active ({{cartFilterCount.activeCount}})
+        </div>
+      </li>
+      <li [ngClass]="(cartState === COMPLETED)?'delivered':'inactive'">
+        <div class="div-link" (click)="filterBy(COMPLETED)">
+          Delivered ({{cartFilterCount.deliveredCount}})
+        </div>
+      </li>
+      <li [ngClass]="(cartState === REJECTED)?'rejected':'inactive'">
+        <div class="div-link" (click)="filterBy(REJECTED)">
+          Rejected ({{cartFilterCount.rejectedCount}})
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div infinite-scroll [infiniteScrollDistance]="scrollDistance" [infiniteScrollUpDistance]="scrollUpDistance"
+  [infiniteScrollThrottle]="throttle" (scrolled)="onScrollDown()">
+
+  <div class="cart-item" *ngFor="let item of sentItems; let i=index">
+
+    <div class="order-id border-bottom" id="{{item.orderId}}" [ngClass]="{'order-id-active':(item.cartState === ACTIVE),
+    'order-id-rejected':(item.cartState === REJECTED || item.cartState === AUTO_CLOSED),
+    'order-id-delivered':(item.cartState === COMPLETED)}">
+      Order ID: {{item.orderId}} <span *ngIf="item.cartState === AUTO_CLOSED" class="text-red">[ Auto Closed by Gloqr
+        on {{item.expirationDate |
+        date}} ]</span>
+      <span class="item-count text-grey">{{i+1}}/
+        <span *ngIf="item.cartState === ACTIVE">
+          {{cartFilterCount.activeCount}}
+        </span>
+        <span *ngIf="item.cartState === COMPLETED">
+          {{cartFilterCount.deliveredCount}}
+        </span>
+        <span *ngIf="item.cartState === REJECTED">
+          {{cartFilterCount.rejectedCount}}
+        </span>
+      </span>
+    </div>
+
+    <div class="cart-item-content">
+
+      <div class="row no-margin">
+
+        <div class="col-md-2">
+          <a *ngIf="item.itemData.itemType == 'PRODUCT';else serviceImage" href="/products/{{item.itemData.itemUrlName}}/p/{{item.itemData.itemUuid}}"
+            target="_blank">
+            <img alt="Product" mat-card-md-image [src]="contentServer + item.itemData.mainImage" onError="this.src='../../../../../../assets/not-found/no_image.png';">
+          </a>
+
+          <ng-template #serviceImage>
+            <a href="/services/{{item.itemData.itemUrlName}}/s/{{item.itemData.itemUuid}}" target="_blank">
+              <img alt="Service" mat-card-md-image [src]="contentServer + item.itemData.mainImage" onError="this.src='../../../../../../assets/not-found/no_image.png';">
+            </a>
+          </ng-template>
+        </div>
+
+        <div class="col-md-6">
+          <div>
+            <a *ngIf="item.itemData.itemType == 'PRODUCT';else serviceName" target="_blank" class="div-link" href="/products/{{item.itemData.itemUrlName}}/p/{{item.itemData.itemUuid}}">
+              {{item.itemData.itemName}}
+              (Product)
+            </a>
+            <ng-template #serviceName>
+              <a href class="div-link" href="services/{{item.itemData.itemUrlName}}/s/{{item.itemData.itemUuid}}"
+                target="_blank">
+                {{item.itemData.itemName}}
+                (Service)
+              </a>
+            </ng-template>
+          </div>
+          <div class="item-sme-name"> by
+            <a href="/sme/{{item.itemData.sUuid}}" target="_blank">
+              {{item.itemData.smeName}}
+            </a>
+          </div>
+        </div>
+
+        <div class="col-md-4 text-bold">
+          <div *ngIf="item.itemData.discount;else originalprice">
+            {{item.itemData.discountedPrice | PrecisionPrice}}
+            <span *ngIf="item.itemData.priceUnit">
+              / {{item.itemData.priceUnit}}
+            </span>
+            <br>
+            <span class="item-discount">
+              {{item.itemData.price | IndianCurrency}}
+            </span>
+            <span class="f-14 text-green">
+              {{item.itemData.discount}}% off
+            </span>
+          </div>
+          <ng-template #originalprice>
+            {{item.itemData.price | IndianCurrency}}
+            <span *ngIf="item.itemData.priceUnit">
+              / {{item.itemData.priceUnit}}
+            </span>
+          </ng-template>
+          <div>
+            Quantity: {{item.itemData.quantity}}
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="row no-margin row2">
+
+        <div class="col-md-8">
+          <app-user-cart-item-status [item]="item"></app-user-cart-item-status>
+        </div>
+
+        <div class="col-md-4">
+          <div *ngIf="item.cartState==='ACTIVE' && item.secondStage && !item.thirdStage">
+            <button mat-stroked-button class="text-green" (click)="acceptQuotation(i)">
+              Accept Quotation
+            </button>
+            <span class="spacing"></span>
+            <button mat-stroked-button class="text-red" (click)="rejectQuotation(i)">
+              Reject Quotation
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="ordered-on border-top row no-margin">
+      <div class="col-md-6">
+        <span class="text-grey"> Ordered on </span>{{item.createdAt | date}}
+      </div>
+      <div class="col-md-6 text-right">
+        <span class="text-grey"> Order Total </span>{{item.itemData.orderTotal | IndianCurrency}}
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="showSpinner" class="spinner">
+    <mat-spinner strokeWidth="5" [diameter]="50"></mat-spinner>
+  </div>
+
+  <div *ngIf="emptyCart || sentItems?.length === 0">
+    <div class="text-center padding">
+      <h2>Your Cart is Empty</h2>
+      <a href class="div-link" routerLink="/">+ Add items</a>
+    </div>
+  </div>
+
+</div>

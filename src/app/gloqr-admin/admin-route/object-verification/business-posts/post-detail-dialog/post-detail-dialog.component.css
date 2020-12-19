@@ -1,0 +1,54 @@
+@import'../../../../../../app/css/super-admin.css';
+
+::ng-deep .mat-dialog-container{
+    padding: 8px 10px;
+    border-radius: 0px;
+}
+.row{
+    margin: 0;
+    padding: 0;   
+}
+.bottom-images{
+    margin: 20px 2px 15px 3px;
+}
+.custom-border{
+    border: 2px solid #4793df
+}
+.sme-img-object
+{
+    width: 128px;
+    height: 130px;
+    margin: 7px;
+}
+
+.certificate-img
+{
+    margin-bottom: 20px;
+}
+
+::ng-deep.plain-container .image
+{
+    height: 37% !important;
+    width: 145% !important;
+    margin: 5px 5px 0 0!important;
+    object-fit: contain;
+}
+::ng-deep ks-dots {display: none;}
+.gallery-images
+{
+    height: 520px !important;
+    width: 100% !important;
+    margin: 10px 5px !important;
+    object-fit: contain;
+    border: 1px solid #ccc;
+}
+.fileLocationOne
+{
+    height: 320px;
+    width: 300px;
+}
+.fileLocationTwo
+{
+    height: 120px;
+    width: 120px;
+}

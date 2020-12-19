@@ -1,0 +1,51 @@
+<h2>Add Product Price Units</h2>
+<form [formGroup]="unitForm">
+
+  <div formArrayName="unitsArray" *ngFor="let unit of getControls(); let i = index;">
+    <div [formGroupName]="i">
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>Price Unit Name</mat-label>
+          <input matInput formControlName="name" required autocomplete="off">
+          <mat-error *ngIf="unitForm.controls['unitsArray'].controls[i].get('name').hasError('required')">
+            Price Unit Name is required
+          </mat-error>
+          <mat-error *ngIf="unitForm.controls['unitsArray'].controls[i].get('name').hasError('maxlength') || unitForm.controls['unitsArray'].controls[i].get('name').hasError('minlength')">
+            Min 1 & Max 100 characters allowed
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div *ngIf="unitForm.get('unitsArray').controls.length > 1" class="text-center">
+      <button type="button" mat-stroked-button color="warn" (click)="deleteControl(i)">
+        remove X
+      </button>
+    </div>
+  </div>
+
+  <div>
+    <button type="button" mat-stroked-button (click)="addControl()">
+      + Add more
+    </button>
+  </div>
+
+  <div class="col-2 mt-3">
+    <div *ngIf="showButton;else disabled">
+      <button mat-raised-button class="global-btn" (click)="onSubmit()">
+        Save
+      </button>
+    </div>
+    <ng-template #disabled>
+      <button disabled type="button" class="btn btn-default">
+        <mat-spinner class="spinner" strokeWidth="4" [diameter]="15">
+        </mat-spinner> Saving...please wait
+      </button>
+    </ng-template>
+  </div>
+
+
+  <div *ngIf="error" class="text-red  mt-3">
+    Error while saving price units
+  </div>
+
+</form>

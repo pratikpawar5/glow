@@ -1,0 +1,39 @@
+<div class="order-progress">
+  <ul class="progressbar">
+
+    <li [ngClass]="{'active':(item.firstStage.status === 'ORDERED'),
+    'inactive':(item.firstStage?.status === 'REJECTED')}">
+      <p>ORDERED</p>
+      <div *ngIf="item.firstStage?.status === 'REJECTED'" class="div-link view-quotation" (click)="firstStage()">
+        view reject message
+      </div>
+    </li>
+
+    <li [ngClass]="{'active':(item.secondStage?.status === 'QUOTATION'),
+    'inactive':(item.secondStage?.status === 'REJECTED')}">
+      <p>QUOTATION</p>
+      <div *ngIf="item.secondStage?.status === 'QUOTATION'" class="div-link view-quotation" (click)="secondStage()">
+        view quotation
+      </div>
+      <div *ngIf="item.secondStage?.status === 'REJECTED'" class="div-link view-quotation" (click)="secondStage()">
+        view reject message
+      </div>
+    </li>
+
+    <li [ngClass]="{'active':(item.thirdStage?.status === 'PURCHASE_ORDER'),
+    'inactive':(item.thirdStage?.status === 'REJECTED')}">
+      <p>PURCHASE ORDER</p>
+      <div *ngIf="item.thirdStage?.status === 'PURCHASE_ORDER'" class="div-link view-quotation" (click)="thirdStage()">
+        view purchase order
+      </div>
+      <div *ngIf="item.thirdStage?.status === 'REJECTED'" class="div-link view-quotation" (click)="thirdStage()">
+        view reject message
+      </div>
+    </li>
+
+    <li [ngClass]="{'active':item.fourthStage?.status === 'DELIVERED'}">
+      <p>DELIVERED</p>
+    </li>
+
+  </ul>
+</div>

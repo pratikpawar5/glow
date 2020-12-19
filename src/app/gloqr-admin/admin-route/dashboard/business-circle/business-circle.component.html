@@ -1,0 +1,117 @@
+<div infinite-scroll [infiniteScrollDistance]="scrollDistance" [infiniteScrollUpDistance]="scrollUpDistance"
+  [infiniteScrollThrottle]="throttle" [scrollWindow]="true" (scrolled)="onScrollDown()">
+  <div class="table">
+    <div class="row">
+      <div class="col-md-6">
+        <h4>{{count}} Records found for last {{circleDaysFormControl.value}} days since now</h4>
+      </div>
+      <div class="col-md-3">
+        <mat-form-field>
+          <mat-label>Days</mat-label>
+          <mat-select [formControl]="circleDaysFormControl">
+            <mat-option *ngFor="let day of filterDays" [value]="day.value">
+              {{day.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-md-3">
+        <mat-form-field>
+          <mat-label>Circle Status</mat-label>
+          <mat-select [formControl]="circleStatusFormControl">
+            <mat-option *ngFor="let circle of circleStatus" [value]="circle.value">
+              {{circle.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <mat-accordion *ngFor="let circleInvite of circleInviteStatus;let i=index">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title class="text-bold" [ngClass]="{
+                  'text-success':circleInvite.circleState === 'ACCEPTED',
+                  'text-danger':circleInvite.circleState === 'REJECTED',
+                  'text-warning':circleInvite.circleState === 'PENDING'
+                  }">
+            {{i+1}}. Request Sent from {{circleInvite.reqSenderSme.smeName}} to
+            {{circleInvite.reqReceiverSme.smeName}} on&nbsp;
+
+            <span
+              *ngIf="circleStatusFormControl.value === 'ACCEPTED' || circleStatusFormControl.value === 'REJECTED';else updatedAt">
+              {{circleInvite.lastModifiedDate | date:'dd/MM/yyyy'}}</span>
+            <ng-template #updatedAt>
+              <span>
+                {{circleInvite.creationDate | date:'dd/MM/yyyy'}}
+              </span>
+            </ng-template>
+
+            [{{circleInvite.circleState}}]
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="row">
+          <div class="col-md-6 border">
+            <h4 class="text-center">Request Sender Sme</h4>
+            <hr>
+            <ul>
+              <li>
+                <span class="text-bold">SME Name:</span>
+                {{circleInvite.reqSenderSme.smeName}}
+              </li>
+
+              <li>
+                <span class="text-bold">SME Contact Email:</span>
+                {{circleInvite.reqSenderSme.contactEmail}}
+              </li>
+              <li>
+                <span class="text-bold">SME Contact Phone:</span>
+                {{circleInvite.reqSenderSme.contactPhone}}
+              </li>
+              <li>
+                <span class="text-bold">SME Address:</span>
+                {{circleInvite.reqSenderSme.smeAddress.locality}},
+                {{circleInvite.reqSenderSme.smeAddress.city}},
+                {{circleInvite.reqSenderSme.smeAddress.state}}
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-6 border">
+            <h4 class="text-center">Request Receiver Sme</h4>
+            <hr>
+            <ul>
+              <li>
+                <span class="text-bold">SME Name:</span>
+                {{circleInvite.reqReceiverSme.smeName}}
+              </li>
+
+              <li>
+                <span class="text-bold">SME Contact Email:</span>
+                {{circleInvite.reqReceiverSme.contactEmail}}
+              </li>
+              <li>
+                <span class="text-bold">SME Contact Phone:</span>
+                {{circleInvite.reqReceiverSme.contactPhone}}
+              </li>
+              <li>
+                <span class="text-bold">SME Address:</span>
+                {{circleInvite.reqReceiverSme.smeAddress.locality}},
+                {{circleInvite.reqReceiverSme.smeAddress.city}},
+                {{circleInvite.reqReceiverSme.smeAddress.state}}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+  <div *ngIf="noDataAvailable">
+    <div class="text-center">
+      <h1>No Data Available</h1>
+    </div>
+  </div>
+  <div *ngIf="noMoreDataAvailable">
+    <div class="text-center">
+      <h1>No More Data Available</h1>
+    </div>
+  </div>
+</div>

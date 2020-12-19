@@ -1,0 +1,248 @@
+<i class="material-icons close-icon" (click)="close()">close</i>
+
+<div class="container-fluid">
+    <h2> Product Details</h2>
+    <form [formGroup]="productAdminForm">
+        <div *ngIf="data">
+            <div class="row">
+                <div class="col-md-6">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Select Category</mat-label>
+                        <mat-select formControlName="category" required>
+                            <mat-option>--</mat-option>
+                            <mat-option *ngFor="let obj of categories" [value]="obj.categoryUuid">
+                                {{obj.categoryName}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="productAdminForm.get('category').hasError('required')">
+                            Please select Category
+                        </mat-error>
+                    </mat-form-field>
+                    <div class="text-bold" *ngIf="userSelectedCategory && !data.otherCategory.categoryUuid">
+                        Category Name: {{data.otherCategory.customCategory}}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Select SubCategory</mat-label>
+                        <mat-select formControlName="subCategory" required>
+                            <mat-option>--</mat-option>
+                            <mat-option *ngFor="let obj of subCategories" [value]="obj.subCategoryUuid">
+                                {{obj.subCategoryName}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="productAdminForm.get('subCategory').hasError('required')">
+                            Please select SubCategory
+                        </mat-error>
+                    </mat-form-field>
+                    <div class="text-bold" *ngIf="userSelectedCategory">
+                        SubCategory Name : {{data.otherCategory.customSubCategory}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="row sub-title-wrap mb-3 mt-3">
+                <div class="col-md-2">
+                    <span class="titile">Product Name: </span>
+                </div>
+
+                <div class="col-md-10">
+                    <span class="sub-titile">{{data.productName}}</span>
+                </div>
+            </div>
+
+            <div class="row sub-title-wrap mb-3">
+                <div class="col-md-2">
+                    <span class="titile">Price: </span>
+                </div>
+
+                <div class="col-md-10">
+                    <span class="sub-titile">{{data.price | IndianCurrency}} </span>
+                    <span class="sub-titile" *ngIf="data.priceUnit">/{{data.priceUnit}}</span>
+                </div>
+            </div>
+
+            <div class="row sub-title-wrap mb-3">
+                <div class="col-md-2">
+                    <span class="titile">Description: </span>
+                </div>
+
+                <div class="col-md-10">
+                    <span class="sub-titile">{{data.description}}</span>
+                </div>
+            </div>
+            <div class="row sub-title-wrap mb-3">
+                <div class="col-md-2">
+                    <span class="titile">Discount: </span>
+                </div>
+
+                <div class="col-md-10">
+                    <span class="sub-titile">{{data.discount}}%</span>
+                </div>
+            </div>
+            <div class="row sub-title-wrap mb-3">
+                <div class="col-md-2">
+                    <span class="titile">Discounted Price: </span>
+                </div>
+
+                <div class="col-md-10">
+                    <span class="sub-titile">{{data.discountedPrice | IndianCurrency}}</span>
+                </div>
+            </div>
+
+            <div class="row sub-title-wrap mb-3">
+                <div class="col-md-2">
+                    <span class="titile">Location: </span>
+                </div>
+
+                <div class="col-md-10">
+                    <span class="sub-titile">{{data.location}}</span>
+                </div>
+            </div>
+
+            <div class="row sub-title-wrap mb-3">
+                <div class="col-md-2">
+                    <span class="titile">Min Order Qty: </span>
+                </div>
+
+                <div class="col-md-10">
+                    <span class="sub-titile">{{data.minOrderQty}}</span>
+                </div>
+            </div>
+
+            <div class="row sub-title-wrap mb-3">
+                <div class="col-md-2">
+                    <span class="titile">Stock: </span>
+                </div>
+
+                <div class="col-md-10">
+                    <span class="sub-titile">{{data.stock}}</span>
+                </div>
+            </div>
+
+            <div class="row sub-title-wrap mb-3" *ngIf="data.specifications">
+                <div class="col-md-2">
+                    <span class="titile">Specifications: </span>
+                </div>
+                <div class="col-md-10">
+                    <div class="border item-specifications border-top-0">
+                        <div *ngFor="let map of data.specifications | keyvalue">
+                            <div class="row" style="padding: 5px">
+                                <div class="col-md-3 text-grey">
+                                    {{map.key}}
+                                </div>
+                                <div class="col-md-1"></div>
+                                <div class="col-md-3">
+                                    {{map.value}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row sub-title-wrap mb-3">
+                <div class="col-md-2">
+                    <span class="titile">Images: </span>
+                </div>
+                <div class="col-md-10">
+                </div>
+            </div>
+
+            <div class="table table-striped f-12">
+                <table class="table">
+                    <thead>
+                        <tr class="text-center">
+                            <th>#</th>
+                            <th>Original Image</th>
+                            <th>320*320 <span style="color:#ff0000">(100kb)</span></th>
+                            <th>150*150 <span style="color:#ff0000">(50kb)</span></th>
+                        </tr>
+                    </thead>
+                    <tbody *ngFor="let image of data.images;let i=index">
+                        <tr class="text-center">
+                            <td>
+                                {{i+1}}
+                            </td>
+                            <td>
+                                <img alt="Product" [src]="contentServer + image.fileLocation" class="fileLocationOne">
+                            </td>
+                            <td>
+                                <div *ngIf="image.fileLocationOne;else locationOne">
+                                    <img alt="Product" [src]="contentServer + image.fileLocationOne" class="fileLocationOne">
+                                    <div class="text-center" style="margin-top: 10px">
+                                        <button type="button" mat-icon-button matTooltip="delete"
+                                            (click)="deleteImage(i,imageLocationOne)">
+                                            <i class="material-icons">close</i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <ng-template #locationOne>
+                                    <input accept=".png,.jpeg,.jpg" onclick="value = null"
+                                        style="display: none;outline: none" type="file"
+                                        (change)="onFileChangedOne($event,i,imageLocationOne)" #fileInput>
+                                    <button type="button" mat-raised-button class="global-btn"
+                                        (click)="fileInput.click()">Upload</button>
+
+                                </ng-template>
+                            </td>
+                            <td>
+                                <div *ngIf="image.fileLocationTwo;else locationTwo">
+                                    <img alt="Product" [src]="contentServer + image.fileLocationTwo" class="fileLocationTwo">
+                                    <div class="text-center" style="margin-top: 10px">
+                                        <button type="button" mat-icon-button matTooltip="delete"
+                                            (click)="deleteImage(i,imageLocationTwo)">
+                                            <i class="material-icons">close</i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <ng-template #locationTwo>
+                                    <input accept=".png,.jpeg,.jpg" onclick="value = null"
+                                        style="display: none;outline: none" type="file"
+                                        (change)="onFileChangedOne($event,i,imageLocationTwo)" #fileInput>
+                                    <button type="button" mat-raised-button class="global-btn"
+                                        (click)="fileInput.click()">Upload</button>
+                                </ng-template>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="mb-3">
+                <mat-form-field appearance="outline">
+                    <mat-label>Feedback</mat-label>
+                    <textarea #input matInput [formControl]="feedbackMessage" [ngModel]="data.frontFeedBackMessage"
+                        rows="2"></textarea>
+                    <mat-hint align="end">{{input.value?.length || 0}}/500</mat-hint>
+                </mat-form-field>
+            </div>
+
+            <div class="row action-button mb-2">
+                <div class="b">
+                    <span *ngIf="data.isApprove">
+                        <span class="text-bold">Current State: Already Approved</span>
+                    </span>
+                    <span *ngIf="data.isReject">
+                        <span class="text-bold">Current State: Already Rejected</span>
+                    </span>
+                </div>
+                <div class="approve-button b" *ngIf="saveImages;else save">
+                    <button type="submit" class="btn btn-success" (click)="checkForApproval()">Add to Approval</button>
+                </div>
+                <ng-template #save>
+                    <div class="b">
+                        <button mat-raised-button class="global-btn" (click)="onSaveImages()">
+                            Save
+                        </button>
+                    </div>
+                </ng-template>
+                <div class="reject-button b">
+                    <button type="submit" class="btn btn-danger" (click)="checkForRejection()">Add to Rejection</button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+</div>

@@ -1,0 +1,61 @@
+<div *ngIf="productCategories?.length > 0">
+  <mat-card>
+    <ul class="breadcrumb">
+      <li>
+        <a href [routerLink]="['/']">Home</a>
+      </li>
+      <li class="truncate">
+        Products
+      </li>
+    </ul>
+  </mat-card>
+
+  <mat-card class="cust-mat-card" *ngFor="let category of productCategories; let i=index">
+
+    <div>
+      <h4 class="slider-title">{{category.categoryName}}
+        <span class="item-sme-name"><a>({{category.subCategories.length}}
+            {{category.subCategories.length > 1?'Sub-Categories':'Sub-Category'}}, {{category.productsCount}}
+            {{category.productsCount > 1?'Products':'Product'}})</a></span>
+        <a href class="view-all" [routerLink]="['/','products',category.urlName]"
+          [queryParams]="{c:category.categoryUuid}">View
+          All</a>
+      </h4>
+    </div>
+    <hr>
+    <ngu-carousel [inputs]="carousel" [dataSource]="category.subCategories">
+      <div NguCarouselItem class="item text-center" *nguCarouselDef="let subCategory;">
+
+        <div class="item-img">
+          <a [routerLink]="['/','products',category.urlName,subCategory.urlName]"
+            [queryParams]="{c:subCategory.subCategoryUuid}" matTooltip="{{subCategory.subCategoryName}}">
+            <img alt="Product" mat-card-lg-image [src]="contentServer + subCategory.fileLocation"
+              alt="SubCategory Image" onError="this.src='../assets/not-found/no_image.png';">
+          </a>
+        </div>
+
+        <div class="item-name">
+          <a [routerLink]="['/','products',category.urlName,subCategory.urlName]"
+            [queryParams]="{c:subCategory.subCategoryUuid}" matTooltip="{{subCategory.subCategoryName}}">
+            {{subCategory.subCategoryName | namePipe}}
+          </a>
+        </div>
+
+        <div class="item-sme-name">
+          <a>({{subCategory.productsCount}} {{subCategory.productsCount > 1?'Products':'Product'}})</a>
+        </div>
+
+      </div>
+
+      <button NguCarouselPrev class="arrow-left">
+        <i class="fa fa-angle-left arrow-icon-size"></i>
+      </button>
+
+      <button NguCarouselNext class="arrow-right">
+        <i class="fa fa-angle-right arrow-icon-size"></i>
+      </button>
+
+    </ngu-carousel>
+
+  </mat-card>
+</div>

@@ -1,0 +1,54 @@
+<div infinite-scroll [infiniteScrollDistance]="scrollDistance" [infiniteScrollUpDistance]="scrollUpDistance"
+  [infiniteScrollThrottle]="throttle" [scrollWindow]="true" (scrolled)="onScrollDown()">
+
+  <div class="wrap">
+    <div class="title">
+      <h4>Social Post</h4>
+    </div>
+    <div class="mt-3">
+      <mat-card class="post-item" *ngFor="let displayFeed of displayFeeds; let i = index">
+        <div class="media border p-3">
+          <img [src]="contentServer + displayFeed.smeInfo.logoImage"
+            onError="this.src='../assets/not-found/no_image.png';" alt="sme-logo"
+            class="mr-3 align-self-start rounded-circle" style="width:60px;">
+          <div class="media-body">
+            <h6>
+              <a href="/sme/{{displayFeed.smeInfo.sUuid}}" target="_blank">
+                {{displayFeed.smeInfo.smeName}}
+              </a>
+              <small class="posted-by">
+                <i>Posted on {{displayFeed.creationDate|date}}</i>
+              </small>
+            </h6>
+            <p class="post-description">
+              {{displayFeed.description}}
+            </p>
+
+            <p *ngIf="displayFeed.files">
+              <ngx-gallery [options]="galleryOptions"
+                [images]="getImageFromBusinessPostMap(displayFeed.businessPostId)">
+              </ngx-gallery>
+            </p>
+            <hr>
+
+            <div *ngIf="displayFeed.liked;else noLiked">
+              <button type="button" class="btn btn-light i-liked" style="outline: none;">
+                <i class="fa fa-thumbs-up"></i> {{displayFeed.likesCount}}
+              </button>
+            </div>
+            <ng-template #noLiked>
+              <div>
+                <button type="button" class="btn btn-light like-btn"
+                  (click)="onClickLike(i,displayFeed.businessPostId)">
+                  <i class="fa fa-thumbs-o-up"></i> {{displayFeed.likesCount}}
+                </button>
+              </div>
+            </ng-template>
+
+          </div>
+
+        </div>
+      </mat-card>
+    </div>
+
+  </div>

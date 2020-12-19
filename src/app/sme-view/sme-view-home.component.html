@@ -1,0 +1,31 @@
+<div #top>
+  <div *ngIf="smes || status">
+    <app-sme-view-header [smes]="smes" [status]="status"></app-sme-view-header>
+
+    <div class="row content-wrap no-margin no-padding col-md-12" *ngIf="smes || status">
+
+      <div class="col-md-2 no-padding sme-sidebar">
+        <app-sme-category [smes]="smes" [status]="status"></app-sme-category>
+      </div>
+
+      <div class="col-md-10 padding">
+        <router-outlet></router-outlet>
+      </div>
+
+    </div>
+    <app-sme-view-footer></app-sme-view-footer>
+  </div>
+</div>
+
+<div class="back-to-top" [ngClass]="{'show-scrollTop': windowScrolled}">
+  <div>
+    <button class="back-to-top-btn" [ngx-scroll-to]="top">
+      <i class="fa fa-arrow-up">
+      </i>
+    </button>
+  </div>
+</div>
+
+<div *ngIf="notFound">
+  <img alt="Not Found" class="not-found-image" src="../../assets/not-found/no-data-found.png">
+</div>

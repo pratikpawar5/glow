@@ -1,0 +1,26 @@
+<i class="material-icons close-icon close" (click)="onClickClose()">close</i>
+
+<div class="specialization-dialog-box">
+  <div class="heading-choose">
+    Choose specialization for {{data.courseName}}
+    <hr>
+  </div>
+  <div class="specialization scrollbar-sml scrollbar">
+    <div *ngFor="let spec of specializations">
+      <label>
+        <input type="checkbox" (click)="onclickCheckBox(spec)"
+          [checked]="specUpdate!=null && specUpdate.indexOf(spec.specializationId) >= 0">
+        <span class="specialization-name">{{spec.specializationName}}</span></label>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="action-button">
+    <mat-chip-list class="mat-chips">
+      <mat-chip (click)="onClickClose()">Cancel</mat-chip>
+      <mat-chip color="primary" selected (click)="onClickDone()">Save Changes</mat-chip>
+    </mat-chip-list>
+  </div>
+
+</div>

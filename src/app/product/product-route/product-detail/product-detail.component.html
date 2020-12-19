@@ -1,0 +1,25 @@
+<div *ngIf="product">
+  <mat-card>
+    <div class="row">
+
+      <div class="col-md-4 text-center">
+        <app-product-images [product]="product"></app-product-images>
+      </div>
+      
+      <div class="col-md-8">
+        <app-product-breadcrumbs [product]="product"></app-product-breadcrumbs>
+        <app-product-info [product]="product" [sUuid]="sUuid"></app-product-info>
+      </div>
+
+    </div>
+  </mat-card>
+  <app-similar-products [product]="product" [sUuid]="sUuid"></app-similar-products>
+</div>
+
+<div *ngIf="showSpinner" class="spinner">
+  <mat-spinner strokeWidth="5" [diameter]="50"></mat-spinner>
+</div>
+
+<div *ngIf="notFound">
+  <img alt="Not Found" class="not-found-image" src="../../../../assets/not-found/no-data-found.png">
+</div>

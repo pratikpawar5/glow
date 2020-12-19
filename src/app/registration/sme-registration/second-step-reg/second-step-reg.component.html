@@ -1,0 +1,199 @@
+<div class="sme-register-form-second-step">
+    <div class="row">
+        <div class="col-md-5 welcome-popup">
+            <div class="smeface-welcome-popup">
+                <div class="welcome text-center mb-2">
+                    <p class="welcome-text">Welcome to </p>
+                </div>
+                <div class="mb-2">
+                    <img src="../../../../../../assets/logo/logo.png" class="welcome-img">
+                </div>
+                <div class="text-center mb-4">
+                    <p class="content mb-1">Your SME has been Registered Successfully...</p>
+                </div>
+                <div class="suggested-note">
+                    <span class="note">
+                        Note:- Your details are under verification process by gloqr team. Once we verify your details
+                        with
+                        us your SME will get live on our platform, this will be inform you by notification.</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6  welcome-popup">
+            <mat-card>
+                <form [formGroup]="companyBasicInformation">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Company Description</mat-label>
+                        <textarea matInput placeholder="Company Description" #desc formControlName="companyDescription"
+                            autocomplete="off" required rows="5" spellcheck="true"></textarea>
+                        <mat-error *ngIf="companyBasicInformation.get('companyDescription').hasError('required')">
+                            Company Description is
+                            required
+                        </mat-error>
+                        <mat-error *ngIf="companyBasicInformation.get('companyDescription').hasError('maxlength')">
+                            Max 1000
+                            Characters are
+                            allowed
+                        </mat-error>
+                        <mat-error *ngIf="companyBasicInformation.get('companyDescription').hasError('minlength')">
+                            Company Description can have minimum 10 characters
+                        </mat-error>
+                        <mat-error *ngIf="companyBasicInformation.get('companyDescription').hasError('inValid')">
+                            Please enter a valid Company Description
+                          </mat-error>
+                        <mat-hint align="end">{{desc.value?.length || 0}}/1000</mat-hint>
+                    </mat-form-field>
+
+                    <div class="row">
+                        <div class="col-md-4 no-Lpadding">
+                            <p>
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Number Of Employees</mat-label>
+                                    <input matInput placeholder="Number Of Employees"
+                                        formControlName="numberOfEmployees" autocomplete="off" maxlength="6"
+                                        (keydown)="onKeydownSpaceSecondStep($event)">
+                                    <mat-error
+                                        *ngIf="companyBasicInformation.get('numberOfEmployees').hasError('pattern')">
+                                        Alphabets not
+                                        allowed
+                                    </mat-error>
+                                </mat-form-field>
+                            </p>
+                        </div>
+                        <div class="col-md-4">
+                            <p>
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Annual TurnOver of Company</mat-label>
+                                    <input matInput placeholder="Ex.(3.4)" formControlName="turnOver" autocomplete="off"
+                                        (keydown)="onKeydownSpace($event)" maxlength="5">
+                                    <mat-error *ngIf="companyBasicInformation.get('turnOver').hasError('pattern')">
+                                        Alphabets not
+                                        allowed
+                                    </mat-error>
+                                </mat-form-field>
+                            </p>
+                        </div>
+                        <div class="col-md-4">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Unit</mat-label>
+                                <mat-select formControlName="turnOverUnit">
+                                    <mat-option *ngFor="let i of turnOverUnits" [value]="i.value">
+                                        {{i.viewValue}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4 no-Lpadding">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Registered AS</mat-label>
+                                <mat-select formControlName="registeredAS">
+                                    <mat-option>--</mat-option>
+                                    <mat-option *ngFor="let name of registeredAs" [value]="name.value">
+                                        {{name.viewValue}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-4 no-Lpadding">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Latitude</mat-label>
+                                <input matInput placeholder="Ex.(57.295411)" formControlName="latitude"
+                                    autocomplete="off" (keydown)="onKeydownSpace($event)" autocomplete="off">
+                                <mat-error *ngIf="companyBasicInformation.get('latitude').hasError('pattern')">
+                                    Invalid Input
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-4">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Longitude</mat-label>
+                                <input matInput placeholder="Ex.(87.255414)" formControlName="longitude"
+                                    autocomplete="off" (keydown)="onKeydownSpace($event)">
+                                <mat-error *ngIf="companyBasicInformation.get('longitude').hasError('pattern')">
+                                    Invalid Input
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="select-image">
+                        <label>
+                            Logo Image <span>*</span>
+                        </label>
+                        <input accept=".png,.jpeg,.jpg" onclick="value = null" style="display: none" type="file"
+                            (change)="onFileChanged($event.target.files)" #fileInput>
+                        <button [disabled]="selectedImages?.length === 1" type="button" class="btn btn-secondary"
+                            (click)="fileInput.click()">Select
+                            File</button>
+                        <span *ngIf="imageRequired" style="margin-left: 10px;color: red">please select logo Image</span>
+                    </div>
+
+                    <div class="image-types">
+                        Image file size should be less than 300kb. Supported formats are: .jpeg .jpg .png
+                    </div>
+
+                    <div class="row image-display">
+                        <div *ngFor="let image of uploadedImages;let i=index" class="image-uploaded">
+                            <!-- <span *ngIf="i === 0">Main Image</span> -->
+                            <div *ngIf="image;else default">
+                                <img mat-card-md-image [src]="contentServer + image" class="border"
+                                    onError="this.src='../assets/not-found/not-available.jpeg';">
+                                <div class="text-center" style="margin-top: 10px">
+                                    <button type="button" mat-icon-button matTooltip="delete"
+                                        (click)="deleteImageFromServer(i,image)">
+                                        <i class="material-icons">close</i>
+                                    </button>
+                                </div>
+                            </div>
+                            <ng-template #default>
+                                <div class="default-image">
+                                    <img mat-card-md-image src="../../../../../../assets/logo/default.png"
+                                        class="border">
+                                </div>
+                            </ng-template>
+                        </div>
+                    </div>
+
+                    <div class="upload-fail" *ngIf="imageUploadFail">
+                        <span>Image Uploadation Failed..please try again!!</span>
+                    </div>
+
+                    <div class="upload-fail" *ngIf="imageSizeError">
+                        <span>Image file size should be less than 300kb</span>
+                    </div>
+                    <div class="upload-fail" *ngIf="imageTypeError">
+                        <span>Please select correct file format...Supported formats are: .jpeg .jpg .png</span>
+                    </div>
+
+                    <div class="text-center" *ngIf="showButtonSecondStep;else disabledSecondStep">
+                        <button mat-stroked-button class="global-btn" (click)="onSkip()">
+                            Skip
+                        </button>
+                        <span style="margin-right:7px;"></span>
+                        <button type="submit" mat-stroked-button class="global-btn" (click)="onSubmitSecondStep()">
+                            Save
+                        </button>
+
+                    </div>
+
+
+                    <ng-template #disabledSecondStep>
+                        <div class="text-center">
+                            <button disabled type="button" class="btn btn-default ">
+                                <mat-spinner class="spinner" strokeWidth="4" [diameter]="15">
+                                </mat-spinner> Saving...please wait
+                            </button>
+                        </div>
+                    </ng-template>
+                </form>
+            </mat-card>
+        </div>
+        <div class="col-md-1">
+
+        </div>
+    </div>
+
+</div>

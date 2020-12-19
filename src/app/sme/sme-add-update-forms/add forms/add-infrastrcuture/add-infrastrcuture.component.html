@@ -1,0 +1,190 @@
+<div class="sme-edit-infrastructure-form">
+  <div class="sme-object-form">
+    <form [formGroup]="infrastructureForm" class="">
+      <div class="mt-3">
+        <h4>Add New Infrastructure</h4>
+      </div>
+      <mat-card class="card">
+
+        <div class="mb-3">
+          <mat-form-field appearance="outline">
+            <mat-label>Machine Name</mat-label>
+            <input matInput placeholder="Machine Name" formControlName="machineName" required autocomplete="off"
+              spellcheck="true">
+            <mat-hint align="end">Not more then 50 characters long.</mat-hint>
+            <mat-error
+              *ngIf="infrastructureForm.get('machineName').hasError('required') ||infrastructureForm.get('machineName').hasError('infrastructureMachineNameError') ">
+              Machine Name is
+              required
+            </mat-error>
+            <mat-error *ngIf="infrastructureForm.get('machineName').hasError('maxlength')">
+              Machine Name Should be Maximum 50 characters
+            </mat-error>
+            <mat-error *ngIf="infrastructureForm.get('machineName').hasError('minlength')">
+              Machine Name should be of
+              minimum 3 characters
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <mat-form-field appearance="outline">
+              <mat-label>Manufacturer Name</mat-label>
+              <input matInput placeholder="Manufacturer Name" formControlName="manufacturer" autocomplete="off"
+                spellcheck="true">
+
+              <mat-error *ngIf="infrastructureForm.get('manufacturer').hasError('maxlength')">
+                Manufacturer Name Should be Maximum 50 characters </mat-error>
+              <mat-error *ngIf="infrastructureForm.get('manufacturer').hasError('minlength')">
+                Manufacturer Name should be of minimum 3 characters
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-md-6 mb-3">
+            <mat-form-field appearance="outline">
+              <mat-label>Model Name</mat-label>
+              <input matInput placeholder="Model Name" formControlName="modelName" autocomplete="off" spellcheck="true">
+              <mat-error *ngIf="infrastructureForm.get('modelName').hasError('maxlength')">
+                Model Name Should be Maximum 50 characters
+              </mat-error>
+              <mat-error *ngIf="infrastructureForm.get('modelName').hasError('minlength')">
+                Model Name should be of  minimum 3 characters
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-md-6 mb-3">
+            <mat-form-field appearance="outline">
+              <mat-label>Capacity Per Day</mat-label>
+              <input matInput placeholder="Capacity per day" formControlName="capacity" autocomplete="off">
+              <mat-error *ngIf="infrastructureForm.get('capacity').hasError('maxlength')">
+                Capacity Should be Maximum 10 characters </mat-error>
+              <mat-error *ngIf="infrastructureForm.get('capacity').hasError('minlength')">
+                Capacity should be of
+                minimum 1 characters
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <mat-form-field appearance="outline">
+              <mat-label>Quanitity</mat-label>
+              <input matInput placeholder="Quantity" formControlName="quantity" autocomplete="off">
+              <mat-error *ngIf="infrastructureForm.get('quantity').hasError('maxlength')">
+                Quantity Should be Maximum 10 characters </mat-error>
+              <mat-error *ngIf="infrastructureForm.get('quantity').hasError('min')">
+                Quanitity should be
+                minimum 1 characters
+              </mat-error>
+              <mat-error *ngIf="infrastructureForm.get('quantity').hasError('pattern')">
+                Alphabets are not allowed
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+
+        <div class="mb-2">
+          <mat-form-field appearance="outline">
+            <mat-label>Description</mat-label>
+            <textarea matInput placeholder="Machine Description" #desc formControlName="description" autocomplete="off"
+              required spellcheck="true"></textarea>
+            <mat-hint align="end">{{desc.value?.length || 0}}/2000</mat-hint>
+            <mat-error *ngIf="infrastructureForm.get('description').hasError('maxlength')">
+              Description Should be Maximum 2000 characters </mat-error>
+            <mat-error *ngIf="infrastructureForm.get('description').hasError('minlength')">
+              Description should be of
+              minimum 3 characters
+            </mat-error>
+            <mat-error *ngIf="infrastructureForm.get('description').hasError('required')">
+              Description Name is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="select-image">
+          <label>
+            Infrastructure Image <span>*</span>
+          </label>
+          <input accept=".png,.jpeg,.jpg" onclick="value = null" style="display: none" type="file" multiple
+            (change)="onFileChanged($event.target.files)" #fileInput>
+          <button [disabled]="selectedImages?.length === 5" type="button" class="btn btn-secondary"
+            (click)="fileInput.click()">Select
+            File</button>
+          <span *ngIf="imageRequired" style="margin-left: 10px;color: red">please select atleast 1 Image</span>
+        </div>
+
+        <div class="image-types">
+          Image file size should be less than 300kb. Supported formats are: .jpeg .jpg .png
+        </div>
+
+        <div class="row image-display">
+          <div *ngFor="let image of uploadedImages;let i=index" class="image-uploaded">
+            <!-- <span *ngIf="i === 0">Main Image</span> -->
+            <div *ngIf="image;else default">
+              <img mat-card-md-image [src]="contentServer+image.imageLocation" class="border">
+              <div class="text-center" style="margin-top: 10px">
+                <button type="button" mat-icon-button matTooltip="delete"
+                  (click)="deleteImageFromServer(i,image.imageLocation)">
+                  <i class="material-icons">close</i>
+                </button>
+              </div>
+            </div>
+            <ng-template #default>
+              <div class="default-image">
+                <img mat-card-md-image src="../../../../../../assets/logo/default.png" class="border">
+              </div>
+            </ng-template>
+          </div>
+        </div>
+        <div class="upload-progress" *ngIf="showUploadProgress">
+          <mat-progress-bar mode="determinate" value="{{progressPercent}}"></mat-progress-bar>
+        </div>
+
+        <div class="upload-fail" *ngIf="imageUploadFail">
+          <span>Image Uploadation Failed..please try again!!</span>
+        </div>
+        <div class="upload-fail" *ngIf="imageSizeError">
+          <span>Image file size should be less than 300kb</span>
+        </div>
+        <div class="upload-fail" *ngIf="imageTypeError">
+          <span>Please select correct file format...Supported formats are: .jpeg .jpg .png</span>
+        </div>
+
+        <div class="row">
+          <div class="business-post-checkbox">
+            <mat-checkbox (click)="onCheckbox()" (keydown)="onKeydownSpace($event)" formControlName="businessPost">
+              Add to Business Post</mat-checkbox>
+          </div>
+        </div>
+
+        <div class="row" *ngIf="showButton;else disabled">
+          <div class="col-md-3">
+          </div>
+          <div class="col-md-3">
+            <button mat-raised-button class="global-btn" (click)="onSubmit(publish)">
+              Save & Publish
+            </button>
+          </div>
+          <div class="col-md-3">
+            <button mat-stroked-button class="cancle-btn" [routerLink]="['../infrastrcutures']">Cancel</button>
+          </div>
+          <div class="col-md-3">
+            <button mat-stroked-button class="default-btn" (click)="onSubmit(draft)">
+              Save as draft
+            </button>
+          </div>
+        </div>
+
+        <ng-template #disabled>
+          <div class="text-center">
+            <button disabled type="button" class="btn btn-default ">
+              <mat-spinner class="spinner" strokeWidth="4" [diameter]="15">
+              </mat-spinner> Saving...please wait
+            </button>
+          </div>
+        </ng-template>
+      </mat-card>
+    </form>
+  </div>
+</div>

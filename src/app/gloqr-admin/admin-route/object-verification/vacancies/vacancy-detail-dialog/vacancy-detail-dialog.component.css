@@ -1,0 +1,16 @@
+@import'../../../../../../app/css/super-admin.css';
+.course-name
+{
+    font-size: 14px;
+}
+.spec-name
+{
+    font-size: 12px;
+}
+.spec-div{
+    margin-left: 95px;
+}
+
+.detail-section{
+    margin-top: 35px;
+}

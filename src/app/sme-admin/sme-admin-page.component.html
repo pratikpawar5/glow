@@ -1,0 +1,18 @@
+<div *ngIf="smes">
+  <app-sme-home-header [smes]="smes"></app-sme-home-header>
+</div>
+
+<div class="admin-page content-wrap">
+  <div class="row">
+    <div class="col-md-2">
+      <app-admin-category-object></app-admin-category-object>
+    </div>
+    <div class="col-md-10">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
+
+<div>
+  <app-sme-home-footer></app-sme-home-footer>
+</div>

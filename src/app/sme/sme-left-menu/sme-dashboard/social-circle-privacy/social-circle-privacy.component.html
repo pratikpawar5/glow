@@ -1,0 +1,25 @@
+<i class="material-icons close-icon" (click)="onClickClose()">close</i>
+<div class="container">
+  <h4>Circle Connection Privacy</h4>
+  <mat-radio-group class="example-radio-group" [(ngModel)]="privacy">
+    <mat-radio-button class="example-radio-button p" value="CIRCLE"
+      (click)="onClickPrivacy(privacyCircleConnection[0].value)">
+      {{privacyCircleConnection[0].viewValue}}
+    </mat-radio-button>
+    <mat-radio-button class="example-radio-button p" value="PUBLIC"
+      (click)="onClickPrivacy(privacyCircleConnection[1].value)">
+      {{privacyCircleConnection[1].viewValue}}
+    </mat-radio-button>
+    <mat-radio-button class="example-radio-button p" value="PRIVATE"
+      (click)="onClickPrivacy(privacyCircleConnection[2].value)">
+      {{privacyCircleConnection[2].viewValue}}
+    </mat-radio-button>
+  </mat-radio-group>
+
+  <div class="save-button">
+    <button mat-stroked-button class="cancle-btn" (click)="onClickClose()">Cancel</button>
+    <button mat-raised-button class="global-btn" (click)="onSave()">
+      Save
+    </button>
+  </div>
+</div>

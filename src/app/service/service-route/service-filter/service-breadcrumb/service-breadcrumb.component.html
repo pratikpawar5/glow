@@ -1,0 +1,23 @@
+<div class="padding">
+  <ul class="breadcrumb">
+    <li>
+      <a href [routerLink]="['/']">Home</a>
+    </li>
+    <li>
+      <a href [routerLink]="['/services']">Services</a>
+    </li>
+    <li class="truncate" *ngIf="category.subCategories;else link">
+      {{category.categoryName}}
+    </li>
+    <ng-template #link>
+      <li>
+        <a href [routerLink]="['/','services',category.serviceCategory.urlName]" [queryParams]="{c:category.serviceCategory.categoryUuid}">
+          {{category.serviceCategory.categoryName}}
+        </a>
+      </li>
+      <li class="truncate">
+        {{category.subCategoryName}}
+      </li>
+    </ng-template>
+  </ul>
+</div>

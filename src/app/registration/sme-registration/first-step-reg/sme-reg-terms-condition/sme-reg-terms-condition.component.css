@@ -1,0 +1,41 @@
+@import '../../../../css/material-dialog.css';
+
+.title{
+    font-size: 14px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #5f5c5c;
+}
+.content{
+    margin-bottom: 15px;
+    color: #676767;
+    text-indent: 20px;
+    text-align: justify;
+}
+.header{
+    font-weight: bold;
+    font-size: 15px;
+}
+.scrollbar{
+    max-height: 250px;
+    width: 100%;
+    overflow-x: hidden;
+}
+.close-button
+{
+    float: right;
+}
+.heading
+{
+    background: #1b5790;
+    z-index: 200;
+    padding: 0 1rem;
+    line-height: 35px;
+    color: #fff;
+}
+.sub-heading
+{
+    font-size: 14px;
+    font-weight: bold;
+    margin-left: 14px;
+}

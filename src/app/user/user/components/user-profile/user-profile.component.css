@@ -1,0 +1,37 @@
+@import'../../../../css/form.css';
+.inputDisable:disabled{
+    cursor: not-allowed;
+    }
+    .right-corner
+    {
+      font-size: 16px;
+      padding-left: 1.2em;
+      font-weight: 500;
+      color: #2387e4;
+      cursor: pointer;
+    
+    }
+    .relative {
+      position: relative;
+      left: 30px;
+    }
+    .resend
+    {
+      font-size: 16px;
+      padding-left: 1.2em;
+      font-weight: 500;
+      color: #2387e4;
+      cursor: pointer;
+    }
+    .marginR-10{
+      margin-right: 10px !important;
+  }
+
+  .line-height{
+    line-height: 2.0;
+  }
+  .mat-raised-button
+  {
+    width: auto;
+    top:10px;
+  }

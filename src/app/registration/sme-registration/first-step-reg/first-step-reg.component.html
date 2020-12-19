@@ -1,0 +1,318 @@
+<div class="sme-register-form-first-step container">
+  <form [formGroup]="companyInformationForm">
+    <p class="main-heading mt-2">SME Registration</p>
+
+    <mat-card class="card margin-auto">
+      <div class="row mb-3">
+        <div class="col-md-4">
+          <mat-form-field appearance="outline">
+            <mat-label>Select SME Category</mat-label>
+            <mat-select formControlName="categoryName" required>
+              <mat-option *ngFor="let category of smeCategories" [value]="category"
+                (click)="onCategory(category.categoryUuid)">
+                {{category.categoryName}}
+              </mat-option>
+              <mat-option [value]="customCategory" class="div-link">
+                + Add New Category
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="companyInformationForm.get('categoryName').hasError('required')">Please choose category
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-md-4">
+          <mat-form-field appearance="outline" *ngIf="newCategory">
+            <mat-label>New Category Name</mat-label>
+            <input matInput formControlName="customCategory">
+            <mat-error *ngIf="companyInformationForm.get('customCategory').hasError('maxlength')">
+              Category Name should be max 100 characters
+            </mat-error>
+            <mat-error *ngIf="companyInformationForm.get('customCategory').hasError('minlength')">
+              Category Name should be min. 3 characters
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-4">
+          <mat-form-field appearance="outline">
+            <mat-label>Company Name</mat-label>
+            <input matInput placeholder="Company Name" #companyName formControlName="smeName" maxlength="50"
+              autocomplete="off" required>
+            <mat-hint align="end">{{companyName.value?.length || 0}}/50</mat-hint>
+            <mat-error *ngIf="companyInformationForm.get('smeName').hasError('required')">
+              Company Name is
+              required
+            </mat-error>
+            <mat-error *ngIf="companyInformationForm.get('smeName').hasError('maxlength')">
+              Company Name should be maximum 50 Characters
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-md-4">
+          <mat-form-field appearance="outline">
+            <mat-label>One Line Statement</mat-label>
+            <input matInput placeholder="One Line Statement" #oneLine formControlName="oneLineStatement"
+              autocomplete="off" maxlength="50" spellcheck="true">
+            <mat-hint align="end">{{oneLine.value?.length || 0}}/50</mat-hint>
+            <mat-error *ngIf="companyInformationForm.get('oneLineStatement').hasError('maxLength')">
+              one-line Statement should be maximum 50 Characters
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-md-4">
+          <mat-form-field appearance="outline">
+            <mat-label>GSTIN number</mat-label>
+            <input matInput placeholder="Ex.27AAAAA1234E5Z5" maxlength="15" minlength="15" formControlName="gstin" #gst
+              required autocomplete="off" autocomplete="off">
+            <mat-hint align="end">{{gst.value?.length || 0}}/15</mat-hint>
+            <mat-error *ngIf="companyInformationForm.get('gstin').hasError('required')">
+              GSTIN Number is
+              required
+            </mat-error>
+            <mat-error *ngIf="companyInformationForm.get('gstin').hasError('maxlength')">Max 15 Characters are
+              allowed</mat-error>
+
+            <mat-error *ngIf="companyInformationForm.get('gstin').hasError('pattern')">Invalid GSTIN Number</mat-error>
+
+            <mat-error *ngIf="companyInformationForm.get('gstin').hasError('alreadyPresent')">GSTIN Number Already
+              Exists</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <mat-checkbox (click)="getExistingMobileAndEmail()" (keydown)="onKeydownSpace($event)" [disabled]="disableFlag"
+        [checked]="isSelected">Get User Details</mat-checkbox>
+      <div class="row mb-3">
+        <div class="col-md-4">
+          <mat-form-field appearance="outline">
+            <mat-label>Mobile number</mat-label>
+            <input matInput placeholder="Mobile number" formControlName="contactPhone" minlength="10" #mobile
+              maxlength="10" required autocomplete="off">
+            <mat-hint align="end">{{mobile.value?.length || 0}}/10</mat-hint>
+            <mat-error *ngIf="companyInformationForm.get('contactPhone').hasError('required')">
+              Mobile Number is
+              required
+            </mat-error>
+
+            <mat-error *ngIf="companyInformationForm.get('contactPhone').hasError('pattern')">
+              Alphabets not
+              allowed
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-md-4">
+          <mat-form-field appearance="outline">
+            <mat-label>Contact Person Email ID</mat-label>
+            <input type="email" matInput placeholder="Contact Person Email ID" formControlName="contactEmail"
+              autocomplete="off" required>
+            <mat-error *ngIf="companyInformationForm.get('contactEmail').hasError('required')">
+              Email Id is
+              required
+            </mat-error>
+            <mat-error *ngIf="companyInformationForm.get('contactEmail').hasError('pattern')">
+              Please enter a
+              valid email address
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-md-4">
+          <mat-form-field appearance="outline">
+            <mat-label>Contact Person Name</mat-label>
+            <input matInput placeholder="Contact Person Name" #personName formControlName="contactPerson" maxlength="30"
+              autocomplete="off" required>
+            <mat-hint align="end">{{personName.value?.length || 0}}/30</mat-hint>
+            <mat-error *ngIf="companyInformationForm.get('contactPerson').hasError('required')">
+              Contact Person Name is
+              required
+            </mat-error>
+            <mat-error *ngIf="companyInformationForm.get('contactPerson').hasError('maxlength')">You have more
+              than 30
+              characters</mat-error>
+            <mat-error *ngIf="companyInformationForm.get('contactPerson').hasError('minLength')">
+              Contact Person can have minimum 2 characters</mat-error>
+            <mat-error *ngIf="companyInformationForm.get('contactPerson').hasError('pattern')">
+              Only characters are allowed
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <ul class="type-of-jobs-list">
+            <li>
+              <h6>SME Type:</h6>
+            </li>
+            <li>&nbsp;
+              <mat-radio-group class="col-md-4" formControlName="smeType" required [(ngModel)]="labelPosition">
+                <mat-radio-button class="" value="MANUFACTURE">
+                  <span class="radio-btn-text">Manufacture</span>
+                </mat-radio-button>
+                &nbsp;&nbsp;
+                <mat-radio-button class="example-margin" value="TRADER">
+                  <span class="radio-btn-text">Trader</span>
+                </mat-radio-button>
+                &nbsp;&nbsp;
+                <mat-radio-button class="example-margin" value="PROVIDER">
+                  <span class="radio-btn-text">Service Provider</span>
+                </mat-radio-button>
+                &nbsp;&nbsp;
+              </mat-radio-group>
+              <mat-error *ngIf="companyInformationForm.get('smeType').hasError('required')">
+                SME Type is required
+              </mat-error>
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <mat-form-field appearance="outline">
+            <mat-label>SME Establishment Date</mat-label>
+            <input matInput [max]="maxDate" [matDatepicker]="picker" placeholder="SME Establishment Date (MM/DD/YYYY)"
+              formControlName="yearOfEstablishment" autocomplete="off" required>
+            <mat-error *ngIf="companyInformationForm.get('yearOfEstablishment').invalid">
+              please choose correct date
+            </mat-error>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker disabled="false"></mat-datepicker>
+          </mat-form-field>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col-md-4">
+          <mat-form-field appearance="outline">
+            <mat-label>Locality/Area</mat-label>
+            <input matInput placeholder="Locality/Area" formControlName="locality" #locality autocomplete="off"
+              required>
+            <mat-hint align="end">{{locality.value?.length || 0}}/30</mat-hint>
+            <mat-error *ngIf="companyInformationForm.get('locality').hasError('maxlength')">Max 30 Characters are
+              allowed</mat-error>
+            <mat-error *ngIf="companyInformationForm.get('locality').hasError('required')">
+              Locality is
+              required
+            </mat-error>
+            <mat-error *ngIf="companyInformationForm.get('locality').hasError('pattern')">
+              Only characters are allowed
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-md-4">
+          <mat-form-field appearance="outline">
+            <mat-label>Pincode</mat-label>
+            <input matInput placeholder="Pincode" formControlName="pincode" #pincode maxlength="6" minlength="6"
+              required autocomplete="off" (keydown)="onKeydown($event)">
+            <mat-hint align="end">{{pincode.value?.length || 0}}/6</mat-hint>
+            <mat-error *ngIf="companyInformationForm.get('pincode').hasError('required')">
+              PinCode is
+              required
+            </mat-error>
+            <mat-error *ngIf="companyInformationForm.get('pincode').hasError('minlength')">
+              Invalid PinCode
+            </mat-error>
+            <mat-error *ngIf="companyInformationForm.get('pincode').hasError('pattern')">
+              Alphabets and Special Symbols are not
+              allowed
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <mat-form-field appearance="outline">
+          <mat-label>Street</mat-label>
+          <textarea matInput placeholder="Ex.MG Road" formControlName="street" #address autocomplete="off"
+            required></textarea>
+          <mat-hint align="end">{{address.value?.length || 0}}/255</mat-hint>
+          <mat-error *ngIf="companyInformationForm.get('street').hasError('maxlength')">Max 255 Characters are
+            allowed</mat-error>
+          <mat-error *ngIf="companyInformationForm.get('street').hasError('required')">
+            Address is required
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-4">
+          <mat-form-field appearance="outline">
+            <mat-label>Country</mat-label>
+            <mat-select formControlName="country" required>
+              <mat-option>--</mat-option>
+              <mat-option *ngFor="let country of countries" [value]="country">
+                {{country.countryName}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="companyInformationForm.get('country').hasError('required')">
+              Please choose Country
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col-md-4">
+          <mat-form-field appearance="outline">
+            <mat-label>State</mat-label>
+            <mat-select formControlName="state" required>
+              <mat-option>--</mat-option>
+              <mat-option *ngFor="let statesName of states" [value]="statesName">
+                {{statesName.stateName}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="companyInformationForm.get('state').hasError('required')">
+              Please choose State
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col-md-4">
+          <mat-form-field appearance="outline">
+            <mat-label>City</mat-label>
+            <mat-select formControlName="city" required>
+              <mat-option>--</mat-option>
+              <mat-option *ngFor="let city of cities" [value]="city">
+                {{city.cityName}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="companyInformationForm.get('city').hasError('required')">
+              Please choose City
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div>
+        <ul class="sme-terms-condition">
+          <li>
+            <mat-checkbox [checked]="acceptedTermsConditionTrue" formControlName="acceptedTermsCondition">
+            </mat-checkbox>
+          </li>
+          <li>
+            <span class="f-12 terms-and-condition">
+              I agree to use the aforesaid details to create my SME-Profile & display it on
+              the gloqr site and also agree to be bound by the
+
+              <a routerLink="/pages/terms-and-condition" target="_blank">Terms of Use & Privacy of gloqr</a> please
+              continue, </span>
+          </li>
+          <mat-error *ngIf="companyInformationForm.get('acceptedTermsCondition').value!=true">
+            <span class="f-12">Please Accept the Terms & Conditions</span>
+          </mat-error>
+        </ul>
+      </div>
+
+      <div class="text-center" *ngIf="showButton;else disabled">
+        <button type="submit" mat-stroked-button class="global-btn" (click)="onSubmitFirstStep()">
+          Register
+        </button>
+      </div>
+      <ng-template #disabled>
+        <div class="text-center">
+          <button disabled type="button" class="btn btn-default ">
+            <mat-spinner class="spinner" strokeWidth="4" [diameter]="15">
+            </mat-spinner> Saving...please wait
+          </button>
+        </div>
+      </ng-template>
+    </mat-card>
+  </form>
+</div>

@@ -1,0 +1,10 @@
+mat-form-field{
+    width: 100%;
+}
+.continue-btn {
+    color: #ffffff;
+    background-color: #1b5790;
+    border-radius: 2px;
+    width: 100%;
+    padding: 4px;
+}

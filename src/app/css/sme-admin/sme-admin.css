@@ -1,0 +1,18 @@
+.not-found
+{
+    object-fit:contain;
+    margin-left: 40%;
+}
+.input[type="checkbox"]{
+  width: 15px; /*Desired width*/
+  height: 15px; /*Desired height*/
+  cursor: pointer;
+}
+.radio-button
+{
+  float: right;
+}
+.titile
+{
+    cursor: pointer;
+}

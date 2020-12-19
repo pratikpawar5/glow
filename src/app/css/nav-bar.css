@@ -1,0 +1,65 @@
+.navbar{
+    height: 55px;
+    box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0.2), 0 0px 5px 0 rgba(0, 0, 0, 0.19);
+}
+.home-logo{
+    height: 40px;
+    width: 80px;
+}
+li a{
+    color: #4b4b4b;
+    cursor: pointer;
+    background-color: transparent;
+}
+li a:hover{
+    color: #1b5790;
+    cursor: pointer;
+    background-color: transparent;
+}
+.nav-item:hover .fa-angle-down{
+    transform: rotate(180deg);
+}
+.nav-custom-icon{
+    font-size: 20px;
+}
+.fixed-top{
+    z-index: 1000;
+}
+.navbar-toggler{
+    border: 1px solid #d7d7d7;
+}
+.mat-badge-content{
+    font-size: 10px;
+}
+.margin{
+    margin-top: 55px;
+    display: flex;
+}
+.avatar{
+    height: 25px;
+    border-radius: 50%;
+    margin-top: 6px;
+}
+@media(max-width:991px){
+    ul{
+        background-color: #f5f5f5;
+        padding: 10px;
+    }
+}
+@media(min-width:1075px){
+    .nav-item{
+        margin-right: 10px;
+    }
+}
+.help-link 
+{
+    color: rgb(153, 153, 153);
+    border: none;
+}
+.help-link.active
+{
+    border-top: solid #ed2301;    
+    border-left: 1px solid #e8e8e8;
+    border-right: 1px solid #e8e8e8;
+    color: #ed2301;
+}

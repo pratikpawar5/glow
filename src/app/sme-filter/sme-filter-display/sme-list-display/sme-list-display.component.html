@@ -1,0 +1,85 @@
+<div infinite-scroll [infiniteScrollDistance]="scrollDistance" [infiniteScrollUpDistance]="scrollUpDistance"
+  [infiniteScrollThrottle]="throttle" [scrollWindow]="true" (scrolled)="onScrollDown()">
+
+  <div class="text-bold f-16 mb-1 sme-count-result">
+    Showing {{smes.length}} smes of {{smesCount}} smes
+  </div>
+  <div class="f-14 sme-count-result">
+    <ul class="nav nav-tabs">
+      <li class="text-bold">Sort by</li>
+      <li [ngClass]="{'active':sortBy === popularity}">
+        <div class="div-link" (click)="sort(popularity)">
+          Popularity
+        </div>
+      </li>
+      <li [ngClass]="{'active':sortBy === desc}">
+        <div class="div-link" (click)="sort(desc)">
+          Newest First
+        </div>
+      </li>
+      <li [ngClass]="{'active':sortBy === asc}">
+        <div class="div-link" (click)="sort(asc)">
+          Oldest First
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="sme text-center" *ngIf="smes?.length > 0">
+    <div class="row no-margin">
+      <mat-card class="sme-card" *ngFor="let sme of smes;let i=index">
+        <div>
+          <a href="/sme/{{sme.sUuid}}" target="_blank">
+            <img mat-card-lg-image [src]="contentServer + sme.logoImage" alt="SME Logo"
+              onError="this.src='../assets/not-found/no_image.png';">
+          </a>
+        </div>
+        <div class="sme-content">
+          <a href="/sme/{{sme.sUuid}}" matTooltip="{{sme.smeName}} {{sme.smeAddress.locality}}" target="_blank"
+            class="sme-name">
+            {{sme.smeName | smeNamePipe}}
+            <span *ngIf="sme.smeAddress" class="sme-address">
+              {{sme.smeAddress.locality | smeAddressPipe}} <br> {{sme.smeAddress.city}}
+            </span>
+          </a>
+        </div>
+
+        <div class="product-service-action">
+            <div *ngIf="sme.status=='OWNER';else check">
+  
+            </div>
+            <ng-template #check>
+              <div *ngIf="!sme.status">
+                <button mat-flat-button  (click)="onClickCircleInvite(sme,i)"><i class="fa fa-link"></i>&nbsp; Circle Invite</button>
+              </div>
+  
+              <div *ngIf="sme.status">
+                <div *ngIf="sme.status=='NEW'">
+                  <button mat-flat-button  [disabled]="sme.sUuid===isDisableId"
+                    (click)="onClickCircleInvite(sme,i)"><i class="fa fa-link"></i>&nbsp; Circle Invite</button>
+                </div>
+                <div *ngIf="sme.status=='RECIEVED_REQ'">
+                  <button mat-button color="primary" disabled><i class="fa fa-hourglass-end"
+                      aria-hidden="true"></i>&nbsp;Pending
+                    Request</button>
+                </div>
+                <div *ngIf="sme.status=='SENT_REQ'">
+                  <button mat-button color="primary" disabled><i class="fa fa-paper-plane" aria-hidden="true"></i>&nbsp;
+                    Request Sent</button>
+                </div>
+                <div *ngIf="sme.status=='OWNER'">
+                </div>
+                <div *ngIf="sme.status=='CONNECTED'">
+                  <button mat-button color="primary" disabled><i class="fa fa-handshake-o"
+                      aria-hidden="true"></i>&nbsp;In-Circle</button>
+                </div>
+              </div>
+            </ng-template>
+          </div>
+      </mat-card>
+    </div>
+
+  </div>
+  <div *ngIf="showSpinner" class="spinner">
+    <mat-spinner strokeWidth="5" [diameter]="50"></mat-spinner>
+  </div>
+</div>

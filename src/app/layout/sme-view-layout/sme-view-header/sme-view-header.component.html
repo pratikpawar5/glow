@@ -1,0 +1,55 @@
+<nav class="navbar navbar-expand-lg bg-white fixed-top" *ngIf="smes">
+  <a class="navbar-brand" routerLink="/sme/{{smes.sUuid}}">
+    <img [src]="contentServer + smes.logoImage" (click)="scrolltoTop()" class="home-logo"
+      onError="this.src='../assets/not-found/no_image.png';">
+  </a>
+
+  <div class="sme-name">
+    {{smes.smeName}}
+  </div>
+
+   <div class="product-service-action" *ngIf="isDesktop||isTablet">
+    <div *ngIf="status=='OWNER';else check">
+
+    </div>
+    <ng-template #check>
+      <div *ngIf="!status">
+        <button mat-flat-button color="primary" (click)="onClickCircleInvite(smes)"><i class="fa fa-link"></i>&nbsp; Circle
+          Invite</button>
+      </div>
+
+      <div *ngIf="status">
+        <div *ngIf="status=='NEW'">
+          <button mat-flat-button color="primary" [disabled]="smes.sUuid===isDisableId"
+            (click)="onClickCircleInvite(smes)"><i class="fa fa-link"></i>&nbsp; Circle Invite</button>
+        </div>
+        <div *ngIf="status=='RECIEVED_REQ'">
+          <button mat-button color="primary" disabled><i class="fa fa-hourglass-end"
+              aria-hidden="true"></i>&nbsp;Pending
+            Request</button>
+        </div>
+        <div *ngIf="status=='SENT_REQ'">
+          <button mat-button color="primary" disabled><i class="fa fa-paper-plane" aria-hidden="true"></i>&nbsp;
+            Request Sent</button>
+        </div>
+        <div *ngIf="status=='OWNER'">
+        </div>
+        <div *ngIf="status=='CONNECTED'">
+          <button mat-button color="primary" disabled><i class="fa fa-handshake-o"
+              aria-hidden="true"></i>&nbsp;In-Circle</button>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+
+  
+  <ul class="navbar-nav ml-auto">
+    <a routerLink="/">
+      <img alt="Gloqr" src="../../../../assets/logo/logo.png" (click)="scrolltoTop()" class="home-logo">
+    </a>
+  </ul>
+
+</nav>
+<div class="margin">
+
+</div>

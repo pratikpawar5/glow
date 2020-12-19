@@ -1,0 +1,468 @@
+<div class="sme-edit-vacancy-form">
+  <div class="sme-object-form">
+    <form [formGroup]="jobPostForm" class="">
+      <div class="mt-3">
+        <h4>Add New SME Job</h4>
+      </div>
+
+      <mat-card class="card">
+        <div class="job-role">
+          <div class="row">
+            <div class="col-md-6">
+              <mat-form-field appearance="outline">
+                <mat-label>Functional Area</mat-label>
+                <mat-select (click)="onGetFunctionalArea()" formControlName="functionalAreaUuid" required>
+                  <mat-option *ngFor="let industrial of industrialAreaDto" [value]="industrial.areaUuid">
+                    {{industrial.industrialAreaName}}
+                  </mat-option>
+                  <mat-option [value]="customCategory" class="div-link">
+                    + Add New Functional Area
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="jobPostForm.get('functionalAreaUuid').hasError('required')">
+                  Functional area is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-md-6">
+              <mat-form-field appearance="outline">
+                <mat-label>Job Role</mat-label>
+                <mat-select formControlName="functionalJobRoleUuid" required>
+                  <mat-option *ngFor="let industrialJobRole of industrialJobRoleDto"
+                    [value]="industrialJobRole.jobRoleUuid">
+                    {{industrialJobRole.jobRole}}
+                  </mat-option>
+                  <mat-option [value]="customCategory" class="div-link">
+                    + Add New Job Role
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="jobPostForm.get('functionalJobRoleUuid').hasError('required')">
+                  Job Role is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="job-role">
+          <div class="row">
+            <div class="col-md-6">
+              <mat-form-field appearance="outline" *ngIf="newCategory">
+                <mat-label>Functional Area</mat-label>
+                <input matInput formControlName="customFunctionalAreaUuid">
+                <mat-error *ngIf="jobPostForm.get('customFunctionalAreaUuid').hasError('maxlength')">
+                  Functional Area should be max 100 characters
+                </mat-error>
+                <mat-error *ngIf="jobPostForm.get('customFunctionalAreaUuid').hasError('minlength')">
+                  Functional Area should be min. 3 characters
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-md-6">
+              <mat-form-field appearance="outline" *ngIf="newCategory || newSubCategory">
+                <mat-label>Job Role</mat-label>
+                <input matInput formControlName="customFunctionalJobRoleUuid">
+                <mat-error *ngIf="jobPostForm.get('customFunctionalJobRoleUuid').hasError('maxlength')">
+                  Job Role should be max 100 characters
+                </mat-error>
+                <mat-error *ngIf="jobPostForm.get('customFunctionalJobRoleUuid').hasError('minlength')">
+                  Job Role should be min 3 characters
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="job-role">
+          <div class="row">
+            <div class="col-md-4">
+              <mat-form-field appearance="outline">
+                <mat-label>Course Category</mat-label>
+                <mat-select placeholder="Course Category" formControlName="courseCategoryId" multiple required>
+                  <mat-optgroup *ngFor="let courseCatName of suggestCourseCategoryDto"
+                    [label]="courseCatName.courseCategoryName">
+                    <mat-option *ngFor="let cName of courseCatName.courses" [value]="cName">
+                      {{cName.courseName}}
+                    </mat-option>
+                  </mat-optgroup>
+                </mat-select>
+                <mat-error *ngIf="jobPostForm.get('courseCategoryId').hasError('required')">
+                  Course Category is
+                  required
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+
+        <div class="select-branch" *ngIf="selectedCourse.length > 0">
+          <div class="row">
+            <div class="col-md-2">
+              <span>Select Branch</span>
+            </div>
+            <div class="col-md-6 border mb-2">
+              <div class="selected-course mb-1" *ngFor="let selectCourse of selectedCourse;let i=index">
+                <div class="row">
+                  <div class="col-sm-6 course-name">
+                    {{selectCourse.courseName}}
+                  </div>
+                  <div class="col-sm-4">
+                    <span *ngIf="selectCourse.totalSpecializations" (click)="onClickChooseSpecialization(selectCourse)"
+                      class="choose-specialization">Choose Specialization</span>
+                  </div>
+                  <div class="col-sm-2">
+                    <a href matTooltip="remove" onclick="return false" class="remove-icon"
+                      (click)="onClickRemoveCourse(selectCourse.courseId,i)">
+                      <i class="material-icons">close</i>
+                    </a>
+                  </div>
+                </div>
+
+                <div *ngIf="specializationMap">
+                  <p *ngFor="let seletedSpecialization of specializationMap | keyvalue">
+                    <span *ngIf="selectCourse.courseId == seletedSpecialization.key">
+                      <p *ngFor="let spec of seletedSpecialization.value;let i=index" class="specialization-name">
+                        {{spec.specializationName}}
+                        <span>
+                          <a class="close" href matTooltip="Remove Specialization" onclick="return false"
+                            class="remove-spec" (click)="onClickRemoveSpec(seletedSpecialization.key,i)">
+                            <i class="material-icons">close</i>
+                          </a>
+                        </span>
+                      </p>
+                    </span>
+                  </p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="job-types mb-2">
+          <p class="titile">Job Type:</p>
+          <div class="row">
+            <div class="col-md-2" *ngFor="let data of jobType">
+              <mat-checkbox (change)="onChangeJobType(data.type, $event)">{{data.type}}</mat-checkbox>
+            </div>
+            <div class="col-md-4">
+              <!--  -->
+            </div>
+          </div>
+        </div>
+
+        <div class="employment-types mb-2">
+          <p class="titile">Employment Type:</p>
+          <div class="row">
+            <div class="col-md-2" *ngFor="let dataEmpType of employmentType">
+              <mat-checkbox (change)="onChangeEmpType(dataEmpType.empType, $event)">{{dataEmpType.empType}}
+              </mat-checkbox>
+            </div>
+            <div class="col-md-4">
+            </div>
+          </div>
+        </div>
+
+        <div class="prefferd-shift mb-2">
+          <p class="titile">Preferred Shift:</p>
+          <ul class="type-of-jobs-list">
+            <li>
+              <mat-radio-group class="" formControlName="preferredShift" [(ngModel)]="prefferedShiftRadioButton">
+                <mat-radio-button class="example-margin" value="DAY">Day</mat-radio-button>
+                <mat-radio-button class="example-margin" value="MID_DAY">Mid-Day</mat-radio-button>
+                <mat-radio-button class="example-margin" value="NIGHT">Night</mat-radio-button>
+                <mat-radio-button class="example-margin" value="FLEXIBLE">Flexible</mat-radio-button>
+              </mat-radio-group>
+            </li>
+          </ul>
+        </div>
+
+        <div class="mb-2">
+          <mat-form-field appearance="outline">
+            <mat-label>Job Title</mat-label>
+            <input matInput placeholder="Job Title" formControlName="vacancyTitle" required maxlength="100"
+              autocomplete="off" spellcheck="true">
+            <mat-error *ngIf="jobPostForm.get('vacancyTitle').hasError('required')">
+              Job Title
+              required
+            </mat-error>
+            <mat-error *ngIf="jobPostForm.get('vacancyTitle').hasError('maxlength')">
+              Job Title Should be Maximum 100 characters
+            </mat-error>
+
+            <mat-error *ngIf="jobPostForm.get('vacancyTitle').hasError('minlength')">
+              Job Title Should be Minimum 3 characters
+            </mat-error>
+            <mat-error *ngIf="jobPostForm.get('vacancyTitle').hasError('invalidInputs')">
+              Job Title
+              required
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="row mb-3">
+          <div class="col-md-4">
+            <mat-form-field appearance="outline">
+              <mat-label>Number Of Vacancy</mat-label>
+              <input matInput placeholder="Number of Vacancy" required formControlName="noOfVacancy" maxlength="6"
+                autocomplete="off">
+              <mat-error *ngIf="jobPostForm.get('noOfVacancy').hasError('pattern')">
+                Only Digits are allowed
+              </mat-error>
+              <mat-error *ngIf="jobPostForm.get('noOfVacancy').hasError('min')">
+                Should be greater than 0
+              </mat-error>
+              <mat-error *ngIf="jobPostForm.get('noOfVacancy').hasError('required')">
+                Number Of Vacancy required
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="col-md-4">
+            <mat-form-field appearance="outline">
+              <mat-label>Min Exp</mat-label>
+              <input matInput placeholder="Min" formControlName="minExp" autocomplete="off" required type="number"
+                (keypress)="onAnyMinExperience($event)">
+              <mat-error *ngIf="jobPostForm.get('minExp').hasError('min')">
+                Min Experience should be between 0 to 30
+              </mat-error>
+              <mat-error *ngIf="jobPostForm.get('minExp').hasError('max')">
+                Min Experience should be between 0 to 30
+              </mat-error>
+              <mat-error *ngIf="jobPostForm.get('minExp').hasError('required')">
+                Min Experience required
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-4">
+            <mat-form-field appearance="outline">
+              <mat-label>Max Exp</mat-label>
+              <input matInput placeholder="Max" formControlName="maxExp" autocomplete="off" required type="number"
+                (keypress)="onAnyMaxExperience($event)">
+              <mat-error *ngIf="jobPostForm.get('maxExp').hasError('min')">
+                Max Experience should be between 01 to 30
+              </mat-error>
+              <mat-error *ngIf="jobPostForm.get('maxExp').hasError('max')">
+                Max Experience should be between 01 to 30
+              </mat-error>
+              <mat-error *ngIf="jobPostForm.get('maxExp').hasError('required')">
+                Max Experience required
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+        </div>
+        <div *ngIf="experienceError" class="salaryError">
+          Please Enter a valid range
+        </div>
+
+
+
+        <div class="row mb-3">
+          <div class="col-md-3">
+            <mat-form-field appearance="outline">
+              <mat-label>Min Salary</mat-label>
+              <input matInput placeholder="Min-Salary" formControlName="minSalary" autocomplete="off" type="number"
+                (keypress)="onAnyMinKeyDown($event)">
+              <mat-error *ngIf="jobPostForm.get('minSalary').hasError('min')">
+                Minimum salary should be between Rs. 1000 to Rs. 400000
+              </mat-error>
+              <mat-error *ngIf="jobPostForm.get('minSalary').hasError('max')">
+                Minimum salary should be between Rs. 1000 to Rs. 400000
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-1" style="margin: 15px 0px;">
+            to
+          </div>
+
+          <div class="col-md-3">
+            <mat-form-field appearance="outline">
+              <mat-label>Max Salary</mat-label>
+              <input matInput placeholder="Max-Salary" formControlName="maxSalary" autocomplete="off" type="number"
+                (keypress)="onAnyMaxKeyDown($event)">
+              <mat-error *ngIf="jobPostForm.get('maxSalary').hasError('min')">
+                Maximum salary should be between Rs. 1000 to Rs. 400000
+              </mat-error>
+              <mat-error *ngIf="jobPostForm.get('maxSalary').hasError('max')">
+                Maximum salary should be between Rs. 1000 to Rs. 400000
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-md-2">
+            <mat-form-field appearance="outline">
+              <input matInput placeholder="Salary Type" formControlName="salaryType">
+            </mat-form-field>
+          </div>
+          <div class="col-md-4 salaryError" *ngIf="salaryError">
+            Please Enter a valid range
+          </div>
+        </div>
+        <mat-checkbox (click)="getExistingMobileAndEmail()" (keydown)="onKeydownSpace($event,getUserDetail)"
+          [checked]="isSelected" [disabled]="disableFlag">Get User Details</mat-checkbox>
+
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <mat-form-field appearance="outline">
+              <mat-label>Contact Email</mat-label>
+              <input matInput placeholder="Contact Email Id" formControlName="contactEmail"
+                (keydown)="onKeydown($event)" maxlength="50" required autocomplete="off">
+              <mat-error *ngIf="jobPostForm.get('contactEmail').hasError('pattern')">
+                Please enter a
+                valid email address
+              </mat-error>
+              <mat-error *ngIf="jobPostForm.get('contactEmail').hasError('required')">
+                Contact Email is
+                required
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-6">
+            <mat-form-field appearance="outline">
+              <mat-label>Contact Number</mat-label>
+              <input matInput placeholder="9890000000" formControlName="contactMobileNumber"
+                (keydown)="onKeydown($event)" #mobile maxlength="10" minlength="10" required autocomplete="off">
+              <mat-hint align="end">{{mobile.value?.length || 0}}/10</mat-hint>
+              <mat-error *ngIf="jobPostForm.get('contactMobileNumber').hasError('required')">
+                Contact Number is
+                required
+              </mat-error>
+              <mat-error *ngIf="jobPostForm.get('contactMobileNumber').hasError('pattern')">
+                Alphabets not
+                allowed
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-md-4">
+            <mat-form-field appearance="outline">
+              <mat-label>Job Locations</mat-label>
+              <mat-select placeholder="Job locations" formControlName="locations" multiple required>
+                <mat-optgroup *ngFor="let state of states" [label]="state.stateName">
+                  <mat-option *ngFor="let city of state.cities" [value]="city.cityName">
+                    {{city.cityName}}
+                  </mat-option>
+                </mat-optgroup>
+              </mat-select>
+              <mat-error *ngIf="jobPostForm.get('locations').hasError('required')">
+                Job Locations is required
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-md-4">
+            <mat-form-field appearance="outline">
+              <mat-label>Last Apply Date</mat-label>
+              <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker"
+                placeholder="Last Apply Date (MM/DD/YYYY)" formControlName="lastApplyDate" autocomplete="off" required>
+              <mat-error *ngIf="jobPostForm.get('lastApplyDate').invalid">
+                please choose correct date
+              </mat-error>
+              <mat-error *ngIf="jobPostForm.get('lastApplyDate').hasError('required')">
+                Last Apply Date is required
+              </mat-error>
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker disabled="false"></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="col-md-4">
+          </div>
+        </div>
+        <div class="mb-2">
+          <mat-form-field appearance="outline">
+            <mat-label>Key Skills</mat-label>
+            <mat-chip-list #chipList>
+              <mat-chip *ngFor="let skill of skillSets" [selectable]="selectable" [removable]="removable"
+                (removed)="remove(skill)">
+                {{skill}}
+                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+              </mat-chip>
+              <input placeholder="Add new Skill Sets" [matChipInputFor]="chipList"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+                (matChipInputTokenEnd)="add($event)" spellcheck="true">
+            </mat-chip-list>
+          </mat-form-field>
+        </div>
+
+        <div class="mb-2">
+          <mat-form-field appearance="outline">
+            <mat-label>Short Job Description</mat-label>
+            <textarea matInput placeholder="Short Job Description" #shortdesc formControlName="shortDescription"
+              autocomplete="off" required spellcheck="true"></textarea>
+            <mat-error *ngIf="jobPostForm.get('shortDescription').hasError('required')">
+              Short Description is
+              required
+            </mat-error>
+            <mat-hint align="end">{{shortdesc.value?.length || 0}}/200</mat-hint>
+            <mat-error *ngIf="jobPostForm.get('shortDescription').hasError('maxlength')">
+              Maximum 200 characters are allowed
+            </mat-error>
+            <mat-error *ngIf="jobPostForm.get('shortDescription').hasError('minlength')">
+              Short Description should be
+              minimum 20 characters
+            </mat-error>
+            <mat-error *ngIf="jobPostForm.get('shortDescription').hasError('invalidInputs')">
+              Short Description
+              required
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="mb-1">
+          <mat-form-field appearance="outline">
+            <mat-label>Long Job Description</mat-label>
+            <textarea matInput placeholder="Long Job Description" #longdesc formControlName="longDescription"
+              autocomplete="off" spellcheck="true"></textarea>
+            <mat-hint align="end">{{longdesc.value?.length || 0}}/1000</mat-hint>
+            <mat-error *ngIf="jobPostForm.get('longDescription').hasError('maxlength')">
+              Maximum 1000 characters are allowed
+            </mat-error>
+            <mat-error *ngIf="jobPostForm.get('longDescription').hasError('minlength')">
+              Long Description should be minimum 20 characters
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="row">
+          <div class="col-md-4">
+            <mat-form-field appearance="outline">
+              <mat-label>Required Documents</mat-label>
+              <mat-select placeholder="Required Documents" formControlName="requiredDocuments" multiple>
+                <mat-option *ngFor="let document of requiredDocuments" [value]="document">{{document}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="business-post-checkbox">
+            <mat-checkbox (click)="onBusinessPostCheckbox()" (keydown)="onKeydownSpace($event,businessPostKey)"
+              formControlName="businessPost" [checked]="isSelectedBIPost">Add
+              to Business Post</mat-checkbox>
+          </div>
+        </div>
+
+        <div class="text-center" *ngIf="showButton;else disabled">
+          <button mat-raised-button class="global-btn" (click)="onSubmit()">
+            Save
+          </button>
+          &nbsp;&nbsp;
+          <button mat-stroked-button class="cancle-btn" [routerLink]="['../jobs']">Cancel</button>
+        </div>
+        <ng-template #disabled>
+          <div class="text-center">
+            <button disabled type="button" class="btn btn-default">
+              <mat-spinner class="spinner" strokeWidth="4" [diameter]="15">
+              </mat-spinner> Saving...please wait
+            </button>
+          </div>
+        </ng-template>
+      </mat-card>
+    </form>
+  </div>
+</div>

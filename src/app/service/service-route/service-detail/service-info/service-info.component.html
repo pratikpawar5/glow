@@ -1,0 +1,90 @@
+<div class="desc-wrap">
+
+  <div class="item-title">
+    {{service.serviceName}}
+  </div>
+
+  <div class="item-by">
+    By
+    <a href="sme/{{service.sUuid}}" target="_blank">
+      {{service.smeInfo.smeName}},
+      {{service.smeInfo.smeAddress.locality}},
+      {{service.smeInfo.smeAddress.city}}
+    </a>
+  </div>
+
+  <div class="price" *ngIf="service.discount;else originalprice">
+    Starts from <span class="item-price">
+      {{service.discountedPrice | IndianCurrency}}
+      <span class="item-price-unit" *ngIf="service.priceUnit">
+        / {{service.priceUnit}}
+      </span>
+    </span>
+    <span class="item-discount">
+      {{service.price | IndianCurrency}}
+    </span>
+    <span class="discount">
+      {{service.discount}}% off
+    </span>
+  </div>
+  <ng-template #originalprice>
+    Starts from 
+    <span class="item-price">
+      {{service.price | IndianCurrency}}
+      <span class="item-price-unit" *ngIf="service.priceUnit">
+        / {{service.priceUnit}}
+      </span>
+    </span>
+  </ng-template>
+
+  <div class="bi-count" *ngIf="service.biCount">
+    Number of Users Showed Interest: <span>{{service.biCount}}</span>
+  </div>
+
+  <div class="mt-2" *ngIf="sUuid === service.sUuid;else check">
+
+  </div>
+
+  <ng-template #check>
+    <div class="mt-2 col-md-3">
+      <button *ngIf="service.addedToCart" mat-stroked-button class="added-to-cart ">
+        Added to Cart <i class="material-icons">shopping_cart</i>
+        <span class="cart-arrow-check"><i class="fa fa-check"></i></span>
+      </button>
+      <button *ngIf="!service.addedToCart"  mat-flat-button class="interest-btn"
+      (click)="businessInterest(service.serviceUuid)">
+        Show Interest <i class="fa fa-eye"></i>
+      </button>
+    </div>
+    <br>
+  </ng-template>
+
+  <div *ngIf="service.location" class="item-location">
+    Available Locations : <span class="item-location-place">{{service.location}}</span>
+  </div>
+
+  <div class="item-description-title">
+    Description
+  </div>
+
+  <div class="item-description">
+    {{service.description}}
+  </div>
+
+  <div *ngIf="service.specifications" class="item-specifications-title border">
+    Specifications
+  </div>
+  <div *ngIf="service.specifications" class="border item-specifications border-top-0">
+    <div *ngFor="let map of service.specifications | keyvalue">
+      <div class="row">
+        <div class="col-md-3 no-padding text-grey">
+          {{map.key}}
+        </div>
+        <div class="col-md-1 no-padding"></div>
+        <div class="col-md-8 no-padding">
+          {{map.value}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

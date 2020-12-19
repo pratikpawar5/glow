@@ -1,0 +1,17 @@
+<div class="imgdiv">
+  <div class="profileimgdiv mb-3">
+    <img [src]="contentServer + smes.logoImage" class="center" onError="this.src='../assets/logo/noimage.png'">
+  </div>
+  <div class="overlay"></div>
+  <div class="button">
+    <a (click)="onUserProfileImage()"  style="cursor: pointer;"   onclick="return false" *ngIf="smes.logoImage">
+      Change Image
+    </a> 
+    <a (click)="onUserProfileImage()"  style="cursor: pointer;"   onclick="return false" *ngIf="!smes.logoImage">
+      Upload Photo
+    </a>
+  </div>
+</div>
+<div class="user-name">
+  <h4 matTooltip="{{smes.smeName}}">{{smes.smeName | smeNamePipe}}</h4>
+</div>

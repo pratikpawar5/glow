@@ -1,0 +1,19 @@
+<i class="material-icons close-icon" (click)="onClickClose()">close</i>
+
+<div class="container">
+  <h4 class="text-center">Message from Recruiter</h4>
+
+  <div class="interview-time f-14">
+    <h6>
+      <mark>
+        Interview Scheduled on {{shortListedInfo.interviewDate}} at {{shortListedInfo.interviewTime}}
+      </mark></h6>
+
+  </div>
+  <div class="message f-14">
+    <h6>Message:</h6>
+    {{shortListedInfo.description}}
+  </div>
+
+
+</div>

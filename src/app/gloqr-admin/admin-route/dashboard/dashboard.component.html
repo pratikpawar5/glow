@@ -1,0 +1,28 @@
+<div class="container">
+    <mat-card>
+        <mat-tab-group [selectedIndex]="selected.value" (selectedIndexChange)="selected.setValue($event)">
+            <mat-tab [label]="tabs[0]">
+                <app-new-user-list [selectedIndex]="selectedIndex"></app-new-user-list>
+            </mat-tab>
+
+            <mat-tab [label]="tabs[1]">
+                <div *ngIf="selectedIndex == 1">
+                    <app-buiness-interest [selectedIndex]="selectedIndex"></app-buiness-interest>
+                </div>
+
+            </mat-tab>
+
+            <mat-tab [label]="tabs[2]">
+                <div *ngIf="selectedIndex == 2">
+                    <app-business-circle [selectedIndex]="selectedIndex"></app-business-circle>
+                </div>
+            </mat-tab>
+
+            <mat-tab [label]="tabs[3]">
+                <div *ngIf="selectedIndex == 3">
+                    <app-job-applied [selectedIndex]="selectedIndex"></app-job-applied>
+                </div>
+            </mat-tab>
+        </mat-tab-group>
+    </mat-card>
+</div>

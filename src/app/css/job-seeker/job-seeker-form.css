@@ -1,0 +1,133 @@
+::ng-deep .mat-form-field-flex > .mat-form-field-infix { 
+    padding: 5px 0px;
+}
+::ng-deep .mat-form-field-label-wrapper { 
+    top: -1.5em; 
+}
+
+::ng-deep .mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+    transform: translateY(-1.1em) scale(.75);
+    width: 133.33333%;
+}
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-prefix, .mat-form-field-appearance-outline .mat-form-field-suffix{
+    top:-3px !important;
+}
+.example-headers-align .mat-expansion-panel-header-title,
+.example-headers-align .mat-expansion-panel-header-description {
+  flex-basis: 0;
+}
+
+.example-headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: right;
+}
+.job-seeker-heading
+{
+    padding: 15px 0px 10px 38px;
+}
+.job-seeker-card
+{
+    margin: auto;
+    max-width: 60%;
+    background-color: #ece8e8de
+}
+
+mat-form-field
+{
+    width: 100%;
+}
+.type-of-jobs-list
+{
+    padding-left: 0;
+}
+.type-of-jobs-list li{
+
+    list-style-type: none;
+    padding: 5px 10px 0 0;
+    display: inline-block;
+}
+.expansion-heading
+{
+    font-size: 17px;
+    font-weight: bold;
+}
+.expansion-icons
+{
+    float: right;
+}
+.example-section {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    height: 60px;
+  }
+  .example-margin {
+    margin: 0 10px;
+  }
+ .checkbox 
+ {
+     margin-top: 1%;
+ }
+ .checkbox-titile
+ {
+     font-size: 14px;
+     font-weight: bold;
+ }
+.job-seeker-forms-button
+{
+    padding: 25px 0 0 45%;
+}
+.submit-button
+{
+    margin-right: 5%;
+}
+:ng-deep.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+    border-color: rgb(66, 134, 244);
+
+}
+  
+:ng-deep.mat-radio-button.mat-accent .mat-radio-inner-circle {
+      background-color: #408cff;
+      size: 10px;
+
+  }
+  :ng-deep mat-expansion-panel-header
+{
+    background-color:#f0efef;
+}
+.display-flex{
+    display: flex !important;
+}
+.heading
+{
+    font-family: cursive;
+    font-size: 25px;
+}
+.save
+{
+    
+}
+.skip
+{
+    margin-right: 10px;
+}
+.age-error
+{
+    color: #f44336;
+    padding: 0px 0px 0px 3px;
+    font-size: 10px;
+}
+.user-detail-chk-box
+{
+    margin-top: 6px;
+}
+.checked
+{
+    cursor: not-allowed;
+}
+.error-message
+{
+    color: #f44336;
+    font-size: 10px;
+    padding: 0px 0px 0px 4px;
+}

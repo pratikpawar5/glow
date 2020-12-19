@@ -1,0 +1,42 @@
+.wrap{
+    margin: 15px 0;
+}
+.item-card{
+    margin: 15px;
+}
+.item-title
+{
+    color: #0073b6;
+    font-size: 16px;
+}
+.item-desc
+{
+    padding-bottom: 10px;
+}
+.sub-title
+{
+    color: grey;
+    font-size: 14px; 
+}
+.sub-title-desc
+{
+    font-size: 14px;
+    text-align: justify;
+    word-break: break-word;
+    white-space: pre-wrap;
+    display: flex;
+}
+::ng-deep .ngx-gallery-image.ngx-gallery-active{
+    z-index: 999 !important;
+}
+
+.spinner{
+    padding: 145px 50%;
+}
+@media(max-width:767px)
+{
+    .item-card{
+        margin: 0px 0 10px 0;
+        
+    }  
+}

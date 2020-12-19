@@ -1,0 +1,107 @@
+ .wrap{
+    margin: 15px 0;
+}
+.count-btn{
+    border-radius: 50%;
+    height: 55px;
+    width: 55px;
+    font-size: 20px;
+    text-align: bold;
+}
+.business-circle-card
+{
+    height: 290px;
+}
+.privacy
+{
+    float: right;
+}
+.circle-privacy
+{
+    margin-bottom: 65px;
+}
+.widget-box {
+    padding: 0;
+    box-shadow: none;
+    margin: 3px 0;
+}
+.widget-header-small>.widget-title {
+    line-height: 30px;
+}
+.widget-box[class*=widget-color-]>.widget-header {
+    color: #020202;
+}
+.widget-header>.widget-title {
+    padding: 0;
+    margin: 0;
+    display: inline;
+}
+.lighter {
+    font-weight: lighter;
+}
+.type-of-jobs-list
+{
+    padding-left: 0;
+}
+.type-of-jobs-list li{
+
+    list-style-type: none;
+    padding: 0 10px 0 0;
+    display: inline-block;
+}
+:host ::ng-deep .mat-dialog-content {
+    overflow-x: hidden !important;
+}
+.value-card
+{
+    height: 170px;  
+    margin: 10px;
+}
+a{
+    text-decoration: none;
+}
+.value-card:hover
+{
+    border: 1px solid #3574b7;
+}
+.amount{
+    color: #757575;}
+.value-card-icon
+{
+    width: 70px;
+    height: 70px;
+}
+.value-text
+{
+    color: #343b42;
+}
+.heading
+{
+    color:#7d7d7d
+}
+tr
+{
+    text-align: center;
+
+}
+.table thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #748ea9;
+}
+.table-bordered {
+    border: 2px solid #748ea9;
+}
+.table-bordered td, .table-bordered th {
+    border: 1px solid #748ea9;
+}
+
+.type-of-jobs-list
+{
+    padding-left: 0;
+}
+.type-of-jobs-list li{
+
+    list-style-type: none;
+    padding: 0 70px 0 0;
+    display: inline-block;
+}

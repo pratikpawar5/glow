@@ -1,0 +1,30 @@
+@import '../../../css/nav-bar.css';
+@import'../../../css/dropdown.css';
+
+.sme-name{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 24px;
+
+}
+.my-avatar /deep/ .avatar-content {
+    font-weight: bold !important;
+    font: 15px/32px Helvetica, Arial, sans-serif !important;
+}
+@media(min-width:991px){
+    .navbar-brand{
+        margin-right: 5%;
+    }
+}
+@media (max-width: 360px){
+    .sme-name{
+        width: 148px;
+    }
+}
+@media (max-width: 500px){
+    .sme-name{
+        width: 180px;
+    }
+}
+

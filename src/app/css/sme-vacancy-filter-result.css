@@ -1,0 +1,26 @@
+.display-flow-root{
+    display: flow-root !important;
+}
+.pull-left{
+    float: left !important;
+}
+
+.filter-result{
+    max-width: 100%;
+}
+
+.filter{
+    max-width: 280px;
+    padding-left: 10px;
+    padding-right: 0px; 
+}
+
+.result{
+    max-width: 70%;
+    padding-left: 10px; 
+    padding-right: 0px; 
+}
+
+.spinner{
+    padding: 300px 50%;
+}

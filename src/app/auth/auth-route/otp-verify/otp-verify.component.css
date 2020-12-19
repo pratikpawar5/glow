@@ -1,0 +1,22 @@
+mat-form-field{
+    width: 100%
+}
+.verify-btn {
+    color: #ffffff;
+    background-color: #1b5790;
+    border-radius: 2px;
+    width: 100%;
+    padding: 4px;
+}
+.btn-parent{
+    margin-top: 5%;
+    padding: 0 20%;
+}
+.sent-on{
+    padding-top: 5%;
+    margin-bottom: 3%;
+    display: inline-block;
+}
+.sent-on span{
+    color:#eb5555;
+}

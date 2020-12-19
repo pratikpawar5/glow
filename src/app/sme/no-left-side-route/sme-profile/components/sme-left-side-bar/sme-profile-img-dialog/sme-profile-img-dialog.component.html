@@ -1,0 +1,43 @@
+<div class="user-left-dialog-wrap">
+  <i class="material-icons close-icon close" (click)="onClickCancle()">close</i>
+
+  <div>
+    <img [src]="contentServer + data.logoImage" class="profileimgdiv" onError="this.src='../assets/logo/noimage.png';">
+  </div>
+  <hr>
+
+  <div class="select-image">
+    <input accept=".png,.jpeg,.jpg" onclick="value = null" style="display: none;" type="file"
+      (change)="onFileChanged($event)" #fileInput>
+    <button type="btn" [disabled]=selectedImages class="btn btn-secondary"(click)="fileInput.click()">Change
+      Logo</button>
+    <span *ngIf="imageRequired" style="margin-left: 10px;color: red">please select atleast 1 Image</span>
+  </div>
+  <div class="image-types">
+    Image file size should be less than 300kb. Supported formats are: .jpeg .jpg .png
+  </div>
+  <br>
+
+  <div *ngFor="let url of urls" class="profile-upload-imgs">
+    <img mat-card-sm-image [src]="url" class="border uploaded-image">
+    <a href matTooltip="Close" class="remove-image" onclick="return false" (click)="onDeleteImage(i)">
+      <mat-icon>close</mat-icon>
+    </a>
+  </div>
+
+  <div class="upload-fail" *ngIf="imageUploadFail">
+    <span>Image Uploadation Failed..please try again!!</span>
+  </div>
+
+  <div class="upload-fail" *ngIf="imageSizeError">
+    <span>Image file size should be less than 300kb</span>
+  </div>
+  <div class="upload-fail" *ngIf="imageTypeError">
+    <span>Please select correct file format...Supported formats are: .jpeg .jpg .png</span>
+  </div>
+  <div>
+    <button mat-raised-button class="global-btn" (click)="onUploadImage()">
+      Upload </button>
+  </div>
+
+</div>

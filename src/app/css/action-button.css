@@ -1,0 +1,31 @@
+.mat-flat-button
+{
+    border: 1px solid #de2b2624;
+    color: #ed4440;
+    background-color: #ffffff;
+}
+.mat-flat-button:hover{
+    color: #ffffff;
+    background-color: #ed4440;
+}
+
+.apply
+{
+    border: 1px solid #de2b2624;
+    color: #ed4440;
+    background-color: #f9f7f7;}
+.apply:hover
+{
+    color: #ffffff;
+    background-color: #ed4440;
+}
+.applied
+{
+    background-color: #bebebe;
+    color: #fff;
+    font-weight: bold;
+    font-size: 14px;
+    border: none;
+    cursor: not-allowed;
+    outline: none;
+}

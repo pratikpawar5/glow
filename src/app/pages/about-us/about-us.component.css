@@ -1,0 +1,53 @@
+@import '../../css/pages.css';
+
+a ,a:hover {
+    color: #ff0000;
+}
+.new-image
+{
+    height: 238px;
+}
+.company-name
+{
+    position: absolute;
+    top: 40%;
+    margin-left: 6%;
+    font-size: 18px;
+    font-weight: bold;
+}
+.emp-name
+{
+    position: absolute;
+    top: 53%;
+    color: #0073b6;
+    font-family: fantasy;
+    margin-left: 6%;
+}
+.address
+{
+    font-size: 12px;
+    position: absolute;
+    top: 54%;
+    margin-left: 30%;
+}
+.address1
+{
+    font-size: 12px;
+    position: absolute;
+    top: 62%;
+    margin-left: 30%;
+}
+.phone
+{
+    font-size: 12px;
+    position: absolute;
+    top: 70%;
+    margin-left: 30%
+}
+.email
+{
+    font-size: 12px;
+    position: absolute;
+    top: 78%;
+    margin-left: 30%;
+}

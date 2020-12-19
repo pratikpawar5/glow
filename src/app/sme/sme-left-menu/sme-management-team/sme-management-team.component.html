@@ -1,0 +1,97 @@
+<div class="wrap">
+  <div class="title row no-margin">
+    <div class="col-md-9 no-padding">
+      <h4>Management Team</h4>
+    </div>
+    <div class="col-md-2 no-padding">
+      <button mat-mini-fab color="primary" [routerLink]="['../add-management-team']">
+        <i class="material-icons">add</i>
+      </button> Add Team
+    </div>
+  </div>
+
+  <div class="col-md-12 mt-2">
+
+    <mat-card class="item-card" *ngFor="let smeManegementTeam of smeManegementTeams">
+
+      <div class="row">
+        <div class="col-md-3">
+          <div class="text-center">
+            <img class="round-img" mat-card-lg-image alt="team-member-img"
+              [src]="contentServer + smeManegementTeam.profileImageUrl"
+              onError="this.src='../assets/not-found/noimage.png';">
+          </div>
+          <div class="card-title text-center">
+            {{smeManegementTeam.fullName}}
+          </div>
+        </div>
+
+        <div class="col-md-9">
+          <div class="mgmt-team-content">
+            <div class="row">
+              <p class="col-sm-2 card-title">
+                Designation:
+              </p>
+              <p class="col-sm-10 card-description">
+                {{smeManegementTeam.designation}}
+              </p>
+            </div>
+
+            <div class="row">
+              <p class="col-sm-2 card-title">
+                Description:
+              </p>
+              <p class="col-sm-10 card-description">
+                {{smeManegementTeam.profileDesc}}
+              </p>
+            </div>
+
+            <div class="row">
+              <p class="col-sm-2 card-title">
+                Email Id :
+              </p>
+              <p class="col-sm-10 card-description">
+                {{smeManegementTeam.mail}}
+              </p>
+            </div>
+
+            <div class="row">
+              <p class="col-sm-2 card-title">
+                Experience :
+              </p>
+              <p class="col-sm-10 card-description">
+                {{smeManegementTeam.experience}} years
+              </p>
+            </div>
+
+            <div class="row"
+              *ngIf="smeManegementTeam.fbLink || smeManegementTeam.linkedinLink || smeManegementTeam.twitterLink">
+              <p class="col-sm-2 card-title">
+                Social :
+              </p>
+              <p class="col-sm-10 card-description">
+                <span *ngIf="smeManegementTeam.fbLink">
+                  <a href="{{smeManegementTeam.fbLink}}" target="_blank">
+                    <img src="../../../../assets/social/fb-logo.png" class="social-logo">
+                  </a>
+                </span>
+                <span *ngIf="smeManegementTeam.linkedinLink">
+                  <a href="{{smeManegementTeam.linkedinLink}}" target="_blank">
+                    <img src="../../../../assets/social/linkedIn-logo.png" class="social-logo">
+                  </a>
+                </span>
+                <span *ngIf="smeManegementTeam.twitterLink">
+                  <a href="{{smeManegementTeam.twitterLink}}" target="_blank">
+                    <img src="../../../../assets/social/twitter-logo.png" class="social-logo">
+                  </a>
+                </span>
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+
+</div>

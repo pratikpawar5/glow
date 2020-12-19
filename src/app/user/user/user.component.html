@@ -1,0 +1,25 @@
+<app-main-header></app-main-header>
+
+<div class="container my-profile">
+  <mat-card>
+    <h5>My Profile</h5>
+
+    <div class="row" *ngIf="user;else spinner">
+      <div class="col-md-4 border-right">
+        <app-user-left-side-bar [user]="user"></app-user-left-side-bar>
+      </div>
+      <div class="col-md-8">
+        <app-user-profile [user]="user"></app-user-profile>
+      </div>
+    </div>
+
+    <ng-template #spinner>
+      <div class="spinner">
+        <mat-spinner strokeWidth="4" [diameter]="40"></mat-spinner>
+      </div>
+    </ng-template>
+
+  </mat-card>
+</div>
+
+<app-main-footer></app-main-footer>

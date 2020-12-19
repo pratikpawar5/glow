@@ -1,0 +1,88 @@
+.filter-menu{
+    padding: 14px;
+    border-bottom:1px solid #dee2e6;
+}
+.card{
+    border: none;
+    border-bottom:1px solid #dee2e6;
+    font-size: 14px;
+}
+.card-header{
+    background-color: #fff;
+    padding: 14px;
+    border: none;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+.card-body{
+    padding: 0 14px 10px 14px;
+}
+.selected-filter{
+    background-color: #ececec;
+    padding: 7px;
+    margin: 3px 3px 3px 0;
+    cursor: pointer;
+    border-radius: 3px;
+    display: inline-block;
+}
+.selected-filter:hover{
+    text-decoration: line-through;
+}
+.cust-icon{
+    font-size: 20px;
+    float: right;
+    transform: rotate(0deg);
+}
+.rotate-icon{
+    transform: rotate(180deg);
+}
+.col-margin{
+    margin: 5px 0;
+}
+.div-link:hover {
+    text-decoration: none;
+    color: #077ff1;
+}
+::ng-deep .ng5-slider .ng5-slider-bubble{
+    color: #000000 !important;
+    font-size:12px !important;
+}
+.scrollbar{
+    max-height: 250px;
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.search-control{
+    padding: 0 14px 10px;
+}
+:host ::ng-deep .mat-form-field-wrapper{
+    padding-bottom: 0;
+}
+.mat-form-field{
+    display: inline;
+}
+.form-control{
+    height: 30px;
+    font-size: 14px;
+}
+.div-link[aria-expanded="true"]::before{
+    content:"SHOW LESS";
+}
+.div-link[aria-expanded="false"]::before{
+    content:"SHOW MORE";
+}
+.smeName{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 117px;
+}
+.clear-all{
+    display: inline-block;
+    font-size: 14px;
+    color: #878787;
+}
+.clear-all:hover {
+    cursor: pointer;
+}

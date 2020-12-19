@@ -1,0 +1,35 @@
+@import '../global/carousel-arrow-button.css';
+@import '../item.css';
+
+mat-card{
+    margin: 0 5px;
+    border-radius: 0;
+    padding: 15px 5px;
+}
+.mat-card:not([class*="mat-elevation-z"]) {
+    box-shadow: 0 0px 0px 0px rgba(0,0,0,.2),0 1px 1px 0 rgba(0,0,0,.14),0 1px 3px 0 rgba(0,0,0,.12);
+}
+.slider-title{
+    font-size: 22px;
+    display: inline-block;
+    width: 100%;
+}
+.view-all{
+    float: right;
+    padding: 8px;
+    color: #0073b6;
+    border-radius: 4px;
+    font-size: 14px;
+    text-decoration: none;
+}
+.view-all:hover{
+    background-color: #ececec;
+    cursor: pointer;
+}
+hr{
+    margin-bottom: 0;
+    margin-top: 5px;
+}
+.original-price{
+    width: unset;
+}

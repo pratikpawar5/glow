@@ -1,0 +1,15 @@
+<i class="material-icons close-icon f-22" (click)="onClickClose()">close</i>
+
+<div class="text-center">
+  <h4>Let us know what is <span style="color: #ed2301">gloqr</span> all about</h4>
+  <div *ngIf="isDesktopDevice">
+      <iframe width="500" height="380" src="https://www.youtube.com/embed/G899b17JkG4?autoplay=1"
+      allowfullscreen="allowfullscreen" allow="autoplay;">
+    </iframe>
+  </div>
+  <div *ngIf="isMobile || isTablet">
+      <iframe width="auto" height="auto" src="https://www.youtube.com/embed/G899b17JkG4?autoplay=1"
+      allowfullscreen="allowfullscreen" allow="autoplay;">
+    </iframe>
+  </div>
+</div>

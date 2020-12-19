@@ -1,0 +1,42 @@
+.wrap{
+  margin: 15px 0;
+}
+.post-item{
+  margin: 0 0 15px 0;
+  }
+/* Like Section Css*/
+  
+.div-like{
+      margin-top: 3%;
+      height: 67px;
+}
+  
+.i-liked-div{
+      border: 0;
+      border-bottom: 1px solid rgba(0,0,0,.1);
+      margin-bottom: 4px;
+      height: 25px;
+}
+.i-liked{
+      color: #39569c;
+      font-size: 18px;
+}
+.like-btn{
+      color: #555252;
+      font-size: 18px;
+}
+    /*new*/
+  
+    .post-description
+    {
+      font-size: 14px;
+      text-align: justify;
+      word-break: break-word;
+  
+    }
+    .posted-by
+    {
+      font-size: 12px;
+      color: #484848;
+  
+    }

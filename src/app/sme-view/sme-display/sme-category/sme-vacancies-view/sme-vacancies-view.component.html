@@ -1,0 +1,116 @@
+<div class="wrap" *ngIf="smeJobsDisplay">
+    <div class="title">
+        <h4>Jobs</h4>
+    </div>
+    <div class="sme-objects">
+        <div class="col-md-12">
+            <div *ngFor="let smeJob of smeJobsDisplay;let i=index;">
+                <mat-card class="vacancy-card border">
+                    <div class="vacancy-title">
+                        <a href="/vacancies/{{smeJob.vacancyUrl}}/v/{{smeJob.vacancyUuid}}" target="_blank">
+                            <span class="vacancy-title-text" *ngIf="smeJob.vacancyTitle">{{smeJob.vacancyTitle}}</span>
+                        </a>
+                        <span class="posted-by p" *ngIf="smeJob.creationDate">Posted
+                            {{smeJob.creationDate | dateAgo}}</span>
+                    </div>
+                    <div class="sme-name" *ngIf="smeJob.smeInfo.smeName">
+                        <a href="/sme/{{smeJob.smeInfo.sUuid}}" target="_blank">
+                            <span class="sme-name-text">{{smeJob.smeInfo.smeName}}</span>
+                        </a>
+                    </div>
+                    <hr>
+                    <div class="mb-1">
+                        <div class="icons" *ngIf="smeJob.rawFormatQualification">Educations :
+                            <span size="2" class="jobDesc">{{smeJob.rawFormatQualification}}</span>
+                        </div>
+                    </div>
+                    <div class="mb-1">
+                        <div class="row">
+                            <div class="col-md-3" *ngIf="smeJob.noOfVacancy">
+                                <div class="icons">Number of Vacancy :
+                                    <span size="2" class="jobDesc">{{smeJob.noOfVacancy}}</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6" *ngIf="smeJob.jobRole">
+                                <div class="icons">Job Role :
+                                    <span size="2" class="jobDesc">{{smeJob.jobRole}} </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-1">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="icons" *ngIf="smeJob.minExp">Experience :
+                                    <span size="2" class="jobDesc">{{smeJob.minExp}}</span>
+                                    <span class="jobDesc"> to </span>
+                                    <span size="2" class="jobDesc" *ngIf="smeJob.maxExp">{{smeJob.maxExp}}</span>
+                                    <span class="jobDesc"> yrs </span>
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="icons" *ngIf="smeJob.minSalary || smeJob.maxSalary">Salary :
+                                    <span size="2" class="jobDesc">{{smeJob.minSalary | IndianCurrency}} </span>
+                                    <span class="jobDesc"> to </span>
+                                    <span size="2" class="jobDesc">{{smeJob.maxSalary | IndianCurrency}} /Monthly</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-1">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="icons" *ngIf="smeJob.totalApplicants">Total Applicants :
+                                    <span size="2" class="jobDesc">{{smeJob.totalApplicants}}</span>
+                                </div>
+                            </div>
+                            <div class="col-md-9">
+                                <div class="icons" *ngIf="smeJob.locations">
+                                    Location :
+                                    <span size="2" class="jobDesc">{{smeJob.locations}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-5">
+                        <div class="icons" *ngIf="smeJob.locations">Short Description :
+                            <span class="jobDesc">{{smeJob.shortDescription}}</span>
+                        </div>
+                    </div>
+                    <div>
+                        <div *ngIf="loginSmeUuid === smeJob.smeInfo.sUuid;else check">
+
+                        </div>
+                        <ng-template #check>
+                            <div class="apply-button col-md-12 mb-2" *ngIf="!smeJob.applied">
+                                <button mat-raised-button class="apply"
+                                    (click)="jobApply(i,smeJob)">
+                                    Apply
+                                </button>
+                            </div>
+                            <div class="apply-button col-md-12 mb-2" *ngIf="smeJob.applied">
+                                <button mat-raised-button class="applied">
+                                    Applied
+                                </button>
+                            </div>
+                        </ng-template>
+                        <a href="/vacancies/{{smeJob.vacancyUrl}}/v/{{smeJob.vacancyUuid}}" target="_blank">
+                            <button mat-stroked-button class="default-btn view-detail temp">
+                                View Detail
+                            </button>
+                        </a>
+                    </div>
+                </mat-card>
+            </div>
+
+        </div>
+    </div>
+    <div *ngIf="showSpinner" class="spinner">
+        <mat-spinner strokeWidth="5" [diameter]="50"></mat-spinner>
+    </div>
+
+    <div *ngIf="notFound">
+        <img alt="Not Found" class="not-found-image" src="../../../../assets/not-found/no-data-found.png">
+    </div>
+</div>

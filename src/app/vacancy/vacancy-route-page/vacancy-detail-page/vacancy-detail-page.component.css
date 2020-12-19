@@ -1,0 +1,73 @@
+@import'../../../css/action-button.css';
+hr{
+    border-top: 1px dotted #a5a2a2;
+}
+.job-title{
+    font-size: 24px;
+    font-weight: bold;
+}
+.job-by a{
+    color: #000;
+    text-decoration: none;
+}
+.job-by a:hover {
+    color: rgb(34, 119, 255);
+    text-decoration: none;
+}
+.job-meta-data{
+    color: #808080;
+    margin-top: 15px;
+}
+.job-meta-data i{
+    font-size: 20px;
+}
+.posted-ago{
+    margin: 10px 0 auto;
+}
+.posted-ago li{
+    margin-right: 30px;
+    float: left;
+    font-size: 14px;
+}
+.description{
+    text-align: justify;
+    color: #404040;
+    text-align: justify;
+    word-break: break-word;
+    line-height: 25px;
+    white-space: pre-wrap;
+}
+.marginTB10{
+    margin: 10px 0;
+}
+.recruiter-details ul{
+    padding-left: 0;
+    line-height: 25px;
+    list-style: none;
+}
+.attr{
+    color: #808080;
+}
+.val{
+    color: #404040;
+}
+.global-btn{
+    width: 30%;
+}
+.skill{
+    padding: 3px 10px;
+    font-size: 14px;
+    background-color: #e9e9e9;
+    margin-right: 5px;
+    font-weight: 600;
+}
+td {
+    padding-right: 20px;
+    line-height: 30px;
+}
+.recruiter-details{
+    padding: 10px;
+    background-color: #f3f3f3;
+    box-shadow: 2px 2px 0px 0px #ebebeb;
+}
+

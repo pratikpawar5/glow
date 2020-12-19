@@ -1,0 +1,145 @@
+<div class="f-18 filter-menu">
+  Filters
+  <div *ngIf="cityFilterParams?.size>0 || categoryFilterParams?.size>0" class="div-link text-uppercase float-right f-12"
+    (click)="clearAllFilter()">
+    Clear all
+  </div>
+  <div *ngIf="cityFilterParams?.size>0 || categoryFilterParams?.size>0">
+    <div *ngIf="cityFilterParams?.size + categoryFilterParams?.size">
+      <span class="selected-filter f-10" *ngFor="let selectedCatfilter of categoryFilterParams;let i=index">
+        <span (click)="removeSelectedFilter(selectedCatfilter,'CATEGORY')">{{selectedCatfilter}} <b>X</b></span>
+      </span>
+      <span class="selected-filter f-10" *ngFor="let selectedCityfilter of cityFilterParams;let i=index">
+        <span (click)="removeSelectedFilter(selectedCityfilter,'CITY')">{{selectedCityfilter}} <b>X</b></span>
+      </span>
+    </div>
+    <!-- <ng-template #viewMore>
+      <div id="demo" class="collapse">
+        <span class="selected-filter f-10" *ngFor="let selectedCatfilter of categoryFilterParams;let i=index">
+          <span (click)="removeSelectedFilter(selectedCatfilter,'CATEGORY')">{{selectedCatfilter}} <b>X</b></span>
+        </span>
+        <span class="selected-filter f-10" *ngFor="let selectedCityfilter of cityFilterParams;let i=index">
+          <span (click)="removeSelectedFilter(selectedCityfilter,'CITY')">{{selectedCityfilter}} <b>X</b></span>
+        </span>
+      </div>
+    </ng-template> -->
+    <!-- <div *ngIf="cityFilterParams?.size + categoryFilterParams?.size > 5" class="f-12">
+      <div class="div-link" data-toggle="collapse" aria-expanded="false" data-target="#demo">
+      </div>
+    </div> -->
+  </div>
+</div>
+<div id="accordion">
+  <div class="card">
+    <div class="card-header" data-toggle="collapse" href="#collapseOne">
+      Category
+      <i class="material-icons cust-icon">
+        keyboard_arrow_down
+      </i>
+    </div>
+    <div id="collapseOne" class="collapse show col-margin " *ngIf="isDesktop || isTablet">
+      <div class="search-control">
+        <span *ngIf="categoryFilterParams?.size>0">
+          <span class="clear-all" (click)="removeSelectedFilter(undefined,'CLEAR_ALL_CATEGORY')">Clear all
+            <b>X</b></span>
+        </span>
+        <input type="text" [formControl]="searchCategory" class="form-control filter-search-input" placeholder="Search">
+      </div>
+      <div *ngIf="categoryFilter?.length > 0;else noresult">
+        <div class="card-body scrollbar">
+          <div *ngFor="let categoryObj of categoryFilter">
+            <mat-checkbox [ngModel]="categoryObj.selected" (click)="filterByCategory(categoryObj.categoryName)">
+              <div class="smeName" matTooltip="{{categoryObj.categoryName}}">
+                {{categoryObj.categoryName | smeVacancyFilterName}} </div>
+            </mat-checkbox>
+            <div class="float-right f-12">
+              ({{categoryObj.totalSmesCount}}) </div>
+          </div>
+        </div>
+      </div>
+      <ng-template #noresult>
+        <span class="filter-search-not-found">No results found..</span>
+      </ng-template>
+    </div>
+    <div id="collapseOne" class="collapse col-margin " *ngIf="isMobile">
+      <div class="search-control">
+        <span *ngIf="categoryFilterParams?.size>0">
+          <span class="clear-all" (click)="removeSelectedFilter(undefined,'CLEAR_ALL_CATEGORY')">Clear all
+            <b>X</b></span>
+        </span>
+        <input type="text" [formControl]="searchCategory" class="form-control filter-search-input" placeholder="Search">
+      </div>
+      <div *ngIf="categoryFilter?.length > 0;else noresult">
+        <div class="card-body scrollbar">
+          <div *ngFor="let categoryObj of categoryFilter">
+            <mat-checkbox [ngModel]="categoryObj.selected" (click)="filterByCategory(categoryObj.categoryName)">
+              <div class="smeName" matTooltip="{{categoryObj.categoryName}}">
+                {{categoryObj.categoryName | smeVacancyFilterName}} </div>
+            </mat-checkbox>
+            <div class="float-right f-12">
+              ({{categoryObj.totalSmesCount}}) </div>
+          </div>
+        </div>
+      </div>
+      <ng-template #noresult>
+        <span class="filter-search-not-found">No results found..</span>
+      </ng-template>
+    </div>
+
+  </div>
+
+  <div class="card">
+    <div class="card-header" data-toggle="collapse" href="#collapseTwo">
+      City      <i class="material-icons cust-icon">
+        keyboard_arrow_down
+      </i>
+    </div>
+    <div id="collapseTwo" class="collapse show col-margin " *ngIf="isDesktop||isTablet">
+      <div class="search-control">
+        <span *ngIf="cityFilterParams?.size>0">
+          <span class="clear-all" (click)="removeSelectedFilter(undefined,'CLEAR_ALL_CITY')">Clear all
+            <b>X</b></span>
+        </span>
+        <input type="text" [formControl]="searchCity" class="form-control filter-search-input" placeholder="Search">
+      </div>
+      <div *ngIf="cityFilter?.length > 0;else noresult">
+        <div class="card-body scrollbar">
+          <div *ngFor="let cityObj of cityFilter let i=index">
+            <mat-checkbox [ngModel]="cityObj.selected" (click)="filterByCity(cityObj.city,i)">
+              <div class="smeName" matTooltip="{{cityObj.city}}"> {{cityObj.city}} </div>
+            </mat-checkbox>
+            <div class="float-right f-12">
+              ({{cityObj.totalSmesCount}}) </div>
+          </div>
+        </div>
+      </div>
+      <ng-template #noresult>
+        <span class="filter-search-not-found">No results found..</span>
+      </ng-template>
+    </div>
+    <div id="collapseTwo" class="collapse col-margin " *ngIf="isMobile">
+        <div class="search-control">
+          <span *ngIf="cityFilterParams?.size>0">
+            <span class="clear-all" (click)="removeSelectedFilter(undefined,'CLEAR_ALL_CITY')">Clear all
+              <b>X</b></span>
+          </span>
+          <input type="text" [formControl]="searchCity" class="form-control filter-search-input" placeholder="Search">
+        </div>
+        <div *ngIf="cityFilter?.length > 0;else noresult">
+          <div class="card-body scrollbar">
+            <div *ngFor="let cityObj of cityFilter let i=index">
+              <mat-checkbox [ngModel]="cityObj.selected" (click)="filterByCity(cityObj.city,i)">
+                <div class="smeName" matTooltip="{{cityObj.city}}"> {{cityObj.city}} </div>
+              </mat-checkbox>
+              <div class="float-right f-12">
+                ({{cityObj.totalSmesCount}}) </div>
+            </div>
+          </div>
+        </div>
+        <ng-template #noresult>
+          <span class="filter-search-not-found">No results found..</span>
+        </ng-template>
+      </div>
+
+  </div>
+</div>

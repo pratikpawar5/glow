@@ -1,0 +1,144 @@
+<mat-card>
+
+  <div class="links-section">
+
+    <div class="row">
+      <div class="col-md-4">
+        <i class="material-icons link-icon">
+          widgets
+        </i>
+        <h5>Products ({{editModeItemsCount.totalProducts}})</h5>
+        <a href [routerLink]="['../products']">View</a>
+        <a href [routerLink]="['../add-product']">Add</a>
+      </div>
+      <div class="col-md-4">
+        <i class="material-icons link-icon">
+          build
+        </i>
+        <h5>Services ({{editModeItemsCount.totalServices}})</h5>
+        <a href [routerLink]="['../services']">View</a>
+        <a href [routerLink]="['../add-service']">Add</a>
+      </div>
+      <div class="col-md-4">
+        <i class="material-icons link-icon">
+          work
+        </i>
+        <h5>Jobs ({{editModeItemsCount.totalVacancies}})</h5>
+        <a href [routerLink]="['../jobs']">View</a>
+        <a href [routerLink]="['../add-job']">Add</a>
+      </div>
+    </div>
+    <br>
+    <br>
+    <div class="row">
+      <div class="col-md-4">
+        <i class="material-icons link-icon">
+          business
+        </i>
+        <h5>Infrastructure ({{editModeItemsCount.totalInfras}})</h5>
+        <a href [routerLink]="['../infrastrcutures']">View</a>
+        <a href [routerLink]="['../add-infrastructure']">Add</a>
+      </div>
+      <div class="col-md-4">
+        <i class="material-icons link-icon">
+          burst_mode
+        </i>
+        <h5>Gallery ({{editModeItemsCount.totalGalleries}})</h5>
+        <a href [routerLink]="['../galleries']">View</a>
+        <a href [routerLink]="['../add-gallery']">Add</a>
+      </div>
+      <div class="col-md-4">
+        <i class="material-icons link-icon">
+          supervisor_account
+        </i>
+        <h5>Management Team ({{editModeItemsCount.totalTeams}})</h5>
+        <a href [routerLink]="['../management-teams']">View</a>
+        <a href [routerLink]="['../add-management-team']">Add</a>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row" *ngIf="smes?.companyDescription">
+    <div class="col-md-6">
+      <div class="heading">
+        About Company
+      </div>
+      <div class="company-desc">
+        {{smes.companyDescription}}
+      </div>
+    </div>
+    <div class="col-md-6 text-center">
+      <!-- <p-chart type="doughnut" [data]="data" [options]="chartOptions"></p-chart> -->
+    </div>
+  </div>
+
+  <div class="text-center col-md-8 mx-auto" id="destination">
+    <div class="section-heading">Let's Get In Touch!</div>
+    <p class="f-12">Ready to start your business with us? That's great! Give us a call or send us an email and
+      we will get back to you as soon as possible!
+    </p>
+  </div>
+
+  <div class="row text-center mt-3">
+
+      <div class="col-md-3" *ngIf="smes.latitude && smes.longitude">
+          <a href="https://www.google.co.in/maps/dir//{{smes.latitude}},{{smes.longitude}}" target="_blank">
+            <img src="../../../../assets/action/google-maps.png" class="google-map">
+            <p>Registered Address:</p>
+            <div>
+              <span class="text-bold">{{smes.smeName}}</span>
+              <p>{{smes.smeAddress.locality}}, {{smes.smeAddress.city}},
+                {{smes.smeAddress.state}}, {{smes.smeAddress.pincode}}
+              </p>
+              <p>
+                <i class="fa fa-location-arrow" aria-hidden="true"></i>
+                Get Directions
+              </p>
+            </div>
+          </a>
+        </div>
+    
+        <div class="col-md-3" *ngIf="!smes.latitude && !smes.longitude">
+            <i class="fa fa-map-marker section-icon"></i>
+    
+          <p>Registered Address:</p>
+          <div>
+            <span class="text-bold">{{smes.smeName}}</span>
+            <p>{{smes.smeAddress.locality}}, {{smes.smeAddress.city}},
+              {{smes.smeAddress.state}}, {{smes.smeAddress.pincode}}
+            </p>
+          </div>
+        </div>
+
+
+    <div class="col-md-3">
+      <i class="fa fa-phone section-icon"></i>
+      <p>+91 {{smes.contactPhone}}</p>
+    </div>
+    <div class="col-md-3">
+      <i class="fa fa-envelope section-icon"></i>
+      <p>
+        <a href="mailto:{{smes.contactEmail}}">{{smes.contactEmail}}</a>
+      </p>
+    </div>
+    <div class="col-md-3">
+      <div (click)="onClickShare()" style="cursor: pointer">
+        <i class="fa fa-share-alt section-icon" aria-hidden="true"></i>
+        <p>Share</p>
+      </div>
+
+    </div>
+    <!-- <div class="col-md-3" *ngIf="smes.latitude && smes.longitude">
+      <img src="../../../../assets/action/map.png" class="logo-small" style="height: 63px;">
+      <p>
+        <a href="https://maps.google.com/?q={{smes.latitude}},{{smes.longitude}}">
+          Map
+        </a>
+      </p>
+    </div> -->
+
+
+  </div>
+
+</mat-card>

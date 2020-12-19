@@ -1,0 +1,13 @@
+<div class="sticky-div">
+  <div class="border pro-left-img-lrg">
+    <img class="lg-image" [src]="contentServer + selectedImage" onError="this.src='../assets/not-found/no_image.png';">
+  </div>
+  <div class="row" *ngIf="service.images?.length > 1">
+    <div class="bottom-images" *ngFor="let image of service.images">
+      <div class="custom-div" (mouseover)="onMouseOver(image.fileLocationOne)">
+        <img [ngClass]="(selectedImage === image.fileLocationOne) ? 'custom-border' : 'border'" mat-card-sm-image
+          [src]="contentServer + image.fileLocationTwo" onError="this.src='../assets/not-found/no_image.png';">
+      </div>
+    </div>
+  </div>
+</div>

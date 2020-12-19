@@ -1,0 +1,24 @@
+<div>
+  <div class="row no-margin" *ngIf="filterAndResult">
+    <div class="col-md-2 padding margin">
+      <mat-card>
+        <app-sme-search-filter [filters]="filterAndResult.filters"></app-sme-search-filter>
+      </mat-card>
+    </div>
+    <div class="col-md-10 padding margin" *ngIf="filterAndResult">
+      <mat-card>
+        <mat-card>
+          <app-sme-search-result [filterAndResult]="filterAndResult" [isSME]="isSME"></app-sme-search-result>
+        </mat-card>
+      </mat-card>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="showSpinner" class="spinner">
+  <mat-spinner strokeWidth="5" [diameter]="50"></mat-spinner>
+</div>
+
+<div *ngIf="notFound">
+  <img alt="Not Found" class="not-found-image" src="../../../assets/not-found/no-data.png">
+</div>

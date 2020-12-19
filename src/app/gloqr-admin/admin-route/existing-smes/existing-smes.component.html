@@ -1,0 +1,84 @@
+<div infinite-scroll [infiniteScrollDistance]="scrollDistance" [infiniteScrollUpDistance]="scrollUpDistance"
+  [infiniteScrollThrottle]="throttle" [scrollWindow]="true" (scrolled)="onScrollDown()">
+
+  <div class="new-register-sme mb-5">
+    <h5 class="headline">Existing SME's</h5>
+    <br>
+    <div *ngIf="smes">
+      <mat-card class="existing-sme-card mb-3" *ngFor="let modifySme of smes; let i=index">
+        <div class="index-count">{{i+1}}/{{totalSmesCount}}</div>
+        <div class="row">
+          <div class="col-md-2">
+            <img alt="SME" [src]="contentServer + modifySme.logoImage" class="brand-img"
+              onError="this.src='../assets/not-found/no_image.png';">
+          </div>
+          <div class="col-md-10">
+            <div class="sme-name">
+              {{modifySme.smeName}}
+            </div>
+            <hr>
+            <div class="row mb-3">
+              <div class="col-sm-8">
+                <span class="listed-on-date">Listed on :- {{modifySme.creationDate|date:'medium'}}</span>
+              </div>
+              <div class="col-sm-4">
+                  <span class="f-14 text-red text-bold">City :- {{modifySme.smeAddress.city}}</span>
+              </div>
+            </div>
+            <hr>
+            <div class="row mb-3">
+              <div class="col-sm-4" [ngClass]="{'pending':(modifySme.itemsCount.activePendingProducts > 0)}">
+                Product: <span>{{modifySme.itemsCount.activePendingProducts}}</span>
+              </div>
+              <div class="col-sm-4" [ngClass]="{'pending':(modifySme.itemsCount.activePendingServices > 0)}">
+                <span>Service: {{modifySme.itemsCount.activePendingServices}}</span>
+              </div>
+              <div class="col-sm-4" [ngClass]="{'pending':(modifySme.itemsCount.activePendingCertificates > 0)}">
+                <span>Certificate: {{modifySme.itemsCount.activePendingCertificates}}</span>
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <div class="col-sm-4" [ngClass]="{'pending':(modifySme.itemsCount.activePendingInfras > 0)}">
+                <span>Infrastructure: {{modifySme.itemsCount.activePendingInfras}}</span>
+              </div>
+              <div class="col-sm-4" [ngClass]="{'pending':(modifySme.itemsCount.activePendingGalleries > 0)}">
+                <span>Gallery: {{modifySme.itemsCount.activePendingGalleries}} </span>
+              </div>
+              <div class="col-sm-4" [ngClass]="{'pending':(modifySme.itemsCount.activePendingTeams > 0)}">
+                <span>Team: {{modifySme.itemsCount.activePendingTeams}} </span>
+              </div>
+            </div>
+
+            <div class="row mb-5">
+              <div class="col-sm-4" [ngClass]="{'pending':(modifySme.itemsCount.activePendingVacancies > 0)}">
+                <span>Job: {{modifySme.itemsCount.activePendingVacancies}}</span>
+              </div>
+              <div class="col-sm-4" [ngClass]="{'pending':(modifySme.itemsCount.activePendingBusinessPosts > 0)}">
+                <span>Social-Post: {{modifySme.itemsCount.activePendingBusinessPosts}}</span>
+              </div>
+              <div class="col-sm-4"
+                [ngClass]="{'pending':(modifySme.itemsCount.pendingOfflinePaymentVerification > 0)}">
+                Payment: {{modifySme.itemsCount.pendingOfflinePaymentVerification}}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="apply-btn">
+          <button type="button" class="btn btn-success"
+            routerLink="/gloqr-admin/existing-smes/{{modifySme.sUuid}}/{{modifySme.uuid}}/sme-basic-details">View
+            SME Details</button>
+        </div>
+      </mat-card>
+    </div>
+
+  </div>
+</div>
+
+<div *ngIf="showSpinner" class="spinner">
+  <mat-spinner strokeWidth="5" [diameter]="50"></mat-spinner>
+</div>
+
+<div *ngIf="noDataFound" class="text-center">
+  <img alt="Not Available" src="../../../../assets/not-found/Great Job!!! You have verified all SME Objects.png">
+</div>

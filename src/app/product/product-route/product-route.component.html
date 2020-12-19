@@ -1,0 +1,19 @@
+<!-- NavBar -->
+<div #top>
+    <app-main-header></app-main-header>
+    <app-main-menu-bar></app-main-menu-bar>
+
+    <router-outlet></router-outlet>
+
+    <!-- Footer -->
+    <app-main-footer></app-main-footer>
+</div>
+
+<div class="back-to-top" [ngClass]="{'show-scrollTop': windowScrolled}">
+    <div>
+        <button class="back-to-top-btn" [ngx-scroll-to]="top">
+            <i class="fa fa-arrow-up">
+            </i>
+        </button>
+    </div>
+</div>

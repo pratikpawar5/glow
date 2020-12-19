@@ -1,0 +1,15 @@
+@import'../../../../../../app/css/super-admin.css';
+
+.item-specifications{
+    padding: 10px
+}
+.fileLocationOne
+{
+    height: 320px;
+    width: 320px;
+}
+.fileLocationTwo
+{
+    height: 150px;
+    width: 150px;
+}

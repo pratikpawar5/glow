@@ -1,0 +1,42 @@
+<div class="skill-set-edit-dialog">
+ 
+  <i class="material-icons close-icon close" (click)="onClickClose()">close</i>
+
+  <p class="main-title mb-2">Key Skill Sets:</p>
+  <div class="container">
+    <form [formGroup]="editSkillSetForm">
+      <div class="skill-set">
+        <mat-form-field appearance="outline">
+          <mat-label>Key Skills</mat-label>
+          <mat-chip-list #chipList>
+            <mat-chip *ngFor="let skill of newlyAddedSkillSets" [selectable]="selectable" [removable]="removable" (removed)="remove(skill)">
+              {{skill}}
+              <i class="material-icons close-icon close" matChipRemove *ngIf="removable">close</i>
+            </mat-chip>
+            <input placeholder="Ex.Machine Operator" [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+              [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="add($event)" rows="5">
+          </mat-chip-list>
+        </mat-form-field>
+         <p class="note f-12">Note: Press Enter or Comma to seaparate out different skills</p>
+      </div>
+      <div class="action-button" *ngIf="showButton;else disabled">
+        <div class="row">
+          <div class="cancel-button">
+            <button type="button" class="btn cancel" (click)="onClickClose()">CANCEL</button>
+          </div>
+          <div class="save-button">
+            <button type="submit" class="btn save" (click)="onSave()">SAVE</button>
+          </div>
+        </div>
+      </div>
+      <ng-template #disabled>
+        <div class="text-center">
+          <button disabled type="button" class="btn btn-default ">
+            <mat-spinner class="spinner" strokeWidth="4" [diameter]="15">
+            </mat-spinner> Saving...please wait
+          </button>
+        </div>
+      </ng-template>
+    </form>
+  </div>
+</div>

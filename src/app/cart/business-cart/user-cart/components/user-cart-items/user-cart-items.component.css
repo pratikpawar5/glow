@@ -1,0 +1,16 @@
+@import '../../../../../css/cart-item.css';
+.item-sme-name a{
+    white-space: nowrap;
+    font-size: 14px;
+    padding: 5px 0;
+    color: #666666;
+}
+.order-id{
+    background-color: #cecece57;
+}
+.padding{
+    padding: 17%;
+}
+.spinner{
+    padding: 145px 50%;
+}

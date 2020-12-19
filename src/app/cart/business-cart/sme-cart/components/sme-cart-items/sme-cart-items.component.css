@@ -1,0 +1,31 @@
+@import '../../../../../css/cart-item.css';
+
+.user-name{
+    font-weight: bold;
+    color: brown;
+}
+.user-details{
+    word-break: break-word;
+}
+.view-spinner{
+    left: 40%;
+    top: -40%;
+}
+.view-button{
+    position: absolute;
+    left: 50%;
+    top: 30%;
+    transform: translate(-50%,0);
+}
+.image{
+    width: 100%;
+    height: fit-content;
+}
+.btn-success {
+    color: #fff;
+    background-color: #328000;
+    font-size: 14px;
+}
+.spinner{
+    padding: 145px 50%;
+}

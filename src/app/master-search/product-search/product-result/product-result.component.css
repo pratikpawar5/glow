@@ -1,0 +1,9 @@
+@import '../../../css/item.css';
+@import '../../../css/global/show-interest-button.css';
+@import '../../../css/discount.ribbon.css';
+@import '../../../css/breadcrumbs.css';
+@import '../../../css/filter-list.css';
+
+.item-name, .item-sme-name{
+    width: 160px;
+}

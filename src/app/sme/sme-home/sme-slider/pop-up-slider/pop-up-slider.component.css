@@ -1,0 +1,43 @@
+:host ::ng-deep .mat-dialog-container
+{
+  height: auto;
+}
+.select-image label{
+    margin-right: 40px;
+  }
+  .select-image label span{
+    color: red;
+  }
+  .image-types{
+    color: grey;
+    font-size: 13px;
+    margin: 10px
+  }
+  .image-uploaded{
+    margin: 10px;
+  }
+  .image-display{
+    padding: 10px;
+  }
+  .default-image img{
+    padding: 30px;
+    background-color: #f1f1f1;
+  }
+  .upload-progress{
+    width: 87%;
+  }
+  .upload-fail{
+    color: red;
+  }
+  .mat-progress-bar {
+    height: 10px;
+  }
+  .border
+  {
+    height: 100px;
+    width: 100px;
+  }
+  .mat-stroked-button
+{
+    width:auto;
+}

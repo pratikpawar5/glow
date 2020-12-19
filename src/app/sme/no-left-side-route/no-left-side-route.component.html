@@ -1,0 +1,20 @@
+<div #top>
+  <div *ngIf="smes">
+    <app-sme-home-header [smes]="smes"></app-sme-home-header>
+  </div>
+
+  <div class="content-wrap">
+    <router-outlet></router-outlet>
+  </div>
+
+  <app-sme-home-footer></app-sme-home-footer>
+</div>
+
+<div class="back-to-top" [ngClass]="{'show-scrollTop': windowScrolled}">
+  <div>
+    <button class="back-to-top-btn" [ngx-scroll-to]="top">
+      <i class="fa fa-arrow-up">
+      </i>
+    </button>
+  </div>
+</div>

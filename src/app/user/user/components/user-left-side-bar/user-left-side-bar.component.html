@@ -1,0 +1,28 @@
+<div class="text-center" *ngIf="user">
+
+  <div class="marginT15">
+    <div *ngIf="user.userDetail.profileImage; else noImg">
+      <img *ngIf="user.userDetail.registrationProvider === 'GLOQR';else socialAcc" [src]="contentServer + user.userDetail.profileImage"
+        class="profile-img" onError="this.src='../assets/logo/noimage.png';">
+      <ng-template #socialAcc>
+        <img [src]="user.userDetail.profileImage" class="profile-img" onError="this.src='../assets/logo/noimage.png';">
+      </ng-template>
+    </div>
+
+    <ng-template #noImg>
+      <img src="../../../../../assets/logo/noimage.png" class="profile-img">
+    </ng-template>
+  </div>
+
+  <button class="change-btn" (click)="onUserProfileImage()">
+    <i class="fa fa-pencil">
+      <span *ngIf="user.userDetail.profileImage;else addNew"> change photo</span>
+      <ng-template #addNew> add photo </ng-template>
+    </i>
+  </button>
+
+  <div class="marginT15">
+    <h4>{{user.userFullName}}</h4>
+  </div>
+
+</div>

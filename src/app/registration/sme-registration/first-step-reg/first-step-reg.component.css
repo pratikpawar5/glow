@@ -1,0 +1,151 @@
+@import '../../../css/sme-registration.css';
+@import '../../../css/material-dialog.css';
+.link-text
+{
+    color: #337ab7;
+    cursor: pointer;
+}
+.mat-stroked-button
+{
+    width:auto;
+}
+.sme-terms-condition
+{
+    padding: 0;
+}
+.sme-terms-condition li
+{
+    list-style-type: none;
+    display: inline-block; 
+    padding: 5px 10px 0 0;
+}
+.sme-register-form{
+    margin: 40px;
+}
+.card{
+    width: 100%;
+    margin-bottom: 10px !important;;
+}
+mat-form-field{
+    width: 100%;  
+}
+.company-desc
+{
+    float: right;
+}
+
+/*SECOND STEP*/
+
+.sme-register-form-second-step
+{
+    background-color: #ffff
+}
+.skip
+{
+    margin-right: 20px;
+}
+.welcome-img
+{
+    height: 10%;
+    width: 49%;
+    margin-left: 24%;
+}
+.welcome-popup
+{
+    margin-top: 32px;
+}
+.action-button
+{
+    margin-left: 35%;
+}
+.welcome-text
+{
+    font-family: fantasy;
+    font-style: oblique;
+    font-size: 66px;
+    color: #048248;
+}
+.content
+{
+    font-family: -webkit-body;
+    font-size: 20px;
+    color: #676767;
+}
+.desc
+{
+    font-family:-webkit-body;
+    font-size: 18px;
+}
+.radio-btn-text
+{
+    font-size: 13px;
+}
+.company-desc{
+    float: right;
+}
+.type-of-jobs-list
+{
+    padding-left: 0;
+}
+.type-of-jobs-list li{
+
+    list-style-type: none;
+    padding: 5px 10px 0 0;
+    display: inline-block;
+}
+.job-type{
+    padding-left: 5px;
+}
+.space{
+    margin-left: 101px;
+} 
+.terms-and-condition
+{
+    
+}
+/*sme-registration-done-step*/
+
+.done
+{
+    font-size: 45px;
+    font-family: initial;
+    font-style: oblique;
+    color: #231a1a;
+}
+.check
+{
+    color: #53467d;
+    font-size: 33px;
+    font-family: serif;
+}
+.sme-thrid-step
+{
+    background-color: #ffffff;
+    padding: 8% 0;
+}
+.button-text
+{
+    font-size: 23px;
+    font-family: initial;
+}
+.img-check
+{
+    height: 10%;
+    width: 25%;
+}   
+.waiting
+{
+    font-size: 30px;
+    color: #0073b6;
+    font-family: fantasy;
+}
+.website
+{
+    font-size: 27px;
+    font-family: serif;
+    color: #316d31;
+}
+.main-heading
+{
+    font-size: 20px;
+}

@@ -1,0 +1,23 @@
+.back-to-top{
+    position: fixed;
+    text-align: center;
+    bottom: 110px;
+    right: 10px;
+    z-index: 1001;
+    display: none;
+}
+.back-to-top-btn{
+    cursor: pointer;
+    font-size: 24px;
+    border: none;
+    outline: none;
+    padding: 5px 15px;
+    border-radius: 4px;
+    background: #ed2301;
+    box-shadow: 0 3px 16px 0 rgba(0,0,0,.11);
+    border: none;
+    color: #fff
+}
+.show-scrollTop{
+    display: block;
+}

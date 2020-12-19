@@ -1,0 +1,326 @@
+<div class="pricing-table" *ngIf="pricing">
+
+  <div class="text-center mb-3">
+    <h2>Pricing Table</h2>
+    <h6 *ngIf="pricing.offer">Offer valid till <span class="text-blue">{{pricing.offerEndDate | date:'medium'}}</span></h6>
+  </div>
+
+  <div class="row no-margin no-padding">
+
+    <div class="col-md-3">
+      <div class="card mb-5 mb-lg-0">
+        <div class="card-body">
+          <h3 class="text-center text-blue">
+            Basic
+          </h3>
+          <h5 class="card-title text-muted text-uppercase text-center">
+            Free
+          </h5>
+          <h4 class="text-black text-center">
+            {{pricing.free_business.planCost | DecimalPrice}}
+          </h4>
+          <h5 class="card-title text-muted text-uppercase text-center" *ngIf="pricing.offer">
+            <span class="text-trans">hidden lable</span>
+          </h5>
+          <hr>
+          <table class="table table-borderless table-sm">
+            <tbody class="text-center f-12">
+              <tr>
+                <td class="text-bold">{{pricing.free_business.listings}}</td>
+                <td class="text-dark-grey">{{pricing.free_business.listingName}}</td>
+              </tr>
+              <tr>
+                <td class="text-bold">{{pricing.free_business.biReadCredits}}</td>
+                <td class="text-dark-grey">{{pricing.free_business.biReadName}}
+                  <i class="fa fa-question-circle-o question-mark" matTooltip="{{pricing.free_business.biReadCredits /12}} credits per Month">
+                  </i>
+                </td>
+              </tr>
+              <tr>
+                <td class="text-bold">{{pricing.free_business.connections}}</td>
+                <td class="text-dark-grey">{{pricing.free_business.connectionName}}</td>
+              </tr>
+              <tr>
+                <td class="text-bold">{{pricing.free_business.businessPosts}}</td>
+                <td class="text-dark-grey">{{pricing.free_business.postName}}</td>
+              </tr>
+              <tr>
+                <td class="text-bold">{{pricing.free_business.jobPostings}}</td>
+                <td class="text-dark-grey">{{pricing.free_business.jobPostName}}</td>
+              </tr>
+              <tr>
+                <td class="text-bold">{{format.formatSizeUnits(pricing.free_business.imageStorageSize)}}</td>
+                <td class="text-dark-grey">{{pricing.free_business.storageName}}</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div *ngIf="isLoggedIn && isSME;else startFree">
+
+            <div class="current-plan" [ngClass]="{'hidden': userPricing?.planName !== pricing.free_business.planName}">
+              Current Plan
+            </div>
+
+          </div>
+
+          <ng-template #startFree>
+            <div>
+              <button mat-stroked-button (click)="buyNow(pricing.free_business.planName)" class="buy-now-btn text-blue">
+                Start Free
+              </button>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card mb-5 mb-lg-0">
+        <div class="card-body">
+          <h3 class="text-center text-blue">
+            Small
+          </h3>
+          <h5 class="card-title text-muted text-uppercase text-center">
+            Business
+          </h5>
+          <h4 class="text-black text-center">
+            <span *ngIf="pricing.offer;else originalPrice1">{{pricing.small_business.discountedCost | DecimalPrice}}</span>
+            <ng-template #originalPrice1>
+              {{pricing.small_business.planCost | DecimalPrice}}
+            </ng-template>
+          </h4>
+          <h5 class="cut-price text-muted text-uppercase text-center" *ngIf="pricing.offer && pricing.small_business.discount">
+            (<span class="text-line-through">{{pricing.small_business.planCost | DecimalPrice}}</span>)
+            <span class="text-red">{{pricing.small_business.discount}}%off</span>
+          </h5>
+          <hr>
+          <table class="table table-borderless table-sm">
+            <tbody class="text-center f-12">
+              <tr>
+                <td class="text-bold">{{pricing.small_business.listings}}</td>
+                <td class="text-dark-grey">{{pricing.small_business.listingName}}</td>
+              </tr>
+              <tr>
+                <td class="text-bold">{{pricing.small_business.biReadCredits}}</td>
+                <td class="text-dark-grey">{{pricing.small_business.biReadName}}
+                  <i class="fa fa-question-circle-o text-lrg question-mark" matTooltip="{{pricing.small_business.biReadCredits /12}} credits per Month">
+                  </i>
+                </td>
+              </tr>
+              <tr>
+                <td class="text-bold">{{pricing.small_business.connections}}</td>
+                <td class="text-dark-grey">{{pricing.small_business.connectionName}}</td>
+              </tr>
+              <tr>
+                <td class="text-bold">{{pricing.small_business.businessPosts}}</td>
+                <td class="text-dark-grey">{{pricing.small_business.postName}}</td>
+              </tr>
+              <tr>
+                <td class="text-bold">{{pricing.small_business.jobPostings}}</td>
+                <td class="text-dark-grey">{{pricing.small_business.jobPostName}}</td>
+              </tr>
+              <tr>
+                <td class="text-bold">{{format.formatSizeUnits(pricing.small_business.imageStorageSize)}}</td>
+                <td class="text-dark-grey">{{pricing.small_business.storageName}}</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div *ngIf="isLoggedIn && isSME;else small">
+
+            <div *ngIf="userPricing?.planName === pricing.free_business.planName;else check">
+              <button mat-stroked-button class="buy-now-btn text-blue" (click)="upgradePlan(pricing.small_business.planName)">
+                Upgrade
+              </button>
+            </div>
+
+            <ng-template #check>
+              <div class="current-plan" [ngClass]="{'hidden': userPricing?.planName !== pricing.small_business.planName}">
+                Current Plan
+              </div>
+            </ng-template>
+
+          </div>
+
+          <ng-template #small>
+            <div>
+              <button mat-stroked-button (click)="buyNow(pricing.small_business.planName)" class="buy-now-btn text-blue">
+                Buy Now
+              </button>
+            </div>
+          </ng-template>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card mb-5 mb-lg-0">
+        <div class="card-body">
+          <h3 class="text-center text-blue">
+            Medium
+          </h3>
+          <h5 class="card-title text-muted text-uppercase text-center">
+            Business
+          </h5>
+          <h4 class="text-black text-center">
+            <span *ngIf="pricing.offer;else originalPrice2">{{pricing.medium_business.discountedCost | DecimalPrice}}</span>
+            <ng-template #originalPrice2>
+              {{pricing.medium_business.planCost | DecimalPrice}}
+            </ng-template>
+          </h4>
+          <h5 class="cut-price text-muted text-uppercase text-center" *ngIf="pricing.offer && pricing.medium_business.discount">
+            (<span class="text-line-through">{{pricing.medium_business.planCost | DecimalPrice}}</span>)
+            <span class="text-red">{{pricing.medium_business.discount}}%off</span>
+          </h5>
+          <hr>
+          <table class="table table-borderless table-sm">
+            <tbody class="text-center f-12">
+              <tr>
+                <td class="text-bold">{{pricing.medium_business.listings}}</td>
+                <td class="text-dark-grey">{{pricing.medium_business.listingName}}</td>
+              </tr>
+              <tr>
+                <td class="text-bold">{{pricing.medium_business.biReadCredits}}</td>
+                <td class="text-dark-grey">{{pricing.medium_business.biReadName}}
+                  <i class="fa fa-question-circle-o text-lrg question-mark" matTooltip="{{pricing.medium_business.biReadCredits /12}} credits per Month">
+                  </i>
+                </td>
+              </tr>
+              <tr>
+                <td class="text-bold">{{pricing.medium_business.connections}}</td>
+                <td class="text-dark-grey">{{pricing.medium_business.connectionName}}</td>
+              </tr>
+              <tr>
+                <td class="text-bold">{{pricing.medium_business.businessPosts}}</td>
+                <td class="text-dark-grey">{{pricing.medium_business.postName}}</td>
+              </tr>
+              <tr>
+                <td class="text-bold">{{pricing.medium_business.jobPostings}}</td>
+                <td class="text-dark-grey">{{pricing.medium_business.jobPostName}}</td>
+              </tr>
+              <tr>
+                <td class="text-bold">{{format.formatSizeUnits(pricing.medium_business.imageStorageSize)}}</td>
+                <td class="text-dark-grey">{{pricing.medium_business.storageName}}</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div *ngIf="isLoggedIn && isSME;else medium">
+
+            <div *ngIf="userPricing?.planName === pricing.free_business.planName || 
+            userPricing?.planName === pricing.small_business.planName;else check">
+              <button mat-stroked-button class="buy-now-btn text-blue" (click)="upgradePlan(pricing.medium_business.planName)">
+                Upgrade
+              </button>
+            </div>
+
+            <ng-template #check>
+              <div class="current-plan" [ngClass]="{'hidden': userPricing?.planName !== pricing.medium_business.planName}">
+                Current Plan
+              </div>
+            </ng-template>
+
+          </div>
+
+          <ng-template #medium>
+            <div>
+              <button mat-stroked-button (click)="buyNow(pricing.medium_business.planName)" class="buy-now-btn text-blue">
+                Buy Now
+              </button>
+            </div>
+          </ng-template>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card mb-5 mb-lg-0">
+        <div class="card-body">
+          <h3 class="text-center text-blue">
+            Big
+          </h3>
+          <h5 class="card-title text-muted text-uppercase text-center">
+            Business
+          </h5>
+          <h4 class="text-black text-center">
+            <span *ngIf="pricing.offer;else originalPrice3">{{pricing.big_business.discountedCost | DecimalPrice}}</span>
+            <ng-template #originalPrice3>
+              {{pricing.big_business.planCost | DecimalPrice}}
+            </ng-template>
+          </h4>
+          <h5 class="cut-price text-muted text-uppercase text-center" *ngIf="pricing.offer && pricing.big_business.discount">
+            (<span class="text-line-through">{{pricing.big_business.planCost | DecimalPrice}}</span>)
+            <span class="text-red">{{pricing.big_business.discount}}%off</span>
+          </h5>
+          <hr>
+          <table class="table table-borderless table-sm">
+            <tbody class="text-center f-12">
+              <tr>
+                <td class="text-bold">{{pricing.big_business.listings}}</td>
+                <td class="text-dark-grey">{{pricing.big_business.listingName}}</td>
+              </tr>
+              <tr>
+                <td class="text-bold">{{pricing.big_business.biReadCredits}}</td>
+                <td class="text-dark-grey">{{pricing.big_business.biReadName}}
+                  <i class="fa fa-question-circle-o text-lrg question-mark" matTooltip="{{pricing.big_business.biReadCredits /12}} credits per Month">
+                  </i>
+                </td>
+              </tr>
+              <tr>
+                <td class="text-bold">{{pricing.big_business.connections}}</td>
+                <td class="text-dark-grey">{{pricing.big_business.connectionName}}</td>
+              </tr>
+              <tr>
+                <td class="text-bold">{{pricing.big_business.businessPosts}}</td>
+                <td class="text-dark-grey">{{pricing.big_business.postName}}</td>
+              </tr>
+              <tr>
+                <td class="text-bold">{{pricing.big_business.jobPostings}}</td>
+                <td class="text-dark-grey">{{pricing.big_business.jobPostName}}</td>
+              </tr>
+              <tr>
+                <td class="text-bold">{{format.formatSizeUnits(pricing.big_business.imageStorageSize)}}</td>
+                <td class="text-dark-grey">{{pricing.big_business.storageName}}</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div *ngIf="isLoggedIn && isSME;else big">
+
+            <div *ngIf="userPricing?.planName === pricing.free_business.planName || 
+              userPricing?.planName === pricing.small_business.planName || 
+              userPricing?.planName === pricing.medium_business.planName;else check">
+              <button mat-stroked-button class="buy-now-btn text-blue" (click)="upgradePlan(pricing.big_business.planName)">
+                Upgrade
+              </button>
+            </div>
+
+            <ng-template #check>
+              <div class="current-plan" [ngClass]="{'hidden': userPricing?.planName !== pricing.big_business.planName}">
+                Current Plan
+              </div>
+            </ng-template>
+
+          </div>
+
+          <ng-template #big>
+            <div>
+              <button mat-stroked-button (click)="buyNow(pricing.big_business.planName)" class="buy-now-btn text-blue">
+                Buy Now
+              </button>
+            </div>
+          </ng-template>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<div *ngIf="showSpinner" class="spinner">
+  <mat-spinner strokeWidth="5" [diameter]="50"></mat-spinner>
+</div>

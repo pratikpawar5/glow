@@ -1,0 +1,34 @@
+@import '../../css/block-button.css';
+
+mat-form-field{
+    width: 100%;
+}
+.margin{
+    margin: 50px 30px;
+}
+.question-mark{
+    cursor: pointer;
+    margin-left: 5px;
+}
+td{
+    text-align: left;
+    padding: 10px;
+}
+.company-bank-details {
+    padding: 5px;
+    background: #f6f6f6;
+    border-bottom: 1px dotted #ccc;
+}
+.radio-button-spacing{
+    margin-left: 10%
+}
+.mat-progress-spinner {
+    display: inline-grid;
+    position: relative;
+}
+.block {
+    width: 75%;
+}
+.block-disabled {
+    width: 75%;
+}

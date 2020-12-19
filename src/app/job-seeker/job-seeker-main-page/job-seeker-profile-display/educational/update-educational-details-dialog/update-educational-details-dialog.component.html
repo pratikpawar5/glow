@@ -1,0 +1,144 @@
+<div class="educational-create-dialog">
+  
+  <i class="material-icons close-icon" (click)="onClickClose()">close</i>
+
+  <p class="main-title mb-2">Educational Details:</p>
+  <div class="container">
+      <form [formGroup]="educationalUpdateForm">
+
+          <div class="job-role">
+              <div class="row">
+                  <div class="col-md-12">
+                      <mat-form-field appearance="outline">
+                          <mat-label>Course Category</mat-label>
+                          <mat-select placeholder="Course Category" formControlName="courseId" required>
+                              <mat-optgroup *ngFor="let courseCatName of suggestCourseCategoryDto" [label]="courseCatName.courseCategoryName">
+                                  <mat-option *ngFor="let course of courseCatName.courses" [value]="course.courseId">
+                                      <p (click)="onGetSpecialization(course)"> {{course.courseName}} </p>
+                                  </mat-option>
+                              </mat-optgroup>
+                          </mat-select>
+                          <mat-error *ngIf="educationalUpdateForm.get('courseId').hasError('required')">
+                                  Course Category is required
+                              </mat-error>
+                      </mat-form-field>
+                  </div>
+              </div>
+          </div>
+
+          <div class="specialization" *ngIf="isSpecializationEnable">
+              <div class="row">
+                  <div class="col-md-12">
+                      <mat-form-field appearance="outline">
+                          <mat-label>Specialization</mat-label>
+                          <mat-select formControlName="specializationId">
+                              <mat-option *ngFor="let specialization of suggestSpecialization" [value]="specialization.specializationId">
+                                  {{specialization.specializationName}}
+                              </mat-option>
+                          </mat-select>
+                      </mat-form-field>
+                  </div>
+              </div>
+          </div>
+
+          <div class="university-name">
+              <div class="row">
+                  <div class="col-md-12">
+                      <mat-form-field appearance="outline">
+                          <mat-label>University Name</mat-label>
+                          <input matInput placeholder="Institute Name" formControlName="universityName" autocomplete="off"
+                              required #universityName>
+                          <mat-hint align="end">{{universityName.value?.length || 0}}/150</mat-hint>
+                          <mat-error *ngIf="educationalUpdateForm.get('universityName').hasError('pattern')">
+                                  Invalid Inputs
+                              </mat-error>
+                          <mat-error *ngIf="educationalUpdateForm.get('universityName').hasError('required')">
+                              University Name is required
+                          </mat-error>
+                          <mat-error *ngIf="educationalUpdateForm.get('universityName').hasError('maxlength')">
+                                Only 150 characters are allowed
+                          </mat-error>
+                      </mat-form-field>
+                  </div>
+              </div>
+          </div>
+
+          <div class="institute-name">
+              <div class="row">
+                  <div class="col-md-12">
+                      <mat-form-field appearance="outline">
+                          <mat-label>Institute Name</mat-label>
+                          <input matInput placeholder="Institute Name" #instituteName formControlName="instituteName"
+                              autocomplete="off" required>
+                          <mat-hint align="end">{{instituteName.value?.length || 0}}/150</mat-hint>
+
+                          <mat-error *ngIf="educationalUpdateForm.get('instituteName').hasError('required')">
+                              Institute Name is required
+                          </mat-error>
+                          <mat-error *ngIf="educationalUpdateForm.get('instituteName').hasError('pattern')">
+                              Invalid Inputs
+                          </mat-error>
+                          <mat-error *ngIf="educationalUpdateForm.get('instituteName').hasError('maxlength')">
+                                Only 150 characters are allowed
+                          </mat-error>
+                      </mat-form-field>
+                  </div>
+              </div>
+          </div>
+
+          <div class="percentage">
+              <div class="row">
+                  <div class="col-md-12">
+                      <mat-form-field appearance="outline">
+                          <mat-label>Percentage</mat-label>
+                          <input matInput placeholder="Percentage" formControlName="percentage" autocomplete="off"
+                              required maxlength="4">
+                          <mat-error *ngIf="educationalUpdateForm.get('percentage').hasError('required')">
+                              Percentage is required
+                          </mat-error>
+                          <mat-error *ngIf="educationalUpdateForm.get('percentage').hasError('pattern') || educationalUpdateForm.get('percentage').hasError('min') || educationalUpdateForm.get('percentage').hasError('max')">
+                              Invalid Inputs
+                          </mat-error>
+                      </mat-form-field>
+                  </div>
+              </div>
+          </div>
+          <div class="passing-out-year mb-4">
+              <div class="row">
+                  <div class="col-md-12">
+                      <mat-form-field appearance="outline">
+                          <mat-label>Year of Passing</mat-label>
+                          <mat-select formControlName="passingOutYear" required>
+
+                              <mat-option *ngFor="let year of passingOutYears" [value]="year">
+                                  {{year}}
+                              </mat-option>
+                          </mat-select>
+                          <mat-error *ngIf="educationalUpdateForm.get('passingOutYear').hasError('required')">
+                             Year of Passing is required
+                          </mat-error>
+                      </mat-form-field>
+                  </div>
+              </div>
+          </div>
+          <div class="action-button" *ngIf="showButton;else disabled">
+              <div class="row">
+                  <div class="cancel-button">
+                      <button type="button" class="btn cancel" (click)="onClickClose()">CANCEL</button>
+                  </div>
+                  <div class="save-button">
+                      <button type="submit" class="btn save" (click)="onClickSave()">SAVE</button>
+                  </div>
+              </div>
+          </div>
+          <ng-template #disabled>
+              <div class="text-center">
+                  <button disabled type="button" class="btn btn-default ">
+                      <mat-spinner class="spinner" strokeWidth="4" [diameter]="15">
+                      </mat-spinner> Saving...please wait
+                  </button>
+              </div>
+          </ng-template>
+      </form>
+  </div>
+</div>

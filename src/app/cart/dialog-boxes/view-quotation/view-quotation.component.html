@@ -1,0 +1,29 @@
+<i class="material-icons close-icon" (click)="close()">close</i>
+
+<div class="text-center">
+  <h5>{{data.statusName}} Stage</h5>
+</div>
+
+<div class="text-center mt-4 mb-4" *ngIf="data.fileLocation">
+  <a class="custom" href="{{contentServer}}{{data.fileLocation}}" target="_blank">
+    Download {{data.statusName}} File
+  </a>
+</div>
+
+<div *ngIf="data.commentMessage">
+  <div class="text-blue">
+    Message
+  </div>
+  <div class="f-14 message-format">
+    {{data.commentMessage}}
+  </div>
+</div>
+
+<div *ngIf="data.rejectMessage">
+  <div class="text-red">
+    Reject Reason
+  </div>
+  <div class="f-14 message-format">
+    {{data.rejectMessage}}
+  </div>
+</div>

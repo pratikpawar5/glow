@@ -1,0 +1,91 @@
+@import'../../css/action-button.css';
+
+.circle-title{
+    padding: 10px 15px 10px 0;
+    margin-left: -15px;
+}
+.not-found
+{
+    width: auto;
+    height: 10%;
+}
+.sme-vendor-wrap mat-card{
+    padding: 0;
+}
+.sme-vendor-wrap .mat-card-lg-image{
+    height: 120px;
+    width: 120px;
+    margin: 0 auto;
+    display: block;
+    float: none;
+}
+.sme-vendor-wrap{
+    margin: 0 30px;
+}
+.no-Lpadding{
+    padding-left: 0!important;
+}
+.sme-vendor-wrap .my-circle-people-you-know .mat-card {
+    width: 189px !important;
+}
+
+.custom-mat-card{
+    width: 100% !important;
+    margin-left: 8px;
+    margin-bottom: 10px;
+}
+.top-listed-sme-clients .item{
+    border: 1px solid #dcdcdc;
+    padding: 5px;
+    border-radius: 5px;
+    box-shadow: 0 8px 6px -6px #909090;
+    margin: 5px;
+    background: #fff;
+}
+
+.top-listed-sme-clients .item:hover
+ {
+    box-shadow: none;
+    border: 1px solid #3574b7; 
+}
+.top-listed-sme-clients
+{
+    padding: 0 10px 15px 10px;
+}
+.top-listed-SME
+{
+  text-align: center;
+}
+        
+.top-listed-SME img
+{
+    object-fit: scale-down;
+}
+        
+.top-listed-SME .content
+{
+        padding: 10px 0;
+        min-height: 80px;
+}
+.sme-name
+{
+    color: #080808;
+    display: block;
+    cursor: pointer;
+    font-size: 12px;
+}
+.sme-address
+{
+    color:#676161;
+    display: block;
+    font-size: 12px;
+}      
+.creation-date
+{
+    font-size: 10px;
+    color: grey;
+}
+
+.spinner{
+    padding: 125px 50%;
+}

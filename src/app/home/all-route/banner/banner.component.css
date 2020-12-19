@@ -1,0 +1,12 @@
+/* @import '../../../css/global/carousel-arrow-button.css'; */
+
+.banner{
+    flex: 0 0 100%;
+}
+.banner-image{
+    /* height: 200px; */
+    width: 100%;
+}
+.col-12{
+    padding: 0 5px;
+}

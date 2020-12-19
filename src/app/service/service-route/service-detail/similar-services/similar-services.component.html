@@ -1,0 +1,79 @@
+<mat-card *ngIf="similarServices?.length > 0">
+  <div>
+    <h4 class="slider-title">Similar Services</h4>
+  </div>
+
+  <ngu-carousel [inputs]="carousel" [dataSource]="similarServices">
+    <div class="item" *nguCarouselDef="let service;let i=index">
+
+      <div class="ribbon" *ngIf="service.discount">
+        <span class="ribbon1">
+          <span>{{service.discount}} %
+            off</span>
+        </span>
+      </div>
+
+      <div class="text-center  pl-3 pr-3">
+
+        <div class="item-img">
+          <a href="/services/{{service.serviceUrlName}}/s/{{service.serviceUuid}}" target="_blank">
+            <img mat-card-lg-image [src]="contentServer + service.mainImage" alt="Service Image" onError="this.src='../assets/not-found/no_image.png';">
+          </a>
+        </div>
+
+        <div class="item-name">
+          <a href="/services/{{service.serviceUrlName}}/s/{{service.serviceUuid}}" matTooltip="{{service.serviceName}}"
+            target="_blank">
+            {{service.serviceName | namePipe}}
+          </a>
+        </div>
+
+        <div class="item-sme-name">
+          <a href="/sme/{{service.sUuid}}" target="_blank" matTooltip="{{service.smeName}}">
+            {{service.smeName | namePipe}}
+          </a>
+        </div>
+
+        <div *ngIf="service.discount; else originalPrice">
+          <span class="line-through-price">
+            {{service.price | IndianCurrency}}
+          </span>
+        </div>
+        <ng-template #originalPrice>
+          <span class="hidden"></span>
+          <br>
+        </ng-template>
+
+        <div class="original-price">
+          {{service.discountedPrice | IndianCurrency}}
+          <span *ngIf="service.priceUnit">
+            / {{service.priceUnit}}
+          </span>
+        </div>
+
+        <div>
+          <button *ngIf="service.addedToCart" mat-stroked-button class="added-to-cart">
+            Added to Cart <i class="material-icons">shopping_cart</i>
+            <span class="cart-arrow-check"><i class="fa fa-check"></i></span>
+          </button>
+          <button *ngIf="!service.addedToCart" mat-stroked-button class="show-interest-btn" (click)="businessInterest(service.serviceUuid,i)">
+            Show Interest <i class="fa fa-eye"></i>
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+
+    <button NguCarouselPrev class="arrow-left">
+      <i class="fa fa-angle-left arrow-icon-size"></i>
+    </button>
+
+    <button NguCarouselNext class="arrow-right">
+      <i class="fa fa-angle-right arrow-icon-size"></i>
+    </button>
+
+  </ngu-carousel>
+
+
+</mat-card>

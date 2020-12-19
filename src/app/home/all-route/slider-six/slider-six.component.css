@@ -1,0 +1,87 @@
+@import '../../../css/home-sliders/home-slider.css';
+@import '../../../css/action-button.css';
+.job-name
+{
+    font-size: 15px;
+}
+a{
+    color: #0073b6;
+    text-decoration: none;
+}
+.item .mat-card:hover
+{
+    border: 1px solid #3574b7;
+}
+.sme-name
+{
+    font-weight: 400;
+    color: #000000;;
+    font-size: 12px;
+}
+.jobDesc
+{
+    font-weight: 100;
+    color:#000000;;
+    font-size: 12px;
+}
+.exp-bag
+{
+    font-size: 13px;
+    color: #000000;;
+    margin-right: 4px;
+}
+.mat-stroked-button
+{
+    width:auto;
+
+}
+.vacancy-card
+{
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    border: 1px solid #ffff;
+}
+.buy-now-btn
+{
+    border-radius: 30px;
+    padding: 5px 15px;
+    min-width: 100%;
+    text-transform: uppercase;
+    font-weight: bold;
+    border-color: #3374b6;
+}
+.mat-chip.mat-standard-chip.mat-chip-selected.mat-primary {
+    background-color: #e8e8e8;
+    color: #0073b6;
+    margin: 0 0px 0 62px;
+}
+.v
+{
+    background: #f8f9fa;
+    color: #0073b6;
+    width: 90%;
+    font-size: 12px;
+}
+.posted-by
+{
+    font-size: 10px;
+    color: #2b2b2b;;
+    position: absolute;
+    right: 8px;
+}
+.apply
+{
+    color: #0073b6;
+    background-color: #e7eaea;
+}
+
+.mat-raised-button
+{
+    background-color: #bebebe;
+    color: #fff;
+    font-weight: bold;
+    font-size: 14px;
+    border: none;
+    cursor: not-allowed;
+}

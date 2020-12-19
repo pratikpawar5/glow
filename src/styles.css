@@ -1,0 +1,155 @@
+/* You can add global styles to this file, and also import other style files */
+@import '../node_modules/material-design-icons/iconfont/material-icons.css';
+@import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+@import '../node_modules/font-awesome/css/font-awesome.min.css';
+html, body { height: 100%; }
+body { 
+    margin: 0; 
+    font-family: Roboto, "Helvetica Neue", sans-serif; 
+    background-color: rgb(245, 245, 245);
+}
+.snackbar {
+    color:#ffff;
+    min-width: auto !important;;
+}
+.f-10{
+    font-size: 10px;
+}
+.f-12{
+    font-size: 12px;
+}
+.f-14{
+    font-size: 14px;
+}
+.f-16{
+    font-size: 16px;
+}
+.f-18{
+    font-size: 18px;
+}
+.f-20{
+    font-size: 20px;
+}
+.f-22{
+    font-size: 22px;
+}
+.div-link{
+    color: #1b5790;
+}
+.div-link:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+.text-grey{
+    color: #808080;
+}
+.google-map
+{
+    height: 50px;
+    width: 50px;
+}
+.close-icon{
+    cursor: pointer;
+    float: right;
+    font-size: 20px;
+    color: #808080
+}
+.close-icon:hover{
+    color: #000000
+}
+.text-blue{
+    color: #3374b6;
+}
+.text-lightBlue
+{
+    color:#17a2b8;
+}
+.text-yellow
+{
+    color: #ffc107;
+}
+.text-green{
+    color: #388e3c;
+}
+.text-black{
+    color: #000000;
+}
+.text-red{
+    color: #ff0000;
+}
+.text-dark-grey{
+    color: #484848;
+}
+.text-bold{
+    font-weight: bold;
+}
+.text-wrap{
+    word-wrap: break-word;
+}
+.no-margin{
+    margin: 0;
+}
+.no-padding{
+    padding: 0;
+}
+.margin-auto{
+    margin: auto;
+}
+.text-line-through{
+    text-decoration: line-through; 
+}
+.global-btn {
+    color: #ffffff;
+    background-color: #1b5790;
+    border-radius: 2px;
+    width: 100%;
+    padding: 4px;
+}
+.cancle-btn{
+    color: #000;
+    background-color: #e1e1e1;
+}
+.default-btn{
+    color: #000;
+    background-color: #e1e1e1;
+}
+.cursor-pointer{
+    cursor: pointer;
+}
+.not-found-image{
+    height: 50%;
+    width: 100%;
+}
+.question-mark{
+    cursor: pointer;
+    margin-left: 5px;
+}
+.content-wrap{
+    padding-bottom: 2.5rem;
+}
+#content-wrap{
+    padding-bottom: 220px;
+}
+.not-found-image:hover{
+    transform:none !important
+}
+.share-icon
+{    
+    height: 40px;
+    width: 40px;
+    margin: 12px;
+}
+.share-link
+{
+    float: right;
+    font-size: 14px;
+    cursor: pointer;
+    color: #0073b6;
+}
+.share-link:hover{
+    text-decoration: underline;}
+.share
+{
+    color:#c2c2c2;
+    padding: 3px;
+}

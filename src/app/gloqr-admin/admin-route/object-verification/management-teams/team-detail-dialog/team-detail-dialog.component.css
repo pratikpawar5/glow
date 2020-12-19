@@ -1,0 +1,10 @@
+@import'../../../../../../app/css/super-admin.css';
+
+
+.profile-img{
+    height: 520px !important;
+    width: 100% !important;
+    margin: 10px 5px !important;
+    object-fit: contain;
+    border: 1px solid #ccc;
+}

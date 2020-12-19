@@ -1,0 +1,255 @@
+<i class="material-icons close-icon" (click)="close()">close</i>
+
+<div class="container-fluid">
+  <h2> SME Jobs Details</h2>
+  <form [formGroup]="jobsAdminForm">
+    <div *ngIf="data">
+
+      <div class="row">
+        <div class="col-md-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Industrial Area</mat-label>
+            <mat-select formControlName="customIndustrialArea" required>
+              <mat-option>--</mat-option>
+              <mat-option *ngFor="let obj of industrialAreaDto" [value]="obj.areaUuid">
+                {{obj.industrialAreaName}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="jobsAdminForm.get('customIndustrialArea').hasError('required')">
+              Please select Category
+            </mat-error>
+          </mat-form-field>
+          <div class="text-bold" *ngIf="userSelectedCategory && data.otherCategory">
+            Custom Area:&nbsp;&nbsp;{{data.otherCategory.customIndustrialArea}}
+          </div>
+        </div>
+        <div class="col-md-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Industrial Job Role</mat-label>
+            <mat-select formControlName="customJobRoleUuid" required>
+              <mat-option>--</mat-option>
+              <mat-option *ngFor="let obj of industrialJobRoleDto" [value]="obj.jobRoleUuid">
+                {{obj.jobRole}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="jobsAdminForm.get('customJobRoleUuid').hasError('required')">
+              Please select SubCategory
+            </mat-error>
+          </mat-form-field>
+          <div class="text-bold" *ngIf="userSelectedCategory && data.otherCategory">
+            Custom Role :&nbsp;&nbsp;{{data.otherCategory.customJobRoleUuid}}
+          </div>
+        </div>
+      </div>
+
+      <div class="row sub-title-wrap mb-3 detail-section" *ngIf="data.vacancyTitle">
+        <div class="col-md-2">
+          <span class="titile">Title: </span>
+        </div>
+
+        <div class="col-md-10">
+          <span class="sub-titile">{{data.vacancyTitle}}</span>
+        </div>
+      </div>
+
+      <div class="course-category mb-2">
+        <span class="titile">Courses:</span>
+        <div class="qualification-name container" *ngFor="let qName of data.qualificationCourses">
+          <span>Course:- &nbsp;</span> <span class="course-name">{{qName.courseName}}</span>
+          <div class="spec-div" *ngIf="qName.specializations!=null&&qName.specializations.length>0">Specializations:
+            <div class="specialization-name" *ngFor="let specName of qName.specializations">
+              <span class="spec-name">{{specName.specializationName}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row sub-title-wrap mb-3" *ngIf="data.vacancyType">
+        <div class="col-md-2">
+          <span class="titile"> Job Type:</span>
+        </div>
+
+        <div class="col-md-10">
+          <span class="sub-titile">{{data.
+                  vacancyType.jobType}}</span>
+        </div>
+      </div>
+
+
+      <div class="row sub-title-wrap mb-3" *ngIf="data.locations">
+        <div class="col-md-2">
+          <span class="titile">Location: </span>
+        </div>
+
+        <div class="col-md-10">
+          <span class="sub-titile">{{data.locations}}</span>
+        </div>
+      </div>
+
+      <div class="row sub-title-wrap mb-3" *ngIf="data.minExp || data.maxExp">
+        <div class="col-md-2">
+          <span class="titile">Expereince: </span>
+        </div>
+
+        <div class="col-md-10">
+          <span class="sub-titile">{{data.minExp}}</span> - <span class="sub-titile">{{data.maxExp}}
+            yrs</span>
+        </div>
+      </div>
+
+      <div class="row sub-title-wrap mb-3" *ngIf="data.minSalary || data.maxSalary">
+        <div class="col-md-2">
+          <span class="titile">Salary: </span>
+        </div>
+
+        <div class="col-md-10">
+          <span class="sub-titile">{{data.minSalary | IndianCurrency}}</span> - <span
+            class="sub-titile">{{data.maxSalary | IndianCurrency}}</span>
+        </div>
+      </div>
+
+      <div class="row sub-title-wrap mb-3" *ngIf="data.noOfVacancy">
+        <div class="col-md-2">
+          <span class="titile">Number of vacancy: </span>
+        </div>
+
+        <div class="col-md-10">
+          <span class="sub-titile">{{data.noOfVacancy}}</span>
+        </div>
+      </div>
+
+      <div class="row sub-title-wrap mb-3" *ngIf="data.lastApplyDate">
+        <div class="col-md-2">
+          <span class="titile">Last Apply Date: </span>
+        </div>
+
+        <div class="col-md-10">
+          <span class="sub-titile">{{data.lastApplyDate | date}}</span>
+        </div>
+      </div>
+
+      <div class="row sub-title-wrap mb-3" *ngIf="data.totalApplicants">
+        <div class="col-md-2">
+          <span class="titile">Total Applicants: </span>
+        </div>
+
+        <div class="col-md-10">
+          <span class="sub-titile">{{data.totalApplicants}}</span>
+        </div>
+      </div>
+
+      <div class="row sub-title-wrap mb-3" *ngIf="data.jobTypes">
+        <div class="col-md-2">
+          <span class="titile">Job Types: </span>
+        </div>
+
+        <div class="col-md-10">
+          <span class="sub-titile">{{data.jobTypes}}</span>
+        </div>
+      </div>
+
+      <div class="row sub-title-wrap mb-3" *ngIf="data.employmentTypes">
+        <div class="col-md-2">
+          <span class="titile">Employment Types: </span>
+        </div>
+
+        <div class="col-md-10">
+          <span class="sub-titile">{{data.employmentTypes}}</span>
+        </div>
+      </div>
+
+      <div class="row sub-title-wrap mb-3" *ngIf="data.preferredShift">
+        <div class="col-md-2">
+          <span class="titile">Preferred Shift: </span>
+        </div>
+        <div class="col-md-10">
+          <span class="sub-titile">{{data.preferredShift}}</span>
+        </div>
+      </div>
+
+      <div class="row sub-title-wrap mb-3">
+        <div class="col-md-2">
+          <span class="titile">Short Description: </span>
+        </div>
+
+        <div class="col-md-10">
+          <span class="sub-titile">{{data.shortDescription}}</span>
+        </div>
+      </div>
+      <div class="row sub-title-wrap mb-3">
+        <div class="col-md-2">
+          <span class="titile">Long Description: </span>
+        </div>
+
+        <div class="col-md-10" *ngIf="data.vacancyDetail">
+          <span class="sub-titile">{{data.vacancyDetail.longDescription}}</span>
+        </div>
+      </div>
+
+      <div class="row sub-title-wrap mb-3" *ngIf="data.minQualification">
+        <div class="col-md-2">
+          <span class="titile">Qualification </span>
+        </div>
+
+        <div class="col-md-10">
+          <span class="sub-titile">{{data.minQualification}}</span>
+        </div>
+      </div>
+
+      <div class="row sub-title-wrap mb-3" *ngIf="data.vacancyDetail">
+        <div class="col-md-2">
+          <span class="titile">Email </span>
+        </div>
+
+        <div class="col-md-10">
+          <span class="sub-titile">{{data.vacancyDetail.contactEmail}}</span>
+        </div>
+      </div>
+      <div class="row sub-title-wrap mb-3" *ngIf="data.vacancyDetail">
+        <div class="col-md-2">
+          <span class="titile">Phone </span>
+        </div>
+
+        <div class="col-md-10">
+          <span class="sub-titile">{{data.vacancyDetail.contactMobileNumber}}</span>
+        </div>
+      </div>
+
+      <div class="row sub-title-wrap mb-3" *ngIf="data.requiredDocuments?.length > 0">
+        <div class="col-md-2">
+          <span class="titile">Required Documents: </span>
+        </div>
+
+        <div class="col-md-10">
+          <span class="sub-titile">{{data.requiredDocuments}}</span>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <mat-form-field appearance="outline">
+          <mat-label>Feedback</mat-label>
+          <textarea #input matInput [formControl]="feedbackMessage" [ngModel]="data.frontFeedBackMessage"
+            rows="2"></textarea>
+          <mat-hint align="end">{{input.value?.length || 0}}/500</mat-hint>
+        </mat-form-field>
+      </div>
+
+      <div class="row action-button mb-2">
+        <div class="b">
+          <span *ngIf="data.isApprove">
+            <span class="text-bold">Current State: Already Approved</span>
+          </span>
+          <span *ngIf="data.isReject">
+            <span class="text-bold">Current State: Already Rejected</span>
+          </span>
+        </div>
+        <div class="approve-button b">
+          <button type="submit" class="btn btn-success" (click)="check()">Add to Approval</button>
+        </div>
+        <div class="reject-button b">
+          <button type="button" class="btn btn-danger" (click)="onReject()">Add to Rejection</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

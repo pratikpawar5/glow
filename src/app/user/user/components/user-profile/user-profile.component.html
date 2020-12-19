@@ -1,0 +1,76 @@
+<form id="form" [formGroup]="userProfileForm" class="example-form">
+    <div class="fluid-container">
+        <div class="col-md-5">
+            <div class="row">
+                <h6>Full Name</h6>
+                <span class="right-corner" (click)="onEditFullName()" *ngIf="nameEdit ; else nameCancel">Edit</span>
+                <ng-template #nameCancel>
+                    <span class="right-corner" (click)="onCancelName()">Cancel</span>
+                </ng-template>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-7">
+                <mat-form-field appearance="outline" class="line-height example-full-width">
+                    <input matInput class="inputDisable" formControlName="userFullName" autocomplete="off"
+                        maxlength="60">
+                    <mat-error *ngIf="userProfileForm.get('userFullName').hasError('required')">
+                        Please Enter Full Name
+                    </mat-error>
+                    <mat-error *ngIf="userProfileForm.get('userFullName').hasError('inValid')">
+                        Please Enter Valid Full Name
+                    </mat-error>
+                    <mat-error *ngIf="userProfileForm.get('userFullName').hasError('pattern')">
+                        Numbers and special characters not
+                        allowed
+                    </mat-error>
+                </mat-form-field>
+
+            </div>
+            <div class="col-md-3" *ngIf="saveButton">
+                <button mat-raised-button class="global-btn" (click)="onUpdateFullName()">Save
+                </button>
+            </div>
+        </div>
+        <div>
+            <div class="col-md-12">
+                <div class="row">
+                    <h6>Email Address</h6>
+                    <span class="right-corner" (click)="onUpdateUsername(EMAIL)">Edit</span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-7">
+                    <mat-form-field appearance="outline" class="line-height example-full-width">
+                        <input matInput class="inputDisable" formControlName="userEmail">
+                        <mat-error *ngIf="userProfileForm.get('userEmail').hasError('sameEmail')">
+                            Trying to edit same email
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+
+
+        </div>
+        <div>
+            <div class="col-md-12">
+                <div class="row">
+                    <h6>Mobile</h6>
+                    <span class="right-corner" (click)="onUpdateUsername(MOBILE)">Edit</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-7 ">
+                    <mat-form-field appearance="outline" class="line-height example-full-width">
+                        <input matInput class="inputDisable" formControlName="userMobile">
+                        <mat-error *ngIf="userProfileForm.get('userMobile').hasError('sameMobile')">
+                            Trying to edit same mobile
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</form>

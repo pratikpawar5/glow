@@ -1,0 +1,16 @@
+<i class="material-icons close-icon close" (click)="onClickClose()">close</i>
+<div class="sme-verify-dialog">
+  <div class="container">
+    <p class="text">Have you verified SME Details of <span class="text-bold">{{data.smeName}}</span> and want to
+      continue ?</p>
+
+    <div class="action-button">
+      <button type="button" mat-raised-button class="global-btn" (click)="yes()">Yes, Make it Live</button>
+      &nbsp;
+      <button mat-stroked-button class="default-btn" (click)="onClickClose()">
+        Verify Again
+      </button>
+    </div>
+
+  </div>
+</div>

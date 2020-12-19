@@ -1,0 +1,357 @@
+
+<div class="job-seeker-profile-information" *ngIf="jobSeeker">
+  <p class="main-heading">Job Profile Details</p>
+  <mat-card class="job-seeker-profile-card mt-2">
+    <div class="row">
+      <div class="col-md-1">
+        <div *ngIf="checkImage(userProfileImage);else socialLogin">
+          <img alt="Job" class="avatar" [src]="contentServer + userProfileImage" onError="this.src='../assets/logo/noimage.png';"
+            alt="user-profile-img">
+        </div>
+        <ng-template #socialLogin>
+          <img alt="Job" src="{{userProfileImage}}" class="avatar" alt="user-profile-img">
+        </ng-template>
+      </div>
+      <div class="col-md-10">
+        <div class="basic-user-info mb-3">
+          <p class="name">{{jobSeeker.fullName}}</p>
+          <span class="designation" *ngIf="jobSeeker.currentDesig">{{jobSeeker.currentDesig}} at
+            {{jobSeeker.currentOrganization}}</span>
+        </div>
+        <div class="other-info">
+          <div class="row mb-2">
+            <div class="col-md-4" *ngIf="jobSeeker.currentCity">
+              <div size="2" class="icons">
+                <i class="material-icons icons">
+                  location_on
+                </i>
+                <span size="2" class="info">{{jobSeeker.currentCity | uppercase}}, {{jobSeeker.currentCountry |
+                  uppercase }}</span>
+              </div>
+            </div>
+            <div class="col-md-4" *ngIf="jobSeeker.mobileNumber">
+              <div size="2" class="icons">
+                <i class="material-icons">
+                  phone
+                </i>
+                <span size="2" class="info">+91-{{jobSeeker.mobileNumber}}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mb-2">
+            <div class="col-md-4" *ngIf="jobSeeker.totalExperience">
+              <div size="2" class="icons">
+                <i class="material-icons">
+                  business_center
+                </i>
+                <span size="2" class="info">
+                  <span *ngIf="jobSeeker.totalExperience.year== 'Fresher';else other">
+                    {{jobSeeker.totalExperience.year}}
+                  </span>
+                  <ng-template #other>
+                    {{jobSeeker.totalExperience.year}} Year(s)
+                    {{jobSeeker.totalExperience.month}} Month(s)
+                  </ng-template>
+                </span>
+              </div>
+            </div>
+            <div class="col-md-8" *ngIf="jobSeeker.emailId">
+              <div size="2" class="icons">
+                <i class="material-icons">
+                  email
+                </i>
+                <span size="2" class="info">{{jobSeeker.emailId}}</span>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-2">
+            <div class="col-md-4" *ngIf="jobSeeker.currentSalary">
+              <div *ngIf="jobSeeker.totalExperience.year == 'Fresher';else salary">
+
+              </div>
+              <ng-template #salary>
+                <div size="2" class="icons">
+                  <!-- <i class="material-icons icons">
+                    location_on
+                  </i> -->
+                  <span size="2" class="info">
+                    {{jobSeeker.currentSalary.salary | IndianCurrency}} /
+                    {{jobSeeker.currentSalary.salaryType}}
+                  </span>
+                </div>
+              </ng-template>
+
+            </div>
+            <div class="col-md-4">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="right-side">
+      <div>
+        <i class="material-icons pop size" (click)="onClickEditProfile()">
+          create
+        </i>
+      </div>
+    </div>
+  </mat-card>
+
+  <mat-card class="education-information-card mt-3">
+    <div class="container">
+      <p class="titile-text mb-3"> Highest Education </p>
+      <div *ngIf="educationDetail">
+        <div class="row">
+          <div class="col-md-1">
+            <i class="material-icons  exp-icons">
+              location_city
+            </i>
+          </div>
+          <div class="col-md-10">
+            <div class="exp-user-info mb-3">
+              <span class="job-titile">{{educationDetail.instituteName}},
+                <span>{{educationDetail.universityName}}</span>
+              </span>
+              <p class="company-name">{{educationDetail.qualificationCourse.courseName}}
+                <span *ngIf="educationDetail.qualificationSpecialization">-</span>
+                <span *ngIf="educationDetail.qualificationSpecialization">
+                  {{educationDetail.qualificationSpecialization.specializationName}}</span>
+              </p>
+              <p class="exp-other-info">{{educationDetail.passingOutYear}}</p>
+            </div>
+          </div>
+          <div class="col-md-1">
+            <i class="material-icons expEditIcon" (click)="onClickEditEducationalDialog()">
+              create
+            </i>
+          </div>
+        </div>
+      </div>
+
+      <div class="right-side" *ngIf="!educationDetail">
+        <div>
+          <i class="material-icons pop" (click)="onClickCreateEducationalDialog()">
+            add
+          </i>
+        </div>
+        <!-- -->
+      </div>
+    </div>
+  </mat-card>
+
+  <mat-card class="experience-information-card mt-3">
+    <div class="container">
+      <p class="titile-text mb-3"> Experience </p>
+      <div *ngIf="experienceDetail?.length > 0">
+        <div class="row" *ngFor="let expDetail of experienceDetail;let i=index">
+          <div></div>
+          <div class="col-md-1">
+            <i class="material-icons exp-icons">
+              domain
+            </i>
+          </div>
+          <div class="col-md-10">
+            <div class="exp-user-info mb-3">
+              <p class="job-titile">{{expDetail.jobRole.jobRole}}</p>
+              <p class="company-name">{{expDetail.companyName}}</p>
+              <p class="exp-other-info" *ngIf="!expDetail.currentlyWorking">from {{expDetail.startDate | date}} to
+                {{expDetail.endDate | date}}</p>
+              <p class="exp-other-info" *ngIf="expDetail.currentlyWorking">from {{expDetail.startDate | date}} to
+                Present</p>
+            </div>
+          </div>
+          <div class="col-md-1">
+            <i class="material-icons expEditIcon" (click)="onClickEditExperienceDialog(i)">
+              create
+            </i>
+          </div>
+        </div>
+      </div>
+      <div class="right-side">
+        <div>
+          <i class="material-icons pop" (click)="onClickCreateExperienceDialog()">
+            add
+          </i>
+        </div>
+      </div>
+    </div>
+  </mat-card>
+
+  <mat-card class="career-desire-profile mt-3">
+    <div class="container">
+      <p class="titile-text mb-3"> Career Desired Profile </p>
+      <div *ngIf="careerProfile">
+        <div class="row mb-2">
+          <div class="col-md-6" *ngIf="careerProfile.jobRole.industrialArea.industrialAreaName">
+            <div class="career-titile">
+              Industrial Area Name
+            </div>
+            <div class="career-content">
+              {{careerProfile.jobRole.industrialArea.industrialAreaName}}
+            </div>
+          </div>
+
+          <div class="col-md-6" *ngIf="careerProfile.jobRole.jobRole">
+            <div class="career-titile">
+              Job Role
+            </div>
+            <div class="career-content">
+              {{careerProfile.jobRole.jobRole}}
+            </div>
+          </div>
+
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-md-6" *ngIf="careerProfile.jobTypes[0]">
+            <div class="career-titile">
+              Job Type
+            </div>
+            <div class="career-content">
+              {{careerProfile.jobTypes[0]}}<span *ngIf="careerProfile.jobTypes[1]">,</span>
+              {{careerProfile.jobTypes[1]}}
+            </div>
+          </div>
+          <div class="col-md-6" *ngIf="careerProfile.employmentTypes[0]">
+            <div class="career-titile">
+              Employment Types
+            </div>
+            <div class="career-content">
+              {{careerProfile.employmentTypes[0]}}<span *ngIf="careerProfile.employmentTypes[1]">,</span>
+
+              {{careerProfile.employmentTypes[1]}}<span *ngIf="careerProfile.employmentTypes[2]">,</span>
+
+              {{careerProfile.employmentTypes[2]}}
+            </div>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-md-6" *ngIf="careerProfile.preferredShift">
+            <div class="career-titile">
+              Preferred Shift
+            </div>
+            <div class="career-content">
+              {{careerProfile.preferredShift}}
+            </div>
+          </div>
+
+          <div class="col-md-6" *ngIf="careerProfile.expectedSalary.salary">
+            <div class="career-titile">
+              Expected Salary
+            </div>
+            <div class="career-content">
+              {{careerProfile.expectedSalary.salary | IndianCurrency}} /
+              <span *ngIf=""></span>
+              {{careerProfile.expectedSalary.salaryType}}
+            </div>
+          </div>
+        </div>
+
+        <div class="row mb-2" *ngIf="careerProfile.prefferedJobLocations[0]">
+          <div class="col-md-6">
+            <div class="career-titile">
+              Preferred Job Locations
+            </div>
+            <div class="career-content">
+              {{careerProfile.prefferedJobLocations}}
+            </div>
+          </div>
+        </div>
+
+        <div class="right-side">
+          <div>
+            <i class="material-icons pop2" (click)="onClickCareerDesiredProfile()">
+              create
+            </i>
+          </div>
+        </div>
+      </div>
+      <div class="right-side" *ngIf="!careerProfile">
+        <div>
+          <i class="material-icons pop" (click)="onClickCreateCareerDesiredProfile()">
+            add
+          </i>
+        </div>
+      </div>
+    </div>
+  </mat-card>
+
+  <mat-card class="key-skill-set-card mt-3">
+    <div class="container">
+      <p class="titile-text mb-3"> Key Skills Set </p>
+      <ul class="type-of-jobs-list">
+        <li *ngFor="let skill of skillSets">&nbsp;
+          <span class="job-type">
+            <button type="button" class="btn btn-secondary m">{{skill}}</button>
+          </span>
+        </li>
+      </ul>
+      <div class="right-side">
+        <div>
+          <i class="material-icons pop2" (click)="onClickSkillSetEditDialog()">
+            create
+          </i>
+        </div>
+        <!-- <div>
+          <i class="material-icons pop2" (click)="onClickSkillSetEditDialog()">
+            add
+          </i>
+        </div> -->
+      </div>
+    </div>
+  </mat-card>
+
+  <mat-card class="reseume-upload-card mt-3">
+    <div class="container">
+      <p class="titile-text mb-3"> Attach Resume </p>
+      <p class="sub-head-info mb-3">Resume is the most important document recruiters look for. Recruiters generally do
+        not look at profiles without resumes.</p>
+
+      <div class="resume-uploaded-name mb-3" *ngIf="jobSeekerResume">
+        <span class="resume-upload-name" *ngIf="jobSeekerResume.resumeFileName">{{jobSeekerResume.resumeFileName}} -
+        </span>
+        <span class="sub-head-info" *ngIf="jobSeekerResume && jobSeekerResume.resumeUrl">Uploaded on
+          {{jobSeekerResume.lastModifiedDate | date}}</span>
+        <span *ngIf="jobSeekerResume.resumeUrl" style="float: right;">
+          <a href="{{contentServer+jobSeekerResume.resumeUrl}}" target="_blank">
+              <i class="fa fa-floppy-o" aria-hidden="true"></i> SAVE RESUME
+          </a>
+        </span>
+        <p class="delete-reusme-text" *ngIf="jobSeekerResume.resumeUrl" (click)="deleteResume(jobSeekerResume)">
+            <i class="fa fa-trash" aria-hidden="true"></i>
+            DELETE
+          RESUME</p>
+      </div>
+      <div class="upload-resume-box mt-4 text-center">
+        <div class="mb-2" *ngIf="jobSeekerResume && jobSeekerResume.resumeUrl; else uploadButton">
+          <input accept=".pdf,.docx,.doc," onclick="value = null" style="display: none" type="file"
+            (change)="onFileChanged($event)" #fileInput>
+          <button type="button" class="btn upload-resume-btn" (click)="fileInput.click()">Update Resume</button>
+        </div>
+        <ng-template #uploadButton>
+          <div class="mb-2">
+            <input accept=".pdf,.docx,.doc" onclick="value = null" style="display: none" type="file"
+              (change)="onFileChanged($event)" #fileInput>
+            <button type="button" class="btn upload-resume-btn" (click)="fileInput.click()">Upload Resume</button>
+          </div>
+        </ng-template>
+        <span class="sub-head-info">Supported Formats: doc, docx, pdf, upto 1 MB</span>
+
+        <div class="upload-fail" *ngIf="fileUploadFail">
+          <span>Resume Uploadation Failed..please try again!!</span>
+        </div>
+
+        <div class="upload-fail" *ngIf="fileSizeError">
+          <span>Resume file size should be less than 1 MB</span>
+        </div>
+
+        <div class="upload-fail" *ngIf="resumeFileTypeError">
+          <span>Please select correct file format...Supported formats are: doc, docx, pdf, upto 1 MB</span>
+        </div>
+      </div>
+    </div>
+  </mat-card>
+
+</div>

@@ -1,0 +1,27 @@
+@import'../global/show-interest-button.css';
+.arrow-right, .arrow-left{
+    position: absolute;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    background: #ffffff;
+    border: none ;
+    box-shadow: 0 1px 5px 0 rgba(0,0,0,.11);
+    height: 30%;
+    width: 40px;    
+    color: #000000;
+    cursor: pointer; 
+    border-radius: 4px 0 0 4px;  
+}
+.arrow-left:hover , .arrow-right:hover{
+    box-shadow: 1px 2px 10px 1px rgba(0,0,0,.3);
+}
+.arrow-right{
+    right: 0px;
+}
+.arrow_left{
+    left: 0px;
+}
+.arrow-icon-size{
+    font-size: 30px;
+}

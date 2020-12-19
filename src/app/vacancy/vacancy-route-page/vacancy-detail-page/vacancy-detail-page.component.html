@@ -1,0 +1,145 @@
+<div class="container" *ngIf="smeJob">
+  <mat-card>
+    <app-vacancy-detail-page-breadcrumbs [smeJob]="smeJob"></app-vacancy-detail-page-breadcrumbs>
+    <div class="job-title text-blue">
+      {{smeJob.vacancyTitle}}
+    </div>
+    <div class="job-by">
+      <a href="/sme/{{smeJob.smeInfo.sUuid}}" target="_blank">
+        {{smeJob.smeInfo.smeName}}
+      </a>
+    </div>
+    <div class="job-meta-data row">
+      <div class="col-md-2" *ngIf="smeJob.minExp && smeJob.maxExp">
+        <i class="fa fa-suitcase"> </i> {{smeJob.minExp}} - {{smeJob.maxExp}} Yrs
+      </div>
+      <div class="col-md-3">
+        <i class="fa fa-inr"> </i>
+        <span *ngIf="smeJob.minSalary && smeJob.minSalary;else na"> {{smeJob.minSalary | CustomPrice}} -
+          {{smeJob.maxSalary | CustomPrice}} /Monthly</span>
+      </div>
+      <div class="col-md-7" *ngIf="smeJob.locations">
+        <i class="fa fa-map-marker"> </i> {{smeJob.locations}}
+      </div>
+    </div>
+
+    <div class="marginTB10 row">
+      <div class="col-md-6 no-padding">
+        <div *ngIf="loginSmeUuid === smeJob.smeInfo.sUuid;else check">
+
+        </div>
+        <ng-template #check>
+          <button *ngIf="!smeJob.applied;else Applied" mat-flat-button (click)="jobApply(smeJob)">
+            Apply
+          </button>
+          <ng-template #Applied>
+            <button [disabled]="disableFlag" mat-raised-button class="applied">
+              Applied
+            </button>
+          </ng-template>
+        </ng-template>
+      </div>
+      <div class="col-md-6 posted-ago">
+        <ul class="no-padding no-margin">
+          <li style="list-style: none">
+            <a href onclick="return false" (click)="onClickShare()">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+              Share
+            </a></li>
+          <li>
+            Job Applicants : <strong>{{smeJob.totalApplicants}}</strong>
+          </li>
+          <li>
+            <strong>Posted {{smeJob.creationDate | dateAgo}}</strong>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <hr>
+
+    <div *ngIf="smeJob.shortDescription || smeJob.vacancyDetail.longDescription">
+      <div class="text-bold">Job Description</div>
+      <div class="description marginTB10" *ngIf="smeJob.shortDescription">
+        {{smeJob.shortDescription}}
+      </div>
+      <div class="description" *ngIf="smeJob.vacancyDetail.longDescription">
+        {{smeJob.vacancyDetail.longDescription}}
+      </div>
+    </div>
+
+    <div>
+      <div class="text-bold marginTB10">Job Summary</div>
+
+      <table>
+        <tr *ngIf="smeJob.jobRole">
+          <td class="attr">Job Role</td>
+          <td class="val">{{smeJob.jobRole}}</td>
+        </tr>
+        <tr *ngIf="smeJob.rawFormatQualification">
+          <td class="attr">Education</td>
+          <td class="val">{{smeJob.rawFormatQualification}}</td>
+        </tr>
+        <tr *ngIf="smeJob.jobTypes">
+          <td class="attr">Job Types</td>
+          <td class="val">{{smeJob.jobTypes}}</td>
+        </tr>
+        <tr *ngIf="smeJob.employmentTypes">
+          <td class="attr">Employment Types</td>
+          <td class="val">{{smeJob.employmentTypes}}</td>
+        </tr>
+        <tr *ngIf="smeJob.preferredShift">
+          <td class="attr">Preferred Shift</td>
+          <td class="val">{{smeJob.preferredShift}}</td>
+        </tr>
+        <tr *ngIf="smeJob.noOfVacancy">
+          <td class="attr">No of vacancies</td>
+          <td class="val">{{smeJob.noOfVacancy}}</td>
+        </tr>
+      </table>
+    </div>
+
+    <div>
+      <div class="text-bold marginTB10">Skills</div>
+      <div class="row no-margin" *ngIf="smeJob.skillSets?.length > 0;else na">
+        <div class="skill text-blue" *ngFor="let skill of smeJob.skillSets">
+          {{skill}}
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="smeJob.requiredDocuments">
+      <div class="text-bold marginTB10">Required Documents</div>
+      {{smeJob.requiredDocuments}}
+    </div>
+
+    <div *ngIf="smeJob.smeInfo" class="recruiter-details marginTB10">
+      <div class="text-bold">About Recruiter</div>
+      <table>
+        <tr>
+          <td class="attr">Company</td>
+          <td>{{smeJob.smeInfo.smeName}}</td>
+        </tr>
+        <tr *ngIf="smeJob.smeInfo.smeAddress">
+          <td class="attr">Address</td>
+          <td>{{smeJob.smeInfo.smeAddress.locality}}, {{smeJob.smeInfo.smeAddress.city}},
+            {{smeJob.smeInfo.smeAddress.state}}</td>
+        </tr>
+        <tr *ngIf="smeJob.smeInfo.contactEmail">
+          <td class="attr">Email</td>
+          <td><a href="mailto:{{smeJob.smeInfo.contactEmail}}">{{smeJob.smeInfo.contactEmail}}</a></td>
+        </tr>
+        <tr *ngIf="smeJob.smeInfo.contactPhone">
+          <td class="attr">Contact Number</td>
+          <td>+91 {{smeJob.smeInfo.contactPhone}}</td>
+        </tr>
+      </table>
+    </div>
+
+    <ng-template #na>
+      Not Disclosed
+    </ng-template>
+
+  </mat-card>
+</div>

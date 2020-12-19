@@ -1,0 +1,82 @@
+<div infinite-scroll [infiniteScrollDistance]="scrollDistance" [infiniteScrollUpDistance]="scrollUpDistance"
+    [infiniteScrollThrottle]="throttle" [scrollWindow]="true" (scrolled)="onScrollDown()">
+
+    <div class="new-register-sme mb-3">
+        <h5 class="headline">New SME's</h5>
+        <br>
+        <div *ngIf="smes">
+            <mat-card class="existing-sme-card mb-3" *ngFor="let newSME of smes; let i=index">
+                <div class="index-count">{{i+1}}/{{totalSmesCount}}</div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <img alt="SME" [src]="contentServer + newSME.logoImage" class="brand-img"
+                            onError="this.src='../assets/not-found/no_image.png';">
+                    </div>
+                    <div class="col-md-10">
+                        <div class="sme-name">
+                            {{newSME.smeName}}
+                        </div>
+                        <hr>
+                        <div class="row mb-3">
+                            <div class="col-sm-8">
+                                <span class="listed-on-date">Listed on :- {{newSME.creationDate|date:'medium'}}</span>
+                            </div>
+                            <div class="col-sm-4">
+                                <span class="f-14 text-red text-bold">City :- {{newSME.smeAddress.city}}</span>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row mb-3">
+                            <div class="col-sm-4" [ngClass]="{'pending':(newSME.itemsCount.activePendingProducts > 0)}">
+                                <span>Product: {{newSME.itemsCount.activePendingProducts}}</span>
+                            </div>
+                            <div class="col-sm-4" [ngClass]="{'pending':(newSME.itemsCount.activePendingServices > 0)}">
+                                <span>Service: {{newSME.itemsCount.activePendingServices}}</span>
+                            </div>
+                            <div class="col-sm-4" [ngClass]="{'pending':(newSME.itemsCount.activePendingCertificates > 0)}">
+                                <span>Certificate: {{newSME.itemsCount.activePendingCertificates}}</span>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-sm-4" [ngClass]="{'pending':(newSME.itemsCount.activePendingInfras > 0)}">
+                                <span>Infrastructure: {{newSME.itemsCount.activePendingInfras}}</span>
+                            </div>
+                            <div class="col-sm-4" [ngClass]="{'pending':(newSME.itemsCount.activePendingGalleries > 0)}">
+                                <span>Gallery: {{newSME.itemsCount.activePendingGalleries}} </span>
+                            </div>
+                            <div class="col-sm-4" [ngClass]="{'pending':(newSME.itemsCount.activePendingTeams > 0)}">
+                                <span>Team: {{newSME.itemsCount.activePendingTeams}} </span>
+                            </div>
+                        </div>
+
+                        <div class="row mb-5">
+                            <div class="col-sm-4" [ngClass]="{'pending':(newSME.itemsCount.activePendingVacancies > 0)}">
+                                <span>Job: {{newSME.itemsCount.activePendingVacancies}}</span>
+                            </div>
+                            <div class="col-sm-4" [ngClass]="{'pending':(newSME.itemsCount.activePendingBusinessPosts > 0)}">
+                                <span>Social-Post: {{newSME.itemsCount.activePendingBusinessPosts}}</span>
+                            </div>
+                            <div class="col-sm-4" [ngClass]="{'pending':(newSME.itemsCount.pendingOfflinePaymentVerification > 0)}">
+                                Payment: {{newSME.itemsCount.pendingOfflinePaymentVerification}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="apply-btn">
+                    <button type="button" class="btn btn-success"
+                        routerLink="/gloqr-admin/new-smes/{{newSME.sUuid}}/{{newSME.uuid}}/sme-basic-details">View
+                        SME Details</button>
+                </div>
+            </mat-card>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="showSpinner" class="spinner">
+    <mat-spinner strokeWidth="5" [diameter]="50"></mat-spinner>
+</div>
+
+<div *ngIf="noDataFound" class="text-center">
+    <img alt="Not Available" style="height: 400px;width: auto;" src="../../../../assets/not-found/Great Job!!! You have verified all SME's-min.png">
+</div>

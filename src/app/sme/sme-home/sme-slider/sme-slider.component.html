@@ -1,0 +1,34 @@
+<div class="sme-slider-banner">
+  <div class="slider-wrap">
+    <div *ngIf="sliderImages?.length > 0; else loading">
+    <ngu-carousel [inputs]="carousel" [dataSource]="sliderImages">
+      <div class="col-12" *nguCarouselDef="let sliderImage;">
+        <img [src]="contentServer + sliderImage.imageLocation" alt="Banner Image" class="img" onError="this.src='../assets/not-found/no-data-found.png';">
+      </div>
+
+      <button NguCarouselPrev class="arrow-left">
+        <i class="fa fa-angle-left arrow-icon-size"></i>
+      </button>
+
+      <button NguCarouselNext class="arrow-right">
+        <i class="fa fa-angle-right arrow-icon-size"></i>
+      </button>
+    </ngu-carousel>
+    <div *ngIf="sliderImages?.length > 0">
+      <button type="button" class="btn update-button" (click)="onUserProfileImage()">Add/Modify Banner Images</button>
+    </div>
+  </div>
+    <ng-template #loading>
+      <div class="no-img-slider">
+        <div class=" text-center margin-auto add-link-btn">
+          <a (click)="onUserProfileImage()" class="product-service-action text-center margin-auto" href=""
+            onclick="return false">
+            <button mat-fab color="primary"><i class="fa fa-plus text-white"></i></button><br>
+            <br>
+            <h5>Add Banner Images</h5>
+          </a>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+</div>

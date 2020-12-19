@@ -1,0 +1,106 @@
+<div class="line-ht">
+  <i class="material-icons close-icon" (click)="close()">close</i>
+
+  <div *ngIf="buyCredits && creditCosting">
+
+    <div class="text-blue f-20 text-center">
+      {{creditCosting.typeDisplayName}}
+    </div>
+
+    <div class="row no-margin mt-3">
+      <div class="col-md-5">
+        <form>
+          <span>Enter Credits <span *ngIf="imageStorage === data.creditType" class="text-bold">in MB</span></span><br>
+          <button mat-icon-button class="btn" (click)="minus()">
+            <i class="material-icons">remove_circle_outline</i>
+          </button>
+
+          <mat-form-field class="input-field">
+            <input matInput [formControl]="credits" maxlength="4">
+            <mat-error *ngIf="credits.hasError('pattern') || credits.hasError('min') || credits.hasError('required')">
+              Invalid Credits
+            </mat-error>
+          </mat-form-field>
+
+          <button mat-icon-button class="btn" (click)="add()">
+            <i class="material-icons">add_circle_outline</i>
+          </button>
+          <br>
+          <span>{{creditCosting.unitCost | DecimalPrice}} per Credit</span>
+        </form>
+      </div>
+      <div class="col-md-7">
+        <table class="table table-borderless table-sm">
+          <thead>
+            <tr>
+              <th class="text-grey">Price Details</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-dark-grey">Price for (x{{creditCosting.credits}})</td>
+              <td>{{creditCosting.basePrice | DecimalPrice}}</td>
+            </tr>
+            <tr>
+              <td class="text-dark-grey">GST</td>
+              <td>{{creditCosting.addedGST | DecimalPrice}}</td>
+            </tr>
+            <tr class="border-top">
+              <td class="text-dark-grey">Total Amount</td>
+              <td class="text-green">{{creditCosting.totalPrice | DecimalPrice}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="text-red f-14 text-center" *ngIf="amountExceeded">
+      Amount limit exceeded. Max Rs. 5 Lakhs allowed
+    </div>
+
+    <div class="text-center" *ngIf="showBuyButton;else disabled">
+      <button type="button" [disabled]="credits.invalid || amountExceeded" class="btn btn-primary block" (click)="buy()">
+        Proceed to Pay {{creditCosting.totalPrice | DecimalPrice}}
+      </button>
+    </div>
+
+    <ng-template #disabled>
+      <div class="text-center">
+        <button disabled type="button" class="btn btn-default block-disabled">
+          <mat-spinner class="spinner" strokeWidth="4" [diameter]="15">
+          </mat-spinner> processing
+        </button>
+      </div>
+    </ng-template>
+
+  </div>
+
+</div>
+
+<div class="text-center" *ngIf="success">
+  <img alt="Check" src="../../../../assets/action/check.gif" height="200" weight="00">
+  <p class="success-msg text-green">
+    Payment Successful
+  </p>
+  <div class="credit-added">
+    <span class="text-bold"> + {{creditCosting.credits}}
+      <span *ngIf="imageStorage === data">MB</span>
+    </span> credit added to
+    {{creditCosting.typeDisplayName}}
+  </div>
+  <button mat-stroked-button class="buy-now-btn text-blue" (click)="ok()">
+    Ok
+  </button>
+</div>
+
+<div class="text-center text-red p-5" *ngIf="error">
+  <h6>Something went wrong....Please Try Again Later!!</h6>
+</div>
+
+<div *ngIf="showSpinner" class="text-center">
+  <mat-spinner strokeWidth="5" [diameter]="50"></mat-spinner>
+  <br>
+  <span class="f-18">Your transaction is processing..</span>
+  <br>
+  <span class="f-14">do not press "back" or "refresh" button</span>
+</div>

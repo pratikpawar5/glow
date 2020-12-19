@@ -1,0 +1,84 @@
+.marginT10{
+    margin-top: 10px;
+}
+mat-card{
+    margin: 5px;
+    border-radius: 0;
+    padding:10px;
+}
+.category-name{
+    padding: 5px 10px 0 0;
+}
+
+@media(min-width:1392px){
+    .ribbon1 {
+        top: -35.1px;
+        right: -30px;
+    }
+}
+@media(max-width:1391px){
+    .ribbon1 {
+        top: -25px;
+        right: -21px;
+    }
+}
+.nav-tabs {
+    border-bottom: none; 
+}
+.nav-tabs li{
+    padding-bottom: 5px;
+    margin-right: 20px;
+}
+li.active{
+    border-bottom: 3px solid #3374b6;
+}
+li div, li div:hover{
+    text-decoration: none;
+    color: #000
+}
+li.active div{
+    color: #3374b6;
+    font-weight: bold;
+}
+@media(max-width:453px){
+    .ribbon1 {
+        top: -21.1px;
+        right: -15px;
+    }
+}
+@media(min-width:1392px){
+    .item{
+        padding: 20px;
+    }
+}
+@media(max-width:767px){
+    .item{
+        padding: 5px;
+    }
+    .mat-card{
+        margin: 2px;
+        padding: 5px;
+    }
+    .ribbon1 {
+        top: -10px;
+        right: -10px;
+    }
+}
+@media(max-width:477px){
+    .item{
+        padding: 0px;
+    }
+    .mat-card{
+        margin: 5px;
+        padding: 5px;
+    }
+}
+@media(max-width:369px){
+    .item{
+        padding: 0px;
+    }
+    .mat-card{
+        margin: 2px;
+        padding: 3px;
+    }
+}

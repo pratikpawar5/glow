@@ -1,0 +1,27 @@
+<ul class="breadcrumb">
+  <li>
+    <a href [routerLink]="['/']">Home</a>
+  </li>
+  <li>
+    <a href [routerLink]="['/services']">Services</a>
+  </li>
+  <li *ngIf="service.active && (service.serviceState === 'APPROVED')">
+    <a href [routerLink]="['/','services',service.subCategory.serviceCategory.urlName]"
+      [queryParams]="{c:service.subCategory.serviceCategory.categoryUuid }">
+      {{service.subCategory.serviceCategory.categoryName}}
+    </a>
+  </li>
+  <li *ngIf="service.active && (service.serviceState === 'APPROVED')">
+    <a href [routerLink]="['/','services',service.subCategory.serviceCategory.urlName,service.subCategory.urlName]"
+      [queryParams]="{c:service.subCategory.subCategoryUuid }">
+      {{service.subCategory.subCategoryName}}
+    </a>
+  </li>
+  <li class="truncate">
+    {{service.serviceName}}
+  </li>
+</ul>
+<div class="share-link" (click)="onClickShare()">
+  <i class="fa fa-share-alt" aria-hidden="true"></i>
+  Share
+</div>
