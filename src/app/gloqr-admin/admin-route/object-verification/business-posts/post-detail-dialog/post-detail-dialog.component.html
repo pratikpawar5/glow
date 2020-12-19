@@ -1,0 +1,125 @@
+<i class="material-icons close-icon" (click)="close()">close</i>
+
+<div class="container-fluid">
+    <div class="certificate-wrap">
+        <h3>Business Post: </h3>
+        <div class="col-md-12 mb-3" *ngIf="data">
+            <div class="row sub-title-wrap mb-2">
+                <p class="col-2">
+                    <span class="sub-title">
+                        Description:
+                    </span>
+                </p>
+                <p class="col-10 sub-titile-content">
+                    {{data.description}}
+                </p>
+            </div>
+        </div>
+
+        <div class="row sub-title-wrap mb-3">
+            <div class="col-md-2">
+                <span class="titile">Images: </span>
+            </div>
+            <!-- <div class="col-md-3" *ngFor="let image of data.files">
+                <div class="product-images border">
+                    <div>
+                        <img [src]="contentServer + image.fileLocation" class="product-img-div">
+                    </div>
+                </div>
+                <br>
+            </div> -->
+        </div>
+
+        <div class="table table-striped f-12">
+            <table class="table">
+                <thead>
+                    <tr class="text-center">
+                        <th>#</th>
+                        <th>Original Image</th>
+                        <th>320*320 <span style="color:#ff0000">(100kb)</span></th>
+                        <th>150*150 <span style="color:#ff0000">(50kb)</span></th>
+                    </tr>
+                </thead>
+                <tbody *ngFor="let image of data.files;let i=index">
+                    <tr class="text-center">
+                        <td>
+                            {{i+1}}
+                        </td>
+                        <td>
+                            <img alt="Post" [src]="contentServer + image.fileLocation" class="fileLocationOne">
+                        </td>
+                        <td>
+                            <div *ngIf="image.fileLocationOne;else locationOne">
+                                <img alt="Post" [src]="contentServer + image.fileLocationOne" class="fileLocationOne">
+                                <div class="text-center" style="margin-top: 10px">
+                                    <button type="button" mat-icon-button matTooltip="delete"
+                                        (click)="deleteImage(i,imageLocationOne)">
+                                        <i class="material-icons">close</i>
+                                    </button>
+                                </div>
+                            </div>
+                            <ng-template #locationOne>
+                                <input accept=".png,.jpeg,.jpg" onclick="value = null"
+                                    style="display: none;outline: none" type="file"
+                                    (change)="onFileChangedOne($event,i,imageLocationOne)" #fileInput>
+                                <button type="button" mat-raised-button class="global-btn"
+                                    (click)="fileInput.click()">Upload</button>
+                            </ng-template>
+                        </td>
+                        <td>
+                            <div *ngIf="image.fileLocationTwo;else locationTwo">
+                                <img alt="Post" [src]="contentServer + image.fileLocationTwo" class="fileLocationTwo">
+                                <div class="text-center" style="margin-top: 10px">
+                                    <button type="button" mat-icon-button matTooltip="delete"
+                                        (click)="deleteImage(i,imageLocationTwo)">
+                                        <i class="material-icons">close</i>
+                                    </button>
+                                </div>
+                            </div>
+                            <ng-template #locationTwo>
+                                <input accept=".png,.jpeg,.jpg" onclick="value = null"
+                                    style="display: none;outline: none" type="file"
+                                    (change)="onFileChangedOne($event,i,imageLocationTwo)" #fileInput>
+                                <button type="button" mat-raised-button class="global-btn"
+                                    (click)="fileInput.click()">Upload</button>
+                            </ng-template>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="mb-2 feedback">
+            <mat-form-field appearance="outline">
+                <mat-label>Feedback</mat-label>
+                <textarea #input matInput [formControl]="feedbackMessage"
+                    [ngModel]="data.frontFeedBackMessage"></textarea>
+                <mat-hint align="end">{{input.value?.length || 0}}/500</mat-hint>
+            </mat-form-field>
+        </div>
+
+        <div class="row action-button mb-2">
+            <div class="b">
+                <span *ngIf="data.isApprove">
+                    <span class="text-bold">Current State: Already Approved</span>
+                </span>
+                <span *ngIf="data.isReject">
+                    <span class="text-bold">Current State: Already Rejected</span>
+                </span>
+            </div>
+            <div class="approve-button b" *ngIf="saveImages;else save">
+                <button type="submit" class="btn btn-success" (click)="onApprove()">Add to Approval</button>
+            </div>
+            <ng-template #save>
+                <div class="b">
+                    <button mat-raised-button class="global-btn" (click)="onClickSave()">
+                        Save
+                    </button>
+                </div>
+            </ng-template>
+            <div class="reject-button b">
+                <button type="button" class="btn btn-danger" (click)="onReject()">Add to Rejection</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,9 @@
+<mat-card>
+    <div *ngIf="isNormalUser">
+        <span class="text-bold">MY CART ({{sentCount}})</span>
+        <mat-divider></mat-divider>
+    </div>
+
+    <app-user-cart-items></app-user-cart-items>
+
+</mat-card>

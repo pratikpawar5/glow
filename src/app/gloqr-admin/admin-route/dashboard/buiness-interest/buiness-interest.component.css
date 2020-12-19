@@ -1,0 +1,52 @@
+@import'../../../../css/cart-stages.css';
+.table{
+    margin-top: 20px;
+}
+
+::ng-deep .mat-tab-label {
+    min-width: 220px !important;
+}
+.cart-active
+{
+  color: #0073b6
+}
+.journey
+{
+    background-color: #b8b8b8;
+    border: 1px solid #b8b8b8;
+    height: 120px;
+    padding: 40px;
+}
+.job-container
+{
+  width: 60%;
+  margin: 0 auto;
+  padding: 20px;
+  background: #f9f4c9;
+}
+.heading
+{
+    color:#7d7d7d
+}
+tr
+{
+    text-align: center;
+
+}
+.table thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #748ea9;
+}
+.table-bordered {
+    border: 2px solid #748ea9;
+}
+.table-bordered td, .table-bordered th {
+    border: 1px solid #748ea9;
+}
+
+.status-block
+{
+    margin-top: 20px;
+}
+  
+        

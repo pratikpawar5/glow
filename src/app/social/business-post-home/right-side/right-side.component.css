@@ -1,0 +1,50 @@
+@import'../../../css/action-button.css';
+.circle-invitation-card
+{
+    padding: 10px;
+    line-height: 15px;
+    border-bottom: 1px solid #f1f1f1;
+}
+.mat-card{
+    padding: 0;
+}
+.logo-image
+{
+    height: 50px;
+    border-radius: 50%;
+    object-fit: contain;
+    width: 50px;
+}
+.sme-name
+{
+    font-size: 15px;
+    color: #0073b6;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+a{
+    text-decoration: none;
+}
+.sme-address
+{
+    font-size: 12px;
+    color: #666666;
+}
+.invite
+{
+    color: #3f51b5;
+    font-size: 12px;
+    padding: 5px;
+}
+.c
+{
+    margin-right: 8px;
+}
+.view-all
+{
+    font-size: 12px;
+    color: #0073b6;
+    float:right;
+    margin-top: 4px;
+}

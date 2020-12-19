@@ -1,0 +1,128 @@
+@import '../../../css/dropdown.css';
+
+.navbar{
+    height: 40px;
+    padding: 0;
+}
+.navbar-nav{
+    flex-direction: row;
+}
+.dropdown{
+    position: unset;
+}
+.dropdown-content {
+    width: 90%;
+    left: 5%;
+    background-color: rgb(245, 245, 245);
+    z-index: 4;
+    box-shadow: none;
+    border: 1px solid #eaeaea;
+    border-top: 0;
+}
+.dropdown-content .category-title a{
+    color: #1b5790;
+    font-weight: bold;
+    background-color: transparent;
+    padding: 5px 0;
+}
+.dropdown-content .sub-categories a{
+    font-size: 12px;
+    padding: 0 0 3px 0;
+    color: #808080;
+    font-weight: normal
+}
+ul{
+    width: 100%;
+    justify-content: space-evenly;
+}
+.menu-header a{
+    color: #4b4b4b;
+    cursor: pointer;
+    background-color: transparent;
+    font-weight: bold;
+    font-size: 14px;
+}
+.menu-header a:hover{
+    color: #1b5790;
+    cursor: pointer;
+    background-color: transparent;
+}
+.column {
+    float: left;
+    width: 20%;
+    padding: 10px;
+    background-color: rgb(245, 245, 245);
+    overflow: hidden;
+    overflow-y: auto;
+}
+.menu-content{
+    background-color: #F5F5F5;
+    overflow: hidden;
+    height: 400px;
+    padding: 10px;
+}
+.list-column{
+    width: 80%;
+    overflow-y: auto;
+    height: 400px;
+}
+.category-block{
+    width: 20%;
+    padding-left: 10px;
+}
+.image-column{
+    width: 20%;
+}
+.menu-bar-img{
+    height: auto;
+    width: 100%;
+}
+.nav-item:hover .fa-angle-down{
+    transform: rotate(180deg);
+}
+.borderRight{
+    border-right: 1px solid #e3e3e3;
+}
+
+@media(max-width:800px){
+    .category-block{
+        width: 25%;
+    }
+    .column{
+        width: 25%;
+    }
+    .image-column{
+        display: none;
+    }
+    .list-column{
+        width: 100%;
+    }
+}
+@media(max-width:550px){
+    .category-block{
+        width: 33%;
+    }
+    .list-column{
+        width: 100%;
+    }
+    .column{
+        width: 33%;
+    }
+    .image-column{
+        display: none;
+    }
+}
+@media(max-width:550px){
+    .category-block{
+        width: 50%;
+    }
+    .image-column{
+        display: none;
+    }
+    .list-column{
+        width: 100%;
+    }
+    .column{
+        width: 50%;
+    }
+}

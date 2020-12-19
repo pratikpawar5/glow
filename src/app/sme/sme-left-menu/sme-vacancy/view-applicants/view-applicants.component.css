@@ -1,0 +1,48 @@
+/*Job Applicants CSS*/
+.avatar {
+    vertical-align: middle;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }
+  .name
+  {
+      color: #000000;
+      font-size: 14px;
+      font-weight: bold;
+      word-break: break-word;
+  }
+  .designation
+  {
+      color: #000000;
+      word-break: break-word;
+      font-size: 12px;
+  }
+  .material-icons {
+    font-size: 15px;
+    color: #2a5e9e;
+  }
+  .info
+  {
+    padding: 0px 0px 0px 7px;
+    color: #000000;
+  }
+  .qualification-course
+  {
+    padding: 0px 0px 0px 22px;
+    color: #000000;
+  }
+  .resume
+  {
+    padding: 0px 0px 0px 7px;
+    color: #41a3e4;
+  }
+  .icons a:hover
+  {
+    color: #000000;
+  }
+  .short-listed-icon
+  {
+    height: 50px;
+    width: 100px;
+  }

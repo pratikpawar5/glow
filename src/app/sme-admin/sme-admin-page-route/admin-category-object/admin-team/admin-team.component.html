@@ -1,0 +1,124 @@
+<div class="sme-admin-table">
+    <mat-card class="card">
+        <h4> Management Team Publish Setting</h4>
+        <div class="radio-button">
+            <input type="radio" name="optradio" checked (click)="onActive()" class="titile">&nbsp;
+            Active Team&nbsp;
+            <input type="radio" name="optradio" (click)="onInActive()" class="titile">&nbsp;
+            De-Active Team
+        </div>
+
+        <div class="table table-striped table-responsive" *ngIf="smeManagementTeam">
+            <table class="table">
+                <thead>
+                    <tr class="text-center">
+                        <th>#</th>
+                        <th>Full Name</th>
+                        <th>Designation</th>
+                        <th>Experience</th>
+                        <th>Created Date</th>
+                        <th>Modified Date</th>
+                        <th>gloqr Status</th>
+                        <th>User Status</th>
+                        <th *ngIf="edit">Edit</th>
+                        <th *ngIf="delete">Delete</th>
+                        <th>FeedBack Message</th>
+                    </tr>
+                </thead>
+
+                <tbody *ngFor="let team of smeManagementTeam;let i=index">
+                    <tr class="text-center">
+                        <td>
+                            <div class="checkbox">
+                                <input type="checkbox" (click)="onclickCheckbox(team.teamUuid,!team.active)">
+                            </div>
+                        </td>
+                        <td>{{team.fullName}}</td>
+                        <td>{{team.designation}}</td>
+                        <td>{{team.experience}}</td>
+                        <td>{{team.creationDate | date:'medium'}}</td>
+                        <td>{{team.lastModifiedDate | date:'medium'}}</td>
+                        <td>{{team.itemState}}</td>
+                        <td *ngIf="team.active">Activated</td>
+                        <td *ngIf="!team.active">Deactivated</td>
+                        <td *ngIf="edit"> <a href onclick="return false" class="pull-right text-right">
+                                <i class="material-icons edit-button" matTooltip="Edit"
+                                    routerLink="/my-sme/{{sUuid}}/update-management-team"
+                                    [queryParams]="{ t:team.teamUuid}" matTooltipPosition="left">
+                                    create
+                                </i>
+                            </a></td>
+                        <td *ngIf="delete">
+                            <i class="material-icons" matTooltip="Remove" (click)="onDelete(team,i)"
+                                matTooltipPosition="right" style="color: rgb(175, 45, 45);cursor: pointer;">
+                                delete
+                            </i>
+                        </td>
+                        <td>{{team.feedbackMessage}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="buttons" *ngIf="smeManagementTeam">
+            <div class="row">
+
+                <div class="col-md-3 mb-1">
+                    <button type="button" class="btn btn-outline-dark">
+                        Total Selected : {{selectedTeamSize}}
+                    </button>
+                </div>
+                <div class="col-md-3 mb-1">
+                    <a href="" onclick="return false" (click)="addNewTeamClick()">
+                        <button type="button" class="btn btn-success">Add New Team</button>
+                    </a>
+                </div>
+                <div class="col-md-3 mb-1">
+                    <a href="" onclick="return false" (click)="viewAllTeamClick()">
+                        <button type="button" class="btn btn-warning">View all Team</button>
+                    </a>
+                </div>
+                <div class="col-md-3 mb-1" *ngIf="publishTeamButton;else Deactivated">
+                    <div *ngIf="showButton;else disabled">
+                        <button mat-raised-button class="global-btn" (click)="onClickDeactive()"
+                            [disabled]="disableDeactiveButton">
+                            Deactivate
+                            Team
+                        </button>
+                    </div>
+                    <ng-template #disabled>
+                        <div class="text-center">
+                            <button disabled type="button" class="btn btn-default ">
+                                <mat-spinner class="spinner" strokeWidth="4" [diameter]="15">
+                                </mat-spinner> Saving...please wait
+                            </button>
+                        </div>
+                    </ng-template>
+                </div>
+                <ng-template #Deactivated>
+                    <div *ngIf="showButton;else disabled1">
+                        <button mat-raised-button class="global-btn" (click)="onClickPublish()"
+                            [disabled]="disablePublishButton">
+                            Publish
+                            On gloqr
+                        </button>
+                    </div>
+                    <ng-template #disabled1>
+                        <div class="text-center">
+                            <button disabled type="button" class="btn btn-default ">
+                                <mat-spinner class="spinner" strokeWidth="4" [diameter]="15">
+                                </mat-spinner> Saving...please wait
+                            </button>
+                        </div>
+                    </ng-template>
+                </ng-template>
+            </div>
+        </div>
+        <div *ngIf="showSpinner" class="spinner">
+            <mat-spinner strokeWidth="5" [diameter]="50"></mat-spinner>
+        </div>
+        <div *ngIf="notFound">
+            <img alt="Not Found" class="not-found-image" src="../../../../assets/not-found/no-data-found.png">
+        </div>
+    </mat-card>
+</div>

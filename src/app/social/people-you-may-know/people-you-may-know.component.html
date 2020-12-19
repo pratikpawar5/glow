@@ -1,0 +1,54 @@
+<div infinite-scroll [infiniteScrollDistance]="scrollDistance" [infiniteScrollUpDistance]="scrollUpDistance"
+  [infiniteScrollThrottle]="throttle" [scrollWindow]="true" (scrolled)="onScrollDown()">
+  <app-people-you-may-know-bread-crumbs></app-people-you-may-know-bread-crumbs>
+  <div class="container-fluid">
+    <div class="sme-vendor-wrap no-Lpadding">
+      <h6 class="sme-filter-title no-Lpadding circle-title">Who to Circle Invite</h6>
+      <div class="row my-circle-people-you-know">
+        <mat-card class="custom-mat-card" *ngFor="let platformSMEs of suggestions; let i = index;">
+          <i class="material-icons close-icon" (click)="close(platformSMEs,i)">close</i>
+          <br>
+          <div class="top-listed-sme-clients">
+            <div class="product-item top-listed-SME">
+              <div class="img-wrp">
+                <a href="/sme/{{platformSMEs.sUuid}}" target="_blank">
+                  <img mat-card-md-image [src]="contentServer + platformSMEs.logoImage" alt="sme-logo"
+                    onError="this.src='../assets/not-found/no_image.png';" alt="sme-logo">
+                </a>
+              </div>
+
+              <div class="content">
+                <a href="/sme/{{platformSMEs.sUuid}}" target="_blank" class="sme-name"
+                  matTooltip="{{platformSMEs.smeName}}">
+                  {{platformSMEs.smeName | smeNamePipe}}
+                </a>
+                <br>
+                <div *ngIf="platformSMEs.mutualConnectionCount;else noMutual" class="sme-name"
+                  (click)="onOpenDialog(platformSMEs.mutualConnections,platformSMEs.smeName)">
+                  {{platformSMEs.mutualConnectionCount}} Mutual Connections
+                </div>
+                <ng-template #noMutual>
+                  <div style="padding: 10px;"></div>
+                </ng-template>
+                <a *ngIf="platformSMEs.smeAddress" class="sme-address"
+                  matTooltip="{{platformSMEs.smeAddress.locality}}">
+                  {{platformSMEs.smeAddress.locality | smeAddressPipe}}, {{platformSMEs.smeAddress.city}}
+                </a>
+              </div>
+              <div>
+                <button mat-flat-button [disabled]="platformSMEs.sUuid===isDisableId"
+                  (click)="onSendRequest(platformSMEs,i)"><i class="fa fa-link"></i>&nbsp; Circle Invite</button>
+              </div>
+            </div>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+    <div *ngIf="showSpinner" class="spinner">
+      <mat-spinner strokeWidth="5" [diameter]="50"></mat-spinner>
+    </div>
+
+    <div *ngIf="notFound">
+      <img alt="Not Found" class="not-found-image" src="../../../../assets/not-found/no-data-found.png">
+    </div>
+  </div>

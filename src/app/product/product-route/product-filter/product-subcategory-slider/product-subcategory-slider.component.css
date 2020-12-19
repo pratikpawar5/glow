@@ -1,0 +1,10 @@
+@import '../../../../css/home-sliders/home-slider.css';
+
+.mat-card-lg-image{
+    height: 100px;
+    width: 100px;
+}
+.item {
+    flex: 0 0 14% !important;
+    width: 33.333333333333336% !important;
+}

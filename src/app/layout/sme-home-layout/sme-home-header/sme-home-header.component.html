@@ -1,0 +1,118 @@
+<nav class="navbar navbar-expand-lg bg-white fixed-top">
+
+  <a class="navbar-brand" routerLink="/my-sme/{{sUuid}}/home">
+    <img alt="Gloqr" [src]="contentServer + smes.logoImage" onError="this.src='../assets/not-found/no_image.png';"
+      (click)="scrolltoTop()" class="home-logo">
+  </a>
+
+  <div class="sme-name">
+    {{smes.smeName}}
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
+    aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+    <i class="fa fa-bars"></i>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" (click)="openVideoPopUp()" target="_blank">
+          <i class="fa fa-video-camera " aria-hidden="true"></i>
+          Help
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/cart/received">
+          <span *ngIf="cartCount;else default">
+            <i class="fa fa-shopping-cart nav-custom-icon" matBadge="{{cartCount}}" matBadgeSize="medium"
+              matBadgeColor="warn">
+            </i>&nbsp;
+          </span>
+          <ng-template #default>
+            <i class="fa fa-shopping-cart nav-custom-icon">
+            </i>
+          </ng-template> Cart
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="dropdown nav-link">
+          <span *ngIf="pendingCount;else default1">
+            <i class="fa fa-users nav-custom-icon" matBadge="{{pendingCount}}" matBadgeSize="medium"
+              matBadgeColor="warn">
+            </i>&nbsp;
+          </span>
+          <ng-template #default1>
+            <i class="fa fa-users nav-custom-icon">
+            </i>
+          </ng-template>
+          <span>
+            Business Social <i class="fa fa-angle-down"></i>
+          </span>
+          <div class="dropdown-content">
+            <a class="dropdown-item" routerLink="/social/{{sUuid}}/my-connection-home">
+              <span class="link-title"> My Business Circle ({{myconnectionCount}}) </span>
+            </a>
+            <a routerLink="/social/{{sUuid}}/people-you-may-know" class="dropdown-item">
+              <span class="link-title"> Build Business Circle </span>
+            </a>
+            <a class="dropdown-item" routerLink="/social/{{sUuid}}/pending-request-home">
+              <span class="link-title"> Circle Invites Received ({{pendingCount}}) </span>
+            </a>
+            <a class="dropdown-item" routerLink="/social/{{sUuid}}/sent-request-home">
+              <span class="link-title"> Circle Invites Sent ({{sentCount}})</span>
+            </a>
+            <a class="dropdown-item" routerLink="/social/{{sUuid}}">
+              <span class="link-title"> Write a Business Post </span>
+            </a>
+          </div>
+        </a>
+      </li>
+
+      <span *ngIf="profileImage; else intialLetter">
+        <img alt="Profile" [src]="contentServer+profileImage" class="avatar"
+          onError="this.src='../assets/logo/noimage.png'">
+      </span>
+      <ng-template #intialLetter>
+        <ngx-avatar name="{{userName}}" size="32" class="my-avatar"></ngx-avatar>
+      </ng-template>
+      <li class="nav-item">
+        <a class="dropdown nav-link">
+          <span>{{userName}} <i class="fa fa-angle-down"></i>
+          </span>
+          <div class="dropdown-content">
+            <a routerLink="/account/{{uuid}}" class="dropdown-item">
+              <span class="link-title"> User Profile </span>
+            </a>
+            <a routerLink="/my-sme/{{sUuid}}/profile" class="dropdown-item">
+              SME Profile
+            </a>
+            <a routerLink="/my-sme/{{sUuid}}/admin/products" class="dropdown-item">
+              Admin Page
+            </a>
+            <a routerLink="/my-sme/{{sUuid}}/business-credits" class="dropdown-item">
+              Business Credits
+            </a>
+            <a routerLink="/pricing" class="dropdown-item">
+              Package Upgrade
+            </a>
+            <a class="nav-link" class="dropdown-item" (click)="logout()">
+              Logout
+            </a>
+
+          </div>
+        </a>
+      </li>
+
+      <a routerLink="/">
+        <img alt="Gloqr" src="../../../../assets/logo/logo.png" (click)="scrolltoTop()" class="home-logo">
+      </a>
+    </ul>
+  </div>
+
+</nav>
+<div class="margin">
+
+</div>

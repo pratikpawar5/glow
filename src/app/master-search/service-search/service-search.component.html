@@ -1,0 +1,22 @@
+<div>
+  <div class="row no-margin" *ngIf="filterResult">
+    <div class="col-md-2 padding margin">
+      <mat-card>
+        <app-common-filter [filter]="filterResult.filter"></app-common-filter>
+      </mat-card>
+    </div>
+
+    <div class="col-md-10 padding margin">
+      <mat-card>
+        <app-service-result [services]="filterResult.response"></app-service-result>
+      </mat-card>
+    </div>
+  </div>
+</div>
+<div *ngIf="showSpinner" class="spinner">
+  <mat-spinner strokeWidth="5" [diameter]="50"></mat-spinner>
+</div>
+
+<div *ngIf="notFound">
+  <img class="not-found-image" src="../../../assets/not-found/no-data.png">
+</div>

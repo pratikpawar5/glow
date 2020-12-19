@@ -1,0 +1,34 @@
+<ngu-carousel [inputs]="carousel" [dataSource]="category.subCategories">
+  <div class="item text-center" *nguCarouselDef="let subCategory;">
+
+    <div class="item-img">
+      <a [routerLink]="['/','products',category.urlName,subCategory.urlName]"
+        [queryParams]="{c:subCategory.subCategoryUuid}" matTooltip="{{subCategory.subCategoryName}}">
+        <img mat-card-lg-image [src]="contentServer + subCategory.fileLocation" alt="Image"
+          onError="this.src='../assets/not-found/no_image.png';">
+      </a>
+    </div>
+
+    <div class="item-name">
+      <a [routerLink]="['/','products',category.urlName,subCategory.urlName]"
+        [queryParams]="{c:subCategory.subCategoryUuid}" matTooltip="{{subCategory.subCategoryName}}"
+        matTooltip="{{subCategory.subCategoryName}}">
+        {{subCategory.subCategoryName | namePipe}}
+      </a>
+    </div>
+
+    <div class="item-sme-name">
+      <a>({{subCategory.productsCount}} {{subCategory.productsCount > 1?'Products':'Product'}})</a>
+    </div>
+
+  </div>
+
+  <button NguCarouselPrev class="arrow-left">
+    <i class="fa fa-angle-left arrow-icon-size"></i>
+  </button>
+
+  <button NguCarouselNext class="arrow-right">
+    <i class="fa fa-angle-right arrow-icon-size"></i>
+  </button>
+
+</ngu-carousel>

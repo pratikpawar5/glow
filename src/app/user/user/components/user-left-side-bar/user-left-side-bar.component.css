@@ -1,0 +1,16 @@
+.marginT15{
+  margin-top: 15px;
+}
+.profile-img{
+  height: 200px;
+  border-radius: 50%;
+}
+.change-btn{
+  border: 0;
+  background-color: transparent;
+  padding: 10px 15px 5px 15px;
+  color: #4d4d4d;
+}
+.change-btn:hover{
+  color: #3374b6;
+}

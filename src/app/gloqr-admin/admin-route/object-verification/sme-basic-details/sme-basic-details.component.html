@@ -1,0 +1,329 @@
+<div class="container-fluid">
+  <div>
+    <form [formGroup]="smeCategoryForm">
+      <mat-card *ngIf="smeData" class="basic-detail-card">
+        <h4 class="mb-3">{{smeData.smeName}} Details :</h4>
+        <div class="row mb-3">
+          <div class="col-md-2">
+            <span class="title">SME Category: </span>
+          </div>
+          <div class="col-md-4" *ngIf="!smeData.active">
+            <mat-form-field appearance="outline">
+              <mat-label>Select Category</mat-label>
+              <mat-select formControlName="categoryName" required>
+                <mat-option>--</mat-option>
+                <mat-option *ngFor="let obj of smeCategories" [value]="obj.categoryUuid">
+                  {{obj.categoryName}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="smeCategoryForm.get('categoryName').hasError('required')">
+                Please select Category
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-md-4" *ngIf="smeData.active">
+            <span class="sub-content"> {{smeData.smeCategory.categoryName}}</span>
+          </div>
+          <div class="col-md-4">
+            <div class="text-bold" *ngIf="userSelectedCategory && !smeData.otherCategory.categoryUuid">
+              <span class="sub-content"> Category Name: {{smeData.otherCategory.otherCategoryName}}</span>
+            </div>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-md-4">
+            <span class="title">SMEName: </span>
+            <span class="sub-content">{{smeData.smeName}}</span>
+          </div>
+          <div class="col-md-4">
+            <span class="title">SMEType: </span>
+            <span class="sub-content">{{smeData.smeType}}</span>
+          </div>
+          <div class="col-md-4">
+            <span class="title">GST-IN: </span>
+            <span class="sub-content">{{smeData.gstin}}</span>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-md-4" *ngIf="smeData.numberOfEmployees">
+            <span class="title"> Number Of Employees: </span>
+            <span class="sub-content">{{smeData.numberOfEmployees}}</span>
+          </div>
+
+          <div class="col-md-4" *ngIf="smeData.registeredType">
+            <span class="title">Registered AS: </span>
+            <span class="sub-content">{{smeData.registeredType}}</span>
+          </div>
+          <div class="col-md-4" *ngIf="smeData.creationDate">
+            <span class="title">Creation Date: </span>
+            <span class="sub-content">{{smeData.creationDate | date}}</span>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-md-4">
+            <span class="title"> Contact Email: </span>
+            <span class="sub-content">{{smeData.contactEmail}}</span>
+          </div>
+          <div class="col-md-4">
+            <span class="title"> Contact Person: </span>
+            <span class="sub-content">{{smeData.contactPerson}}</span>
+          </div>
+          <div class="col-md-4">
+            <span class="title">Contact Phone: </span>
+            <span class="sub-content">{{smeData.contactPhone}}</span>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-md-4">
+            <span class="title">Year of Establishment: </span>
+            <span class="sub-content">{{smeData.yearOfEstablishment |date}}</span>
+          </div>
+          <div class="col-md-4" *ngIf="smeData.turnOver">
+            <span class="title">Turn Over: </span>
+            <span class="sub-content">{{smeData.turnOver.totalTurnOver}} <span>/ {{smeData.turnOver.turnOverUnit}}
+              </span>
+            </span>
+          </div>
+
+        </div>
+
+        <div class="address-section"> <span> Address:-</span> </div>
+        <div class="row mb-3">
+          <div class="col-md-12">
+            <span class="title">Street: </span>
+            <span class="sub-content">{{smeData.smeAddress.street}}</span>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-md-4">
+            <span class="title">City: </span>
+            <span class="sub-content">{{smeData.smeAddress.city}}</span>
+          </div>
+          <div class="col-md-4">
+            <span class="title">Locality: </span>
+            <span class="sub-content">{{smeData.smeAddress.locality}}
+            </span>
+          </div>
+          <div class="col-md-4">
+            <span class="title">Pin-Code: </span>
+            <span class="sub-content">{{smeData.smeAddress.pincode}}</span>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-md-4">
+            <span class="title">State: </span>
+            <span class="sub-content">{{smeData.smeAddress.state}}</span>
+          </div>
+          <div class="col-md-4">
+            <span class="title">Country: </span>
+            <span class="sub-content">{{smeData.smeAddress.country}}</span>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-md-4">
+            <span class="title">Latitude: </span>
+            <span class="sub-content">{{smeData.latitude}}</span>
+          </div>
+          <div class="col-md-4">
+            <span class="title">Longitude: </span>
+            <span class="sub-content">{{smeData.longitude}}</span>
+          </div>
+        </div>
+
+        <div class="address-section"> <span> Other Details:-</span></div>
+        <div class="row mb-3">
+          <div class="col-md-8">
+            <span class="title">One Line Statement: </span>
+            <span class="sub-content">{{smeData.oneLineStatement}}</span>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-md-12">
+            <span class="title">Description: </span>
+            <span class="sub-content"> {{smeData.companyDescription}}</span>
+          </div>
+        </div>
+        <div class="row mb-7">
+          <div class="table table-striped f-12">
+            <table class="table">
+              <thead>
+                <tr class="text-center">
+                  <th>Original Image</th>
+                  <th>150*150 <span style="color:#ff0000">(50kb)</span></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="text-center">
+                  <td>
+                    <img alt="SME" mat-card-lg-image [src]="contentServer + smeData.logoImage" class="logo"
+                      onError="this.src='../../../../../../assets/not-found/PleaseUploadYourCompanyLogo.png';">
+                  </td>
+                  <td>
+                    <div *ngIf="tempLogo">
+                      <img mat-card-sm-image [src]="tempLogo" class="logo">
+                      <div class="text-center" style="margin-top: 10px">
+                        <button type="button" mat-icon-button matTooltip="delete" (click)="deleteLogoImage('new')">
+                          <i class="material-icons">close</i>
+                        </button>
+                      </div>
+                    </div>
+                    <div *ngIf="existingImage">
+                      <img alt="SME" mat-card-lg-image [src]="contentServer + existingImage" class="logo">
+                      <div class="text-center" style="margin-top: 10px">
+                        <button type="button" mat-icon-button matTooltip="delete" (click)="deleteLogoImage('existing')">
+                          <i class="material-icons">close</i>
+                        </button>
+                      </div>
+                    </div>
+                    <div *ngIf="!(existingImage || tempLogo)">
+                      <input accept=".png,.jpeg,.jpg" onclick="value = null" style="display: none;outline: none"
+                        type="file" (change)="onFileLogoChange($event)" #fileInput>
+                      <button type="button" mat-raised-button class="global-btn"
+                        (click)="fileInput.click()">Upload</button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="approve-button b" *ngIf="saveLogo">
+          <div *ngIf="showButton;else disabled">
+            <button type="submit" class="btn btn-success" (click)="onSaveLogoImage()">Save Logo</button>
+          </div>
+          <ng-template #disabled>
+            <div class="text-center">
+              <button disabled type="button" class="btn btn-default ">
+                <mat-spinner class="spinner" strokeWidth="4" [diameter]="15">
+                </mat-spinner> Saving...please wait
+              </button>
+            </div>
+          </ng-template>
+        </div>
+        <br>
+        <div>
+          <div class="row mb-3">
+            <div class="title col-md-2">Slider Images: </div>
+          </div>
+          <div class="table table-striped f-12">
+            <table class="table">
+              <thead>
+                <tr class="text-center">
+                  <th>#</th>
+                  <th>Original Image</th>
+                  <!-- <th>1100*300 <span style="color:#ff0000">(100kb)</span></th> -->
+                  <th>1100*300 <span style="color:#ff0000">(50kb)</span></th>
+                </tr>
+              </thead>
+
+              <tbody *ngFor="let image of sliderImages;let i=index">
+                <tr class="text-center">
+                  <td>
+                    {{i+1}}
+                  </td>
+                  <td>
+                    <img alt="SME" [src]="contentServer + image.imageLocation" class="slider-images"
+                      onError="this.src='../../../../../../assets/not-found/PleaseUploadYourCompanyLogo.png';">
+                  </td>
+                  <td>
+                    <div *ngIf="image.imageLocationOne">
+                      <img alt="SME" [src]="contentServer + image.imageLocationOne" class="imageLocationOne">
+                      <div class="text-center" style="margin-top: 10px">
+                        <button type="button" mat-icon-button matTooltip="delete"
+                          (click)="deleteImage(i,imageLocationOne)">
+                          <i class="material-icons">close</i>
+                        </button>
+                      </div>
+                    </div>
+                    <div *ngIf="!(image.imageLocationOne)">
+                      <input accept=".png,.jpeg,.jpg" onclick="value = null" style="display: none;outline: none"
+                        type="file" (change)="onFileChanged($event,i,imageLocationOne)" #fileInput>
+                      <button type="button" mat-raised-button class="global-btn"
+                        (click)="fileInput.click()">Upload</button>
+                    </div>
+                  </td>
+                  <!-- <td>
+                        <div *ngIf="image.imageLocationTwo">
+                          <img alt="SME" [src]="contentServer + image.imageLocationTwo" class="imageLocationTwo">
+                          <div class="text-center" style="margin-top: 10px">
+                            <button type="button" mat-icon-button matTooltip="delete"
+                              (click)="deleteImage(i,imageLocationTwo)">
+                              <i class="material-icons">close</i>
+                            </button>
+                          </div>
+                        </div>
+                        <div *ngIf="!(image.imageLocationTwo)">
+                          <input accept=".png,.jpeg,.jpg" onclick="value = null" style="display: none;outline: none"
+                            type="file" (change)="onFileChanged($event,i,imageLocationTwo)" #fileInput3>
+                          <button type="button" mat-raised-button class="global-btn"
+                            (click)="fileInput3.click()">Upload</button>
+                        </div>
+                      </td> -->
+                </tr>
+              </tbody>
+
+              <tbody *ngIf="sliderImages?.length === 0">
+                <tr class="text-center">
+                  <td>
+
+                  </td>
+                  <td>
+                    <img src="../../../../../assets/not-found/PleaseUploadYourSliderLogo (1)-min.png"
+                      class="slider-images">
+                  </td>
+                  <td>
+                    <input accept=".png,.jpeg,.jpg" onclick="value = null" type="file"
+                      (change)="onFileChanged($event,0,imageLocationOne)" #fileInput1
+                      style="display: none;outline: none">
+                    <button type="button" mat-raised-button class="global-btn"
+                      (click)="fileInput1.click()">Upload</button>
+                  </td>
+                  <!-- <td>
+                        <input accept=".png,.jpeg,.jpg" onclick="value = null" style="display: none;outline: none"
+                          type="file" (change)="onFileChanged($event,1,imageLocationTwo)" #fileInput2>
+                        <button type="button" mat-raised-button class="global-btn"
+                          (click)="fileInput2.click()">Upload</button>
+                      </td> -->
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="approve-button b" *ngIf="saveBanner">
+            <div *ngIf="showButton;else disabledBanner">
+              <button type="submit" class="btn btn-success" (click)="onSaveSliderImage()">Save Slider</button>
+            </div>
+            <ng-template #disabledBanner>
+              <div class="text-center">
+                <button disabled type="button" class="btn btn-default ">
+                  <mat-spinner class="spinner" strokeWidth="4" [diameter]="15">
+                  </mat-spinner> Saving...please wait
+                </button>
+              </div>
+            </ng-template>
+          </div>
+        </div>
+        <div class="row mb-3 approve-button">
+          <div *ngIf="!smeData.verified;else Verified">
+            <button type="submit" class="btn btn-success" (click)="verifySME(smeData.sUuid)">
+              Verify SME
+            </button>
+          </div>
+        </div>
+        <ng-template #Verified>
+          <button type="button" [disabled]="disableFlag" class="btn btn-light">Verified</button>
+        </ng-template>
+      </mat-card>
+    </form>
+  </div>
+  <div *ngIf="showSpinner" class="spinner">
+    <mat-spinner strokeWidth="5" [diameter]="50"></mat-spinner>
+  </div>
+  <div *ngIf="notFound">
+    <img alt="Not Found" class="not-found-image" src="../../../../assets/not-found/no-data-found.png">
+  </div>
+</div>

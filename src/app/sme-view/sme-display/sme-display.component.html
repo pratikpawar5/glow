@@ -1,0 +1,6 @@
+<div>
+  <app-sme-image-slider [sliderImages]="sliderImages"></app-sme-image-slider>
+</div>
+<div *ngIf="smes && viewModeItemsCount">
+  <app-sme-web-home-content [smes]="smes" [viewModeItemsCount]="viewModeItemsCount"></app-sme-web-home-content>
+</div>

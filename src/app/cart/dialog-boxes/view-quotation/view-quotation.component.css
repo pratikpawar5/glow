@@ -1,0 +1,12 @@
+@import '../../../css/material-dialog.css';
+
+.custom{
+    border: 1px solid #bfbfbf;
+    padding: 5px;
+    color: #225282;
+}
+.message-format{
+    text-align: justify;
+    padding: 0 10px 0 10px;
+    word-break: break-word;
+}

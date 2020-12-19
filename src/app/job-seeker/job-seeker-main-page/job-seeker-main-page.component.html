@@ -1,0 +1,23 @@
+<app-main-header></app-main-header>
+<!-- job seeker landing page following are the left menu display -->
+<div class="row">
+  <div class="col-md-2">
+    <div class="text-center sticky-div f-12">
+      <ul id="grouplist" class="list-group">
+        <li class="list-group-item" routerLinkActive="active">
+          <a routerLink="/job-seeker/{{uuid}}/job-seeker-display">
+            <span class="category-name">Job Seeker Profile</span>
+          </a>
+        </li>
+        <li class="list-group-item" routerLinkActive="active">
+          <a routerLink="/job-seeker/{{uuid}}/applied-jobs">
+            <span class="category-name">Applied Jobs</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="col-md-10">
+    <router-outlet></router-outlet>
+  </div>
+</div>

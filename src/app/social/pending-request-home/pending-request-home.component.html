@@ -1,0 +1,58 @@
+<app-pending-request-bread-crumbs></app-pending-request-bread-crumbs>
+<div class="container-fluid">
+  <div class="sme-vendor-wrap no-Lpadding">
+    <h6 class="sme-filter-title no-Lpadding circle-title">Circle Invites Received</h6>
+    <div class="row my-circle-people-you-know">
+      <mat-card class="custom-mat-card" *ngFor="let rreq of ReceivedReq; let i = index;">
+        <br>
+        <div class="top-listed-sme-clients">
+          <div class="product-item top-listed-SME">
+            <div class="img-wrp">
+              <a href="/sme/{{rreq.sUuid}}" target="_blank">
+                <img mat-card-md-image [src]="contentServer + rreq.logoImage" alt="sme-logo"
+                  onError="this.src='../assets/not-found/no_image.png';" alt="sme-logo">
+              </a>
+            </div>
+
+            <div class="content">
+              <a href="/sme/{{rreq.sUuid}}" target="_blank" class="sme-name" matTooltip="{{rreq.smeName}}">
+                {{rreq.smeName | smeNamePipe}}
+              </a>
+              <br>
+              <div *ngIf="rreq.mutualConnectionCount;else noMutual" class="sme-name" (click)="onOpenDialog(rreq.mutualConnections,rreq.smeName)">
+                {{rreq.mutualConnectionCount}} Mutual Connections
+              </div>
+              <ng-template #noMutual>
+                <div style="padding: 10px;"></div>
+              </ng-template>
+              <a *ngIf="rreq.smeAddress" class="sme-address" matTooltip="{{rreq.smeAddress.locality}}">
+                {{rreq.smeAddress.locality | smeAddressPipe}}, {{rreq.smeAddress.city}}
+              </a>
+              <span class="creation-date">{{rreq.creationDate | dateAgo}}</span>
+            </div>
+
+            <div class="action-button">
+              <button mat-stroked-button (click)="onConfirmRequest(rreq,i)" [disabled]="rreq.sUuid===isDisableId" class="accept-button">Accept</button>
+              <button mat-stroked-button (click)="onDeleteRequest(rreq,i)" class="reject-button">Reject</button>
+
+            </div>
+          </div>
+        </div>
+      </mat-card>
+      <mat-card class="custom-see-more-card text-center" *ngIf="seeMoreCount > 0">
+        <div class="see-more-main" (click)="onSeeMore()">
+          <span class="see-more mb-3">See More</span>
+          <br>
+          <span class="see-more">{{seeMoreCount}}</span>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+  <div *ngIf="showSpinner" class="spinner">
+    <mat-spinner strokeWidth="5" [diameter]="50"></mat-spinner>
+  </div>
+
+  <div *ngIf="notFound">
+    <img alt="Not Found" class="not-found-image" src="../../../../assets/not-found/no-data-found.png">
+  </div>
+</div>

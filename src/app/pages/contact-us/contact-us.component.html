@@ -1,0 +1,151 @@
+<div class="container mb-5 mt-5 bg-white p-4">
+  <p class="header text-center">
+    Contact Us
+  </p>
+  <div class="row">
+    <div class="col-md-6">
+
+      <p class="whatsapp-enquiry">
+        Enquire on
+        <a href="https://api.whatsapp.com/send?phone=918530097227&amp;text=I am interested in knowing more about gloqr. Please call me back or share some information here."
+          target="_blank">
+          <i class="fa fa-whatsapp" aria-hidden="true" style="color: #25d366"></i>
+        </a>
+      </p>
+
+      <p class="title">
+        Contact Details:
+      </p>
+
+      <div class="indent">
+        <!-- <p>
+          Name : Ms. Priya
+        </p> -->
+        <p>
+          Mobile No : +91 8530097557
+        </p>
+        <p>
+          Email : <a href="mailto:pune@gloqr.com">pune@gloqr.com</a>
+        </p>
+      </div>
+
+
+      <p class="title">
+        Available in Cities:
+      </p>
+
+      <div class="">
+        <ul>
+          <li>
+            Pune
+          </li>
+          <li>
+            Mumbai
+          </li>
+          <li>
+            Delhi and NCR
+          </li>
+          <li>
+            Ahmedabad
+          </li>
+          <li>
+            Chennai
+          </li>
+          <li>
+            Bengaluru
+          </li>
+          <li>
+            Hyderabad
+          </li>
+        </ul>
+      </div>
+      <!-- <p class="title">
+        Mumbai :
+      </p>
+
+      <div class="indent">
+        <p>
+          Name : Ms. Priya
+        </p>
+        <p>
+          Mobile No : +91 8530097227
+        </p>
+        <p>
+          Email : <a href="mailto:mumbai@gloqr.com">mumbai@gloqr.com</a>
+        </p>
+      </div> -->
+
+
+
+    </div>
+
+    <div class="col-md-6">
+      <p class="text-bold">If any quries, please fill the form</p>
+      <form [formGroup]="form">
+        <div>
+          <mat-form-field appearance="outline">
+            <mat-label>Name</mat-label>
+            <input matInput formControlName="name" required>
+            <mat-error *ngIf="form.get('name').hasError('required')">
+              Name is required
+            </mat-error>
+            <mat-error *ngIf="form.get('name').hasError('maxlength')">
+              Name should be less than 100 characters
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div>
+          <mat-form-field appearance="outline">
+            <mat-label>Contact Number</mat-label>
+            <input matInput formControlName="mobile" required maxlength="11">
+            <mat-error *ngIf="form.get('mobile').hasError('required')">
+              Contact Number is required
+            </mat-error>
+            <mat-error *ngIf="form.get('mobile').hasError('maxlength') || form.get('mobile').hasError('pattern')">
+              Enter correct contact number
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div>
+          <mat-form-field appearance="outline">
+            <mat-label>Email (optional)</mat-label>
+            <input matInput formControlName="email">
+            <mat-error *ngIf="form.get('email').hasError('email')">
+              Enter correct Email
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div>
+          <mat-form-field appearance="outline">
+            <mat-label>Message</mat-label>
+            <textarea matInput formControlName="message" required></textarea>
+            <mat-hint align="end">{{form.get('message').value?.length || 0}}/1000</mat-hint>
+            <mat-error *ngIf="form.get('message').hasError('required')">
+              Message is required
+            </mat-error>
+            <mat-error *ngIf="form.get('message').hasError('maxlength')">
+              Message should be less than 1000 characters
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div *ngIf="showSpinner">
+          submitting your information ...
+        </div>
+
+        <div *ngIf="showButton">
+          <button type="submit" class="btn default-btn" (click)="send()">Submit</button>
+        </div>
+
+        <div *ngIf="showMsg">
+          {{showMsg}}
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+</div>

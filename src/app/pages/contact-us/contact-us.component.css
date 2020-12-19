@@ -1,0 +1,42 @@
+.header{
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+.indent{
+    text-indent: 20px;
+}
+.title{
+    font-weight: bold;
+    margin: 10px 0;
+    color: #181818
+}
+.sub-title{
+    font-weight: bold;
+    font-size: 11px;
+    color: rgb(90, 90, 90)
+}
+mat-form-field{
+    width: 100%;
+}
+.whatsapp-enquiry
+{
+    font-size: 23px;
+    font-weight: bold;
+}
+.mat-stroked-button
+{
+    width: 30%;
+    font-weight: bold;
+}
+.default-btn:hover{
+    color: #ffffff;
+    background-color: #ed2301;
+}
+.mat-stroked-button
+{
+    cursor: none;
+}
+li{
+    color: #3f51b5;
+}

@@ -1,0 +1,56 @@
+<div class="sme-admin-table">
+  <mat-card class="card">
+    <h4> Business Post Setting</h4>
+    <div class="table table-striped table-responsive" *ngIf="businessposts">
+      <table class="table">
+        <thead>
+          <tr class="text-center">
+            <th>Description</th>
+            <th>gloqr Status</th>
+            <th>User Status</th>
+            <th>Created Date</th>
+            <th>Edit</th>
+            <th>Delete</th>
+            <th>Feedback Message</th>
+
+          </tr>
+        </thead>
+        <tbody *ngFor="let post of businessposts;let i=index">
+          <tr class="text-center">
+            <td><span class="desc">
+                {{post.description}}
+              </span>
+            </td>
+            <td>{{post.postState}}</td>
+            <td *ngIf="post.active">Activated</td>
+            <td *ngIf="!post.active">Deactivated</td>
+            <td matTooltip="{{post.creationDate}}">{{post.creationDate | date:'medium'}}</td>
+            <td>
+              <a href onclick="return false" class="pull-right text-right" *ngIf="post.postState == 'REJECTED'">
+                <i class="material-icons edit-button" matTooltip="Edit"
+                  routerLink="/my-sme/{{sUuid}}/update-business-post" [queryParams]="{ post:post.businessPostId}"
+                  matTooltipPosition="left">
+                  create
+                </i>
+              </a>
+            </td>
+            <td>
+              <i class="material-icons" matTooltip="Remove" (click)="onDelete(post,i)" matTooltipPosition="right"
+                style="color: rgb(175, 45, 45);cursor: pointer;">
+                delete
+              </i>
+            </td>
+            <td>{{post.feedbackMessage}}</td>
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div *ngIf="showSpinner" class="spinner">
+      <mat-spinner strokeWidth="5" [diameter]="50"></mat-spinner>
+    </div>
+    <div *ngIf="notFound">
+      <img alt="Not Found" class="not-found-image" src="../../../../assets/not-found/no-data-found.png">
+    </div>
+  </mat-card>
+</div>

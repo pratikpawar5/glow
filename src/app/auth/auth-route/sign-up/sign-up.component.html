@@ -1,0 +1,57 @@
+<div class="container">
+  <h5>Create your account</h5>
+  <form [formGroup]="signupForm">
+    <div class="mt-3 mb-2">
+      <mat-form-field>
+        <input matInput placeholder="Full Name" formControlName="userFullName" autocomplete="off" required
+          maxlength="60">
+        <mat-error *ngIf="signupForm.get('userFullName').hasError('required')">
+          Full name is required
+        </mat-error>
+        <mat-error *ngIf="signupForm.get('userFullName').hasError('pattern')">
+          Only Alphabets are allowed
+        </mat-error>
+        <mat-error
+          *ngIf="signupForm.get('userFullName').hasError('inValid')">
+          Please enter a valid Full Name
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="mb-2">
+      <mat-form-field>
+        <input matInput placeholder="Email/Mobile Number" formControlName="username" autocomplete="off" required>
+        <mat-error *ngIf="signupForm.get('username').hasError('required')">
+          Email/Mobile Number is required
+        </mat-error>
+        <mat-error *ngIf="signupForm.get('username').hasError('invalidUsername')">
+          Please enter a valid Email/Mobile Number
+        </mat-error>
+        <mat-error *ngIf="signupForm.get('username').hasError('emailExist')">
+          Email Already Exist
+        </mat-error>
+        <mat-error *ngIf="signupForm.get('username').hasError('mobileExist')">
+          Mobile Number Already Exist
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <!-- <div class="mb-2">
+      <mat-form-field>
+        <input type="password" matInput placeholder="Password" formControlName="userPassword" required>
+        <mat-error *ngIf="signupForm.get('userPassword').hasError('required')">
+          Password is required
+        </mat-error>
+        <mat-error
+          *ngIf="signupForm.get('userPassword').hasError('minlength') || signupForm.get('userPassword').hasError('maxlength')">
+          Password must be between 5 to 20 characters
+        </mat-error>
+      </mat-form-field>
+    </div> -->
+
+    <div class="mt-3">
+      <button mat-raised-button class="continue-btn" (click)="generateOTP()">Continue</button>
+    </div>
+  </form>
+
+</div>

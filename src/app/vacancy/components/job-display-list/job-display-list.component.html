@@ -1,0 +1,115 @@
+<div infinite-scroll [infiniteScrollDistance]="scrollDistance" [infiniteScrollUpDistance]="scrollUpDistance"
+    [infiniteScrollThrottle]="throttle" [scrollWindow]="true" (scrolled)="onScrollDown()">
+    <div class="sme-vacancy-wrap">
+        <div class="container-fluid" *ngIf="smeJobsDisplay">
+            <div class="sme-count-result">
+                <div>
+                    <div class="text-bold f-16 mb-1">
+                        Showing {{totalJobsCount | CustomPrice}} results
+                    </div>
+                </div>
+            </div>
+            <div *ngFor="let smeJob of smeJobsDisplay;let i=index;">
+                <mat-card class="vacancy-card border">
+
+                    <div class="vacancy-title">
+                        <a href="/vacancies/{{smeJob.vacancyUrl}}/v/{{smeJob.vacancyUuid}}" target="_blank">
+                            <span class="vacancy-title-text" *ngIf="smeJob.vacancyTitle">{{smeJob.vacancyTitle}}</span>
+                        </a>
+                        <span class="count text-grey">{{i+1}}/{{totalJobsCount}}</span>
+
+                        <span class="posted-by margin" *ngIf="smeJob.creationDate">Posted
+                            {{smeJob.creationDate | dateAgo}}</span>
+                    </div>
+
+                    <div class="sme-name" *ngIf="smeJob.smeInfo.smeName">
+                        <a href="/sme/{{smeJob.smeInfo.sUuid}}" target="_blank">
+                            <span class="sme-name-text">{{smeJob.smeInfo.smeName}}</span>
+                        </a>
+                    </div>
+                    <hr>
+                    <div class="mb-1">
+                        <div class="row">
+                            <div class="col-md-3" *ngIf="smeJob.noOfVacancy">
+                                <div class="icons">Number of Vacancy :
+                                    <span size="2" class="jobDesc">{{smeJob.noOfVacancy}}</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6" *ngIf="smeJob.jobRole">
+                                <div class="icons">Job Role :
+                                    <span size="2" class="jobDesc">{{smeJob.jobRole}} </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-1">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="icons" *ngIf="smeJob.minExp || smeJob.maxExp">Experience :
+                                    <span size="2" class="jobDesc">{{smeJob.minExp}}</span>
+                                    <span class="jobDesc"> to </span>
+                                    <span size="2" class="jobDesc">{{smeJob.maxExp}}</span>
+                                    <span class="jobDesc"> yrs </span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="icons" *ngIf="smeJob.minSalary || smeJob.maxSalary">Salary :
+                                    <span size="2" class="jobDesc">{{smeJob.minSalary | IndianCurrency}} </span>
+                                    <span class="jobDesc"> to </span>
+                                    <span size="2" class="jobDesc">{{smeJob.maxSalary | IndianCurrency}} /Monthly</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-1">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="icons">Total Applicants :
+                                        <span size="2" class="jobDesc">{{smeJob.totalApplicants}}</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="icons">
+                                        Location :
+                                        <span size="2" class="jobDesc">{{smeJob.locations}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-5">
+                        <div class="icons">Short Description :
+                            <span class="jobDesc">{{smeJob.shortDescription}}</span>
+                        </div>
+                    </div>
+                    <div>
+                        <div *ngIf="loginSmeUuid === smeJob.smeInfo.sUuid;else check">
+
+                        </div>
+                        <ng-template #check>
+                            <div *ngIf="!smeJob.applied;" class="b">
+                                <button mat-raised-button class="apply"
+                                    (click)="jobApply(i,smeJob)">
+                                    Apply
+                                </button>
+                            </div>
+                            <div *ngIf="smeJob.applied">
+                                <button mat-raised-button class="applied">
+                                    Applied
+                                </button>
+                            </div>
+                        </ng-template>
+                        <a href="/vacancies/{{smeJob.vacancyUrl}}/v/{{smeJob.vacancyUuid}}" target="_blank">
+                            <button mat-stroked-button class="default-btn view-detail">
+                                View Detail
+                            </button>
+                        </a>
+                    </div>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="showSpinner" class="spinner">
+    <mat-spinner strokeWidth="5" [diameter]="50"></mat-spinner>
+</div>

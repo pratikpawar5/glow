@@ -1,0 +1,253 @@
+<div class="container-fluid">
+  <div *ngIf="paymentDetails">
+    <mat-card>
+
+      <div class="f-20">
+        Payment Details
+      </div>
+
+      <div class="mb-3">
+        <span class="text-grey">Current Plan : </span>
+        <span class="text-blue f-18">{{paymentDetails.planDisplayName}}</span>
+      </div>
+
+      <div class="mb-2 text-center">
+        <ul class="nav nav-tabs" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href [ngClass]="{'active':tab==='Offline'}"
+              (click)="changeTab(false)">
+              Offline Payments
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href [ngClass]="{'active':tab==='Online'}" (click)="changeTab(true)">
+              Online Payments
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div *ngIf="tab==='Offline'">
+        <div *ngIf="paymentDetails.offlineDetails?.length > 0;else noRecords">
+          <div class="border" *ngFor="let offline of paymentDetails.offlineDetails;let i=index;">
+
+            <div id="accordion">
+              <div class="card">
+                <div class="card-header" data-toggle="collapse" [attr.data-target]="'#collapse'+i">
+
+                  <div class="row">
+
+                    <div class="col-sm-4 text-grey">
+                      Requested Plan:
+                      <span class="text-black f-18">{{offline.planDisplayName}}</span>
+                    </div>
+
+                    <div class="col-sm-2">
+
+                      <div class="text-green" style="display: inline-flex" *ngIf="offline.verified">
+                        <i class="material-icons f-20">done</i>Verified
+                      </div>
+                      <div class="text-red" style="display: inline-flex" *ngIf="offline.rejected">
+                        <i class="material-icons f-20">close</i>Rejected
+                      </div>
+                      <div class="text-grey" *ngIf="offline.action">
+                        <i class="fa fa-hourglass-end"></i>Verification Pending
+                      </div>
+
+                    </div>
+
+                    <div class="col-sm-5">
+
+                      <div *ngIf="offline.rejectReason" class="text-red">
+                        <span class="text-dark-grey">Reason : </span>
+                        {{offline.rejectReason}}
+                      </div>
+                    </div>
+
+                    <div class="col-sm-1">
+                      <i class="material-icons">
+                        keyboard_arrow_down
+                      </i>
+                    </div>
+
+                  </div>
+                </div>
+
+                <div [id]="'collapse'+i" class="collapse col-margin"
+                  [ngClass]="{'show':paymentDetails.offlineDetails.length === 1}">
+                  <div class="card-body row">
+                    <div class="col-sm-4">
+                      <div>
+                        Payment Mode: {{offline.paymentMode}}
+                      </div>
+                      <div>
+                        Original PlanCost: {{offline.planCost | IndianCurrency}}
+                      </div>
+                      <div>
+                        Transaction Number: {{offline.transactionNumber}}
+                      </div>
+                      <div>
+                        Transaction Date: {{offline.transactionDate | date}}
+                      </div>
+                      <div class="mt-2" *ngIf="offline.action">
+                        <button mat-stroked-button class="text-green" (click)="verify(offline,i)">
+                          Verify
+                        </button>
+                        <span class="ml-3"></span>
+                        <button mat-stroked-button class="text-red" (click)="reject(offline,i)">
+                          Reject
+                        </button>
+                      </div>
+                      <div *ngIf="offline.processing">
+                        <b>Processing..Please wait...</b>
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                      <div>
+                        Created Date: {{offline.createdAt | date}}
+                      </div>
+                      <div>
+                        User Amount: {{offline.amount | IndianCurrency}}
+                      </div>
+                      <div>
+                        Bank Name: {{offline.bankName}}
+                      </div>
+                      <div>
+                        Message: {{offline.message}}
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                      <div>
+                        User for:
+                        <span *ngIf="offline.paymentUtility === 'UPGRADE_PACKAGE';else newPlan">
+                          Upgrading plan
+                        </span>
+                        <ng-template #newPlan>
+                          First Plan Purchase
+                        </ng-template>
+                      </div>
+                      <div *ngIf="offline.fileLocation">
+                        Attachment: <a href="{{contentServer + offline.fileLocation}}" target="_blank">Download</a>
+                      </div>
+                      <div>
+                        Branch Name: {{offline.branchName}}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="tab==='Online'">
+        <div *ngIf="paymentDetails.onlineDetails?.length > 0;else noRecords">
+          <div class="border" *ngFor="let online of paymentDetails.onlineDetails;let i=index;">
+
+            <div id="accordion">
+              <div class="card">
+                <div class="card-header" data-toggle="collapse" [attr.data-target]="'#collapse'+i">
+
+                  <div class="row">
+
+                    <div class="col-sm-4 text-grey">
+                      Plan:
+                      <span class="text-black f-18">{{online.planDisplayName}}</span>
+                    </div>
+
+                    <div class="col-sm-7">
+
+                      <div class="text-green" style="display: inline-flex" *ngIf="online.paymentStatus === 'CAPTURED'">
+                        <i class="material-icons f-20">done</i>CAPTURED
+                      </div>
+                      <div class="text-grey" style="display: inline-flex" *ngIf="online.paymentStatus === 'ATTEMPTED'">
+                        ATTEMPTED
+                      </div>
+
+                    </div>
+
+                    <div class="col-sm-1">
+                      <i class="material-icons">
+                        keyboard_arrow_down
+                      </i>
+                    </div>
+
+                  </div>
+                </div>
+
+                <div [id]="'collapse'+i" class="collapse col-margin">
+                  <div class="card-body row">
+                    <div class="col-sm-4">
+                      <div>
+                        Transaction ID: {{online.transactionID}}
+                      </div>
+                      <div>
+                        Payment Method: {{online.paymentDetails.paymentMethod}}
+                      </div>
+                      <div>
+                        Bank: {{online.paymentDetails.bank}}
+                      </div>
+                      <div>
+                        User Mobile: {{online.paymentDetails.userMobile}}
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                      <div>
+                        OrderID: {{online.orderID}}
+                      </div>
+                      <div>
+                        Created Date: {{online.createdAt | date}}
+                      </div>
+                      <div>
+                        VPA: {{online.paymentDetails.vpa}}
+                      </div>
+                      <div>
+                        User Email: {{online.paymentDetails.userEmail}}
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                      <div>
+                        Payment ID: {{online.paymentID}}
+                      </div>
+                      <div>
+                        User for:
+                        <span *ngIf="online.paymentUtility === 'UPGRADE_PACKAGE';else newPlan">
+                          Upgrading plan
+                        </span>
+                        <ng-template #newPlan>
+                          First Plan Purchase
+                        </ng-template>
+                      </div>
+                      <div>
+                        Wallet: {{online.paymentDetails.wallet}}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <ng-template #noRecords>
+        <div class="p-5 text-center">
+          No records found for <b>{{tab}}</b> payments
+        </div>
+      </ng-template>
+
+    </mat-card>
+
+  </div>
+
+  <div *ngIf="showSpinner" class="text-center">
+    <mat-spinner strokeWidth="5" [diameter]="50"></mat-spinner>
+  </div>
+
+  <div *ngIf="notFound">
+    <img alt="Not Found" class="not-found-image" src="../../../../assets/not-found/no-data-found.png">
+  </div>
+</div>

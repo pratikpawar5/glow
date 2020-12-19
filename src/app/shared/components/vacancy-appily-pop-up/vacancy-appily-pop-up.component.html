@@ -1,0 +1,86 @@
+<i class="material-icons close-icon close" (click)="close()">close</i>
+<div class="vacancy-applied-type fluid-container">
+  <div class="radio-button mb-3">
+    <h4>Job Custom Apply</h4>
+    <form [formGroup]="customJobSeekerForm">
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>Full Name</mat-label>
+          <input matInput formControlName="fullName" placeholder="Contact Person Full Name" required autocomplete="off">
+          <mat-error *ngIf="customJobSeekerForm.get('fullName').hasError('required')">
+            Full Name is
+            required
+          </mat-error>
+          <mat-error *ngIf="customJobSeekerForm.get('fullName').hasError('pattern')">
+            Only alphabets are allowed
+          </mat-error>
+          <mat-error *ngIf="customJobSeekerForm.get('fullName').hasError('maxlength')">
+            Only 50 characters are allowed
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Mobile Number</mat-label>
+          <input matInput formControlName="contactNumber" maxlength="10" minlength="10" placeholder="Contact Person Mobile Number"
+            required autocomplete="off">
+          <mat-error *ngIf="customJobSeekerForm.get('contactNumber').hasError('required')">
+            Mobile Number is
+            required
+          </mat-error>
+          <mat-error *ngIf="customJobSeekerForm.get('contactNumber').hasError('pattern')">
+            Only numbers are allowed
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Email Id</mat-label>
+          <input matInput formControlName="emailId" placeholder="Contact Person Email ID" autocomplete="off">
+          <mat-error *ngIf="customJobSeekerForm.get('emailId').hasError('pattern')">
+            Please enter a
+            valid email address
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="mb-3">
+        <input accept=".pdf,.docx,.doc" onclick="value = null" style="display: none" type="file"
+          (change)="onFileChanged($event)" #fileInput>
+        <button [disabled]=selectedImages [ngClass]="{'not-allowed':selectedImages}" type="button"
+          class="btn btn-secondary f-12" (click)="fileInput.click()">
+          Upload
+          Resume</button>
+        <span class="fileName">{{fileName}}</span>
+        <a href matTooltip="remove" onclick="return false" (click)="onRemoveFile()" *ngIf="fileName">
+          <i class="material-icons remove">
+            clear
+          </i> </a>
+      </div>
+      <div class="resume-types">
+        Supported Formats: doc, docx, pdf upto 1 MB
+      </div>
+      <div class="upload-fail" *ngIf="imageUploadFail">
+        <span>Resume Uploadation Failed..please try again!!</span>
+      </div>
+
+      <div class="upload-fail" *ngIf="imageSizeError">
+        <span>Resume file size should be less than 1 MB</span>
+      </div>
+      <div class="upload-fail" *ngIf="imageTypeError">
+        <span>Please select correct file format...Supported formats are: doc, docx, pdf, upto 1 MB</span>
+      </div>
+
+
+      <div class="action-button">
+        <button mat-stroked-button class="default-btn" (click)="close()">
+          Cancel
+        </button>
+        <button type="submit" mat-raised-button class="global-btn" (click)="submit()">
+          Submit
+        </button>
+      </div>
+    </form>
+  </div>
+
+
+
+</div>

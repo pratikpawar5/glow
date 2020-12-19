@@ -1,0 +1,148 @@
+<div infinite-scroll [infiniteScrollDistance]="scrollDistance" [infiniteScrollUpDistance]="scrollUpDistance"
+  [infiniteScrollThrottle]="throttle" [scrollWindow]="true" (scrolled)="onScrollDown()">
+  <div class="table">
+    <div class="row">
+      <div class="col-md-6">
+        <h4>{{count}} Records found for last {{jobDaysFormControl.value}} days since now</h4>
+      </div>
+      <div class="col-md-3">
+        <mat-form-field>
+          <mat-label>Days</mat-label>
+          <mat-select [formControl]="jobDaysFormControl">
+            <mat-option *ngFor="let day of filterDays" [value]="day.value">
+              {{day.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-md-3">
+        <mat-form-field>
+          <mat-label>Job Applicants</mat-label>
+          <mat-select [formControl]="jobStatusFormControl">
+            <mat-option *ngFor="let job of jobStatusEnum" [value]="job.value">
+              {{job.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <mat-accordion *ngFor="let vacancyApplicant of vacancyApplicantInfo;let i=index">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title class="text-bold" [ngClass]="{
+            'text-blue':vacancyApplicant.customApplicant,
+                    'text-success':vacancyApplicant.applicantStatus === 'SHORTLISTED',
+                    'text-danger':vacancyApplicant.applicantStatus === 'REJECTED',
+                    'text-warning':(vacancyApplicant.applicantStatus === 'PENDING' && !vacancyApplicant.customApplicant)
+                    }">
+            {{i+1}}. {{vacancyApplicant.fullName}} applied for Job
+            {{vacancyApplicant.vacancyTitle}} posted by {{vacancyApplicant.smeUuid}} &nbsp;
+            <span *ngIf="vacancyApplicant.lastModifiedDate;else createdAt">
+              {{vacancyApplicant.lastModifiedDate | date:'dd/MM/yyyy'}}
+            </span>
+            <ng-template #createdAt>
+              {{vacancyApplicant.applyDate | date:'dd/MM/yyyy'}}
+            </ng-template>
+            <span style="margin-left: 10px;" *ngIf="vacancyApplicant.applicantStatus; else pending2">
+              [{{vacancyApplicant.applicantStatus}}] <span *ngIf="vacancyApplicant.customApplicant === true">[Custom
+                Applicant]</span>
+            </span>
+            <ng-template #pending2>
+              [ Pending from Action ]
+            </ng-template>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <ul>
+          <li>
+            <span class="text-bold"> Applicant Full Name:</span>
+            {{vacancyApplicant.fullName}}
+          </li>
+          <li *ngIf="vacancyApplicant.mobileNumber">
+            <span class="text-bold">Applicant Mobile Number:</span>
+            {{vacancyApplicant.mobileNumber}}
+          </li>
+          <li *ngIf="vacancyApplicant.emailId">
+            <span class="text-bold">Applicant Email Id:</span>
+            {{vacancyApplicant.emailId}}
+          </li>
+          <li>
+            <span class="text-bold">Vacancy Title:</span>
+            {{vacancyApplicant.vacancyTitle}}
+          </li>
+          <li>
+            <span class="text-bold"> Apply Date:</span>
+            {{vacancyApplicant.applyDate | date:'dd/MM/yyyy'}}
+          </li>
+          <li>
+            <span class="text-bold"> SME Name:</span>
+            {{vacancyApplicant.smeUuid}}
+          </li>
+          <li>
+            <span class="text-bold">SME Contact Email:</span>
+            {{vacancyApplicant.contactEmail}}
+          </li>
+          <li>
+            <span class="text-bold">SME Contact Number:</span>
+            {{vacancyApplicant.contactMobileNumber}}
+          </li>
+          <li>
+            <div *ngIf="vacancyApplicant.applicantStatus;else pending">
+              <span class="text-bold"> Applicant Status:</span>
+              {{vacancyApplicant.applicantStatus}}
+            </div>
+            <ng-template #pending>
+              <span class="text-bold">Applicant Status:</span> Pending from Action
+            </ng-template>
+          </li>
+        </ul>
+        <div class="job-container" *ngIf="!vacancyApplicant.customApplicant">
+          <div class="order-progress">
+            <ul class="progressbar">
+              <li
+                [ngClass]="{'active':(vacancyApplicant.applicantStatus === 'SHORTLISTED'|| vacancyApplicant.applicantStatus === 'REJECTED'|| vacancyApplicant.applicantStatus === 'PENDING')}">
+                <p>Job Applied</p>
+                <p></p>
+                <div *ngIf="vacancyApplicant.applyDate" class="text-black view-quotation">
+                  {{vacancyApplicant.applyDate | date:'dd/MM/yyyy'}}
+                </div>
+                <div *ngIf="vacancyApplicant.lastModifiedDate;else noLastModifiedDate">
+                  {{vacancyApplicant.diffDays}} days
+                </div>
+                <ng-template #noLastModifiedDate>
+                  <div>
+                    {{vacancyApplicant.applyDate|dateAgo}}
+                  </div>
+                </ng-template>
+              </li>
+
+              <li [ngClass]="{'active':(vacancyApplicant.applicantStatus === 'SHORTLISTED'),
+                        'inactive':(vacancyApplicant.applicantStatus === 'REJECTED')}">
+                <p>
+                  <span *ngIf="vacancyApplicant.applicantStatus === 'SHORTLISTED'">SHORTLISTED</span>
+                  <span *ngIf="vacancyApplicant.applicantStatus === 'REJECTED'">REJECTED</span>
+                  <span *ngIf="vacancyApplicant.applicantStatus === 'PENDING'">PENDING</span>
+
+                </p>
+                <div *ngIf="vacancyApplicant.lastModifiedDate" class="text-black view-quotation">
+                  {{vacancyApplicant.lastModifiedDate | date:'dd/MM/yyyy'}}
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+  <div *ngIf="noDataAvailable">
+    <div class="text-center">
+      <h1>No Data Available</h1>
+    </div>
+  </div>
+  <div *ngIf="noMoreDataAvailable">
+    <div class="text-center">
+      <h1>No More Data Available</h1>
+    </div>
+  </div>
+</div>

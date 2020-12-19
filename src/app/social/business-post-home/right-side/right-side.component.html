@@ -1,0 +1,37 @@
+<div class="circle-invitation-wrap ">
+    <h6>Circle Invite</h6>
+
+    <mat-card>
+        <div class="circle-invitation-card" *ngFor="let suggestion of suggestions; let i=index">
+            <div class="row">
+                <div class="col-sm-3">
+                    <img class="logo-image" [src]="contentServer + suggestion.logoImage"
+                        onError="this.src='../assets/not-found/no_image.png';" alt="sme-logo">
+                </div>
+                <div class="col-sm-9">
+                    <div class="sme-info">
+                        <div class="sme-name">
+                            <a routerLink="/sme/{{suggestion.sUuid}}" class="sme-name" target="_blank"
+                                matTooltip="{{suggestion.smeName}}">
+                                {{suggestion.smeName}}
+                            </a>
+                        </div>
+                        <span class="sme-address">{{suggestion.smeAddress.locality}},
+                            {{suggestion.smeAddress.city}}</span>
+                    </div>
+                    <div>
+                        <button type="button" mat-flat-button [disabled]="suggestion.sUuid===isDisableId"
+                            (click)="onaddConnection(suggestion,i)"><i class="fa fa-link c"></i>Circle Invite</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </mat-card>
+
+    <div *ngIf="suggestions!=null&&suggestions.length>0">
+        <a routerLink="/social/{{sUuid}}/people-you-may-know">
+            <span class="view-all">View all <i class="fa fa-eye c"></i></span>
+        </a>
+    </div>
+
+</div>

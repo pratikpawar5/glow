@@ -1,0 +1,36 @@
+<app-main-header></app-main-header>
+
+<!-- NavBar -->
+
+<app-main-menu-bar></app-main-menu-bar>
+
+<div #top>
+  <div class="row no-margin" *ngIf="smeFilterAndResult">
+    <div class="col-md-2 padding margin">
+      <mat-card>
+        <app-sme-filter-side [filters]="smeFilterAndResult.filters"> </app-sme-filter-side>
+      </mat-card>
+    </div>
+    <div class="col-md-10 padding margin" *ngIf="smeFilterAndResult">
+      <mat-card>
+        <app-sme-filter-bread-crumbs [breadcrumbs]="breadcrumbs"></app-sme-filter-bread-crumbs>
+        <app-sme-list-display [smeFilterAndResult]="smeFilterAndResult" [isSME]="isSME"></app-sme-list-display>
+      </mat-card>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="showSpinner" class="spinner">
+  <mat-spinner strokeWidth="5" [diameter]="50"></mat-spinner>
+</div>
+<div class="back-to-top" [ngClass]="{'show-scrollTop': windowScrolled}">
+  <div>
+    <button class="back-to-top-btn" [ngx-scroll-to]="top">
+      <i class="fa fa-arrow-up">
+      </i>
+    </button>
+  </div>
+</div>
+
+<!-- Footer -->
+<app-main-footer></app-main-footer>

@@ -1,0 +1,44 @@
+@import '../../../css/nav-bar.css';
+@import '../../../css/dropdown.css';
+@import '../../../css/search-bar.css';
+
+.navbar-brand{
+    margin-right: 8%;
+}
+.beta{
+    color: #6e6e6e;
+    font-size: 12px;
+    position: absolute;
+    margin-left: 3px;
+}
+.search-box{
+    box-shadow: 1px 1px 1px 1px #efefef;
+}
+.input-group{
+    height: 35px;
+}
+.btn{
+    border-radius: 0;
+    border:1px solid #dee2e6;
+    font-size: 14px;
+    color: #1b5790;
+    background-color: #fff;
+}
+.btn:focus, .form-control:focus{
+    outline: 0;
+    box-shadow: none;
+}
+.select-dropbtn{
+    border-radius: 3px 0px 0px 3px;
+}
+.searchbtn{
+    border-left: 0;
+    border-radius: 0px 3px 3px 0px;
+}
+.btn:hover{
+    background-color: #f3f3f3;
+}
+.my-avatar /deep/ .avatar-content {
+    font-weight: bold !important;
+    font: 15px/32px Helvetica, Arial, sans-serif !important;
+}

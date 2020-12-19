@@ -1,0 +1,10 @@
+:host ::ng-deep .mat-dialog-container {
+    border-radius: 15px !important;
+}
+
+::ng-deep.cdk-overlay-backdrop.cdk-overlay-backdrop-showing {
+    opacity: 0.8;
+}
+::ng-deep.cdk-overlay-dark-backdrop {
+    background: #000;
+}

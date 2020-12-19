@@ -1,0 +1,34 @@
+@import'../../../../../../app/css/super-admin.css';
+
+.img-div
+{
+    height: 520px !important;
+    width: 100% !important;
+    margin: 10px 5px !important;
+    object-fit: contain;
+    border: 1px solid #ccc;
+}
+.product-specifications-title{
+    padding: 15px 30px 15px 15px;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 1.14;
+    color: #212121;
+    margin-top: 20px;
+}
+.product-specifications{
+    padding: 10px
+}
+.item-specifications{
+    padding: 10px
+}
+.fileLocationOne
+{
+    height: 320px;
+    width: 320px;
+}
+.fileLocationTwo
+{
+    height: 150px;
+    width: 150px;
+}

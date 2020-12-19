@@ -1,0 +1,5 @@
+@import'../../../../../../app/css/material-dialog.css';
+
+mat-form-field{
+  width: 100%;
+}

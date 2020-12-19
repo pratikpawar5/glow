@@ -1,0 +1,52 @@
+<app-sent-request-bread-crumbs></app-sent-request-bread-crumbs>
+<div class="container-fluid">
+  <div class="sme-vendor-wrap no-Lpadding">
+    <h6 class="sme-filter-title no-Lpadding circle-title">Circle Invites Sent</h6>
+    <div class="row my-circle-people-you-know">
+      <mat-card class="custom-mat-card" *ngFor="let sreq of sendReqs; let i = index;">
+        <br>
+        <div class="top-listed-sme-clients">
+          <div class="product-item top-listed-SME">
+            <div class="img-wrp">
+              <a href="/sme/{{sreq.sUuid}}" target="_blank">
+                <img mat-card-md-image [src]="contentServer + sreq.logoImage" alt="sme-logo"
+                  onError="this.src='../assets/not-found/no_image.png';" alt="sme-logo">
+              </a>
+            </div>
+
+            <div class="content">
+              <a href="/sme/{{sreq.sUuid}}" target="_blank" class="sme-name" matTooltip="{{sreq.smeName}}">
+                {{sreq.smeName | smeNamePipe}}
+              </a>
+              <br>
+              <div *ngIf="sreq.mutualConnectionCount;else noMutual" class="sme-name"
+                (click)="onOpenDialog(sreq.mutualConnections,sreq.smeName)">
+                {{sreq.mutualConnectionCount}} Mutual Connections
+              </div>
+              <ng-template #noMutual>
+
+                <div style="padding: 10px;"></div>
+              </ng-template>
+              <a *ngIf="sreq.smeAddress" class="sme-address" matTooltip="{{sreq.smeAddress.locality}}">
+                {{sreq.smeAddress.locality | smeAddressPipe}}, {{sreq.smeAddress.city}}
+              </a>
+
+              <span class="creation-date">{{sreq.creationDate | dateAgo}}</span>
+
+            </div>
+            <div>
+              <button type="button" (click)="cancelSentrequest(sreq,i)" class="btn btn-info btn-sm">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+  <div *ngIf="showSpinner" class="spinner">
+    <mat-spinner strokeWidth="5" [diameter]="50"></mat-spinner>
+  </div>
+
+  <div *ngIf="notFound">
+    <img alt="Not Found" class="not-found-image" src="../../../../assets/not-found/no-data-found.png">
+  </div>
+</div>

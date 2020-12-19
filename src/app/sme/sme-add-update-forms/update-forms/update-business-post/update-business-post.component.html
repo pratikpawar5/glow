@@ -1,0 +1,95 @@
+<div class="sme-update-gallery-form">
+  <div class="sme-object-form">
+    <form [formGroup]="updateBusinessPostForm">
+      <h4>Update Business Post</h4>
+      <mat-card class="card post-update-form">
+        <div class="mb-2">
+          <mat-form-field appearance="outline">
+            <mat-label>Business Post Description</mat-label>
+            <textarea matInput placeholder="BI Post Description" rows="5" #desc formControlName="description"
+              autocomplete="off" spellcheck="true" required></textarea>
+            <mat-hint align="end">{{desc.value?.length || 0}}/2000</mat-hint>
+            <mat-error *ngIf="updateBusinessPostForm.get('description').hasError('required')">
+              Description is required
+            </mat-error>
+            <mat-error *ngIf="updateBusinessPostForm.get('description').hasError('maxlength')">
+              Description should be of
+              2000 characters long
+            </mat-error>
+            <mat-error *ngIf="updateBusinessPostForm.get('description').hasError('minlength')">
+              Description should be of
+              atleast 20 characters
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="select-image">
+          <label>
+            Business Post Image
+          </label>
+          <input accept=".png,.jpeg,.jpg" onclick="value = null" style="display: none" type="file" multiple
+            (change)="onFileChanged($event.target.files)" #fileInput>
+          <button [disabled]="selectedImages?.length === 5" type="button" class="btn btn-secondary"
+            (click)="fileInput.click()">Select
+            File</button>
+          <span *ngIf="imageRequired" style="margin-left: 10px;color: red">Please select atleast 1 Image</span>
+        </div>
+
+        <div class="image-types">
+          Image file size should be less than 300kb. Supported formats are: .jpeg .jpg .png
+        </div>
+
+        <div class="upload-progress" *ngIf="showUploadProgress">
+          <mat-progress-bar mode="determinate" value="{{progressPercent}}"></mat-progress-bar>
+        </div>
+
+        <div class="upload-fail" *ngIf="imageUploadFail">
+          <span>Image Uploadation Failed..please try again!!</span>
+        </div>
+
+        <div class="upload-fail" *ngIf="imageSizeError">
+          <span>Image file size should be less than 300kb</span>
+        </div>
+        <div class="upload-fail" *ngIf="imageTypeError">
+          <span>Please select correct file format...Supported formats are: .jpeg .jpg .png</span>
+        </div>
+        <div class="row image-display">
+          <div *ngFor="let image of uploadedImages;let i=index" class="image-uploaded">
+            <div *ngIf="image;else default">
+              <img mat-card-md-image [src]="contentServer + image.fileLocation" class="border">
+              <div class="text-center" style="margin-top: 10px">
+                <button type="button" mat-icon-button matTooltip="delete"
+                  (click)="deleteImageBusinessPost(i,image.fileLocation)">
+                  <i class="material-icons">close</i>
+                </button>
+              </div>
+            </div>
+            <ng-template #default>
+              <div class="default-image">
+                <img mat-card-md-image src="../../../../../../assets/logo/default.png" class="border">
+              </div>
+            </ng-template>
+          </div>
+        </div>
+
+        <div class="text-center" *ngIf="showButton;else disabled">
+          <div class="">
+            <button type="submit" mat-raised-button class="global-btn" (click)="onUpdateBusinessPost()">
+              Save & Publish
+            </button>
+            <button type="button" (click)="onClickCancel()" class="btn">Cancel</button>
+          </div>
+        </div>
+
+        <ng-template #disabled>
+          <div class="text-center">
+            <button disabled type="button" class="btn btn-default ">
+              <mat-spinner class="spinner" strokeWidth="4" [diameter]="15">
+              </mat-spinner> Saving...please wait
+            </button>
+          </div>
+        </ng-template>
+      </mat-card>
+    </form>
+  </div>
+</div>

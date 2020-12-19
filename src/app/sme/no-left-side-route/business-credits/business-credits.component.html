@@ -1,0 +1,146 @@
+<div class="container business-credits" *ngIf="userPricing">
+
+  <div class="title">
+    <h4>Business Credits</h4>
+  </div>
+  <!-- <div class="upgrade-plan">
+    <button mat-stroked-button class="buy-now-btn text-blue">
+      Upgrade Plan
+    </button>
+  </div> -->
+  <div class="row">
+    <div class="col-md-6">
+      Current Plan :
+
+      <span class="plan-name f-18">{{userPricing.planDisplayName}} </span>
+      <a href routerLink="/pricing" *ngIf="bigPlan != userPricing.planName">(UPGRADE PACKAGE)</a>
+    </div>
+    <div class="col-md-2"></div>
+    <div class="col-md-4">
+      <div *ngIf="userPricing.expirationDate">
+          Plan Expiry :
+          <span class="plan-name f-16">{{userPricing.expirationDate | date:'medium'}}</span>
+      </div>
+      <!-- <div>
+        <a href target="_blank" routerLink="/my-sme/{{userPricing.sUuid}}/business-credits/credit-consumptions" *ngIf="userPricing">
+          view credit consumptions
+        </a>
+      </div>  -->
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="card shadow-lg">
+      <p class="card-header">
+        {{userPricing.listingName}}
+      </p>
+      <p class="card-credits">
+        {{userPricing.listings}}
+        <span class="div-link" (click)="buyMoreCredits(listing,userPricing.listingName)">+Buy more</span>
+      </p>
+      <p class="card-consumed-credits">
+        {{userPricing.initialPricing.listings - userPricing.listings}} consumed out of
+        {{userPricing.initialPricing.listings}}
+      </p>
+      <p class="unit-pricing">
+        (per unit cost {{userPricing.unitCost.listingCost | DecimalPrice}})
+      </p>
+    </div>
+    <div class="card shadow-lg">
+      <p class="card-header">
+        {{userPricing.biReadName}}
+        <!-- <i class="fa fa-question-circle-o text-lrg question-mark" 
+          matTooltip="{{pricing.big.planDetails.biReadCredits/12}} credits per Month"></i> -->
+      </p>
+      <p class="card-credits">
+        {{userPricing.biReadCredits}}
+        <span class="div-link" (click)="buyMoreCredits(biRead,userPricing.biReadName)">+Buy more</span>
+      </p>
+      <p class="card-consumed-credits">
+        {{userPricing.initialPricing.biReadCredits - userPricing.biReadCredits}} consumed out of
+        {{userPricing.initialPricing.biReadCredits}}
+        <i class="material-icons" matTooltip="{{userPricing.monthlyCredit}} credits will be added on {{userPricing.monthlyCreditedDate | date:'mediumDate'}}">
+          info_outline
+        </i>
+      </p>
+      <p class="unit-pricing">
+        (per unit cost {{userPricing.unitCost.biReadCost | DecimalPrice}})
+      </p>
+    </div>
+
+    <div class="card shadow-lg">
+      <p class="card-header">
+        {{userPricing.jobPostName}}
+      </p>
+      <p class="card-credits">
+        {{userPricing.jobPostings}}
+        <span class="div-link" (click)="buyMoreCredits(jobPost,userPricing.jobPostName)">+Buy more</span>
+      </p>
+      <p class="card-consumed-credits">
+        {{userPricing.initialPricing.jobPostings - userPricing.jobPostings}} consumed out of
+        {{userPricing.initialPricing.jobPostings}}
+      </p>
+      <p class="unit-pricing">
+        (per unit cost {{userPricing.unitCost.jobPostCost| DecimalPrice}})
+      </p>
+    </div>
+
+    <div class="card shadow-lg">
+      <p class="card-header">
+        {{userPricing.postName}}
+      </p>
+      <p class="card-credits">
+        {{userPricing.businessPosts}}
+        <span class="div-link" (click)="buyMoreCredits(businessPost,userPricing.postName)">+Buy more</span>
+      </p>
+      <p class="card-consumed-credits">
+        {{userPricing.initialPricing.businessPosts - userPricing.businessPosts}} consumed out of
+        {{userPricing.initialPricing.businessPosts}}
+      </p>
+      <p class="unit-pricing">
+        (per unit cost {{userPricing.unitCost.businessPostCost| DecimalPrice}})
+      </p>
+    </div>
+
+    <div class="card shadow-lg">
+      <p class="card-header">
+        {{userPricing.connectionName}}
+      </p>
+      <p class="card-credits">
+        {{userPricing.connections}}
+        <span class="div-link" (click)="buyMoreCredits(connection,userPricing.connectionName)">+Buy more</span>
+      </p>
+      <!-- <p class="card-consumed-credits">
+          {{userPricing.initialPricing.connections - userPricing.connections}} consumed out of {{userPricing.initialPricing.connections}}
+        </p> -->
+      <p class="unit-pricing">
+        (per unit cost {{userPricing.unitCost.connectionCost | DecimalPrice}})
+      </p>
+    </div>
+
+    <div class="card shadow-lg">
+      <p class="card-header">
+        {{userPricing.storageName}}
+      </p>
+      <p class="card-credits">
+        {{format.formatSizeUnits(userPricing.imageStorageSize)}}
+        <span class="div-link" (click)="buyMoreCredits(imageStorage,userPricing.storageName)">+Buy more</span>
+      </p>
+      <p class="card-consumed-credits">
+        {{format.formatSizeUnits(userPricing.initialPricing.imageStorageSize - userPricing.imageStorageSize)}}
+        consumed out of {{format.formatSizeUnits(userPricing.initialPricing.imageStorageSize)}}
+      </p>
+      <p class="unit-pricing">
+        (per unit cost {{userPricing.unitCost.storageCost| DecimalPrice}})
+      </p>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="showSpinner" class="spinner">
+  <mat-spinner strokeWidth="5" [diameter]="50"></mat-spinner>
+</div>
+
+<div *ngIf="notFound">
+  <img alt="Not Found" class="not-found-image" src="../../../../assets/not-found/no-data-found.png">
+</div>

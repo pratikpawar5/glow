@@ -1,0 +1,4 @@
+@import '../../../css/form.css';
+.mat-form-field{
+    width: auto;
+}

@@ -1,0 +1,113 @@
+<div class="desc-wrap">
+
+  <div class="item-title">
+    {{product.productName}}
+  </div>
+
+  <div class="item-by">
+    By
+    <a href="sme/{{product.sUuid}}" target="_blank">
+      {{product.smeInfo.smeName}},
+      {{product.smeInfo.smeAddress.locality}},
+      {{product.smeInfo.smeAddress.city}}
+    </a>
+  </div>
+
+  <div class="price" *ngIf="product.discount;else originalprice">
+    <span class="item-price">
+      {{product.discountedPrice | IndianCurrency}}
+      <span class="item-price-unit" *ngIf="product.priceUnit">
+        / {{product.priceUnit}}
+      </span>
+    </span>
+    <span class="item-discount">
+      {{product.price | IndianCurrency}}
+    </span>
+    <span class="discount">
+      {{product.discount}}% off
+    </span>
+  </div>
+  <ng-template #originalprice>
+    <div class="item-price">
+      {{product.price | IndianCurrency}}
+      <span class="item-price-unit" *ngIf="product.priceUnit">
+        / {{product.priceUnit}}
+      </span>
+    </div>
+  </ng-template>
+
+  <span class="bi-count" *ngIf="product.biCount">
+    Number of Users Showed Interest: <span>{{product.biCount}}</span>
+  </span>
+
+  <div class="mt-2" *ngIf="sUuid === product.sUuid;else check">
+
+  </div>
+
+  <ng-template #check>
+
+    <div class="row mt-2">
+      <div class="col-md-3">
+        <button *ngIf="product.addedToCart" mat-stroked-button class="added-to-cart ">
+          Added to Cart <i class="material-icons">shopping_cart</i>
+          <span class="cart-arrow-check"><i class="fa fa-check"></i></span>
+        </button>
+        <button *ngIf="!product.addedToCart"  mat-flat-button class="interest-btn" (click)="businessInterest(product.productUuid)">
+          Show Interest <i class="fa fa-eye"></i>
+        </button>
+        <br>
+      </div>
+      <div class="col-md-6" *ngIf="!product.addedToCart">
+        <form>
+          <label>Quantity </label>
+          <button mat-icon-button color="primary" class="btn" (click)="minusQuantity()" [disabled]="disabled">
+            <i class="material-icons">remove_circle_outline</i>
+          </button>
+
+          <mat-form-field class="input-field">
+            <input matInput [formControl]="quantityControl" maxlength="6">
+            <mat-error *ngIf="quantityControl.hasError('pattern') || quantityControl.hasError('required') || quantityControl.hasError('min')">
+              Invalid Quantity
+            </mat-error>
+            <mat-error *ngIf="quantityControl.hasError('minQty')">
+              Min Qty {{product.minOrderQty}}
+            </mat-error>
+          </mat-form-field>
+
+          <button mat-icon-button color="primary" class="btn" (click)="addQuantity()">
+            <i class="material-icons">add_circle_outline</i>
+          </button>
+        </form>
+      </div>
+    </div>
+
+  </ng-template>
+
+  <div *ngIf="product.location" class="item-location">
+    Available Locations : <span class="item-location-place">{{product.location}}</span>
+  </div>
+
+  <div class="item-description-title">
+    Description
+  </div>
+
+  <div class="item-description">
+    {{product.description}}
+  </div>
+
+  <div *ngIf="product.specifications" class="item-specifications-title border">
+    Specifications
+  </div>
+  <div *ngIf="product.specifications" class="border item-specifications border-top-0">
+    <div *ngFor="let map of product.specifications | keyvalue">
+      <div class="row">
+        <div class="col-md-3 no-padding text-grey">
+          {{map.key}}
+        </div>
+        <div class="col-md-1 no-padding"></div>
+        <div class="col-md-8 no-padding">
+          {{map.value}}
+        </div>
+      </div>
+    </div>
+  </div>

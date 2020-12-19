@@ -1,0 +1,94 @@
+<div infinite-scroll [infiniteScrollDistance]="scrollDistance" [infiniteScrollUpDistance]="scrollUpDistance"
+    [infiniteScrollThrottle]="throttle" [scrollWindow]="true" (scrolled)="onScrollDown()">
+    <div class="table">
+        <div class="row">
+            <div class="col-md-6">
+                <h4>
+                    {{count}} Records found for last {{userDaysFormControl.value}} days since now</h4>
+            </div>
+            <div class="col-md-3">
+                <mat-form-field>
+                    <mat-label>Days</mat-label>
+                    <mat-select [formControl]="userDaysFormControl">
+                        <mat-option *ngFor="let day of filterDays" [value]="day.value">
+                            {{day.viewValue}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="col-md-3">
+                <mat-form-field>
+                    <mat-label>User Type</mat-label>
+                    <mat-select [formControl]="userTypeFormControl">
+                        <mat-option *ngFor="let u of user" [value]="u.value">
+                            {{u.viewValue}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <mat-accordion *ngFor="let userBasic of userBasicInfo;let i=index">
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title class="text-bold" [ngClass]="{
+              'text-success':userBasic.userType === 'SME',
+              'text-danger':userBasic.userType === 'GLOQR',
+              'text-blue':userBasic.userType === 'NORMAL'
+              }">
+                        {{i+1}}. {{userBasic.userFullName}} ({{userBasic.userType}})
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <ul>
+                    <h5>USER Details</h5>
+                    <li>
+                        <span class="text-bold"> User Full Name:</span>
+                        {{userBasic.userFullName}}
+                    </li>
+                    <li *ngIf="userBasic.userMobile">
+                        <span class="text-bold"> User Mobile Number:</span>
+                        {{userBasic.userMobile}}
+                    </li>
+                    <li *ngIf="userBasic.userEmail">
+                        <span class="text-bold">User Email Id:</span>
+                        {{userBasic.userEmail}}
+                    </li>
+                    <li>
+                        <span class="text-bold">User Type:</span>
+                        {{userBasic.userType}}
+                    </li>
+                    <li>
+                        <span class="text-bold"> Creation Date:</span>
+                        {{userBasic.creationDate | date:'medium'}}
+                    </li>
+                </ul>
+
+                <ul *ngIf="userBasic.userType == 'SME'">
+                    <h5>SME Details</h5>
+                    <li>
+                        <span class="text-bold"> SME Name:</span>
+                        {{userBasic.smeDto.smeName}}
+                    </li>
+                    <li>
+                        <span class="text-bold"> SME Phone:</span>
+                        {{userBasic.smeDto.contactPhone}}
+                    </li>
+                    <li>
+                        <span class="text-bold"> SME Email:</span>
+                        {{userBasic.smeDto.contactEmail}}
+                    </li>
+                </ul>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+    <div *ngIf="noDataAvailable">
+        <div class="text-center">
+            <h1>No Data Available</h1>
+        </div>
+    </div>
+    <div *ngIf="noMoreDataAvailable">
+        <div class="text-center">
+            <h1>No More Data Available</h1>
+        </div>
+    </div>
+</div>

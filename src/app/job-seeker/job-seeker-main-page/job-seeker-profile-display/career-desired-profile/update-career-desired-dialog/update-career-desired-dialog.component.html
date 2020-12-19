@@ -1,0 +1,164 @@
+<div class="edit-career-desired-profile">
+  <i class="material-icons close-icon" (click)="onClickClose()">close</i>
+
+  <p class="main-title mb-2">Career Profile:</p>
+  <div class="container">
+    <form [formGroup]="editCareerDesiredProfileForm">
+      <div class="job-role">
+        <div class="row">
+          <div class="col-md-6">
+            <mat-form-field appearance="outline">
+              <mat-label>Functional Area</mat-label>
+              <mat-select (click)="onGetFunctionalArea()" formControlName="functionalAreaUuid" required>
+                <mat-option *ngFor="let industrial of industrialAreaDto" [value]="industrial.areaUuid">
+                  {{industrial.industrialAreaName}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="editCareerDesiredProfileForm.get('functionalAreaUuid').hasError('required')">
+                Functional area is required
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-6">
+            <mat-form-field appearance="outline">
+              <mat-label>Job Role</mat-label>
+              <mat-select formControlName="functionalJobRoleUuid" required>
+                <mat-option *ngFor="let industrialJobRole of industrialJobRoleDto"
+                  [value]="industrialJobRole.jobRoleUuid">
+                  {{industrialJobRole.jobRole}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="editCareerDesiredProfileForm.get('functionalJobRoleUuid').hasError('required')">
+                Job Role is required
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+
+      <div class="job-types mb-2">
+        <p class="titile">Job Type:</p>
+        <div class="row">
+          <div class="col-md-4" formArrayName="jobTypes" *ngFor="let type of jobType.controls; let i=index;">
+            <mat-checkbox [formControlName]="i">{{jobTypes[i]}}</mat-checkbox>
+          </div>
+          <div class="col-md-4">
+            <!--  -->
+          </div>
+        </div>
+      </div>
+
+
+      <div class="employment-types mb-2">
+        <p class="titile">Employment Type:</p>
+        <div class="row">
+          <div class="col-md-4" formArrayName="employmentTypes"
+            *ngFor="let type of employmentType.controls; let i=index;">
+            <mat-checkbox [formControlName]="i">{{employmentTypes[i]}}</mat-checkbox>
+          </div>
+          <div class="col-md-4"> </div>
+        </div>
+      </div>
+
+      <div class="prefferd-shift mb-2">
+        <p class="titile">Preferred Shift:</p>
+        <ul class="type-of-jobs-list">
+          <li>
+            <mat-radio-group class="" formControlName="preferredShift" [(ngModel)]="prefferedShift">
+              <mat-radio-button class="example-margin" value="DAY">Day</mat-radio-button>
+              <mat-radio-button class="example-margin" value="MID_DAY">Mid-Day</mat-radio-button>
+              <mat-radio-button class="example-margin" value="NIGHT">Night</mat-radio-button>
+              <mat-radio-button class="example-margin" value="FLEXIBLE">Flexible</mat-radio-button>
+            </mat-radio-group>
+          </li>
+        </ul>
+      </div>
+
+      <div class="preffered-locations mb-2">
+        <p class="titile">Preferred Locations <span style="color: red">*</span></p>
+        <div class="row">
+          <div class="col-md-4">
+            <mat-form-field appearance="outline">
+              <mat-label>Job Locations</mat-label>
+              <mat-select placeholder="Job locations" formControlName="prefferedJobLocations" multiple required>
+                <mat-optgroup *ngFor="let state of states" [label]="state.stateName">
+                  <mat-option *ngFor="let city of state.cities" [value]="city.cityName">
+                    {{city.cityName}}
+                  </mat-option>
+                </mat-optgroup>
+              </mat-select>
+              <mat-error *ngIf="editCareerDesiredProfileForm.get('prefferedJobLocations').hasError('required')">
+                Preferred Job Locations is required
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="prefferd-shift mb-2">
+        <p class="titile">Expected Salary:</p>
+        <div class="row">
+          <div class="col-md-4">
+            <mat-radio-group class="example-radio-group" formControlName="currency" [(ngModel)]="indianRupees">
+              <mat-radio-button class="example-margin" value="INR">Indian Rupees</mat-radio-button>
+            </mat-radio-group>
+          </div>
+          <div class="col-md-4">
+          </div>
+          <div class="col-md-4">
+          </div>
+        </div>
+      </div>
+
+      <div class="annual-salary mb-2">
+        <div class="row">
+          <div class="col-md-4">
+            <mat-form-field appearance="outline">
+              <mat-label>Salary Type</mat-label>
+              <mat-select formControlName="salaryType">
+                <mat-option *ngFor="let i of salaryName" [value]="i.value" (click)="onClickSalaryType()">
+                  {{i.viewValue}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-md-4">
+            <mat-form-field appearance="outline">
+              <mat-label>Salary</mat-label>
+              <input matInput placeholder="Salary" formControlName="salary" autocomplete="off" maxlength="10">
+              <mat-error *ngIf="editCareerDesiredProfileForm.get('salary').hasError('maxlength')">
+                Salary is
+
+              </mat-error>
+              <mat-error *ngIf="editCareerDesiredProfileForm.get('salary').hasError('pattern')">
+                Please Enter Valid Inputs
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="action-button" *ngIf="showButton;else disabled">
+        <div class="row">
+          <div class="cancel-button">
+            <button type="button" class="btn cancel" (click)="onClickClose()">CANCEL</button>
+          </div>
+          <div class="save-button">
+            <button type="submit" class="btn save" (click)="onClickSave()">SAVE</button>
+          </div>
+        </div>
+      </div>
+      <ng-template #disabled>
+        <div class="text-center">
+          <button disabled type="button" class="btn btn-default ">
+            <mat-spinner class="spinner" strokeWidth="4" [diameter]="15">
+            </mat-spinner> Saving...please wait
+          </button>
+        </div>
+      </ng-template>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,72 @@
+#myFooter {
+    background-color: #172336;
+    color: white;
+    /* position: absolute;
+    bottom: 0;
+    width: 100%; */
+}
+#myFooter .footer-copyright {
+    background-color: #172336;
+    padding: 10px 0;
+    text-align: center;
+    border-top: 1px solid #454d5e;
+    color: #ccc;
+    font-size: 12px;
+}
+#myFooter .row {
+    padding: 2% 0%;
+}
+#myFooter li{
+    font-size: 12px;
+    font-weight: 400;
+}
+#myFooter ul {
+    list-style-type: none;
+    padding-left: 0;
+    line-height: 1.7;
+}
+#myFooter h5 {
+    font-size: 14px;
+    color: white;
+    font-weight: initial;
+}
+#myFooter a,li{
+    color: #d2d1d1;
+}
+#myFooter .social-networks a {
+    font-size: 32px;
+    color: #f9f9f9;
+    padding: 10px;
+    transition: 0.2s;
+}
+#myFooter #twitter:hover {
+    color: #00acee !important;
+}
+#myFooter #facebook:hover {
+    color: #3b5998 !important;
+}
+#myFooter #linked-in:hover {
+    color: #0e76a8 !important;
+}
+#myFooter #instagram:hover {
+    color: #e24279 !important;
+}
+#myFooter #youtube:hover {
+    color: #c4302b !important;
+}
+html{
+    height: 100%;
+}
+
+body{
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: column;
+    -webkit-flex-direction: column;
+    height: 100%;
+}
+
+#myFooter{
+   flex: 0 0 auto;
+   -webkit-flex: 0 0 auto;
+}

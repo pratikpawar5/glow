@@ -1,0 +1,69 @@
+:host ::ng-deep .mat-dialog-container{
+    padding: 0 10px ;
+    border-radius: 0px;
+    width: 94%;
+}
+.main
+{
+    position: fixed;
+    z-index: 1000;
+    padding: 20px 0px 0px 10px;
+    background-color: #fff;
+    width: 57%;
+}
+.private-connection-dialog
+{
+    margin-top:90px; 
+}
+.selected
+{
+}
+.connection-card
+{
+    width: 200px;
+    margin: 10px 0 50px 50px;
+
+}
+.profile-img
+{
+    width: 120px;
+    height: 120px;
+}
+.sme-name
+{
+    font-size: 15px;
+    color: #0073b6;
+}
+.sme-address
+{
+    font-size: 12px;
+    color: #666666;
+}
+.checkbox
+{
+    margin-top: 10px;
+}
+.total-selection
+{
+    font-size: 12px;
+    margin-left: 10px;
+}
+.selection
+{
+    margin-left: 8px;
+}
+.mat-raised-button
+{
+    width: auto;
+    margin-left: 10px;
+}
+.action-button
+{
+    width: 100%;
+    position: sticky;
+    z-index: 1000;
+    padding: 20px 0px 0px 10px;
+    background-color: #fff;
+    bottom: 0;
+    float: right;
+}

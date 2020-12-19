@@ -1,0 +1,21 @@
+@import'../../../css/sme-object.css';
+.round-img{
+    border-radius: 50%;
+}
+.card-title{
+    font-weight: bold;
+    font-size: 14px;
+    color: #3a3a3a;
+    /* margin: 0; */
+
+}
+.card-description{
+    width: 100%;
+    font-size: 13px;
+    word-break: break-word;
+    text-align: justify;
+}.social-logo
+{
+    width: 30px;
+    margin: 5px;
+}

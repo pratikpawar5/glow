@@ -1,0 +1,30 @@
+@import '../css/material-dialog.css';
+
+.padding{
+    padding: 0 5px;
+}
+.title{
+    text-align: center;
+}
+.margin-b20{
+    margin-bottom: 20px;
+}
+.margin-b10{
+    margin-bottom: 10px;
+}
+mat-form-field{
+    width: 100%;
+}
+.selected-file{
+    display: inline-block;
+    margin-left: 20px;
+}
+.button-spacing{
+    margin-right: 10%;
+}
+.global-btn{
+    width: auto;
+}
+.spinner{
+    margin: 0 auto;
+}

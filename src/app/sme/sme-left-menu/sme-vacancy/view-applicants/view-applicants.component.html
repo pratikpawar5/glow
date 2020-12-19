@@ -1,0 +1,101 @@
+<i class="material-icons close-icon f-20" (click)="onClickClose()">close</i>
+<div class="container" *ngIf="data">
+  <h4>
+    <span *ngIf="data.value === undefined">Total </span>
+    <span *ngIf="data.value === 'shortlisted'">Shortlisted </span>
+    <span *ngIf="data.value === 'rejected'">Rejected </span>
+    <span *ngIf="data.value === 'pending'">Pending </span>
+
+    Job
+    Applicants</h4>
+  <div class="applicants mb-3" *ngFor="let jobApplicant of jobApplicantDto;let i=index">
+    <div class="row">
+      <div class="col-md-1">
+        <b>{{i + 1}}</b>
+      </div>
+      <div class="col-md-8" *ngIf="jobApplicant.applicant">
+        <div class="basic-user-info mb-2">
+          <div class="name">
+
+            {{jobApplicant.applicant.fullName}}
+          </div>
+          <div class="designation" *ngIf="jobApplicant.applicant.currentDesig">
+            {{jobApplicant.applicant.currentDesig}} at
+            {{jobApplicant.applicant.currentOrganization}}</div>
+        </div>
+        <div class="row">
+          <div class="col-md-5" *ngIf="jobApplicant.applicant.emailId;else noEmailId">
+            <div class="icons f-12">
+              <i class="material-icons">
+                email
+              </i>
+              <a href="mailto:{{jobApplicant.applicant.emailId}}">
+                <span class="info">{{jobApplicant.applicant.emailId}}</span>
+              </a>
+            </div>
+          </div>
+          <ng-template #noEmailId>
+            <div class="col-md-5">
+
+            </div>
+          </ng-template>
+          <div class="col-md-4" *ngIf="jobApplicant.applicant.mobileNumber">
+            <div class="icons f-12">
+              <i class="material-icons">
+                phone
+              </i>
+              <span class="info">+91-{{jobApplicant.applicant.mobileNumber}}</span>
+            </div>
+          </div>
+          <div class="col-md-3 f-12">
+            <a [routerLink]="['/','job-seeker',uuid,'j',jobApplicant.applicantUuid]" target="_blank">
+              view profile
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-8" *ngIf="jobApplicant.customApplicant">
+        <div class="basic-user-info mb-2">
+          <div class="name">
+            {{jobApplicant.customApplicant.fullName}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-5" *ngIf="jobApplicant.customApplicant.emailId">
+            <div class="icons f-12">
+              <i class="material-icons">
+                email
+              </i>
+              <a href="mailto:{{jobApplicant.customApplicant.emailId}}">
+                <span size="2" class="info">{{jobApplicant.customApplicant.emailId}}</span>
+              </a>
+            </div>
+          </div>
+          <div class="col-md-4" *ngIf="jobApplicant.customApplicant.contactNumber">
+            <div class="icons f-12">
+              <i class="material-icons">
+                phone
+              </i>
+              <span class="info">+91-{{jobApplicant.customApplicant.contactNumber}}</span>
+            </div>
+          </div>
+          <div class="col-md-3 f-12" *ngIf="jobApplicant.customApplicant.resumeUrl">
+            <a href="{{contentServer+jobApplicant.customApplicant.resumeUrl}}" target="_blank">
+              Download Resume
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="status">
+        <div class="col-md-2" *ngIf="jobApplicant.applicantStatus === 'SHORTLISTED'">
+          <img src="../../../../../assets/action/shortlistedICON.png" class="short-listed-icon">
+        </div>
+        <div class="col-md-2" *ngIf="jobApplicant.applicantStatus === 'REJECTED'">
+          <img src="../../../../../assets/action/rejected.png" class="short-listed-icon">
+        </div>
+      </div>
+    </div>
+    <hr>
+  </div>
+
+</div>

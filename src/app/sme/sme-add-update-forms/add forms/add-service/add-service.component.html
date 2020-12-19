@@ -1,0 +1,371 @@
+<div class="wrap">
+
+  <div class="title">
+    <h4>Add Service</h4>
+  </div>
+
+  <mat-card class="form">
+    <form [formGroup]="serviceForm">
+
+      <div class="row">
+
+        <div class="col-md-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Select Category</mat-label>
+            <mat-select formControlName="category" required>
+              <mat-option class="category-mat-option" *ngFor="let obj of categories" [value]="obj">
+                <img mat-card-sm-image class="category-img" [src]="contentServer + obj.fileLocation">
+                {{obj.categoryName}}
+              </mat-option>
+              <mat-option [value]="customCategory" class="div-link">+Add New Category</mat-option>
+            </mat-select>
+            <mat-error *ngIf="serviceForm.get('category').hasError('required')">
+              Please select Category
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col-md-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Select SubCategory</mat-label>
+            <mat-select formControlName="subCategory" required>
+              <mat-option class="category-mat-option" *ngFor="let obj of subCategories" [value]="obj">
+                <img mat-card-sm-image class="category-img" [src]="contentServer + obj.fileLocation">
+                {{obj.subCategoryName}}
+              </mat-option>
+              <mat-option [value]="customCategory" class="div-link">+Add New SubCategory</mat-option>
+            </mat-select>
+            <mat-error *ngIf="serviceForm.get('subCategory').hasError('required')">
+              Please select SubCategory
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <mat-form-field appearance="outline" *ngIf="newCategory">
+            <mat-label>Category Name</mat-label>
+            <input matInput formControlName="customCategory" autocomplete="off">
+            <mat-error *ngIf="serviceForm.get('customCategory').hasError('maxlength')">
+              Category Name should be max 100 characters
+            </mat-error>
+            <mat-error *ngIf="serviceForm.get('customCategory').hasError('minlength')">
+              Category Name should be min. 3 characters
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-md-6">
+          <mat-form-field appearance="outline" *ngIf="newCategory || newSubCategory">
+            <mat-label>SubCategory Name</mat-label>
+            <input matInput formControlName="customSubCategory" autocomplete="off">
+            <mat-error *ngIf="serviceForm.get('customSubCategory').hasError('maxlength')">
+              SubCategory Name should be max 100 characters
+            </mat-error>
+            <mat-error *ngIf="serviceForm.get('customSubCategory').hasError('minlength')">
+              SubCategory Name should be min. 3 characters
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+      </div>
+
+      <!-- <div *ngIf="serviceForm.value.category">
+        <span style="color: grey">Selected category : </span>
+        {{serviceForm.value.category.categoryName}} >>
+        <span *ngIf="serviceForm.value.subCategory">
+          {{serviceForm.value.subCategory.subCategoryName}}
+        </span>
+      </div> -->
+
+      <div class="mt-2">
+        <mat-form-field appearance="outline">
+          <mat-label>Service Name</mat-label>
+          <input matInput formControlName="serviceName" required autocomplete="off">
+          <mat-error *ngIf="serviceForm.get('serviceName').hasError('required')">
+            Service name is required
+          </mat-error>
+          <mat-error *ngIf="serviceForm.get('serviceName').hasError('maxlength')">
+            Service Name should be max 100 characters
+          </mat-error>
+          <mat-error *ngIf="serviceForm.get('serviceName').hasError('minlength')">
+            Service Name should be min. 3 characters
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="row">
+        <div class="col-md-4">
+          <mat-form-field appearance="outline">
+            <mat-label>Price</mat-label>
+            <input matInput formControlName="price" required maxlength="10" autocomplete="off">
+            <span matPrefix><i class="fa fa-inr" aria-hidden="true">&nbsp;</i>
+            </span>
+            <mat-error *ngIf="serviceForm.get('price').hasError('required')">
+              Price value is required
+            </mat-error>
+            <mat-error *ngIf="serviceForm.get('price').hasError('pattern')">
+              Only digits are
+              allowed
+            </mat-error>
+            <mat-error *ngIf="serviceForm.get('price').hasError('maxlength')">
+              Max 10 digits number are allowed for price
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-md-4">
+          <mat-form-field appearance="outline">
+            <mat-label>Price Unit</mat-label>
+            <mat-select formControlName="priceUnit">
+              <mat-option>--</mat-option>
+              <mat-option *ngFor="let name of priceUnits" [value]="name">
+                {{name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-md-4">
+          <mat-form-field appearance="outline">
+            <mat-label>Discount</mat-label>
+            <input matInput placeholder="Discount" formControlName="discount" autocomplete="off">
+            <mat-error *ngIf="serviceForm.get('discount').hasError('maxlength')">
+              Discount should be between 0 to 99
+            </mat-error>
+            <mat-error *ngIf="serviceForm.get('discount').hasError('pattern')">
+              Alphabets & Symbols are not allowed
+            </mat-error>
+            <span matSuffix>%</span>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <mat-form-field appearance="outline">
+            <mat-label>Available Locations</mat-label>
+            <input matInput formControlName="location" autocomplete="off">
+            <mat-error *ngIf="serviceForm.get('location').hasError('maxlength')">
+              Maximum limit reached to 200 characters
+            </mat-error>
+            <mat-error *ngIf="serviceForm.get('location').hasError('pattern')">
+              Only characters are allowed
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>Description</mat-label>
+          <textarea #input matInput formControlName="description" required rows="5" spellcheck="true"></textarea>
+          <mat-hint align="end">{{input.value?.length || 0}}/1500</mat-hint>
+          <mat-error *ngIf="serviceForm.get('description').hasError('required')">
+            Description is required
+          </mat-error>
+          <mat-error *ngIf="serviceForm.get('description').hasError('maxlength')">
+            Description should be of 1500 characters long
+          </mat-error>
+          <mat-error *ngIf="serviceForm.get('description').hasError('minlength')">
+            Description should be of atleast 30 characters
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>Terms and Condition for Quotation</mat-label>
+          <textarea #input1 matInput formControlName="termsAndCondition" rows="5" spellcheck="true"></textarea>
+          <mat-hint align="end">{{input1.value?.length || 0}}/2000</mat-hint>
+          <!-- <mat-error *ngIf="serviceForm.get('termsAndCondition').hasError('required')">
+            Terms and Condition is required
+          </mat-error> -->
+          <mat-error *ngIf="serviceForm.get('termsAndCondition').hasError('maxlength')">
+            Terms and Condition should be of 2000 characters long
+          </mat-error>
+          <!-- <mat-error *ngIf="serviceForm.get('termsAndCondition').hasError('minlength')">
+            Terms and Condition should be of atleast 20 characters
+          </mat-error> -->
+        </mat-form-field>
+      </div>
+
+      <div class="row mb-4">
+        <div class="col-md-4">
+          <mat-form-field appearance="outline">
+            <mat-label>Select Quotation Format</mat-label>
+            <mat-select formControlName="quotationFormat">
+              <mat-option *ngFor="let format of quotationFormats" [value]="format">
+                {{format.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <a href="{{contentServer}}/gloqr-platform/quotation/{{serviceForm.get('quotationFormat').value.url}}" target="_blank" class="link f-14">view
+            click here to view sample quotation format</a>
+        </div>
+        <div class="col-md-3">
+          <mat-form-field appearance="outline">
+            <mat-label>GST % </mat-label>
+            <mat-select formControlName="gst" required>
+              <mat-option>--</mat-option>
+              <mat-option *ngFor="let gstObj of gstSlabs" [value]="gstObj.value">
+                {{gstObj.name}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="serviceForm.get('gst').hasError('required')">
+              Please select GST %
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="mb-2">
+        <mat-checkbox (keydown)="onKeydownSpaceQuotation($event)" formControlName="autoQuotation">
+          Send Auto Quotation
+          <i class="fa fa-question-circle-o text-lrg question-mark" matTooltip="When user shown interest on service, 
+              automatic generated quotation will be send to the user. It will consumes 1 credit of Business Interest Read">
+          </i>
+        </mat-checkbox>
+      </div>
+
+      <h6>Specifications : </h6>
+      <div formArrayName="specifications">
+        <div *ngFor="let control of getControls(serviceForm); let i = index">
+          <div [formGroupName]="i">
+            <div class="row mb-2">
+              <div class="col-md-2"></div>
+              <div class="col-md-3">
+                <span style="color: rgb(99, 99, 99)">{{specifications[i]}}</span>
+              </div>
+              <div class="col-md-4">
+                <input spellcheck="true" class="custom-input" type="text" formControlName="{{specifications[i]}}" autocomplete="off">
+                <div class="spec-error" *ngIf="serviceForm.get('specifications').controls[i].status === 'INVALID'">
+                  Max 100 characters allowed
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div formArrayName="specifications1" *ngFor="let dynamic of getControls1(serviceForm); let i = index;">
+        <div [formGroupName]="i">
+          <div class="row mb-2">
+            <div class="col-md-2"></div>
+            <div class="col-md-3">
+              <input spellcheck="true" placeholder="Attribute e.g Color" class="custom-input" type="text" formControlName="key{{i}}">
+              <div class="text-red f-12" *ngIf="serviceForm.get('specifications1').controls[i].controls['key'+i]?.status === 'INVALID'">
+                Max 50 characters allowed
+              </div>
+            </div>
+            <div class="col-md-4">
+              <input spellcheck="true" placeholder="Value e.g Red" class="custom-input" type="text" formControlName="value{{i}}">
+              <div class="text-red f-12" *ngIf="serviceForm.get('specifications1').controls[i].controls['value'+i]?.status === 'INVALID'">
+                Max 100 characters allowed
+              </div>
+            </div>
+            <div class="col-md-1" *ngIf="serviceForm.get('specifications1').controls.length > 1">
+              <i class="material-icons cursor-pointer" (click)="removeSpecification(i)">
+                close
+              </i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row" *ngIf="getControls1(serviceForm)?.length < (maxSpec - specifications.length)">
+        <div class="col-md-8"></div>
+        <div class="col-md-4">
+          <span class="custom-add-more cursor-pointer border" (click)="addSpecification()">
+            + Add more
+          </span>
+        </div>
+      </div>
+
+      <div>
+        <label>
+          Service Image <span class="text-red" style="margin-right: 30px;">*</span>
+        </label>
+        <input accept=".png,.jpeg,.jpg" onclick="value = null" style="display: none" type="file" multiple (change)="onFileChanged($event.target.files)"
+          #fileInput>
+        <button [disabled]="selectedImages?.length === 5" type="button" class="btn default-btn" (click)="fileInput.click()">Select
+          File</button>
+        <span *ngIf="imageRequired" class="text-red f-12">please select atleast 1 Image</span>
+      </div>
+
+      <div class="text-grey f-12">
+        Image file size should be less than 300kb. Supported formats are: .jpeg .jpg .png
+      </div>
+
+      <div class="row">
+        <div *ngFor="let image of uploadedImages;let i=index" class="image-uploaded">
+          <div *ngIf="i === 0;else noMainImage" class="text-blue text-bold f-12 text-center">
+            Main Image
+          </div>
+          <ng-template #noMainImage>
+            <div class="not-main-image">
+            </div>
+          </ng-template>
+          <div *ngIf="image;else default">
+            <img mat-card-md-image [src]="contentServer + image.fileLocation" class="border">
+            <div class="text-center" style="margin-top: 10px">
+              <button type="button" mat-icon-button matTooltip="delete" (click)="deleteImage(i,image.fileLocation)">
+                <i class="material-icons">close</i>
+              </button>
+            </div>
+          </div>
+          <ng-template #default>
+            <div class="default-image">
+              <img mat-card-md-image src="../../../../../assets/action/default-image.png" class="border">
+            </div>
+          </ng-template>
+        </div>
+      </div>
+
+      <div *ngIf="showUploadProgress">
+        <mat-progress-bar mode="determinate" value="{{progressPercent}}"></mat-progress-bar>
+      </div>
+
+      <div class="text-red f-12" *ngIf="imageUploadFail">
+        <span>Image Uploadation Failed..please try again!!</span>
+      </div>
+      <div class="text-red f-12" *ngIf="imageSizeError">
+        <span>Image file size should be less than 300kb</span>
+      </div>
+      <div class="text-red f-12" *ngIf="imageTypeError">
+        <span>Please select correct file format...Supported formats are: .jpeg .jpg .png</span>
+      </div>
+
+      <div class="mt-2">
+        <mat-checkbox (click)="onCheckbox()" (keydown)="onKeydownSpace($event)" formControlName="businessPost">
+          Add to Business Post
+        </mat-checkbox>
+      </div>
+
+      <div class="row" *ngIf="showButton;else disabled">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-2">
+          <button mat-raised-button class="global-btn" (click)="onSubmit(true)">
+            Save & Publish
+          </button>
+        </div>
+        <div class="col-sm-1"></div>
+        <div class="col-sm-2">
+          <button mat-stroked-button class="cancle-btn" routerLink="../services">Cancel</button>
+        </div>
+        <div class="col-sm-1"></div>
+        <div class="col-sm-2">
+          <button mat-stroked-button class="default-btn" (click)="onSubmit(false)">
+            Save as draft
+          </button>
+        </div>
+      </div>
+      <ng-template #disabled>
+        <div class="text-center">
+          <button disabled type="button" class="btn btn-default">
+            <mat-spinner class="spinner" strokeWidth="4" [diameter]="15">
+            </mat-spinner> Saving...please wait
+          </button>
+        </div>
+      </ng-template>
+
+    </form>
+  </mat-card>
+
+</div>

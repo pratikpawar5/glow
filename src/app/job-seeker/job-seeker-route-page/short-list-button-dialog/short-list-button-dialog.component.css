@@ -1,0 +1,19 @@
+mat-form-field
+{
+    width: 100%;
+}
+.cancel
+{
+    color: #0073b6;
+    background-color: #fff;
+}
+.save
+{
+    background-color: #0073b6;
+    color: #fff;
+}
+.action-button
+{
+    position: inherit;
+    float: right;
+}

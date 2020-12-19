@@ -1,0 +1,27 @@
+<app-main-header></app-main-header>
+
+<div class="pt-5 pb-5">
+  <div class="container">
+    <div *ngIf="pdfSrc;else noPdf">
+      <div class="text-right">
+        <a [href]="'/links/' + pdfSrc" target="_blank">
+          <i class="fa fa-download" aria-hidden="true"> download</i>
+        </a>
+      </div>
+
+      <pdf-viewer [src]="'/links/' + pdfSrc" [original-size]="false" [render-text]="true" (error)="onError($event)"
+        style="display: block;"></pdf-viewer>
+    </div>
+    <ng-template #noPdf>
+      <div class="text-center" style="padding: 15%">
+        <i class="fa fa-history" aria-hidden="true" style="font-size: 40px"></i>
+        <h1>Oops, this link is expired</h1>
+        <p>The link is no longer available or incorrect.</p>
+        <hr>
+        <a href="/" routerLink="/">GO BACK TO SITE</a>
+      </div>
+    </ng-template>
+  </div>
+</div>
+
+<app-main-footer></app-main-footer>

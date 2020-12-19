@@ -1,0 +1,253 @@
+<h5 *ngIf="searchText && !notFound">&nbsp; Showing results for "{{searchText}}"</h5>
+<mat-card *ngIf="products?.response?.result?.length > 0" class="mb-3">
+  <div>
+    <h4 class="slider-title">Products
+      <a href class="view-all" [routerLink]="['/','search','p']" [queryParams]="{searchText:searchText}">
+        View More
+      </a>
+    </h4>
+  </div>
+  <hr>
+  <ngu-carousel [inputs]="carousel" [dataSource]="products.response.result">
+    <div NguCarouselItem class="item" *nguCarouselDef="let product;let i=index">
+
+      <div class="ribbon" *ngIf="product.discount">
+        <span class="ribbon1">
+          <span>{{product.discount}} %
+            off</span>
+        </span>
+      </div>
+
+      <div class="text-center pl-3 pr-3">
+        <div class="item-img">
+          <a href="/products/{{product.productUrlName}}/p/{{product.productUuid}}" target="_blank">
+            <img mat-card-lg-image [src]="contentServer + product.mainImage" alt="Product" onError="this.src='../assets/not-found/no_image.png';">
+          </a>
+        </div>
+
+        <div class="item-name">
+          <a href="/products/{{product.productUrlName}}/p/{{product.productUuid}}" matTooltip="{{product.productName}}"
+            target="_blank">
+            {{product.productName}}
+          </a>
+        </div>
+
+        <div class="item-sme-name">
+          <a href="/sme/{{product.sUuid}}" target="_blank" matTooltip="{{product.smeName}}">
+            {{product.smeName}}
+          </a>
+        </div>
+
+        <div *ngIf="product.discount; else originalPrice">
+          <span class="line-through-price">
+            {{product.price | IndianCurrency}}
+          </span>
+        </div>
+        <ng-template #originalPrice>
+          <span class="hidden"></span>
+          <br>
+        </ng-template>
+
+        <div class="original-price">
+          {{product.discountedPrice | IndianCurrency}}
+          <span *ngIf="product.priceUnit">
+            / {{product.priceUnit}}
+          </span>
+        </div>
+
+        <div *ngIf="sUuid === product.sUuid;else check">
+
+        </div>
+
+        <ng-template #check>
+          <button *ngIf="product.addedToCart" mat-stroked-button class="added-to-cart">
+            Added to Cart <i class="material-icons">shopping_cart</i>
+            <span class="cart-arrow-check"><i class="fa fa-check"></i></span>
+          </button>
+          <button *ngIf="!product.addedToCart" mat-stroked-button class="show-interest-btn" (click)="businessInterestProduct(product.productUuid,i)">
+            Show Interest <i class="fa fa-eye"></i>
+          </button>
+        </ng-template>
+      </div>
+
+    </div>
+
+    <button NguCarouselPrev class="arrow-left">
+      <i class="fa fa-angle-left arrow-icon-size"></i>
+    </button>
+
+    <button NguCarouselNext class="arrow-right">
+      <i class="fa fa-angle-right arrow-icon-size"></i>
+    </button>
+
+  </ngu-carousel>
+
+</mat-card>
+
+<mat-card *ngIf="services?.response?.result?.length > 0" class="mb-3">
+  <div>
+    <h4 class="slider-title">Services
+      <a href class="view-all" [routerLink]="['/','search','s']" [queryParams]="{searchText:searchText}">
+        View More
+      </a>
+    </h4>
+  </div>
+  <hr>
+  <ngu-carousel [inputs]="carousel" [dataSource]="services.response.result">
+    <div NguCarouselItem class="item" *nguCarouselDef="let service;let i=index">
+
+      <div class="ribbon" *ngIf="service.discount">
+        <span class="ribbon1">
+          <span>{{service.discount}} %
+            off</span>
+        </span>
+      </div>
+
+      <div class="text-center  pl-3 pr-3">
+
+        <div class="item-img">
+          <a href="/services/{{service.serviceUrlName}}/s/{{service.serviceUuid}}" target="_blank">
+            <img mat-card-lg-image [src]="contentServer + service.mainImage" alt="Service Image" onError="this.src='../assets/not-found/no_image.png';">
+          </a>
+        </div>
+
+        <div class="item-name">
+          <a href="/services/{{service.serviceUrlName}}/s/{{service.serviceUuid}}" matTooltip="{{service.serviceName}}"
+            target="_blank">
+            {{service.serviceName}}
+          </a>
+        </div>
+
+        <div class="item-sme-name">
+          <a href="/sme/{{service.sUuid}}" target="_blank" matTooltip="{{service.smeName}}">
+            {{service.smeName}}
+          </a>
+        </div>
+
+        <div *ngIf="service.discount; else originalPrice">
+          <span class="line-through-price">
+            {{service.price | IndianCurrency}}
+          </span>
+        </div>
+        <ng-template #originalPrice>
+          <span class="hidden"></span>
+          <br>
+        </ng-template>
+
+        <div class="original-price">
+          {{service.discountedPrice | IndianCurrency}}
+          <span *ngIf="service.priceUnit">
+            / {{service.priceUnit}}
+          </span>
+        </div>
+
+        <div *ngIf="sUuid === service.sUuid;else check">
+
+        </div>
+
+        <ng-template #check>
+          <button *ngIf="service.addedToCart" mat-stroked-button class="added-to-cart">
+            Added to Cart <i class="material-icons">shopping_cart</i>
+            <span class="cart-arrow-check"><i class="fa fa-check"></i></span>
+          </button>
+          <button *ngIf="!service.addedToCart" mat-stroked-button class="show-interest-btn" (click)="businessInterest(service.serviceUuid,i)">
+            Show Interest <i class="fa fa-eye"></i>
+          </button>
+        </ng-template>
+
+      </div>
+
+    </div>
+
+    <button NguCarouselPrev class="arrow-left">
+      <i class="fa fa-angle-left arrow-icon-size"></i>
+    </button>
+
+    <button NguCarouselNext class="arrow-right">
+      <i class="fa fa-angle-right arrow-icon-size"></i>
+    </button>
+
+  </ngu-carousel>
+
+</mat-card>
+
+
+<mat-card *ngIf="smes?.length > 0" class="mb-3">
+  <div>
+    <h4 class="slider-title">SME's
+      <a href class="view-all" [routerLink]="['/','search','res']" [queryParams]="{searchText:searchText}">
+        View More
+      </a>
+    </h4>
+  </div>
+  <hr>
+  <ngu-carousel [inputs]="carousel" [dataSource]="smes">
+    <div NguCarouselItem class="item text-center" *nguCarouselDef="let sme; let i=index;">
+
+      <div class="text-center pl-3 pr-3">
+        <div class="item-img">
+          <a href="/sme/{{sme.sUuid}}" target="_blank">
+            <img mat-card-lg-image [src]="contentServer + sme.logoImage" alt="sme-logo" onError="this.src='../assets/not-found/no_image.png';">
+          </a>
+        </div>
+
+        <div class="item-name">
+          <a href="/sme/{{sme.sUuid}}" matTooltip="{{sme.smeName}}" target="_blank" class="sme-name">
+            {{sme.smeName | smeNamePipe}}
+          </a>
+          <br>
+          <a *ngIf="sme.smeAddress" class="sme-address">
+            {{sme.smeAddress.locality}}, {{sme.smeAddress.city}}
+          </a>
+        </div>
+
+        <div class="product-service-action">
+          <div *ngIf="sme.status=='OWNER';else check">
+
+          </div>
+          <ng-template #check>
+            <div *ngIf="!sme.status">
+              <button mat-flat-button (click)="onClickCircleInvite(sme,i)"><i class="fa fa-link"></i>&nbsp; Circle
+                Invite</button>
+            </div>
+
+            <div *ngIf="sme.status">
+              <div *ngIf="sme.status=='NEW'">
+                <button mat-flat-button [disabled]="sme.sUuid===isDisableId" (click)="onClickCircleInvite(sme,i)"><i
+                    class="fa fa-link"></i>&nbsp; Circle Invite</button>
+              </div>
+              <div *ngIf="sme.status=='RECIEVED_REQ'">
+                <button mat-button color="primary" disabled><i class="fa fa-hourglass-end" aria-hidden="true"></i>&nbsp;Pending
+                  Request</button>
+              </div>
+              <div *ngIf="sme.status=='SENT_REQ'">
+                <button mat-button color="primary" disabled><i class="fa fa-paper-plane" aria-hidden="true"></i>&nbsp;
+                  Request Sent</button>
+              </div>
+              <div *ngIf="sme.status=='OWNER'">
+              </div>
+              <div *ngIf="sme.status=='CONNECTED'">
+                <button mat-button color="primary" disabled><i class="fa fa-handshake-o" aria-hidden="true"></i>&nbsp;In-Circle</button>
+              </div>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+    <button NguCarouselPrev class="arrow-left">
+      <i class="fa fa-angle-left arrow-icon-size"></i>
+    </button>
+
+    <button NguCarouselNext class="arrow-right">
+      <i class="fa fa-angle-right arrow-icon-size"></i>
+    </button>
+  </ngu-carousel>
+</mat-card>
+
+<div *ngIf="notFound">
+  <img alt="Not Found" class="not-found-image" src="../../../assets/not-found/no-data.png">
+</div>
+<div *ngIf="spinner" class="spinner">
+  <mat-spinner strokeWidth="5" [diameter]="50"></mat-spinner>
+</div>
+<div style="margin-bottom:150px"></div>

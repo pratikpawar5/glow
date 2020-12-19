@@ -1,0 +1,242 @@
+<div class="sme-profile-details">
+  <h3>Basic Details</h3>
+  <div class="edit-basic-detail mb-2">
+    <span class="right-corner" (click)="onEditInfo()" *ngIf="infoEdit ; else nameCancel"> Edit </span>
+    <ng-template #nameCancel>
+      <span class="right-corner" (click)="onCancelInfo()">Cancel</span>
+    </ng-template>
+  </div>
+  <form [formGroup]="smeProfileForm" class="mb-3">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <p class="titile">Company Name <span style="color:#ff0000">*</span> <i class="material-icons f-14"
+              matTooltip="Want to update your Company name? Raise a request via Contact Us page or email or Call us."
+              style="padding-left:4px">
+              help
+            </i> </p>
+          <mat-form-field appearance="outline">
+            <input matInput placeholder="Company Name" #companyName formControlName="smeName" maxlength="50"
+              autocomplete="off" required>
+            <mat-hint align="end">{{companyName.value?.length || 0}}/50</mat-hint>
+            <mat-error *ngIf="smeProfileForm.get('smeName').hasError('required')">
+              Company Name
+              required
+            </mat-error>
+            <mat-error *ngIf="smeProfileForm.get('smeName').hasError('maxlength')">
+              Company Name should be maximum 50 Characters
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-md-6">
+          <p class="titile">One Line Statement</p>
+          <mat-form-field appearance="outline">
+            <input matInput placeholder="One Line Statement" #oneLine formControlName="oneLineStatement"
+              autocomplete="off" maxlength="50" spellcheck="true">
+            <mat-hint align="end">{{oneLine.value?.length || 0}}/50</mat-hint>
+            <mat-error *ngIf="smeProfileForm.get('oneLineStatement').hasError('maxLength')">
+              one-line Statement should be maximum 50 Characters
+            </mat-error>
+            <mat-error *ngIf="smeProfileForm.get('oneLineStatement').hasError('minlength')">
+              one-line can have minimum 2 characters
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <p class="titile">Contact Person <span style="color:#ff0000">*</span> </p>
+          <mat-form-field appearance="outline">
+            <input matInput placeholder="Contact Person Name" #personName formControlName="contactPerson" maxlength="30"
+              autocomplete="off" required>
+            <mat-hint align="end">{{personName.value?.length || 0}}/30</mat-hint>
+
+            <mat-error *ngIf="smeProfileForm.get('contactPerson').hasError('required')">
+              Contact Person Name
+              required
+            </mat-error>
+
+            <mat-error *ngIf="smeProfileForm.get('contactPerson').hasError('maxlength')">You have more
+              than 30
+              characters</mat-error>
+
+            <mat-error *ngIf="smeProfileForm.get('contactPerson').hasError('minLength')">One Line
+              Statement can have minimum 2 characters</mat-error>
+
+            <mat-error *ngIf="smeProfileForm.get('contactPerson').hasError('pattern')">
+              Only characters are allowed
+            </mat-error>
+
+            <mat-error *ngIf="smeProfileForm.get('contactPerson').hasError('inValidContact')">
+              Please enter a valid Contact Person Name
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-md-6">
+          <p class="titile">Contact Number <span style="color:#ff0000">*</span> </p>
+          <mat-form-field appearance="outline">
+            <input matInput placeholder="Contact Number" formControlName="contactPhone" minlength="10" #mobile
+              maxlength="10" required autocomplete="off">
+            <mat-hint align="end">{{mobile.value?.length || 0}}/10</mat-hint>
+
+            <mat-error *ngIf="smeProfileForm.get('contactPhone').hasError('required')">
+              Contact Number is
+              required
+            </mat-error>
+            <mat-error *ngIf="smeProfileForm.get('contactPhone').hasError('mobileNotAvailable')">
+              Contact Number not available
+            </mat-error>
+            <mat-error *ngIf="smeProfileForm.get('contactPhone').hasError('pattern')">
+              Alphabets not
+              allowed
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <p class="titile">Contact Email <span style="color:#ff0000">*</span> </p>
+          <mat-form-field appearance="outline">
+            <input type="email" matInput placeholder="Contact Person Email ID" formControlName="contactEmail"
+              autocomplete="off" required email>
+            <mat-error *ngIf="smeProfileForm.get('contactEmail').hasError('required')">
+              Email Id is
+              required
+            </mat-error>
+            <mat-error *ngIf="smeProfileForm.get('contactEmail').hasError('email')">
+              Please enter a
+              valid email address
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-md-6">
+          <p class="titile">No of Employees </p>
+          <mat-form-field appearance="outline">
+            <input matInput placeholder="Number Of Employees" formControlName="numberOfEmployees" autocomplete="off"
+              maxlength="6">
+            <mat-error *ngIf="smeProfileForm.get('numberOfEmployees').hasError('pattern')">
+              Alphabets not
+              allowed
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <p class="titile">Company Description <span style="color:#ff0000">*</span></p>
+          <mat-form-field appearance="outline">
+            <textarea matInput placeholder="Company Description" #companyDesc formControlName="companyDescription"
+              autocomplete="off" required rows="3"></textarea>
+            <mat-hint align="end">{{companyDesc.value?.length || 0}}/1000</mat-hint>
+            <mat-error *ngIf="smeProfileForm.get('companyDescription').hasError('maxlength')">
+              Max 1000 Characters are allowed
+            </mat-error>
+            <mat-error *ngIf="smeProfileForm.get('companyDescription').hasError('minlength')">
+              Company Description can have minimum 10 characters
+            </mat-error>
+            <mat-error *ngIf="smeProfileForm.get('companyDescription').hasError('required')">
+              Company Description is required
+            </mat-error>
+            <mat-error *ngIf="smeProfileForm.get('companyDescription').hasError('inValid')">
+              Please enter a valid Company Description
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+
+
+      <div class="row">
+        <div class="col-md-4">
+          <p class="titile">Registered As </p>
+          <mat-form-field appearance="outline">
+            <mat-select formControlName="registeredType">
+              <mat-option *ngFor="let registeredName of registeredType" [value]="registeredName.value">
+                {{registeredName.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-md-4">
+          <p class="titile">SME Establishment Date <span style="color:#ff0000">*</span> </p>
+          <mat-form-field appearance="outline">
+            <input matInput placeholder="Date" formControlName="yearOfEstablishment" autocomplete="off">
+          </mat-form-field>
+        </div>
+        <div class="col-md-4">
+          <p class="titile">GST-IN Number <span style="color:#ff0000">*</span> </p>
+          <mat-form-field appearance="outline">
+            <input matInput placeholder="Ex.(3.4)" formControlName="gstin" autocomplete="off">
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <p class="titile">Turn Over </p>
+          <mat-form-field appearance="outline">
+            <input matInput placeholder="Ex.(3.4)" formControlName="turnOver" autocomplete="off"
+              (keydown)="onKeydown($event)" maxlength="5">
+            <mat-error *ngIf="smeProfileForm.get('turnOver').hasError('pattern')">
+              Alphabets not
+              allowed
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col-md-4">
+          <p class="titile">Unit </p>
+          <mat-form-field appearance="outline">
+            <mat-select formControlName="turnOverUnit">
+              <mat-option *ngFor="let i of turnOverUnit" [value]="i.value">
+                {{i.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <p class="titile">Latitude </p>
+          <mat-form-field appearance="outline">
+            <input matInput placeholder="Ex.(79.28533)" formControlName="latitude" autocomplete="off"
+              (keydown)="onKeydown($event)" maxlength="10">
+            <mat-error *ngIf="smeProfileForm.get('latitude').hasError('pattern')">
+              Alphabets not
+              allowed
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col-md-4">
+          <p class="titile">Longitude </p>
+          <mat-form-field appearance="outline">
+            <input matInput placeholder="Ex.(87.255414)" formControlName="longitude" autocomplete="off"
+              (keydown)="onKeydown($event)" maxlength="10">
+            <mat-error *ngIf="smeProfileForm.get('latitude').hasError('pattern')">
+              Alphabets not
+              allowed
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="text-center" *ngIf="saveButton">
+        <button mat-raised-button class="global-btn" (click)="onUpdateInformation()">
+          Save
+        </button>
+      </div>
+
+      <ng-template #disabledSecondStep>
+        <div class="text-center">
+          <button disabled type="button" class="btn btn-default ">
+            <mat-spinner class="spinner" strokeWidth="4" [diameter]="15">
+            </mat-spinner> Saving...please wait
+          </button>
+        </div>
+      </ng-template>
+    </div>
+  </form>
+</div>

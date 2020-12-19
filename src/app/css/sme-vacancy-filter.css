@@ -1,0 +1,101 @@
+
+.filter-menu {
+    position: relative;
+    background: #fff;
+    box-shadow: 0 1px 8px 0 rgba(0,0,0,.06);
+    border-bottom: 1px solid #f0f0f0;
+    padding: 14px;
+    font-size: 18px;
+    
+}
+
+.header-font-color{
+    color: #000000;
+}
+
+.cust-icon{
+    font-size: 20px;
+    float: right;
+    transform: rotate(0deg);
+}
+
+
+.filters-headline{
+    font-size: 18px;
+    letter-spacing: .3px;
+}
+
+.filter-section-font{
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #212121;
+}
+
+.card{
+    border: none;
+    border-bottom:1px solid #dee2e6;
+    font-size: 14px;
+}
+.card-header{
+    background-color: #fff;
+    padding: 14px;
+    border: none;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+.card-body{
+    padding: 0 14px 10px 0px;
+}
+
+.selected-filter{
+    background-color: #ececec;
+    padding: 7px;
+    margin: 3px 3px 3px 0;
+    cursor: pointer;
+    border-radius: 3px;
+    display: inline-block;
+}
+.selected-filter:hover{
+    text-decoration: line-through;
+}
+
+.div-link:hover {
+    text-decoration: none;
+    color: #077ff1;
+}
+
+.scrollbar{
+    max-height: 230px;
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.search-btn{
+    margin-left: 14px;
+    padding-bottom: 8px;
+}
+
+.clear-all{
+    display: inline-block;
+    font-size: 14px;
+    color: #878787;
+}
+.clear-all:hover {
+    cursor: pointer;
+}
+
+.filter-search-input{
+    height: 34px;
+}
+
+.filter-search-not-found{
+    padding-left: 16px;
+}
+.smeName{
+    width: 200px;
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

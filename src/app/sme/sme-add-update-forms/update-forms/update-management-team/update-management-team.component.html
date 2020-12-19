@@ -1,0 +1,224 @@
+<div class="sme-edit-update-team-form">
+    <div class="sme-object-form">
+        <form [formGroup]="updateTeam" class="">
+            <div class="margin-auto no-shadow no-bg no-padding">
+                <h4>Update Management Team</h4>
+            </div>
+            <mat-card class="card margin-auto">
+                <div class="mb-3">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Full Name</mat-label>
+                        <input matInput placeholder="Full Name" formControlName="fullName" required autocomplete="off">
+                        <mat-hint align="end">Not more than 50 characters long.</mat-hint>
+                        <mat-error
+                            *ngIf="updateTeam.get('fullName').hasError('required') || updateTeam.get('fullName').hasError('fullNameError')">
+                            Full Name is
+                            required
+                        </mat-error>
+                        <mat-error *ngIf="updateTeam.get('fullName').hasError('pattern')">
+                            Numbers and special characters not
+                            allowed
+                        </mat-error>
+                        <mat-error *ngIf="updateTeam.get('fullName').hasError('maxlength')">
+                            Full Name Should be Maximum 50 characters
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+
+                <div class="row mb-3">
+                    <div class="col-md-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Designation</mat-label>
+                            <input matInput placeholder="Designation" formControlName="designation" autocomplete="off"
+                                required spellcheck="true">
+                            <mat-error
+                                *ngIf="updateTeam.get('designation').hasError('required') || updateTeam.get('designation').hasError('designationError') ">
+                                Designation is
+                                required
+                            </mat-error>
+                            <mat-error *ngIf="updateTeam.get('designation').hasError('pattern')">
+                                Numbers and special characters not
+                                allowed
+                            </mat-error>
+                            <mat-error *ngIf="updateTeam.get('designation').hasError('maxlength')">
+                                Designation Should be Maximum 80 characters </mat-error>
+                            <mat-error *ngIf="updateTeam.get('designation').hasError('minlength')">
+                                Designation should be of
+                                minimum 1 characters
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Year of Experience</mat-label>
+                            <input matInput placeholder="Years of Experience" formControlName="experience" maxlength="2"
+                                autocomplete="off" required>
+                            <mat-error *ngIf="updateTeam.get('experience').hasError('pattern')">
+                                Alphabets not allowed
+                            </mat-error>
+                            <mat-error *ngIf="updateTeam.get('experience').hasError('required')">
+                                Year of Experience is required
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Email Id</mat-label>
+                            <input matInput placeholder="Email Id" formControlName="mail" required>
+                            <mat-error *ngIf="updateTeam.get('mail').hasError('pattern')">
+                                Please enter a
+                                valid email address
+                            </mat-error>
+                            <mat-error *ngIf="updateTeam.get('mail').hasError('required')">
+                                Email Id is
+                                required
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Facebook Link</mat-label>
+                            <input matInput placeholder="(eg. https://www.facebook.com/username)"
+                                formControlName="fbLink" autocomplete="off">
+                            <mat-error *ngIf="updateTeam.get('fbLink').hasError('maxlength')">
+                                Facebook Link Should be Maximum 50 characters
+                            </mat-error>
+                            <mat-error *ngIf="updateTeam.get('fbLink').hasError('minlength')">
+                                Facebook Link should be
+                                minimum 5 characters
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Twitter Link</mat-label>
+                            <input matInput placeholder="(eg. https://www.twitter.com/username)"
+                                formControlName="twitterLink" autocomplete="off">
+                            <mat-error *ngIf="updateTeam.get('twitterLink').hasError('maxlength')">
+                                Twitter Link Should be Maximum 50 characters </mat-error>
+                            <mat-error *ngIf="updateTeam.get('twitterLink').hasError('minlength')">
+                                Twitter Link Should be minimum 5 characters
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Linkedin Link</mat-label>
+                            <input matInput placeholder="(eg. https://www.linkedin.com/username)"
+                                formControlName="linkedinLink" autocomplete="off">
+                            <mat-error *ngIf="updateTeam.get('linkedinLink').hasError('maxlength')">
+                                LinkedIn Link Should be Maximum 50 characters
+                            </mat-error>
+                            <mat-error *ngIf="updateTeam.get('linkedinLink').hasError('minlength')">
+                                LinkedIn Link Should be minimum 5 characters
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
+                </div>
+
+                <div class="mb-2">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Profile Description</mat-label>
+                        <textarea matInput placeholder="Description" #add required formControlName="profileDesc"
+                            autocomplete="off" spellcheck="true"></textarea>
+                        <mat-hint align="end">{{add.value?.length || 0}}/500</mat-hint>
+                        <mat-error
+                            *ngIf="updateTeam.get('profileDesc').hasError('required') || updateTeam.get('profileDesc').hasError('profileDescError')">
+                            Profile Description is required
+                        </mat-error>
+                        <mat-error *ngIf="updateTeam.get('profileDesc').hasError('maxlength')">
+                            Profile Description Should be Maximum 500 characters
+
+                        </mat-error>
+                        <mat-error *ngIf="updateTeam.get('profileDesc').hasError('minlength')">
+                            Description should be
+                            atleast 20 characters
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="select-image">
+                    <label>
+                        Team Image <span>*</span>
+                    </label>
+                    <input accept=".png,.jpeg,.jpg" onclick="value = null" style="display: none" type="file"
+                        (change)="onFileChanged($event)" #fileInput>
+                    <button [disabled]=selectedImages type="button" class="btn btn-secondary"
+                        (click)="fileInput.click()">Select
+                        File</button>
+                    <span *ngIf="imageRequired" style="margin-left: 10px;color: red">Please select Profile Image</span>
+                </div>
+
+                <div class="image-types">
+                    Image file size should be less than 300kb. Supported formats are: .jpeg .jpg .png
+                </div>
+
+                <div class="row image-display">
+                    <div class="image-uploaded">
+                        <div *ngIf="uploadedImage;else default">
+                            <img mat-card-md-image [src]="contentServer + uploadedImage" class="border"
+                                onError="this.src='../assets/not-found/not-available.jpeg';">
+                            <div class="text-center" style="margin-top: 10px">
+                                <button type="button" mat-icon-button matTooltip="delete" (click)="deleteImageTeam()">
+                                    <i class="material-icons">close</i>
+                                </button>
+                            </div>
+                        </div>
+                        <ng-template #default>
+                            <div class="default-image">
+                                <img mat-card-md-image src="../../../../../../assets/logo/default.png" class="border">
+                            </div>
+                        </ng-template>
+                    </div>
+                </div>
+
+                <div class="upload-progress" *ngIf="showUploadProgress">
+                    <mat-progress-bar mode="determinate" value="{{progressPercent}}"></mat-progress-bar>
+                </div>
+
+                <div class="upload-fail" *ngIf="imageUploadFail">
+                    <span>Image Uploadation Failed..please try again!!</span>
+                </div>
+
+                <div class="upload-fail" *ngIf="imageSizeError">
+                    <span>Image file size should be less than 300kb</span>
+                </div>
+                <div class="upload-fail" *ngIf="imageTypeError">
+                    <span>Please select correct file format...Supported formats are: .jpeg .jpg .png</span>
+                </div>
+
+                <div class="row" *ngIf="showButton;else disabled">
+                    <div class="col-md-3">
+                    </div>
+                    <div class="col-md-3">
+                        <button mat-raised-button class="global-btn" (click)="onUpdateTeam(publish)">
+                            Save & Publish
+                        </button>
+                    </div>
+                    <div class="col-md-3">
+                        <button mat-stroked-button class="cancle-btn"
+                            [routerLink]="['../management-teams']">Cancel</button>
+                    </div>
+                    <div class="col-md-3">
+                        <button mat-stroked-button class="default-btn" (click)="onUpdateTeam(draft)">
+                            Save as draft
+                        </button>
+                    </div>
+                </div>
+
+                <ng-template #disabled>
+                    <div class="text-center">
+                        <button disabled type="button" class="btn btn-default ">
+                            <mat-spinner class="spinner" strokeWidth="4" [diameter]="15">
+                            </mat-spinner> Saving...please wait
+                        </button>
+                    </div>
+                </ng-template>
+            </mat-card>
+        </form>
+    </div>
+</div>

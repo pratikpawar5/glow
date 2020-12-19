@@ -1,0 +1,372 @@
+<div class="job-seeker-profile-information" *ngIf="jobApplicantDto">
+  <p class="main-heading">View Job-Seeker Profile</p>
+  <mat-card class="job-seeker-profile-card mt-2 mb-3">
+    <div class="row">
+      <div class="col-md-2" style="border: red">
+        <div class="image-profile" *ngIf="jobApplicantDto.applicant.userProfileImg;else noImage">
+          <img alt="Job" [src]="contentServer + jobApplicantDto.applicant.userProfileImg " class="avatar">
+        </div>
+        <ng-template #noImage>
+          <img alt="Job" src="../../../../assets/job-seeker/default_seeker.png" class="avatar">
+        </ng-template>
+      </div>
+      <div class="col-md-10" style="border: red">
+        <div class="row">
+          <div class="col-md-4 heading">
+            Full Name:
+          </div>
+          <div class="col-md-6 description">
+            {{jobApplicantDto.applicant.fullName}}
+          </div>
+        </div>
+        <div class="row mt-1">
+          <div class="col-md-4 heading">
+            Email Id:
+          </div>
+          <div class="col-md-6 description">
+            {{jobApplicantDto.applicant.emailId}}
+          </div>
+        </div>
+        <div class="row mt-1" *ngIf="jobApplicantDto.applicant.mobileNumber">
+          <div class="col-md-4 heading">
+            Mobile Number:
+          </div>
+          <div class="col-md-6 description">
+            {{jobApplicantDto.applicant.mobileNumber}}
+          </div>
+        </div>
+
+        <div class="row mt-1" *ngIf="jobApplicantDto.applicant.gender">
+          <div class="col-md-4 heading">
+            Gender
+          </div>
+          <div class="col-md-6 description">
+            {{jobApplicantDto.applicant.gender}}
+          </div>
+        </div>
+
+        <div class="row mt-1" *ngIf="jobApplicantDto.applicant.dob">
+          <div class="col-md-4 heading">
+            Date of Birth:
+          </div>
+          <div class="col-md-6 description">
+            {{jobApplicantDto.applicant.dob |date}}
+          </div>
+        </div>
+
+        <div class="row mt-1" *ngIf="jobApplicantDto.applicant.jobSeekerAddress">
+          <div class="col-md-4 heading">
+            Location:
+          </div>
+          <div class="col-md-6 description">
+            {{jobApplicantDto.applicant.jobSeekerAddress.currentCity}},{{jobApplicantDto.applicant.jobSeekerAddress.currentState}}
+          </div>
+        </div>
+
+        <div class="row mt-1" *ngIf="jobApplicantDto.applicant.totalExperience">
+          <div class="col-md-4 heading">
+            Total Experience:
+          </div>
+          <div class="col-md-6 description">
+            <span *ngIf="jobApplicantDto.applicant.totalExperience.year== 'Fresher';else other">
+              {{jobApplicantDto.applicant.totalExperience.year}}
+            </span>
+            <ng-template #other>
+              <div *ngIf="jobApplicantDto.applicant.totalExperience">
+                {{jobApplicantDto.applicant.totalExperience.year}} Year(s)
+                {{jobApplicantDto.applicant.totalExperience.month}} Month(s)
+              </div>
+            </ng-template>
+          </div>
+        </div>
+
+        <div class="row mt-1 mb-5" *ngIf="jobApplicantDto.applicant.totalExperience">
+          <div class="col-md-4 heading">
+            Current Salary:
+          </div>
+          <div class="col-md-6 description">
+            <div *ngIf="jobApplicantDto.applicant.totalExperience.year == 'Fresher';else salary">
+              N.A
+            </div>
+            <ng-template #salary>
+              <div>
+                <span>
+                  {{jobApplicantDto.applicant.currentSalary.salary | IndianCurrency}} /
+                  {{jobApplicantDto.applicant.currentSalary.salaryType}}
+                </span>
+              </div>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="actions">
+      <ul class="action-list">
+        <li *ngIf="jobApplicantDto.applicant.resume">
+          <a href="{{contentServer+jobApplicantDto.applicant.resume.resumeUrl}}" target="_blank"
+            *ngIf="jobApplicantDto.applicant.resume && jobApplicantDto.applicant.resume.resumeUrl">
+            <button mat-raised-button class="resume-btn">
+              Download Resume
+            </button>
+          </a>
+        </li>
+        <li *ngIf="jobApplicantDto.applicantStatus === 'PENDING'">
+          <button mat-raised-button type="button" class="short-list-btn" (click)="onClickShortList()">
+            Shortlist
+          </button>
+        </li>
+        <li *ngIf="jobApplicantDto.applicantStatus === 'PENDING'">
+          <button mat-raised-button class="rejected-btn" (click)="onClickRejected()">
+            Reject
+          </button>
+        </li>
+        <li *ngIf="jobApplicantDto.applicantStatus === 'SHORTLISTED'">
+          <button [disabled]="disableFlag" mat-raised-button class="short-listed-btn space">
+            SHORTLISTED
+          </button>
+        </li>
+        <li *ngIf="jobApplicantDto.applicantStatus === 'REJECTED'">
+          <button disabled mat-raised-button class="rejected-btn space">
+            REJECTED
+          </button>
+        </li>
+      </ul>
+    </div>
+
+  </mat-card>
+  <mat-accordion>
+    <mat-expansion-panel *ngIf="jobApplicantDto.applicant.educationalDetail">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <h5 class="text-bold">Educational Details</h5>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <div class="row">
+        <div class="col-md-4 heading p">
+          University Name
+        </div>
+        <div class="col-md-6 description">
+          {{jobApplicantDto.applicant.educationalDetail.universityName}}
+        </div>
+      </div>
+      <div class="row mt-1">
+        <div class="col-md-4 heading p">
+          Institute Name
+        </div>
+        <div class="col-md-6 description">
+          {{jobApplicantDto.applicant.educationalDetail.instituteName}}
+        </div>
+      </div>
+      <div class="row mt-1">
+        <div class="col-md-4 heading p">
+          Passing Out Year
+        </div>
+        <div class="col-md-6 description">
+          {{jobApplicantDto.applicant.educationalDetail.passingOutYear}}
+        </div>
+      </div>
+      <div class="row mt-1">
+        <div class="col-md-4 heading p">
+          Percentage
+        </div>
+        <div class="col-md-6 description">
+          {{jobApplicantDto.applicant.educationalDetail.percentage}}
+        </div>
+      </div>
+      <div class="row mt-1">
+        <div class="col-md-4 heading p">
+          Qualification Course Name
+        </div>
+        <div class="col-md-6 description">
+          {{jobApplicantDto.applicant.educationalDetail.qualificationCourse.courseName}}
+        </div>
+      </div>
+      <div class="row mt-1" *ngIf="jobApplicantDto.applicant.educationalDetail.qualificationSpecialization">
+        <div class="col-md-4 heading p">
+          Qualification Specialization Name
+        </div>
+        <div class="col-md-6 description">
+          {{jobApplicantDto.applicant.educationalDetail.qualificationSpecialization.specializationName}}
+        </div>
+      </div>
+    </mat-expansion-panel>
+    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false"
+      *ngIf="jobApplicantDto.applicant.experienceDetails != null && jobApplicantDto.applicant.experienceDetails.length > 0">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <h5 class="text-bold">Experience Details</h5>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div *ngFor="let experience of jobApplicantDto.applicant.experienceDetails;let i=index;">
+        <p class="text-bold" style="margin-bottom: 10px;">{{i+1}}</p>
+        <div class="row mt-1">
+          <div class="col-md-4 heading p">
+            Company Name
+          </div>
+          <div class="col-md-6 description">
+            {{experience.companyName}}
+          </div>
+        </div>
+        <div class="row mt-1">
+          <div class="col-md-4 heading p" *ngIf="experience.jobRole.industrialArea.industrialAreaName">
+            Industrial Area
+          </div>
+          <div class="col-md-6 description">
+            {{experience.jobRole.industrialArea.industrialAreaName}}
+          </div>
+        </div>
+
+        <div class="row mt-1">
+          <div class="col-md-4 heading p" *ngIf="experience.jobRole.jobRole">
+            Job Role
+          </div>
+          <div class="col-md-6 description">
+            {{experience.jobRole.jobRole}}
+          </div>
+        </div>
+
+        <div class="row mt-1">
+          <div class="col-md-4 heading p">
+            Currently Working
+          </div>
+          <div class="col-md-6 description" *ngIf="experience.currentlyWorking;else no">
+            Yes
+          </div>
+          <ng-template #no>
+            <div class="col-md-6 description">
+              No
+            </div>
+          </ng-template>
+        </div>
+
+        <div class="row mt-1">
+          <div class="col-md-4 heading p" *ngIf="experience.startDate">
+            Job Start Date
+          </div>
+          <div class="col-md-6 description">
+            {{experience.startDate | date}}
+          </div>
+        </div>
+
+        <div class="row mt-1">
+          <div class="col-md-4 heading p" *ngIf="experience.endDate">
+            Job End Date
+          </div>
+          <div class="col-md-6 description">
+            {{experience.endDate | date}}
+          </div>
+        </div>
+
+        <div class="row mt-1">
+          <div class="col-md-4 heading p" *ngIf="experience.noticePeriod">
+            Notice Period
+          </div>
+          <div class="col-md-6 description">
+            {{experience.noticePeriod}}
+          </div>
+        </div>
+      </div>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false"
+      *ngIf="jobApplicantDto.applicant.careerProfile">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <h5 class="text-bold">Career Desired Profile</h5>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <div class="row mt-1">
+        <div class="col-md-4 heading p"
+          *ngIf="jobApplicantDto.applicant.careerProfile.jobRole.industrialArea.industrialAreaName">
+          Industrial Area
+        </div>
+        <div class="col-md-6 description">
+          {{jobApplicantDto.applicant.careerProfile.jobRole.industrialArea.industrialAreaName}}
+        </div>
+      </div>
+
+      <div class="row mt-1">
+        <div class="col-md-4 heading p" *ngIf="jobApplicantDto.applicant.careerProfile.jobRole.jobRole">
+          Job Role
+        </div>
+        <div class="col-md-6 description">
+          {{jobApplicantDto.applicant.careerProfile.jobRole.jobRole}}
+        </div>
+      </div>
+
+      <div class="row mt-1">
+        <div class="col-md-4 heading p" *ngIf="jobApplicantDto.applicant.careerProfile.jobTypes[0]">
+          Job Type
+        </div>
+        <div class="col-md-6 description">
+          {{jobApplicantDto.applicant.careerProfile.jobTypes[0]}}<span
+            *ngIf="jobApplicantDto.applicant.careerProfile.jobTypes[1]">,</span>
+          {{jobApplicantDto.applicant.careerProfile.jobTypes[1]}}
+        </div>
+      </div>
+
+      <div class="row mt-1">
+        <div class="col-md-4 heading p" *ngIf="jobApplicantDto.applicant.careerProfile.employmentTypes[0]">
+          Employment Type
+        </div>
+        <div class="col-md-6 description">
+          {{jobApplicantDto.applicant.careerProfile.employmentTypes[0]}}<span
+            *ngIf="jobApplicantDto.applicant.careerProfile.employmentTypes[1]">,</span>
+
+          {{jobApplicantDto.applicant.careerProfile.employmentTypes[1]}}<span
+            *ngIf="jobApplicantDto.applicant.careerProfile.employmentTypes[2]">,</span>
+
+          {{jobApplicantDto.applicant.careerProfile.employmentTypes[2]}}
+        </div>
+      </div>
+
+      <div class="row mt-1">
+        <div class="col-md-4 heading p" *ngIf="jobApplicantDto.applicant.careerProfile.preferredShift">
+          Preffered Shift
+        </div>
+        <div class="col-md-6 description">
+          {{jobApplicantDto.applicant.careerProfile.preferredShift}}
+        </div>
+      </div>
+      <div class="row mt-1">
+        <div class="col-md-4 heading p" *ngIf="jobApplicantDto.applicant.careerProfile.expectedSalary">
+          Expected Salary
+        </div>
+        <div class="col-md-6 description">
+          {{jobApplicantDto.applicant.careerProfile.expectedSalary.salary | IndianCurrency}} /
+          <span *ngIf=""></span>
+          {{jobApplicantDto.applicant.careerProfile.expectedSalary.salaryType}}
+        </div>
+      </div>
+      <div class="row mt-1">
+        <div class="col-md-4 heading p" *ngIf="jobApplicantDto.applicant.careerProfile.prefferedJobLocations[0]">
+          Preffered Job Locations
+        </div>
+        <div class="col-md-6 description">
+          {{jobApplicantDto.applicant.careerProfile.prefferedJobLocations}}
+        </div>
+      </div>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false"
+      *ngIf="jobApplicantDto.applicant.skillSets != null && jobApplicantDto.applicant.skillSets.length > 0">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <h5 class="text-bold">Key Skill Sets</h5>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <ul class="type-of-jobs-list">
+        <li *ngFor="let skill of jobApplicantDto.applicant.skillSets">&nbsp;
+          <span class="job-type">
+            <button type="button" class="btn btn-secondary m">{{skill}}</button>
+          </span>
+        </li>
+      </ul>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+
+  <br>
+</div>

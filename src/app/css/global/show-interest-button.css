@@ -1,0 +1,33 @@
+.show-interest-btn{
+    width: 90%;
+    font-size: 14px;
+    border:1px solid #de2b2624;
+    color: #ed4440;
+    background-color: #ffffff;
+}
+.show-interest-btn:hover{
+    color: #ffffff;
+    background-color: #ed4440;
+}
+.added-to-cart{
+    font-size: 14px;
+    border: none;
+    cursor: not-allowed;
+    background-color: #bebebe;
+    color: #fff;
+    font-weight: bold;
+}
+.cart-arrow-check
+{
+    position: absolute;
+    background: #9f9f9f;
+    height: 18px;
+    width: 18px;
+    border-radius: 100%;
+    color: #fff;
+    line-height: 20px;
+    top: 1px;
+    right: 8px;
+    text-align: center;
+    font-size: 11px;
+}

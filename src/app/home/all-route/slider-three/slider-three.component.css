@@ -1,0 +1,6 @@
+@import '../../../css/home-sliders/home-slider.css';
+
+.mat-card-lg-image{
+    height: 130px;
+    width: 130px;
+}

@@ -1,0 +1,41 @@
+<i class="material-icons close-icon close" (click)="onClickClose()">close</i>
+
+<div class="share-dialog-box">
+  <h4 class="header text-center">Share this {{data.mailContent}}</h4>
+  <div class="note">
+    Click any one of these icon to share the {{data.mailContent}}
+  </div>
+  <div class="links text-center">
+    <a *ngIf="isDesktopDevice" href="https://web.whatsapp.com/send?text=https://www.gloqr.com{{data.url}}"
+      target="_blank" title="Share on WhatsApp">
+      <img alt="Whatsapp" src="../../../../assets/social/whatsapp.png" class="share-icon">
+    </a>
+    <a *ngIf="isMobile || isTablet" [href]="url">
+      <img src="../../../../assets/social/whatsapp.png" class="share-icon">
+    </a>
+    <a href="mailto:?subject=Check this {{data.mailContent}} on gloqr!&amp;body={{data.name}}. Here is the link https://www.gloqr.com{{data.url}}"
+      title="Share by Email">
+      <img alt="Email" src="../../../../../assets/social/Mail.png" class="share-icon">
+    </a>
+
+    <a href="https://twitter.com/intent/tweet?url=https://www.gloqr.com{{data.url}}" target="_blank"
+      title="Share on Twitter">
+      <img alt="Twitter" src="../../../../../assets/social/twitter-logo.png" class="share-icon">
+    </a>
+
+    <a href="https://www.facebook.com/dialog/share?app_id=2447419352161233&display=popup&href=https://www.gloqr.com{{data.url}}&redirect_uri=https://www.gloqr.com"
+      title="Share on Facebook" target="_blank">
+      <img alt="Facebook" src="../../../../../assets/social/fb-logo.png" class="share-icon">
+    </a>
+
+    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://www.gloqr.com{{data.url}}"
+      title="Share on LinkedIn" target="_blank">
+      <img alt="LinkedIn" src="../../../../../assets/social/linkedIn-logo.png" class="share-icon">
+    </a>
+    <!-- <br>
+    <a *ngIf="data.mailContent === 'SME'" class="qr-code text-center">
+        <qrcode [qrdata]="myAngularxQrCode" [size]="100" [level]="'M'"></qrcode>
+    </a> -->
+  </div>
+
+</div>

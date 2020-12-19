@@ -1,0 +1,41 @@
+@import '../../../css/nav-bar.css';
+@import'../../../css/action-button.css';
+
+.sme-name{
+    font-size: 24px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.product-service-action
+{
+    margin: 10px;
+}
+.navbar{
+    justify-content: unset
+}
+.home-logo {
+    height: 30px;
+    width: 60px;
+}
+@media(min-width:991px){
+    .navbar-brand{
+        margin-right: 5%;
+    }
+}
+@media (max-width: 991px){
+    ul {
+        background-color: #fff;
+        padding: 0px;
+    }
+}
+@media (max-width: 767px){
+    .sme-name{
+        width: 130px;
+    }
+}
+/* @media (max-width: 500px){
+    .sme-name{
+        width: 180px;
+    }
+} */

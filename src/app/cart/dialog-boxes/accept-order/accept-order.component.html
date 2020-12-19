@@ -1,0 +1,88 @@
+<i class="material-icons close-icon" (click)="close()">close</i>
+<div class="padding">
+
+  <div class="title margin-b20 text-blue">
+    <h5>Send Quotation File</h5>
+  </div>
+
+  <mat-radio-group [formControl]="quotationType">
+    <div class="row margin-b20">
+      <div class="col-sm-1"></div>
+      <div class="col-sm-4">
+        <mat-radio-button value="{{autoQuotation}}">Default Quotation Format</mat-radio-button>
+        <div class="text-center" *ngIf="quotationType.value === autoQuotation">
+          <div *ngIf="spinner; else genQuot">
+            <mat-spinner strokeWidth="4" [diameter]="15"></mat-spinner>
+          </div>
+          <ng-template #genQuot>
+            <div class="div-link" class="div-link" (click)="generateQuotation()">
+              View Quotation
+            </div>
+          </ng-template>
+        </div>
+      </div>
+      <div class="col-sm-2"></div>
+      <div class="col-sm-4">
+        <mat-radio-button value="{{manualQuotation}}">Select Quotation</mat-radio-button>
+      </div>
+    </div>
+  </mat-radio-group>
+
+  <div class="margin-b20" *ngIf="quotationType.value === manualQuotation">
+    <div class="margin-b10">
+      <input accept=".png,.jpeg,.jpg,.pdf,.docx,.txt" onclick="value = null" style="display: none" type="file" (change)="onFileChanged($event.target.files)"
+        #fileInput>
+      <button [disabled]="selectedFile" type="button" class="btn default-btn" (click)="fileInput.click()">Select
+        File
+      </button>
+
+      <div class="selected-file" *ngIf="selectedFile">
+        <span class="text-blue">{{selectedFile.name}}</span>
+        <button type="button" mat-icon-button matTooltip="delete" (click)="deleteImage()">
+          <i class="material-icons">close</i>
+        </button>
+      </div>
+    </div>
+
+    <div class="text-grey f-12" [ngClass]="{'text-red':imageSizeError}">
+      File file size should be less than 300kb.
+    </div>
+
+    <div class="text-grey f-12" [ngClass]="{'text-red':imageTypeError}">
+      Supported formats are: .pdf .docx .txt .jpeg .jpg .png
+    </div>
+
+  </div>
+
+  <div *ngIf="showError" class="text-red f-12">
+    please select file or write message
+  </div>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Write a message</mat-label>
+    <textarea matInput [formControl]="quotationMessage" rows="3" spellcheck="true"></textarea>
+    <mat-error *ngIf="quotationMessage.hasError('maxlength')">
+      Maximum 500 characters allowed
+    </mat-error>
+    <mat-hint align="end">{{quotationMessage.value?.length || 0}}/500</mat-hint>
+  </mat-form-field>
+
+  <div class="text-center" *ngIf="showButton;else disabled">
+    <button type="submit" (click)="acceptOrder()" mat-raised-button class="global-btn">
+      Send Quotation
+    </button>
+    <span class="button-spacing"></span>
+    <button type="button" (click)="close()" class="btn cancle-btn">
+      Cancel
+    </button>
+  </div>
+
+  <ng-template #disabled>
+    <div class="text-center">
+      <button disabled type="button" class="btn btn-default">
+        <mat-spinner class="spinner" strokeWidth="4" [diameter]="15">
+        </mat-spinner> Sending quotation...please wait
+      </button>
+    </div>
+  </ng-template>
+</div>

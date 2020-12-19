@@ -1,0 +1,15 @@
+.p
+{
+  margin: 5px;
+}
+.mat-raised-button
+{
+  width: auto;
+  float: right;
+  margin-right: 5px;
+}
+.mat-stroked-button
+{
+  float: right;
+
+}

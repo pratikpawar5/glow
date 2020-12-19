@@ -1,0 +1,40 @@
+<mat-card>
+  <div>
+    <h4 class="slider-title">Top Service Categories
+      <a href class="view-all" routerLink="/services">View All</a>
+    </h4>
+  </div>
+  <hr>
+  <ngu-carousel [inputs]="carousel" [dataSource]="serviceCategories">
+    <div NguCarouselItem class="item text-center" *nguCarouselDef="let category;">
+
+      <div class="item-img">
+        <a href [routerLink]="['/','services',category.urlName]" [queryParams]="{c:category.categoryUuid}" matTooltip="{{category.categoryName}}">
+          <img alt="Service Category" mat-card-lg-image [src]="contentServer + category.fileLocation" onError="this.src='../assets/not-found/no_image.png';">
+        </a>
+      </div>
+
+      <div class="text-center pl-3 pr-3">
+        <div class="item-name">
+          <a [routerLink]="['/','services',category.urlName]" [queryParams]="{c:category.categoryUuid}" matTooltip="{{category.categoryName}}">
+            {{category.categoryName | namePipe}}
+          </a>
+        </div>
+        <div class="item-sme-name">
+          <a>({{category.servicesCount}}  {{category.servicesCount > 1?'Services':'Service'}})</a>
+        </div>
+      </div>
+
+    </div>
+
+    <button NguCarouselPrev class="arrow-left">
+      <i class="fa fa-angle-left arrow-icon-size"></i>
+    </button>
+
+    <button NguCarouselNext class="arrow-right">
+      <i class="fa fa-angle-right arrow-icon-size"></i>
+    </button>
+
+  </ngu-carousel>
+
+</mat-card>

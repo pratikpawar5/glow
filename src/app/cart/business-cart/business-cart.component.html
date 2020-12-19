@@ -1,0 +1,40 @@
+<div #top>
+    <app-main-header></app-main-header>
+</div>
+
+<div class="cart-page container">
+    <div *ngIf="isNormalUser; else smecart">
+        <app-user-cart></app-user-cart>
+    </div>
+
+
+    <ng-template #smecart>
+
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href routerLink="/cart/received" routerLinkActive="active">
+                    Received ({{receiveCount}})
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href routerLink="/cart" [routerLinkActiveOptions]="{exact: true}"
+                    routerLinkActive="active">
+                    Sent ({{sentCount}})
+                </a>
+            </li>
+        </ul>
+        <router-outlet></router-outlet>
+    </ng-template>
+
+</div>
+
+<div class="back-to-top" [ngClass]="{'show-scrollTop': windowScrolled}">
+    <div>
+        <button class="back-to-top-btn" [ngx-scroll-to]="top">
+            <i class="fa fa-arrow-up">
+            </i>
+        </button>
+    </div>
+</div>
+
+<app-main-footer></app-main-footer>

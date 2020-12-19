@@ -1,0 +1,22 @@
+<i class="material-icons close-icon close" (click)="close()">close</i>
+
+<div class="container-fluid">
+    <h6>Mutual Connections: {{data.smeName}}</h6>
+    <hr>
+    <div *ngFor="let mutualConnection of data.mutualConnections">
+        <div class="row">
+            <div class="col-md-2">
+                <img alt="Logo" [src]="contentServer + mutualConnection.logoImage" class="avatar" onError="this.src='../assets/not-found/no_image.png';" alt="sme-logo">
+            </div>
+            <div class="col-md-8">
+                <a href="/sme/{{mutualConnection.sUuid}}" target="_blank" class="smeName" matTooltip="{{mutualConnection.smeName}}">
+                    {{mutualConnection.smeName}}
+                </a>
+                <br>
+                <a *ngIf="mutualConnection.smeAddress" class="sme-address">
+                    {{mutualConnection.smeAddress.locality}}, {{mutualConnection.smeAddress.city}}
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,59 @@
+<mat-card class="card">
+  <h4>Add Job Industrial Area and Job Role</h4>
+  <form [formGroup]="jobRoleForm">
+    <div class="job-role">
+      <mat-form-field appearance="outline">
+        <mat-label>Functional Area</mat-label>
+        <mat-select (click)="onGetFunctionalArea()" formControlName="functionalAreaUuid" required>
+          <mat-option *ngFor="let industrial of industrialAreaDto" [value]="industrial.areaUuid">
+            {{industrial.industrialAreaName}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="jobRoleForm.get('functionalAreaUuid').hasError('required')">
+          Functional area is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div style="background-color: #f1f1f1;
+    padding: 50px;" formArrayName="jobRoles" *ngFor="let role of getControls(); let i = index;">
+      <div [formGroupName]="i">
+        <b>{{i+1}}.</b>
+        <div>
+          <mat-form-field appearance="outline">
+            <mat-label>Job Role Name</mat-label>
+            <input matInput formControlName="jobRole" required autocomplete="off">
+            <mat-error *ngIf="jobRoleForm.controls['jobRoles'].controls[i].get('jobRole').hasError('required')">
+              Job Role Name is required
+            </mat-error>
+            <mat-error
+              *ngIf="jobRoleForm.controls['jobRoles'].controls[i].get('jobRole').hasError('maxlength') || jobRoleForm.controls['jobRoles'].controls[i].get('jobRole').hasError('minlength')">
+              Min 1 & Max 100 characters allowed
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div>
+          <button type="button" mat-stroked-button (click)="addSubCategory()">
+            + Add more
+          </button>
+        </div>
+        <div class="col-md-4" *ngIf="jobRoleForm.get('jobRoles').controls.length > 1">
+          <button type="button" mat-stroked-button color="warn" (click)="removeSubCategory(i)">
+            remove X
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="showButton;else disabled">
+      <button mat-raised-button class="global-btn" (click)="onSubmit()">
+        Save
+      </button>
+    </div>
+    <ng-template #disabled>
+      <button disabled type="button" class="btn btn-default">
+        <mat-spinner class="spinner" strokeWidth="4" [diameter]="15">
+        </mat-spinner> Saving...please wait
+      </button>
+    </ng-template>
+  </form>
+</mat-card>

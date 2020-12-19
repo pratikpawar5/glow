@@ -1,0 +1,39 @@
+<i class="material-icons close-icon" (click)="close()">close</i>
+
+<div class="padding">
+
+  <div class="title margin-b20">
+    <h5>Reject Business Interest</h5>
+  </div>
+
+  <mat-form-field>
+    <mat-select placeholder="Please select reason" [formControl]="BIclosedReason" required>
+      <mat-option *ngFor="let value of reasons" [value]="value">
+        <span>{{value.message}}</span>
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="BIclosedReason.hasError('required')">Please select reason</mat-error>
+  </mat-form-field>
+
+  <div *ngIf="otherReasonTextBox" class="text-center">
+    <mat-form-field appearance="outline">
+      <mat-label>Write a reason</mat-label>
+      <textarea matInput [formControl]="reasonControl" spellcheck="true"></textarea>
+      <mat-error *ngIf="reasonControl.hasError('maxlength')">
+        Max 500 characters allowed
+      </mat-error>
+      <mat-hint align="end">{{reasonControl.value?.length || 0}}/500</mat-hint>
+    </mat-form-field>
+
+    <button *ngIf="showButton;else spinner" type="button" class="btn cancle-btn" (click)="otherMessage()">
+      Reject
+    </button>
+    <ng-template #spinner>
+      <div class="text-center">
+        <mat-spinner class="spinner" strokeWidth="4" [diameter]="15">
+        </mat-spinner> Rejecting...please wait
+      </div>
+    </ng-template>
+  </div>
+
+</div>

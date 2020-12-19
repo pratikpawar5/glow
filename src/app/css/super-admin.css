@@ -1,0 +1,114 @@
+::ng-deep .mat-dialog-container{
+    padding: 8px 10px;
+    border-radius: 0px;
+}
+.link
+{
+  float: right;
+    color: #097ee2;
+    font-size: 13px;
+    margin-right: 45px;
+    cursor: pointer;
+}
+.approve-tr
+{
+    background-color: #6ac36a !important;
+}
+.reject-tr
+{
+    background-color:#ff0000b8 !important
+}
+.b{
+    margin: 10px;
+}
+.action-button
+{
+    float: right;
+}
+mat-form-field
+{
+    width: 100%;
+}
+.titile
+{
+    color: #808080;
+    font-size: 18px;
+}
+.sub-titile
+{
+    color: #141516;
+    font-size: 14px;
+    word-break: break-word;
+}
+.view-detail
+{
+    color:#212529
+}
+
+.product-img-div
+{
+    width: auto;
+    max-width: 100%;
+    height: 320px;
+    max-height: 400px;
+    object-fit: scale-down;
+}
+.border {
+    border: 1px solid #dee2e6!important;
+}
+
+.spinner{
+    padding: 0px 0%;
+}
+
+.headline{
+margin-left: 0%;
+font-weight: bold;
+}
+
+.brand-img
+{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+.sme-name
+{
+    color: #3c3535;
+    font-size: 25px;
+    margin-bottom: 2px;
+}
+
+.existing-sme-card
+{
+    width: 70%;
+    margin: auto;
+}
+
+.apply-btn
+{
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+}
+
+.index-count{
+    text-align: right;
+    color: #a5a5a5;
+}
+
+.listed-on-date
+{
+    color: #616161;
+    font-weight: bold;
+    font-size: 14px;
+    margin-right: 10px;
+    margin-bottom: 2px;
+
+}
+
+.upload-fail
+{
+    color: #ff0000;
+}  
+

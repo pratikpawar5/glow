@@ -1,0 +1,98 @@
+.circle-title{
+    padding: 10px 15px 10px 0;
+    margin-left: -15px;
+}
+.not-found
+{
+    width: auto;
+    height: 10%;
+}
+.sme-vendor-wrap mat-card{
+    padding: 0;
+}
+.sme-vendor-wrap .mat-card-lg-image{
+    height: 120px;
+    width: 120px;
+    margin: 0 auto;
+    display: block;
+    float: none;
+}
+.sme-vendor-wrap{
+    margin: 0 30px;
+}
+.no-Lpadding{
+    padding-left: 0!important;
+}
+.sme-vendor-wrap .my-circle-people-you-know .mat-card {
+    width: 189px;
+}
+.custom-mat-card{
+    margin: 0 11px 11px 0;
+}
+.top-listed-sme-clients .item{
+    border: 1px solid #dcdcdc;
+    padding: 5px;
+    border-radius: 5px;
+    box-shadow: 0 8px 6px -6px #909090;
+    margin: 5px;
+    background: #fff;
+}
+
+.top-listed-sme-clients .item:hover
+ {
+    box-shadow: none;
+    border: 1px solid #3574b7; 
+}
+.top-listed-sme-clients
+{
+    padding: 0 10px 15px 10px;
+}
+.top-listed-SME
+{
+  text-align: center;
+}
+        
+.top-listed-SME img
+{
+    object-fit: scale-down;
+}
+        
+.top-listed-SME .content
+{
+        padding: 10px 0;
+        min-height: 80px;
+}
+.sme-name
+{
+    color: #080808;
+    display: block;
+    font-size: 12px;
+    cursor: pointer;
+}
+.sme-address
+{
+    color:#676161;
+    display: block;
+    font-size: 12px;
+}
+.custom-see-more-card
+{
+    height: 294px;
+}
+.see-more-main
+{
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    filter: blur('5px');
+}
+.see-more
+{
+    color: #004f7d;
+    font-weight: 600;
+    font-size: 20px;
+    cursor: pointer;
+}
+.spinner{
+    padding: 145px 50%;
+}      

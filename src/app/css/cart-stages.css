@@ -1,0 +1,94 @@
+.order-progress .progressbar {
+	height: 90px;
+	padding: 10px 0;
+	max-width: 600px;
+	margin: auto
+}
+
+.order-progress .progressbar li {
+	list-style-type: none;
+	width: 25%;
+	float: left;
+	font-size: 12px;
+	position: relative;
+	text-align: center;
+	text-transform: uppercase;
+	color: #7d7d7d;
+	z-index: 1
+}
+
+.order-progress .progressbar li:before {
+	width: 16px;
+	height: 16px;
+	content: '';
+	line-height: 15px;
+	border: 2px solid #d4d4d5;
+	display: block;
+	text-align: center;
+	margin: 0 auto 10px;
+	border-radius: 50%;
+	background-color: #d4d4d5;
+	z-index: 1
+}
+
+.order-progress .progressbar li:after {
+	width: 100%;
+	height: 6px;
+	content: '';
+	position: absolute;
+	background-color: #d4d4d5;
+	top: 5px;
+	left: -50%;
+	margin-left: 7px;
+	z-index: -1
+}
+
+.order-progress .progressbar li:first-child:after {
+	content: none
+}
+
+.order-progress .progressbar li.active {
+	color: #388e3c
+}
+
+.order-progress .progressbar li.active:before {
+	border-color: #388e3c;
+	background: #388e3c
+}
+
+.order-progress .progressbar li.active:after {
+	background-color: #388e3c
+}
+
+.order-progress .progressbar li.pending {
+	color: #ffbd08
+}
+
+.order-progress .progressbar li.pending:after {
+	background-color: #388e3c
+}
+
+.order-progress .progressbar li.pending:before {
+	border-color: #ffbd08;
+	background-color: #ffbd08
+}
+
+.order-progress .progressbar li.inactive {
+	color: #ff0000
+}
+
+.order-progress .progressbar li.inactive:after {
+	background-color: #388e3c
+}
+
+.order-progress .progressbar li.inactive:before {
+	border-color: #ff0000;
+	background-color: #ff0000
+}
+.view-quotation{
+	text-transform: lowercase;
+	font-size: 12px;
+}
+
+
+      

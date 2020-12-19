@@ -1,0 +1,98 @@
+<div *ngIf="smeJobsDisplay?.length > 0;else noAppliedJob">
+    <div *ngFor="let smeJob of smeJobsDisplay;let i=index;">
+        <mat-card class="vacancy-card border">
+
+            <div class="vacancy-title">
+                <a href="/vacancies/{{smeJob.vacancyVo.vacancyUrl}}/v/{{smeJob.vacancyVo.vacancyUuid}}" target="_blank">
+                    <span class="vacancy-title-text"
+                        *ngIf="smeJob.vacancyVo.vacancyTitle">{{smeJob.vacancyVo.vacancyTitle}}</span>
+                </a>
+                <span class="count text-grey">{{i+1}}/{{smeJobsDisplay.length}}</span>
+
+                <span class="posted-by margin" *ngIf="smeJob.vacancyVo.creationDate">Posted
+                    {{smeJob.vacancyVo.creationDate | dateAgo}}</span>
+            </div>
+
+            <div class="sme-name" *ngIf="smeJob.vacancyVo.smeInfo.smeName">
+                <a href="/sme/{{smeJob.vacancyVo.smeInfo.sUuid}}" target="_blank">
+                    <span class="sme-name-text">{{smeJob.vacancyVo.smeInfo.smeName}}</span>
+                </a>
+            </div>
+            <hr>
+            <div class="mb-1">
+                <div class="row">
+                    <div class="col-md-3" *ngIf="smeJob.vacancyVo.noOfVacancy">
+                        <div class="icons">Number of Vacancy :
+                            <span size="2" class="jobDesc">{{smeJob.vacancyVo.noOfVacancy}}</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6" *ngIf="smeJob.vacancyVo.jobRole">
+                        <div class="icons">Job Role :
+                            <span size="2" class="jobDesc">{{smeJob.vacancyVo.jobRole}} </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mb-1">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="icons" *ngIf="smeJob.vacancyVo.minExp || smeJob.vacancyVo.maxExp">Experience :
+                            <span size="2" class="jobDesc">{{smeJob.vacancyVo.minExp}}</span>
+                            <span class="jobDesc"> to </span>
+                            <span size="2" class="jobDesc">{{smeJob.vacancyVo.maxExp}}</span>
+                            <span class="jobDesc"> yrs </span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="icons" *ngIf="smeJob.minSalary || smeJob.maxSalary">Salary :
+                            <span size="2" class="jobDesc">{{smeJob.vacancyVo.minSalary | IndianCurrency}} </span>
+                            <span class="jobDesc"> to </span>
+                            <span size="2" class="jobDesc">{{smeJob.vacancyVo.maxSalary | IndianCurrency}}
+                                /Monthly</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-1">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="icons">Total Applicants :
+                                <span size="2" class="jobDesc">{{smeJob.vacancyVo.totalApplicants}}</span>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="icons">
+                                Location :
+                                <span size="2" class="jobDesc">{{smeJob.vacancyVo.locations}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mb-2">
+                <div class="icons">Short Description :
+                    <span class="jobDesc">{{smeJob.vacancyVo.shortDescription}}</span>
+                </div>
+            </div>
+            <div class="mb-5 f-12" style="cursor: pointer" *ngIf="smeJob.shortListedInfo">
+                <mark (click)="onClickMarker(smeJob.shortListedInfo)"> Message from Recruiter please click here to
+                    view</mark>
+            </div>
+            <div>
+                <div *ngIf="smeJob.vacancyVo.applied">
+                    <button mat-raised-button class="applied">
+                        Applied
+                    </button>
+                </div>
+
+                <div *ngIf="smeJob.applicantStatus==='SHORTLISTED'">
+                    <button [disabled]="disableFlag" mat-raised-button class="short-listed-btn space">
+                        SHORTLISTED
+                    </button>
+                </div>
+            </div>
+        </mat-card>
+    </div>
+</div>
+<ng-template #noAppliedJob>
+    <img src="../../../../assets/job-seeker/NotAppliedForJob-min.png">
+</ng-template>

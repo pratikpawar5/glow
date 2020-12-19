@@ -1,0 +1,13 @@
+@import'../css/back-to-top.css';
+.social-post-wrap
+{
+    margin-top: 60px;
+}
+.gloqr-footer
+{
+    margin-bottom: 60px;
+}
+.sticky-div{
+    position: sticky;
+    top: 65px;
+}

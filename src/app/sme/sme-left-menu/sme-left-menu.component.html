@@ -1,0 +1,60 @@
+<div class="text-center sticky-div f-12">
+  <ul id="grouplist" class="list-group">
+    <!-- <li class="list-group-item" routerLinkActive="active">
+      <a [routerLink]="['sme-dashboard']">
+        <span class="category-name">Dashboard</span>
+      </a>
+    </li> -->
+    <li class="list-group-item" routerLinkActive="active">
+      <a [routerLink]="['home']">
+        <span class="category-name">Home</span>
+      </a>
+    </li>
+    <li class="list-group-item"
+      [ngClass]="{'active': (router.url === '/my-sme/'+sUuid+'/products')|| (router.url === '/my-sme/'+sUuid+'/add-product') || (router.url.includes('/my-sme/'+sUuid+'/update-product'))}">
+      <a [routerLink]="['products']">
+        <span class="category-name">Products</span>
+      </a>
+    </li>
+    <li class="list-group-item"
+      [ngClass]="{'active': (router.url === '/my-sme/'+sUuid+'/services')|| (router.url === '/my-sme/'+sUuid+'/add-service') || (router.url.includes('/my-sme/'+sUuid+'/update-service'))}">
+      <a [routerLink]="['services']">
+        <span class="category-name">Services</span>
+      </a>
+    </li>
+    <li class="list-group-item"
+      [ngClass]="{'active': (router.url === '/my-sme/'+sUuid+'/certificates')|| (router.url === '/my-sme/'+sUuid+'/add-certificate') || (router.url.includes('/my-sme/'+sUuid+'/update-certificate'))}">
+      <a [routerLink]="['certificates']">
+        <span class="category-name">Certificates</span>
+      </a>
+    </li>
+    <li class="list-group-item"
+      [ngClass]="{'active': (router.url === '/my-sme/'+sUuid+'/infrastrcutures')|| (router.url === '/my-sme/'+sUuid+'/add-infrastructure') || (router.url.includes('/my-sme/'+sUuid+'/update-infrastructure'))}">
+      <a [routerLink]="['infrastrcutures']">
+        <span class="category-name">Infrastructure</span>
+      </a>
+    </li>
+    <li class="list-group-item"
+      [ngClass]="{'active': (router.url === '/my-sme/'+sUuid+'/management-teams') || (router.url === '/my-sme/'+sUuid+'/add-management-team') || (router.url.includes('/my-sme/'+sUuid+'/update-management-team'))}">
+      <a [routerLink]="['management-teams']">
+        <span class="category-name">Management Team</span>
+      </a>
+    </li>
+    <li class="list-group-item"
+      [ngClass]="{'active': (router.url === '/my-sme/'+sUuid+'/galleries')|| (router.url === '/my-sme/'+sUuid+'/add-gallery') || (router.url.includes('/my-sme/'+sUuid+'/update-gallery'))}">
+      <a [routerLink]="['galleries']">
+        <span class="category-name">Gallery</span>
+      </a></li>
+    <li class="list-group-item"
+      [ngClass]="{'active': (router.url === '/my-sme/'+sUuid+'/jobs')|| (router.url === '/my-sme/'+sUuid+'/add-job') ||  (router.url.includes('/my-sme/'+sUuid+'/update-job'))}">
+      <a [routerLink]="['jobs']">
+        <span class="category-name">Jobs</span>
+      </a>
+    </li>
+    <li class="list-group-item" [ngx-scroll-to]="'destination'">
+      <a [routerLink]="['home']">
+        <span class="category-name"> Contact Us</span>
+      </a>
+    </li>
+  </ul>
+</div>

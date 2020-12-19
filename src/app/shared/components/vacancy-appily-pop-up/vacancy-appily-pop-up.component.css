@@ -1,0 +1,85 @@
+@import'../../../css/material-dialog.css';
+/* :host ::ng-deep .mat-form-field-wrapper {
+  padding-bottom: 5px;
+} */
+.option
+{
+    font-size: 17px;
+    font-weight: 800;
+}
+.radio-btn-text
+{
+    font-size: 15px;
+    font-weight: 300;
+}
+.mat-raised-button
+{
+    width:auto;
+    margin-left: 10px;
+    min-width: 75px;
+}
+.action-button
+{
+    float: right;
+}
+mat-form-field
+{
+    width: 100%;
+}
+.fileName
+{
+  font-size: 12px;
+  margin-left: 5px;
+  color: #0073b6;
+}
+.resume-types
+{
+  font-size: 12px;
+    color: #666;
+}
+.upload-fail
+{
+  font-size: 12px;
+  color: #ff0000;
+}
+.remove
+{
+  font-size: 14px;
+  color:#000000
+}
+::ng-deep .mat-form-field-flex > .mat-form-field-infix { 
+    padding: 5px 0px;
+  }
+  ::ng-deep .mat-form-field-label-wrapper { 
+    top: -1.5em; 
+  }
+  
+  ::ng-deep .mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+    transform: translateY(-1.1em) scale(.75);
+    width: 133.33333%;
+  }
+  ::ng-deep .mat-form-field-appearance-outline .mat-form-field-prefix, .mat-form-field-appearance-outline .mat-form-field-suffix{
+    top:-3px !important;
+  }
+  .card-header {
+    padding: .75rem 1.25rem;
+    margin-bottom: 0;
+    background-color: rgba(0,0,0,.03);  
+    border-bottom: 1px;
+  }
+  .cust-icon {
+    font-size: 20px;
+    float: right;
+    transform: rotate(0);
+    cursor: pointer;
+}
+.close-icon
+{
+    float: right;
+    font-size: 18px;
+    margin-left: 10px;
+}
+.not-allowed
+{
+  cursor: not-allowed;
+}

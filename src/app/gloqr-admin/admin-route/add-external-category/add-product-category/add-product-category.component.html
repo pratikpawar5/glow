@@ -1,0 +1,144 @@
+<div>
+  <h2>Add Product Category or SubCategory</h2>
+
+  <form [formGroup]="categoryForm">
+
+    <div class="col-md-6">
+      <mat-form-field appearance="outline">
+        <mat-label>Select Category</mat-label>
+        <mat-select formControlName="categoryUuid" required>
+          <mat-option class="category-mat-option" *ngFor="let obj of productCategories" [value]="obj.categoryUuid">
+            {{obj.categoryName}}
+          </mat-option>
+          <mat-option [value]="'NewCategory'" class="div-link">
+            + Add New Category
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="categoryForm.get('categoryUuid').hasError('required')">
+          Please select Category
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div *ngIf="newCategory">
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>Category Name</mat-label>
+          <input matInput formControlName="categoryName" required autocomplete="off">
+          <mat-error *ngIf="categoryForm.get('categoryName').hasError('required')">
+            Category name is required
+          </mat-error>
+          <mat-error *ngIf="categoryForm.get('categoryName').hasError('maxlength')">
+            Max 100 characters allowed
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="text-grey f-12">
+        Image file size should be less than 20kb. Supported formats are: .jpeg .jpg .png
+      </div>
+      <div class="row">
+        <div class="col-md-2">
+          <input accept=".png,.jpeg,.jpg" onclick="value = null" style="display: none" type="file" (change)="onFileChanged($event.target.files,0,'Category')"
+            #fileInput>
+          <button [disabled]="categoryForm.controls['fileLocation'].value" type="button" class="btn default-btn"
+            (click)="fileInput.click()">Select
+            File</button>
+          <div class="text-red f-12" *ngIf="!categoryForm.controls['fileLocation'].value">please select image</div>
+        </div>
+        <div class="col-md-10">
+          <div *ngIf="categoryForm.controls['fileLocation'].value;else default">
+            <img mat-card-md-image [src]="contentServer + categoryForm.controls['fileLocation'].value" class="border">
+            <div>
+              <button type="button" mat-icon-button matTooltip="delete" (click)="deleteCategoryImage()">
+                <i class="material-icons">close</i>
+              </button>
+            </div>
+          </div>
+          <ng-template #default>
+            <div>
+              <img mat-card-md-image src="../../../../assets/action/default-image.png" class="border p-3">
+            </div>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+    <div style="background-color: #f1f1f1;
+    padding: 50px;" formArrayName="subCategories" *ngFor="let subCategory of getControls(); let i = index;">
+      <div [formGroupName]="i">
+        <b>{{i+1}}.</b>
+        <div>
+          <mat-form-field appearance="outline">
+            <mat-label>SubCategory Name</mat-label>
+            <input matInput formControlName="subCategoryName" required autocomplete="off">
+            <mat-error *ngIf="categoryForm.controls['subCategories'].controls[i].get('subCategoryName').hasError('required')">
+              SubCategory name is required
+            </mat-error>
+            <mat-error *ngIf="categoryForm.controls['subCategories'].controls[i].get('subCategoryName').hasError('maxlength') || categoryForm.controls['subCategories'].controls[i].get('subCategoryName').hasError('minlength')">
+              Min 1 & Max 100 characters allowed
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="text-grey f-12">
+          Image file size should be less than 20kb. Supported formats are: .jpeg .jpg .png
+        </div>
+        <div class="row">
+          <div class="col-md-2">
+            <input accept=".png,.jpeg,.jpg" onclick="value = null" style="display: none" type="file" (change)="onFileChanged($event.target.files,i)"
+              #fileInput>
+            <button [disabled]="getImage(i)" type="button" class="btn default-btn" (click)="fileInput.click()">Select
+              File</button>
+            <div class="text-red f-12" *ngIf="getImage(i) == null">please select image</div>
+          </div>
+          <div class="col-md-6">
+            <div *ngIf="getImage(i);else default">
+              <img mat-card-md-image [src]="contentServer + getImage(i)" class="border">
+              <div>
+                <button type="button" mat-icon-button matTooltip="delete" (click)="deleteImage(i)">
+                  <i class="material-icons">close</i>
+                </button>
+              </div>
+            </div>
+            <ng-template #default>
+              <div>
+                <img mat-card-md-image src="../../../../assets/action/default-image.png" class="border p-3">
+              </div>
+            </ng-template>
+          </div>
+          <div class="col-md-4" *ngIf="categoryForm.get('subCategories').controls.length > 1">
+            <button type="button" mat-stroked-button color="warn" (click)="removeSubCategory(i)">
+              remove X
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <button type="button" mat-stroked-button (click)="addSubCategory()">
+        + Add more
+      </button>
+    </div>
+
+    <div class="col-2 mt-3">
+      <div *ngIf="showButton;else disabled">
+        <button mat-raised-button class="global-btn" (click)="onSubmit()">
+          Save
+        </button>
+      </div>
+      <ng-template #disabled>
+        <button disabled type="button" class="btn btn-default">
+          <mat-spinner class="spinner" strokeWidth="4" [diameter]="15">
+          </mat-spinner> Saving...please wait
+        </button>
+      </ng-template>
+    </div>
+
+
+    <div *ngIf="error" class="text-red  mt-3">
+      Error while saving Category or SubCategory.. Please check that it already exist or not
+    </div>
+
+  </form>
+
+</div>

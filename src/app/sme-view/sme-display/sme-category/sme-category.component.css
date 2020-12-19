@@ -1,0 +1,13 @@
+@import '../../../css/sme-left-menu.css';
+@import'../../../css/action-button.css';
+
+@media (max-width: 767px){
+    li a{
+        padding: 5px;
+    }
+}
+
+.circle-invite
+{
+    padding: 20px;
+}

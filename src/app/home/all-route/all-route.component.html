@@ -1,0 +1,37 @@
+<div infinite-scroll [infiniteScrollDistance]="scrollDistance" [infiniteScrollUpDistance]="scrollUpDistance"
+  [infiniteScrollThrottle]="throttle" (scrolled)="onScrollDown()">
+  <!-- Banner -->
+  <div class="mb-2">
+    <app-banner></app-banner>
+  </div>
+
+  <!-- Top  Products --> 
+  <div class="mb-2" *ngIf="products?.length > 0">
+    <app-slider-one [products]="products" [sUuid]="sUuid"></app-slider-one>
+  </div>
+
+  <!-- Products Categories-->
+  <div class="mb-2" *ngIf="productCategories?.length > 0">
+    <app-slider-three [productCategories]="productCategories"></app-slider-three>
+  </div>
+
+  <!-- Top Services -->
+  <div class="mb-2" *ngIf="services?.length > 0">
+    <app-slider-two [services]="services" [sUuid]="sUuid"></app-slider-two>
+  </div>
+
+  <!-- Service Categories -->
+  <div class="mb-2" *ngIf="serviceCategories?.length > 0">
+    <app-slider-four [serviceCategories]="serviceCategories"></app-slider-four>
+  </div>
+
+  <!-- TOP JOBS -->
+  <div class="mb-2" *ngIf="jobs?.length > 0">
+    <app-slider-six [jobs]="jobs"></app-slider-six>
+  </div>
+
+  <!-- Top SME's -->
+  <div class="mb-2" *ngIf="smes?.length > 0">
+    <app-slider-five [smes]="smes"></app-slider-five>
+  </div>
+</div>

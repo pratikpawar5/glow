@@ -1,0 +1,6 @@
+@import '../../css/home-sliders/home-slider.css';
+@import '../../css/discount.ribbon.css';
+@import '../../css/action-button.css';
+.spinner{
+    padding: 15% 50%;
+}

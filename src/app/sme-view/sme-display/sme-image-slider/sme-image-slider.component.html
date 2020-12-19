@@ -1,0 +1,16 @@
+<div class="slider-wrap mb-2" *ngIf="sliderImages?.length > 0">
+  <ngu-carousel [inputs]="carousel" [dataSource]="sliderImages">
+    <div class="item text-center" *nguCarouselDef="let sliderImage;">
+      <div class="item-img">
+        <img mat-card-lg-image [src]="contentServer + sliderImage.imageLocationOne" onError="" class="img">
+      </div>
+    </div>
+    <button NguCarouselPrev class="arrow-left">
+      <i class="fa fa-angle-left arrow-icon-size"></i>
+    </button>
+
+    <button NguCarouselNext class="arrow-right">
+      <i class="fa fa-angle-right arrow-icon-size"></i>
+    </button>
+  </ngu-carousel>
+</div>

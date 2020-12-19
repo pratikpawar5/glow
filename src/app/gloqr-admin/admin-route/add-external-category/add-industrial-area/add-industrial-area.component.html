@@ -1,0 +1,29 @@
+<mat-card class="card">
+  <form [formGroup]="jobCategoryForm">
+    <div>
+      <h4>Add New Industrial Area Name</h4>
+      <mat-form-field appearance="outline">
+        <mat-label>Industrial Area Name</mat-label>
+        <input matInput formControlName="industrialAreaName" required autocomplete="off">
+        <mat-error *ngIf="jobCategoryForm.get('industrialAreaName').hasError('required')">
+          Industrial Area is required
+        </mat-error>
+        <mat-error *ngIf="jobCategoryForm.get('industrialAreaName').hasError('maxlength')">
+          Max 100 characters allowed
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div *ngIf="showButton;else disabled">
+      <button mat-raised-button class="global-btn" (click)="onSubmit()">
+        Save
+      </button>
+    </div>
+    <ng-template #disabled>
+      <button disabled type="button" class="btn btn-default">
+        <mat-spinner class="spinner" strokeWidth="4" [diameter]="15">
+        </mat-spinner> Saving...please wait
+      </button>
+    </ng-template>
+  </form>
+</mat-card>

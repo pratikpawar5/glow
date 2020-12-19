@@ -1,0 +1,34 @@
+<!-- NavBar -->
+<div #top>
+  <div class="social-post-wrap">
+    <div class="sme-header" *ngIf="smes">
+      <app-sme-home-header [smes]="smes"></app-sme-home-header>
+    </div>
+
+    <div class="row no-margin content-wrap">
+      <div class="col-md-3">
+        <div *ngIf="profileResponse" class="sticky-div">
+          <app-profile-contents [profileResponse]="profileResponse" [smes]="smes"></app-profile-contents>
+        </div>
+
+      </div>
+      <div class="col-md-9">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="sme-footer">
+      <app-sme-home-footer></app-sme-home-footer>
+    </div>
+  </div>
+</div>
+
+<div class="back-to-top" [ngClass]="{'show-scrollTop': windowScrolled}">
+    <div>
+        <button class="back-to-top-btn" [ngx-scroll-to]="top">
+            <i class="fa fa-arrow-up">
+            </i>
+        </button>
+    </div>
+</div>

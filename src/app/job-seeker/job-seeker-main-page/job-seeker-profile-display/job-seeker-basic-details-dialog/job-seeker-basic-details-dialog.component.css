@@ -1,0 +1,7 @@
+@import'../../../../css/job-seeker/job-seeker-profile-display.css';
+.age-error
+{
+    color: red;
+    padding: 0px 0px 0px 3px;
+    font-size: 10px;
+}

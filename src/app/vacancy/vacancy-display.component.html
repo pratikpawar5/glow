@@ -1,0 +1,31 @@
+<!-- NavBar -->
+<app-main-header></app-main-header>
+<app-main-menu-bar></app-main-menu-bar>
+<div #top>
+  <div class="row no-margin" *ngIf="jobFilterAndResult">
+    <div class="col-md-2 padding margin">
+      <mat-card>
+        <app-job-left-side-bar [vacancyFilters]="jobFilterAndResult.filters"></app-job-left-side-bar>
+      </mat-card>
+    </div>
+
+    <div class="col-md-10 padding margin" *ngIf="jobFilterAndResult">
+      <mat-card>
+        <app-job-bread-crumbs [breadcrumbs]="breadcrumbs"></app-job-bread-crumbs>
+        <app-job-display-list [jobFilterAndResult]="jobFilterAndResult"></app-job-display-list>
+      </mat-card>
+    </div>
+  </div>
+</div>
+<div *ngIf="showSpinner" class="spinner">
+  <mat-spinner strokeWidth="5" [diameter]="50"></mat-spinner>
+</div>
+
+<div class="back-to-top" [ngClass]="{'show-scrollTop': windowScrolled}">
+  <div>
+    <button class="back-to-top-btn" [ngx-scroll-to]="top">
+      <i class="fa fa-arrow-up">
+      </i>
+    </button>
+  </div>
+</div>

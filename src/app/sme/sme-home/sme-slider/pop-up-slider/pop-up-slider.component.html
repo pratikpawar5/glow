@@ -1,0 +1,53 @@
+<div class="container-fluid">
+  <i class="material-icons close-icon" (click)="close()">close</i>
+  <h4>Add or Update Banner Images</h4>
+  <div class="select-image">
+    <label>
+      Banner Image <span>*</span>
+    </label>
+    <input accept=".png,.jpeg,.jpg" onclick="value = null" style="display: none" type="file" multiple
+      (change)="onFileChanged($event.target.files)" #fileInput>
+    <button [disabled]="selectedImages?.length === 5" type="button" class="btn btn-secondary"
+      (click)="fileInput.click()">Select
+      File</button>
+    <span *ngIf="imageRequired" style="margin-left: 10px;color: red">please select atleast 1 Image</span>
+  </div>
+
+  <div class="image-types">
+    Image file size should be less than 300kb. Supported formats are: .jpeg .jpg .png
+  </div>
+
+  <div class="row image-display">
+    <div *ngFor="let image of uploadedImages;let i=index" class="image-uploaded">
+      <div *ngIf="image;else default">
+        <img mat-card-sm-image [src]="contentServer + image.imageLocation" class="border"
+          onError="this.src='../assets/not-found/no_image.png';">
+        <div class="text-center" style="margin-top: 10px">
+          <button type="button" mat-icon-button matTooltip="delete" (click)="deleteBannerImage(i,image)">
+            <i class="material-icons close-icon">close</i>
+          </button>
+        </div>
+      </div>
+    </div>
+    <ng-template #default>
+      <div class="default-image">
+        <img mat-card-sm-image src="../../../../../../assets/logo/default.png" class="border">
+      </div>
+    </ng-template>
+  </div>
+  <div>
+    <button type="submit" mat-stroked-button class="global-btn" (click)="onSubmit()">
+      Save Images
+    </button>
+  </div>
+  <div class="upload-fail" *ngIf="imageUploadFail">
+    <span>Image Uploadation Failed..please try again!!</span>
+  </div>
+  <div class="upload-fail" *ngIf="imageSizeError">
+    <span>Image file size should be less than 300kb</span>
+  </div>
+  <div class="upload-fail" *ngIf="imageTypeError">
+    <span>Please select correct file format...Supported formats are: .jpeg .jpg .png</span>
+  </div>
+
+</div>

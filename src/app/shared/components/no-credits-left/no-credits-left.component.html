@@ -1,0 +1,21 @@
+<div class="text-center">
+  <i class="material-icons cust-icon">error_outline</i>
+</div>
+
+<div class="text-center">
+  <h6 class="text-red">0 Credits left for {{this.data.displayName}}</h6>
+</div>
+
+<div class="text-center mt-2">
+  <div class="row no-margin no-padding">
+    <div class="col-md-1"></div>
+    <div class="col-md-6">
+      <button mat-raised-button class="global-btn" (click)="proceed()">
+        Proceed to BUY
+      </button>
+    </div>
+    <div class="col-md-4">
+      <button mat-stroked-button class="cancle-btn" (click)="close()">cancel</button>
+    </div>
+  </div>
+</div>

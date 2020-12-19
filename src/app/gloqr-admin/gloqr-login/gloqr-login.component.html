@@ -1,0 +1,51 @@
+<app-admin-header></app-admin-header>
+<div class="container">
+  <div class="margin">
+    <mat-card class="card">
+      <form id="form" [formGroup]="sauthForm" (ngSubmit)="login(sauthForm.value)" class="example-form">
+        <h5 class="mb-3"> Login </h5>
+        <div class="mb-2">
+          <mat-form-field appearance="outline">
+            <mat-label>Mobile number</mat-label>
+            <input matInput placeholder="Enter Mobile number" formControlName="username" (keydown)="onKeydown($event)">
+            <mat-error *ngIf="sauthForm.get('username').hasError('required')">
+              Please enter Mobile number
+            </mat-error>
+            <mat-error *ngIf="sauthForm.get('username').hasError('usernameNotFound')">
+              Enter valid Mobile number
+            </mat-error>
+            <mat-error *ngIf="sauthForm.get('username').hasError('pattern')">
+              Only Digits are allowed
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="mb-2">
+          <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input matInput placeholder="Enter password" formControlName="password" [type]="hide ? 'password' : 'text'">
+            <mat-error *ngIf="sauthForm.get('password').hasError('required')">
+              please enter valid
+              Password
+            </mat-error>
+            <mat-error *ngIf="sauthForm.get('password').hasError('passwordNotFound')">
+              Enter valid Password
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="text-center" *ngIf="loginButton;else disabled">
+          <button type="submit" mat-raised-button class="global-btn">
+            Login
+          </button>
+        </div>
+        <ng-template #disabled>
+          <div class="text-center">
+            <button disabled type="button" class="btn btn-default ">
+              <mat-spinner class="spinner" strokeWidth="4" [diameter]="15">
+              </mat-spinner> Please wait...
+            </button>
+          </div>
+        </ng-template>
+      </form>
+    </mat-card>
+  </div>
+</div>

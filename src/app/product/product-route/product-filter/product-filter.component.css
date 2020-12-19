@@ -1,0 +1,15 @@
+.padding{
+    padding: 0 5px;
+}
+.margin{
+    margin: 5px 0
+}
+.mat-card{
+    padding: 0;
+}
+.spinner{
+    padding: 300px 50%;
+}
+.no-margin{
+    margin: 0 0 70px 0;
+}

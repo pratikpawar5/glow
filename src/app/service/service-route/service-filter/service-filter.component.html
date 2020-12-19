@@ -1,0 +1,27 @@
+<div>
+    <div class="row no-margin" *ngIf="filterResult">
+        <div class="col-md-2 padding margin">
+            <mat-card>
+                <app-service-filter-result [filter]="filterResult.filter"></app-service-filter-result>
+            </mat-card>
+        </div>
+
+        <div class="col-md-10 padding margin">
+            <mat-card>
+                <app-service-breadcrumb [category]="filterResult.category"></app-service-breadcrumb>
+                <div *ngIf="filterResult.category.subCategories">
+                    <app-service-subcategory-slider [category]="filterResult.category"></app-service-subcategory-slider>
+                </div>
+                <app-service-result [category]="filterResult.category" [response]="filterResult.response">
+                </app-service-result>
+            </mat-card>
+        </div>
+    </div>
+</div>
+<div *ngIf="showSpinner" class="spinner">
+    <mat-spinner strokeWidth="5" [diameter]="50"></mat-spinner>
+</div>
+
+<div *ngIf="notFound">
+    <img alt="Not Found" class="not-found-image" src="../../../../assets/not-found/no-data.png">
+</div>

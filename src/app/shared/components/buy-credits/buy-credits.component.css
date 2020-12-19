@@ -1,0 +1,56 @@
+@import '../../../css/block-button.css';
+@import '../../../css/material-dialog.css';
+
+.mat-input-element{
+    text-align: center
+}
+.input-field{
+    width: 50%;
+}
+.block {
+    width: 70%;
+    padding: 10px 15px;
+}
+.block-disabled {
+    width: 70%;
+    padding: 10px 15px;
+}
+.btn.disabled:hover, .btn:disabled{
+    background-color: #3374b6;
+    color: #fff;
+    cursor: not-allowed;
+    opacity: 0.55;
+}
+.spinner{
+    margin: 0 auto;
+}
+.mat-progress-spinner {
+    display: inline-grid;
+    position: relative;
+}
+.success-msg{
+    font-weight: bold;
+    font-size: 20px;
+}
+.credit-added{
+    padding: 10px;
+    background: #f6f6f6;
+    border: 1px dotted #ccc;
+    margin: 10px 0;
+}
+.buy-now-btn{
+    border-radius: 30px;
+    padding: 5px 15px;
+    min-width: 25%;
+    text-transform: uppercase;
+    font-weight: bold;
+    border-color: #3374b6;
+}
+.buy-now-btn:hover{
+    color: #fff;
+    background-color: #3374b6;
+    border-color: none;
+}
+.line-ht{
+    line-height: 17px;
+}

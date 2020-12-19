@@ -1,0 +1,33 @@
+::ng-deep  .mat-dialog-container
+{
+    padding: 0 !important;
+}
+.heading-choose
+{
+    position: sticky;
+    top: 0;
+    right: 0;
+    left: 0;
+    background-color: #fff;
+    padding: 10px 0 0 10px;
+}
+.specialization
+{
+    padding: 0 10px 10px 10px;
+}
+
+.specialization-name
+{
+    padding: 0 0 0 10px;
+    font-size: 14px;
+}
+
+.action-button
+{
+    position: sticky;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background-color: #fff;
+    float: right;
+}

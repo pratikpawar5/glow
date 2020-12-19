@@ -1,0 +1,31 @@
+<div>
+  <i class="material-icons close-icon" (click)="close()">close</i>
+
+  <div *ngIf="data.pageName === 0">
+    <app-login (closeDialog)="closeDialog()" (otpVerify)="otpVerify($event)" (forgotPassword)="forgotPassword($event)">
+    </app-login>
+    <div class="mt-4 text-center">
+      New to gloqr? <span class="div-link" (click)="onSignup()">Sign up</span>
+    </div>
+  </div>
+
+  <div *ngIf="data.pageName === 1">
+    <app-sign-up (otpVerify)="otpVerify($event)"></app-sign-up>
+    <div class="mt-4 text-center">
+      Existing User? <span class="div-link" (click)="onLogin()">Log in</span>
+    </div>
+  </div>
+
+  <div *ngIf="data.pageName === 2">
+    <app-otp-verify [otpData]="otpData" (closeDialog)="closeDialog()" (jobSeekerPage)="jobSeekerPage()">
+    </app-otp-verify>
+  </div>
+
+  <div *ngIf="data.pageName === 3">
+    <app-forgot-password (callBack)="callBack($event)" [otpData]="otpData"></app-forgot-password>
+    <div class="mt-4 text-center">
+      New to gloqr? <span class="div-link" (click)="onSignup()">Sign up</span>
+    </div>
+  </div>
+
+</div>

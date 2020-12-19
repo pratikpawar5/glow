@@ -1,0 +1,76 @@
+<i class="material-icons close-icon" (click)="onClickClose()">close</i>
+
+<div class="short-listed-dialog">
+    <p class="text-bold"> When do you want to Schedule Interview for {{data.name}}?</p>
+
+    <div class="container">
+        <form [formGroup]="shortListedForm">
+
+            <div class="interview-date">
+                    <p class="titile">Choose Interview Date and Time <span style="color: #f44336">*</span></p>
+                <mat-form-field appearance="outline">
+                    <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker"
+                        placeholder="Choose Interview Date (MM/DD/YYYY)" formControlName="interviewDate"
+                        autocomplete="off">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker disabled="false"></mat-datepicker>
+                </mat-form-field>
+                <div *ngIf="interviewDateRecquired" style="color: #f44336;font-size: 12px ">
+                    Interview Date is required
+                </div>
+            </div>
+
+            <div class="interview-time">
+                <mat-form-field appearance="outline">
+                    <mat-label>Choose Interview Time</mat-label>
+                    <mat-select placeholder="Interview Time" formControlName="interviewTime" required>
+                        <mat-option *ngFor="let time of interviewTime" [value]="time">{{time}}
+                        </mat-option>
+                    </mat-select>
+
+                    <mat-error *ngIf="shortListedForm.get('interviewTime').hasError('required')">
+                        Interview time is required
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="interview-description mb-2">
+                <div class="row">
+                    <div class="col-md-12">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Message</mat-label>
+                            <textarea matInput #input1 placeholder="message" #interDesc formControlName="description"
+                                autocomplete="off" rows="4"></textarea>
+                            <mat-hint align="end">{{interDesc.value?.length || 0}}/500</mat-hint>
+                            <mat-error *ngIf="shortListedForm.get('description').hasError('maxlength')">
+                                Only 500 characters are Allowed
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="action-button" *ngIf="showButton;else disabled">
+                <div class="row">
+                    <div class="cancel-button">
+                        <button type="button" class="btn cancel" (click)="onClickClose()">CANCEL</button>
+                    </div>
+                    <div class="save-button">
+                        <button type="submit" class="btn save" (click)="onClickSubmit()">Schedule</button>
+                    </div>
+                </div>
+            </div>
+
+            <ng-template #disabled>
+                <div class="text-center">
+                    <button disabled type="button" class="btn btn-default ">
+                        <mat-spinner class="spinner" strokeWidth="4" [diameter]="15">
+                        </mat-spinner> Saving...please wait
+                    </button>
+                </div>
+            </ng-template>
+        </form>
+    </div>
+
+</div>

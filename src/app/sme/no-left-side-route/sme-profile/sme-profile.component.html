@@ -1,0 +1,17 @@
+<div class="sme-edit-web-profile content-wrap" *ngIf="smes">
+
+  <mat-card class="card-layout">
+      
+    <div class="row">
+      <div class="col-md-3 border-right">
+        <app-sme-left-side-bar [smes]="smes"></app-sme-left-side-bar>
+      </div>
+      
+      <div class="col-md-9">
+        <!-- <app-sme-profile-details [smes]="smes"></app-sme-profile-details> -->
+        <app-sme-basic-details [smes]="smes"></app-sme-basic-details>
+        <app-sme-address-details [smes]="smes"></app-sme-address-details>
+      </div>
+    </div>
+  </mat-card>
+</div>

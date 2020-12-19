@@ -1,0 +1,69 @@
+.card{
+    width: 29%;
+    border: none;
+    margin: 15px 12px 30px 12px;
+    padding: 10px;
+    border-radius: 10px;
+}
+.card-header{
+    font-size: 20px;
+    margin-bottom: 0;
+    background-color: #fff;
+    border-bottom: none;
+    text-align: center;
+    font-family: 'Franklin Gothic Medium';
+    color: #3374b6;
+}
+.card-credits{
+    font-size: 35px;
+    text-align: center;
+}
+.card-credits span{
+    font-size: 14px;
+    margin-right: -35px;
+    color: #dc0000
+}
+.card-consumed-credits{
+    font-size: 15px;
+    text-align: center
+}
+.unit-pricing{
+    font-size: 12px;
+    text-align: center
+}
+.title{
+    margin-top: 10px
+}
+.spinner{
+    padding: 178px 50%;
+}
+.plan-name{
+    color: #3374b6;
+}
+.material-icons{
+    font-size: 16px;
+    cursor: pointer;
+}
+.buy-now-btn{
+    border-radius: 30px;
+    padding: 5px 15px;
+    min-width: 20%;
+    text-transform: uppercase;
+    font-weight: bold;
+    border-color: #3374b6;
+}
+.buy-now-btn:hover{
+    color: #fff;
+    background-color: #3374b6;
+    border-color: none;
+}
+@media(max-width:500px){
+    .business-credits .card{
+        width: 100%;
+    }
+}
+@media (max-width:900px) and (min-width:501px){
+    .business-credits .card{
+        width: 44%;
+    }
+}

@@ -1,0 +1,85 @@
+<div class="wrap">
+
+  <div class="title">
+    <h4>Products</h4>
+  </div>
+
+  <div class="row no-margin" *ngIf="products?.length > 0">
+    <mat-card *ngFor="let product of products;let i=index;">
+      <div class="item">
+
+        <div class="ribbon" *ngIf="product.discount">
+          <span class="ribbon1">
+            <span>{{product.discount}} %
+              off</span>
+          </span>
+        </div>
+
+        <div class="text-center">
+
+          <div class="item-img">
+            <a href="/products/{{product.productUrlName}}/p/{{product.productUuid}}" target="_blank">
+              <img mat-card-lg-image [src]="contentServer + product.mainImage" alt="Product" onError="this.src='../assets/not-found/no_image.png';">
+            </a>
+          </div>
+
+          <div class="item-name">
+            <a href="/products/{{product.productUrlName}}/p/{{product.productUuid}}" matTooltip="{{product.productName}}"
+              target="_blank">
+              {{product.productName}}
+            </a>
+          </div>
+
+          <div class="item-sme-name">
+            <a href="/sme/{{product.sUuid}}" target="_blank" matTooltip="{{product.smeName}}">
+              {{product.smeName}}
+            </a>
+          </div>
+
+          <div *ngIf="product.discount; else originalPrice">
+            <span class="line-through-price">
+              {{product.price | IndianCurrency}}
+            </span>
+          </div>
+          <ng-template #originalPrice>
+            <span class="hidden"></span>
+            <br>
+          </ng-template>
+
+          <div class="original-price">
+            {{product.discountedPrice | IndianCurrency}}
+            <span *ngIf="product.priceUnit">
+              / {{product.priceUnit}}
+            </span>
+          </div>
+
+          <div *ngIf="tokenSuuid === product.sUuid;else check">
+
+          </div>
+
+          <ng-template #check>
+            <button *ngIf="product.addedToCart" mat-stroked-button class="added-to-cart">
+              Added to Cart <i class="material-icons">shopping_cart</i>
+              <span class="cart-arrow-check"><i class="fa fa-check"></i></span>
+            </button>
+            <button *ngIf="!product.addedToCart" mat-stroked-button class="show-interest-btn" (click)="businessInterest(product.productUuid,i)">
+              Show Interest <i class="fa fa-eye"></i>
+            </button>
+          </ng-template>
+
+        </div>
+
+      </div>
+    </mat-card>
+  </div>
+
+  <div *ngIf="showSpinner" class="spinner">
+    <mat-spinner strokeWidth="5" [diameter]="50"></mat-spinner>
+  </div>
+
+  <div *ngIf="notFound">
+    <img alt="Not Found" class="not-found-image" src="../../../../../assets/not-found/no-data-found.png">
+  </div>
+
+
+</div>

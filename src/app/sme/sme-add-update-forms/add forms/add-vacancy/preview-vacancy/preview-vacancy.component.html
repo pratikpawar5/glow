@@ -1,0 +1,95 @@
+<i class="material-icons close-icon close" (click)="onClickClose()">close</i>
+
+<div class="vacancy-detail-page container" *ngIf="data">
+  <p class="preview-job">Preview Job</p>
+  <div class="vacancy-title mb-1" *ngIf="data.vacancyTitle">
+    <span class="vacancy-title-text">{{data.vacancyTitle}}</span>
+  </div>
+  <!-- <div class="sme-name mb-2" *ngIf="smeJob.smeInfo">
+        <a href="/sme/{{smeJob.smeInfo.sUuid}}" target="_blank">
+          <span class="sme-name-text">{{smeJob.smeInfo.smeName}}</span>
+        </a>
+      </div> -->
+
+  <div class="row">
+    <div class="col-md-3" *ngIf="data.minExp || data.maxExp">
+      <i class="material-icons" style="margin-right: 10px;color: #656565;">
+        work
+      </i>
+      <span size="2" class="jobDesc">{{data.minExp}} </span>
+      <span class="jobDesc"> to</span>
+      <span size="2" class="jobDesc"> {{data.maxExp}} Yrs</span>
+    </div>
+    <div class="col-md-4" *ngIf="data.locations">
+      <i class="material-icons" style="margin-right: 10px;color: #656565;">
+        place
+      </i>
+      &nbsp;
+      <span class="jobDesc">{{data.locations}}</span>
+    </div>
+  </div>
+  <div *ngIf="data.lastApplyDate">
+    <span class="jobDesc">Last Date Apply: {{data.lastApplyDate | date}}</span>
+  </div>
+  <div class="skills mb-3" *ngIf="data.rawFormatQualification">
+    <span class="skill-set-text">Education:
+      <span style="color: #2572b1;font-size: 12px;">{{data.rawFormatQualification}}</span>
+    </span>
+  </div>
+  <hr>
+  <div class="job-description mb-3">
+    <p class="job-description-text">Job Description</p>
+    <div *ngIf="data.shortDescription">
+      <span class="desc"><b>Short Description:</b> {{data.shortDescription}}</span>
+    </div>
+    <div *ngIf="data.minExp || data.maxExp">
+      <span class="desc"><b>Experience:</b>
+        <span size="2" class="jobDesc">{{data.minExp}} </span>
+        <span class="jobDesc"> to</span>
+        <span size="2" class="jobDesc"> {{data.maxExp}} Yrs</span>
+      </span>
+    </div>
+
+    <div *ngIf="data.minSalary || data.maxSalary">
+      <span class="desc"><b>Salary:</b>
+        <span size="2" class="jobDesc">{{data.minSalary | IndianCurrency}}</span>
+        <span class="jobDesc"> to</span>
+        <span size="2" class="jobDesc">{{data.maxSalary}}</span>
+      </span>
+    </div>
+
+    <div *ngIf="data.jobTypes">
+      <span class="desc"><b>Job Types:</b> {{data.jobTypes}}</span>
+    </div>
+
+    <div *ngIf="data.employmentTypes">
+      <span class="desc"><b>Employment Types:</b> {{data.employmentTypes}}</span>
+    </div>
+    <div *ngIf="data.locations">
+      <span class="desc"><b>Job Locations:</b> {{data.locations}}</span>
+    </div>
+    <div *ngIf="data.preferredShift">
+      <span class="desc"><b>Preffered Shift:</b> {{data.preferredShift}}</span>
+    </div>
+    <!-- <div *ngIf="data.jobRole">
+      <span class="desc"><b>Job Role:</b> {{data.jobRole}}</span>
+    </div> -->
+    <div *ngIf="data.noOfVacancy">
+      <span class="desc"><b>Number of Vacancy:</b> {{data.noOfVacancy}}</span>
+    </div>
+    <div *ngIf="data.vacancyDetail.longDescription">
+      <span class="desc"><b>Long Description:</b>{{data.vacancyDetail.longDescription}}</span>
+    </div>
+  </div>
+  <div>
+    <!-- <p class="job-description-text">Other details</p> -->
+    <!-- <p class="" style="font-size: 13px;" *ngIf="data.jobRole">Industry: <span
+        style="color: #2572b1">{{data.jobRole}}</span></p> -->
+    <p class="" style="font-size: 13px;" *ngIf="data.skillSets?.length > 0 ">
+      Skills: <span
+        style="color: #2572b1">{{data.skillSets}}</span></p>
+    <p class="" style="font-size: 13px;" *ngIf="data.requiredDocuments?.length > 0">Recquired Documents: <span
+        style="color: #2572b1">{{data.requiredDocuments}}</span></p>
+
+  </div>
+</div>

@@ -1,0 +1,114 @@
+<div infinite-scroll [infiniteScrollDistance]="scrollDistance" [infiniteScrollUpDistance]="scrollUpDistance"
+  [infiniteScrollThrottle]="throttle" (scrolled)="onScrollDown()">
+  <div class="p-2">
+    <ul class="breadcrumb">
+      <li>
+        <a href [routerLink]="['/']">Home</a>
+      </li>
+      <li class="truncate">
+        <span *ngIf="searchText;else all">{{searchText}}</span>
+        <ng-template #all>All Products</ng-template>
+      </li>
+    </ul>
+
+    <div class="border-bottom">
+      <div class="text-bold f-16 mb-1">
+        Showing {{products?.result?.length}} products of {{products.totalCount | CustomPrice}} products
+        <span *ngIf="searchText"> for "{{searchText}}"</span>
+      </div>
+      <div class="f-14">
+        <ul class="nav nav-tabs">
+          <li class="text-bold">Sort by</li>
+          <li [ngClass]="{'active':sortBy === popularity}">
+            <div class="div-link" (click)="sort(popularity)">
+              Popularity
+            </div>
+          </li>
+          <li [ngClass]="{'active':sortBy === asc}">
+            <div class="div-link" (click)="sort(asc)">
+              Low Price
+            </div>
+          </li>
+          <li [ngClass]="{'active':sortBy === desc}">
+            <div class="div-link" (click)="sort(desc)">
+              High Price
+            </div>
+          </li>
+          <li [ngClass]="{'active':sortBy === newest}">
+            <div class="div-link" (click)="sort(newest)">
+              Newest First
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="row no-margin">
+    <mat-card *ngFor="let product of products.result;let i=index;">
+      <div class="item">
+
+        <div class="ribbon" *ngIf="product.discount">
+          <span class="ribbon1">
+            <span>{{product.discount}} %
+              off</span>
+          </span>
+        </div>
+
+        <div class="text-center">
+
+          <div class="item-img">
+            <a href="/products/{{product.productUrlName}}/p/{{product.productUuid}}" target="_blank">
+              <img mat-card-lg-image [src]="contentServer + product.mainImage" alt="product Image" onError="this.src='../assets/not-found/no_image.png';">
+            </a>
+          </div>
+
+          <div class="item-name">
+            <a href="/products/{{product.productUrlName}}/p/{{product.productUuid}}" matTooltip="{{product.productName}}"
+              target="_blank">
+              {{product.productName}}
+            </a>
+          </div>
+
+          <div class="item-sme-name">
+            <a href="/sme/{{product.sUuid}}" target="_blank" matTooltip="{{product.smeName}}">
+              {{product.smeName}}
+            </a>
+          </div>
+
+          <div *ngIf="product.discount; else originalPrice">
+            <span class="line-through-price">
+              {{product.price | IndianCurrency}}
+            </span>
+          </div>
+          <ng-template #originalPrice>
+            <span class="hidden"></span>
+            <br>
+          </ng-template>
+
+          <div class="original-price">
+            {{product.discountedPrice | IndianCurrency}}
+            <span *ngIf="product.priceUnit">
+              / {{product.priceUnit}}
+            </span>
+          </div>
+
+          <div *ngIf="sUuid === product.sUuid;else check">
+
+          </div>
+
+          <ng-template #check>
+            <button *ngIf="product.addedToCart" mat-stroked-button class="added-to-cart">
+              Added to Cart <i class="material-icons">shopping_cart</i>
+              <span class="cart-arrow-check"><i class="fa fa-check"></i></span>
+            </button>
+            <button *ngIf="!product.addedToCart" mat-stroked-button class="show-interest-btn" (click)="businessInterest(product.productUuid,i)">
+              Show Interest <i class="fa fa-eye"></i>
+            </button>
+          </ng-template>
+        </div>
+
+      </div>
+    </mat-card>
+  </div>
+</div>

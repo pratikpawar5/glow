@@ -1,0 +1,46 @@
+::ng-deep .mat-form-field-flex > .mat-form-field-infix { 
+    padding: 5px 0px;
+}
+::ng-deep .mat-form-field-label-wrapper { 
+    top: -1.5em; 
+}
+::ng-deep .mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+    transform: translateY(-1.1em) scale(.75);
+    width: 133.33333%;
+}
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-prefix, .mat-form-field-appearance-outline .mat-form-field-suffix{
+    top:-3px !important;
+}
+
+.right-corner
+{
+    font-size: 16px;
+    font-weight: 500;
+    color: #015baf;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 29px;
+}
+.titile
+{
+  font-size: 14px;
+  font-weight: 500;
+}
+mat-form-field{
+    width: 100%;  
+  }
+.address
+{
+  font-size: 16px;
+  font-weight: 500;
+  color: #015baf;
+  cursor: pointer;
+  position: absolute;
+  /* top: 40px; */
+  right: 29px;
+}
+.mat-raised-button
+{
+  width: auto;
+}

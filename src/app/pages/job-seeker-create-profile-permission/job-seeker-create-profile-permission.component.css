@@ -1,0 +1,45 @@
+.job-bg
+{
+    width: 100%;
+}
+.card
+{
+    position: absolute;
+    top: 10%;
+    width: 39%;
+    margin: 0 22px 0px 31%;
+}
+.cp-header
+{
+    margin-bottom: 0;
+    padding-bottom: 16px;
+}
+.cp-header .headline {
+    line-height: 28px;
+    color: #000000;
+    font-size: 21px;
+    word-wrap: break-word;
+    font-family: cursive;
+}
+
+.cp-header .sub-headline {
+line-height: 20px;
+color: rgba(0,0,0,.7);
+font-size: 15px;
+font-family: serif;
+
+}
+.seeker-img
+{
+    width: 30%;
+}
+.mat-raised-button
+{
+    width: auto;
+    margin-left: 10px;
+    min-width: 94px;
+}
+.action-button
+{
+    float: right;
+}

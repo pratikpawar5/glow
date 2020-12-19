@@ -1,0 +1,17 @@
+.qr-code
+{
+    margin: 98px;
+}
+.header
+{
+    color: #0073b6;
+    font-size: 22px;
+    font-weight: normal;
+    font-family: serif;
+}
+.note
+{
+    font-size: 12px;
+    padding: 15px 0 30px 0;
+    text-align: center;
+}

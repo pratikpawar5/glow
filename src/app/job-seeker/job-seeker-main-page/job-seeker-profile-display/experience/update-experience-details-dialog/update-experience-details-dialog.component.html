@@ -1,0 +1,165 @@
+<div class="experience-update-dialog">
+
+  <i class="material-icons close-icon" (click)="onClickClose()">close</i>
+
+  <p class="main-title mb-2">Experience Details:</p>
+  <div class="container">
+    <form [formGroup]="experienceUpdateForm">
+      <div class="job-role">
+        <div class="row">
+          <div class="col-md-6">
+            <mat-form-field appearance="outline">
+              <mat-label>Functional Area</mat-label>
+              <mat-select (click)="onGetFunctionalArea()" formControlName="functionalAreaUuid" required>
+                <mat-option *ngFor="let industrial of industrialAreaDto" [value]="industrial.areaUuid">
+                  {{industrial.industrialAreaName}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="experienceUpdateForm.get('functionalAreaUuid').hasError('required')">
+                Functional area is required
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-6">
+            <mat-form-field appearance="outline">
+              <mat-label>Job Role</mat-label>
+              <mat-select formControlName="functionalJobRoleUuid" required>
+
+                <mat-option *ngFor="let industrialJobRole of industrialJobRoleDto" [value]="industrialJobRole.jobRoleUuid">
+                  {{industrialJobRole.jobRole}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="experienceUpdateForm.get('functionalJobRoleUuid').hasError('required')">
+                Job Role is required
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <div class="company-name mb-2">
+        <div class="row">
+          <div class="col-md-12">
+            <mat-form-field appearance="outline">
+              <mat-label>Company Name</mat-label>
+              <input matInput placeholder="Company Name" formControlName="companyName" autocomplete="off" required>
+              <mat-error *ngIf="experienceUpdateForm.get('companyName').hasError('required')">
+                Company Name is required
+              </mat-error>
+              <mat-error *ngIf="experienceUpdateForm.get('companyName').hasError('maxlength')">
+                Company Name is greater than 200 characters
+              </mat-error>
+              <mat-error *ngIf="experienceUpdateForm.get('companyName').hasError('cannotbeblank')">
+                Invalid Inputs
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <div class="job-description mb-2">
+        <div class="row">
+          <div class="col-md-12">
+            <mat-form-field appearance="outline">
+              <mat-label>Job Description</mat-label>
+              <textarea matInput placeholder="Job-Description" #jobDesc formControlName="description" autocomplete="off"
+                rows="3"></textarea>
+              <mat-hint align="end">{{jobDesc.value?.length || 0}}/500</mat-hint>
+              <mat-error *ngIf="experienceUpdateForm.get('description').hasError('maxlength')">
+                  Job Description is greater than 500 characters
+                </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-12">
+          <ul class="type-of-jobs-list">
+            <li>
+              <h6>Currently Working: </h6>
+            </li>
+            <li>&nbsp;
+              <mat-radio-group class="col-md-6" formControlName="currentlyWorking" [(ngModel)]="currentWorking">
+                <mat-radio-button class="" [value]=true (click)="yesRadioButton()" (keydown)="onClickYes($event)">
+                  <span class="radio-btn-text">Yes</span>
+                </mat-radio-button>
+                &nbsp;&nbsp;
+                <mat-radio-button class="example-margin" [value]=false (click)="noRadioButton()" (keydown)="onClickNo($event)">
+                  <span class="radio-btn-text">No</span>
+                </mat-radio-button>
+                &nbsp;&nbsp;
+              </mat-radio-group>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="job-date">
+          <p class="titile">Job Date <span style="color:red">*</span> </p>
+        <div class="row">
+          <div class="col-md-6">
+            <mat-form-field appearance="outline">
+              <mat-label>Job Start Date</mat-label>
+              <input matInput [matDatepicker]="picker" [max]="startJobDate" [min]="minStartDate" placeholder="Start Date"
+                formControlName="startDate">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker disabled="false"></mat-datepicker>
+            </mat-form-field>
+            <span class="error-message" *ngIf="startDateRequired">Job Start Date is required</span>
+
+          </div>
+          <div class="col-md-6" *ngIf="endDateShow">
+            <mat-form-field appearance="outline">
+              <mat-label>Job End Date</mat-label>
+              <input matInput [matDatepicker]="picker1" [min]="selectedStartDate" [max]="maxEndDate" placeholder="End Date"
+                formControlName="endDate">
+              <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+              <mat-datepicker #picker1 disabled="false"></mat-datepicker>
+            </mat-form-field>
+            <span class="error-message" *ngIf="endDateRequired">Job End Date is required</span>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="job-role" *ngIf="noticePeriodShow">
+        <div class="row">
+          <div class="col-md-6">
+            <mat-form-field appearance="outline">
+              <mat-label>Notice Period</mat-label>
+              <mat-select formControlName="noticePeriod" required>
+
+                <mat-option *ngFor="let day of noticePeriod" [value]="day">
+                  {{day}}
+                </mat-option>
+              </mat-select>
+
+              <mat-error *ngIf="experienceUpdateForm.get('noticePeriod').hasError('required')">
+                Notice Period is required
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+
+      <div class="action-button" *ngIf="showButton;else disabled">
+        <div class="row">
+          <div class="cancel-button">
+            <button type="button" class="btn cancel" (click)="onClickClose()">CANCEL</button>
+          </div>
+          <div class="save-button">
+            <button type="submit" class="btn save" (click)="onSave()">SAVE</button>
+          </div>
+        </div>
+      </div>
+      <ng-template #disabled>
+        <div class="text-center">
+          <button disabled type="button" class="btn btn-default ">
+            <mat-spinner class="spinner" strokeWidth="4" [diameter]="15">
+            </mat-spinner> Saving...please wait
+          </button>
+        </div>
+      </ng-template>
+    </form>
+  </div>
+</div>

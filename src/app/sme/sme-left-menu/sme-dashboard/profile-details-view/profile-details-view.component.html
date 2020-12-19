@@ -1,0 +1,95 @@
+<i class="material-icons close-icon close" (click)="onClickClose()">close</i>
+<h4>SME Profile Completion Status</h4>
+<div class="profile">
+  <div class="objects">
+    <div class="row">
+      <div class="col-md-3" style="margin-top: 2%">
+        Products <i class="fa fa-question-circle-o question-mark" matTooltip="Add min 3 products for 100% result."></i>
+      </div>
+      <div class="col-md-9">
+        <progress-bar [progress]="editModeItemsPercentage.productPercentage" [color]="'#808ac3'">
+        </progress-bar>
+      </div>
+    </div>
+  </div>
+  <div class="objects">
+    <div class="row">
+      <div class="col-md-3" style="margin-top: 2%">
+        Services <i class="fa fa-question-circle-o question-mark" matTooltip="Add min 3 services for 100% result."></i>
+      </div>
+      <div class="col-md-9">
+        <progress-bar [progress]="editModeItemsPercentage.servicePercentage" [color]="'#efc96f'">
+        </progress-bar>
+      </div>
+    </div>
+  </div>
+  <div class="objects">
+    <div class="row">
+      <div class="col-md-3" style="margin-top: 2%">
+        Certificates <i class="fa fa-question-circle-o question-mark"
+          matTooltip="Add min 2 certificates for 100% result."></i>
+      </div>
+      <div class="col-md-9">
+        <progress-bar [progress]="editModeItemsPercentage.certificatePercentage" [color]="'#673ab7'">
+        </progress-bar>
+      </div>
+    </div>
+  </div>
+  <div class="objects">
+    <div class="row">
+      <div class="col-md-3" style="margin-top: 2%">
+        Infrastructure <i class="fa fa-question-circle-o question-mark"
+          matTooltip="Add min 2 infrastructure for 100% result."></i>
+      </div>
+      <div class="col-md-9">
+        <progress-bar [progress]="editModeItemsPercentage.infraPercentage" [color]="'#f37b72'">
+        </progress-bar>
+      </div>
+    </div>
+  </div>
+  <div class="objects">
+    <div class="row">
+      <div class="col-md-3" style="margin-top: 2%">
+        Team <i class="fa fa-question-circle-o question-mark" matTooltip="Add min 2 team for 100% result."></i>
+      </div>
+      <div class="col-md-9">
+        <progress-bar [progress]="editModeItemsPercentage.teamPercentage" [color]="'#e85572'">
+        </progress-bar>
+      </div>
+    </div>
+  </div>
+  <div class="objects">
+    <div class="row">
+      <div class="col-md-3" style="margin-top: 2%">
+        Gallery <i class="fa fa-question-circle-o question-mark" matTooltip="Add min 2 gallery for 100% result."></i>
+      </div>
+      <div class="col-md-9">
+        <progress-bar [progress]="editModeItemsPercentage.galleryPercentage" [color]="'#6fc2ec'">
+        </progress-bar>
+      </div>
+    </div>
+  </div>
+  <div class="objects">
+    <div class="row">
+      <div class="col-md-3" style="margin-top: 2%">
+        Jobs <i class="fa fa-question-circle-o question-mark" matTooltip="Add min 2 jobs for 100% result."></i>
+      </div>
+      <div class="col-md-9">
+        <progress-bar [progress]="editModeItemsPercentage.jobsPercentage" [color]="'#886158'">
+        </progress-bar>
+      </div>
+    </div>
+  </div>
+  <div class="objects">
+    <div class="row">
+      <div class="col-md-3" style="margin-top: 2%">
+        Social Post <i class="fa fa-question-circle-o question-mark"
+          matTooltip="Add min 2 social post for 100% result."></i>
+      </div>
+      <div class="col-md-9">
+        <progress-bar [progress]="editModeItemsPercentage.socialPostPercentage" [color]="'#92bd3c'">
+        </progress-bar>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,58 @@
+@import '../../css/action-button.css'; 
+.sme-profile-wrap
+{
+    position: sticky;
+    top:60px;
+}
+a{
+    text-decoration: none;
+}
+.sme-name
+{
+    color: #3374b6;
+    white-space: nowrap;
+    overflow: hidden;
+    font-size: 20px;
+    text-overflow: ellipsis;
+    margin-top: 15px;
+}
+.sme-address
+{
+    font-size: 12px;
+    color: #666666;
+}
+.social_count
+{
+    padding-top:20px;
+    text-align: left
+}
+.circle-invite
+{
+    border-radius: 6px;
+    padding:4px;
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+}
+.circle-invite:hover{ 
+    color: #fff;
+    background: #ed4440
+}
+.circle-objects{
+    margin: 20px 0;
+}
+.count-btn{
+    border-radius: 50%;
+    height: 35px;
+    width: 35px;
+    font-size: 14px;
+    margin: 5px 10px;
+    padding: 5px;
+}
+.w-b-p
+{
+    color: #fff;
+    font-size: 14px;
+    background-color: #0073b6;
+    width: 100%;
+}

@@ -1,0 +1,91 @@
+<div class="sticky-div f-12">
+  <ul id="grouplist" class="list-group">
+    <li class="list-group-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+      <a routerLink="/sme/{{smes.sUuid}}">
+        <span class="category-name">Home</span>
+      </a>
+    </li>
+    <li class="list-group-item" routerLinkActive="active" *ngIf="productCount">
+      <a [routerLink]="['products']">
+        <span class="category-name">Products ({{productCount}})</span>
+      </a>
+    </li>
+    <li class="list-group-item" routerLinkActive="active" *ngIf="serviceCount">
+      <a [routerLink]="['services']">
+        <span class="category-name">Services ({{serviceCount}})</span>
+      </a>
+    </li>
+    <li class="list-group-item" routerLinkActive="active" *ngIf="certificatesCount">
+      <a [routerLink]="['certificates']">
+        <span class="category-name">Certificates ({{certificatesCount}})</span>
+      </a></li>
+    <li class="list-group-item" routerLinkActive="active" *ngIf="infrastructureCount">
+      <a [routerLink]="['infrastructures']">
+        <span class="category-name">Infrastructure ({{infrastructureCount}})</span>
+      </a></li>
+    <li class="list-group-item" routerLinkActive="active" *ngIf="teamCount">
+      <a [routerLink]="['management-teams']">
+        <span class="category-name">Management Team ({{teamCount}})</span>
+      </a></li>
+    <li class="list-group-item" routerLinkActive="active" *ngIf="galleryCount">
+      <a [routerLink]="['galleries']">
+        <span class="category-name">Gallery ({{galleryCount}})</span>
+      </a></li>
+    <li class="list-group-item" routerLinkActive="active" *ngIf="vacancyCount">
+      <a [routerLink]="['jobs']">
+        <span class="category-name">Jobs ({{vacancyCount}})</span>
+      </a>
+    </li>
+    <li class="list-group-item" routerLinkActive="active" *ngIf="isSME && smeConnections?.length > 0">
+      <a [routerLink]="['circle']">
+        Business Circle
+      </a>
+    </li>
+    <li class="list-group-item" routerLinkActive="active" *ngIf="socialPostCount">
+      <a [routerLink]="['postView']">
+        Social Posts ({{socialPostCount}})
+      </a>
+    </li>
+    <li class="list-group-item" [ngx-scroll-to]="'destination'">
+      <a routerLink="/sme/{{smes.sUuid}}">
+        <span class="category-name"> Contact Us</span>
+      </a>
+    </li>
+  </ul>
+
+  <div class="text-center circle-invite" *ngIf="isMobile">
+      <div class="product-service-action">
+          <div *ngIf="status=='OWNER';else check">
+      
+          </div>
+          <ng-template #check>
+            <div *ngIf="!status">
+              <button mat-flat-button color="primary" (click)="onClickCircleInvite(smes)"><i class="fa fa-link"></i>&nbsp; Circle
+                Invite</button>
+            </div>
+      
+            <div *ngIf="status">
+              <div *ngIf="status=='NEW'">
+                <button mat-flat-button color="primary" [disabled]="smes.sUuid===isDisableId"
+                  (click)="onClickCircleInvite(smes)"><i class="fa fa-link"></i>&nbsp; Circle Invite</button>
+              </div>
+              <div *ngIf="status=='RECIEVED_REQ'">
+                <button mat-button color="primary" disabled><i class="fa fa-hourglass-end"
+                    aria-hidden="true"></i>&nbsp;Pending
+                  Request</button>
+              </div>
+              <div *ngIf="status=='SENT_REQ'">
+                <button mat-button color="primary" disabled><i class="fa fa-paper-plane" aria-hidden="true"></i>&nbsp;
+                  Request Sent</button>
+              </div>
+              <div *ngIf="status=='OWNER'">
+              </div>
+              <div *ngIf="status=='CONNECTED'">
+                <button mat-button color="primary" disabled><i class="fa fa-handshake-o"
+                    aria-hidden="true"></i>&nbsp;In-Circle</button>
+              </div>
+            </div>
+          </ng-template>
+        </div>
+  </div>
+</div>

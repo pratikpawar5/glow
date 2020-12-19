@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="mx-auto">
+    <mat-card class="un-subscribe-card">
+      <div class="unsubscribe">
+        <div class="unsubscribe-heading text-center">
+          <p class="heading">Unsubscribe from our mailing list</p>
+          <p>To help us improve our services, we would be grateful if you could tell us why:
+          </p>
+        </div>
+        <div class="complaint-box">
+          <form [formGroup]="unSubscribeForm">
+            <div class="emailId">
+              <mat-form-field appearance="outline">
+                  <mat-label>Email Id</mat-label>
+                <input matInput placeholder="Please Enter Your Email Id" formControlName="unSubscribeEmailId" required autocomplete="off">
+                <mat-error *ngIf="unSubscribeForm.get('unSubscribeEmailId').hasError('required') ">
+                  Email Id is
+                  required
+                </mat-error>
+                <mat-error *ngIf="unSubscribeForm.get('unSubscribeEmailId').hasError('pattern')">
+                    Please enter a
+                    valid email address
+                  </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="description">
+              <mat-form-field appearance="outline">
+                <mat-label>Description</mat-label>
+                <textarea matInput placeholder="Please tell us reason" #desc formControlName="unSubscribeReason"
+                  autocomplete="off" rows="5"></textarea>
+                <mat-hint align="end">{{desc.value?.length || 0}}/500</mat-hint>
+              </mat-form-field>
+            </div>
+          </form>
+        </div>
+        <div class="text-center" *ngIf="showButton;else disabled">
+          <button type="submit"  mat-raised-button class="global-btn" (click)="onClickUnsubscribe()">
+            Unsubscribe
+          </button>
+        </div>
+        <ng-template #disabled>
+            <div class="text-center">
+              <button disabled type="button" class="btn btn-default ">
+                <mat-spinner class="spinner" strokeWidth="4" [diameter]="15">
+                </mat-spinner> Saving...please wait
+              </button>
+            </div>
+          </ng-template>
+      </div>
+    </mat-card>
+  </div>
+</div>

@@ -1,0 +1,5 @@
+@import '../../../../css/display.page.css';
+@import '../../../../css/global/show-interest-button.css';
+.cart-arrow-check{
+    right: 0px;
+}

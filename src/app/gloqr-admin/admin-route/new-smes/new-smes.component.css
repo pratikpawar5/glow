@@ -1,0 +1,10 @@
+@import'../../../../../src/app/css/super-admin.css';
+
+.mat-card {
+    padding: 5px;
+}
+
+.pending{
+    font-weight: bold;
+    color: #ff0000
+}

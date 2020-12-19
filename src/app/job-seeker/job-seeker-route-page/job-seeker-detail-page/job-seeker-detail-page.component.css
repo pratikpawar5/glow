@@ -1,0 +1,86 @@
+@import'../../../css/job-seeker/job-seeker-profile-display.css';
+.job-seeker-profile-information
+{
+    margin: auto;
+    max-width: 70%;
+}
+.main-heading
+{
+   
+    background-color: #0073b6;
+    color: #fff;
+    padding: 5px 5px 5px 5px;
+}
+.avatar
+{
+    height: 125px;
+}
+.heading
+{
+    background-color: #e8e8e8;
+    padding: 3px 3px 3px 10px;
+    font-weight: bold;
+    font-size: 14px;
+
+}
+.description
+{
+    background-color: #f1f1f1;
+    font-size: 13px;
+
+}
+.actions-button
+{
+
+}
+.space
+{
+    margin-right: 19px;
+    cursor: not-allowed;
+}
+.sub-heading
+{
+   
+}
+.rejected-btn
+{
+    color: #fff;
+    background: #ed2301;
+    /* margin-left: 20px; */
+}
+.p
+{
+    margin-left: 15px;
+}
+.resume-btn
+{
+    color: #ffffff;
+    background-color: #663399;
+}
+.short-list-btn
+{
+
+    color: #ffff;
+    background-color: #e0440a;
+}
+.short-listed-btn
+{
+    color: #ffff;
+    background-color: #0f7708;
+}
+.actions
+{
+position: absolute;
+right: 0;
+bottom: 0;
+}
+.action-list
+{
+padding-left: 0;
+}
+.action-list li{
+
+list-style-type: none;
+padding: 5px 10px 0 0;
+display: inline-block;
+}

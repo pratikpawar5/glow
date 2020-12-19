@@ -1,0 +1,5 @@
+@import'../../../../../src/app/gloqr-admin/admin-route/new-smes/new-smes.component.css';
+.pending{
+    font-weight: bold;
+    color: #ff0000
+}

@@ -1,0 +1,26 @@
+<div #top>
+    <div *ngIf="smes">
+        <app-sme-home-header [smes]="smes"></app-sme-home-header>
+    </div>
+
+    <div class="row no-margin content-wrap no-padding col-md-12">
+        <div class="col-md-2 no-padding sme-sidebar" *ngIf="smes">
+            <app-sme-left-menu [sUuid]="smes.sUuid"></app-sme-left-menu>
+        </div>
+
+        <div class="col-md-10 padding">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+
+    <app-sme-home-footer></app-sme-home-footer>
+</div>
+
+<div class="back-to-top" [ngClass]="{'show-scrollTop': windowScrolled}">
+    <div>
+        <button class="back-to-top-btn" [ngx-scroll-to]="top">
+            <i class="fa fa-arrow-up">
+            </i>
+        </button>
+    </div>
+</div>

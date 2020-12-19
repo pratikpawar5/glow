@@ -1,0 +1,27 @@
+mat-form-field{
+    width: 100%;
+}
+.login-btn {
+    color: #ffffff;
+    background-color: #1b5790;
+    border-radius: 2px;
+    width: 100%;
+    padding: 4px;
+}
+.login-with-otp-btn{
+    color: #1b5790;
+    background-color: #ffffff;
+    border-radius: 2px;
+    width: 100%;
+    padding: 5px;
+}
+.custom-or{
+    margin: 5% 0;
+    text-align: center;
+}
+
+.social-img{
+    width: 20px;
+    height: 20px;
+}
+

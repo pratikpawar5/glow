@@ -1,0 +1,215 @@
+@import'../../../css/job-seeker/job-seeker-profile-display.css';
+.job-seeker-profile-card
+{
+    margin: auto;
+    max-width: 70%;
+    background-color: #0073b6;
+}
+
+.experience-information-card
+{
+    margin: auto;
+    max-width: 70%;
+    background-color: #ffffff;
+}
+.avatar {
+    vertical-align: middle;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }
+.content
+{
+    color: #ffffff;
+    font-size: 14px;
+}
+.name
+{
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: bold;
+    word-break: break-word;
+}
+.designation
+{
+    color: #ffffff;
+    word-break: break-word;
+}
+.material-icons {
+    font-size: 19px;
+    color: #ffff;
+}
+.info
+{
+    padding: 0px 0px 0px 7px;
+    color: #ffff;
+}
+
+.titile-text
+{
+    font-size: 21px;
+}
+.job-titile
+{
+    font-weight: bold;
+    font-size: 17px;
+    word-break: break-word;
+}
+.company-name
+{
+    font-size: 14px;
+    word-break: break-word;
+}
+.exp-other-info
+{
+    font-size: 13px;
+    color: #808080;
+}
+.pop
+{    font-size: 43px;
+    font-weight: 500;
+    color: #525252;
+    cursor: pointer;
+    position: absolute;
+    top: 8px;
+    right: 23px;
+}
+.expEditIcon
+{
+    font-size: 33px;
+    font-weight: 500;
+    color: #525252;
+    cursor: pointer;
+    position: absolute;
+    right: 4px;
+}
+.eduEditIcon
+{
+    font-size: 33px;
+    font-weight: 500;
+    color: #525252;
+    cursor: pointer;
+    position: absolute;
+    right: 22px;
+    top: 10%;
+}
+.pop2
+{
+    font-size: 33px;
+    font-weight: 500;
+    color: #525252;
+    cursor: pointer;
+    position: absolute;
+    top: 8px;
+    right: 26px;
+}
+.size
+{
+    font-size: 32px;
+    color: #ffffff
+}
+.pop:hover
+{
+    color:#000000;
+}
+.pop1:hover
+{
+    color:#0073b6;
+}
+.exp-icons
+{
+    color: #7d7c7c;
+    padding-top: 50%;
+    font-size: 43px;
+    padding-left: 10%;
+}
+.education-information-card
+{
+    margin: auto;
+    max-width: 70%;
+    background-color: #ffffff;
+}
+.career-desire-profile
+{
+    margin: auto;
+    max-width: 70%;
+    background-color: #ffffff;
+}
+.career-titile
+{
+   color:#b8b8b8; 
+}
+.career-content
+{
+    word-break: break-all;
+}
+.key-skill-set-card
+{
+    margin: auto;
+    max-width: 70%;
+    background-color: #ffffff;
+}
+.m
+{
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+.main-heading
+{
+    margin: 0 0 0 15%;
+    font-size: 23px;
+    padding: 5px 0px 0 0px;
+}
+.sub-head-info
+{
+    font-size: 13px;
+    color: #adadad;
+}
+.uploaded-date
+{
+    font-size: 13px;
+    color: #adadad;
+}
+.reseume-upload-card
+{
+    margin: auto;
+    max-width: 70%;
+    background-color: #ffffff;
+}
+.resume-upload-name 
+{
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.download-icon
+{
+    font-size: 28px;
+    font-weight: 500;
+    color: #0073b6;
+    cursor: pointer;
+    position: absolute;
+    right: 26px;
+}
+.delete-reusme-text
+{
+    font-weight: 500;
+    color: #0073b6;
+    cursor: pointer;
+    position: absolute;
+    right: 26px;
+    margin-top: 7px;
+}
+
+.upload-resume-box
+{
+    text-align: center;
+    padding: 35px 0 25px;
+    border: 1px dotted #ddd;
+}
+.upload-resume-btn
+{
+    color: #0073b6;
+}.upload-fail{
+    color: red;
+  }

@@ -1,0 +1,52 @@
+@import'../../../css/filter-list.css';
+@import'../../../css/action-button.css';
+.spinner{
+    padding: 300px 50%;
+}
+
+.sme-count-result {
+    margin-left: 14px;
+}
+a{
+    text-decoration: none;
+}
+.sme-filter-title{
+    padding: 10px 16px 0;
+}
+.show-result{
+    margin-left: 10px;
+    color: #878787;
+    font-size: 12px;
+}
+.sme-card
+{
+    margin: 10px 8px;
+    /* display 5 smes in list */
+
+    /* margin: 10px 30px;  */
+    /* display 4 smes in list */
+}
+.sme-name
+{
+    color: #080808;
+    display: block;
+    font-size: 12px;
+}
+.sme-address
+{
+    color:#676161;
+    display: block;
+    font-size: 12px;
+}
+.sme-content
+{
+    padding: 10px;
+}
+
+@media(max-width:767px)
+{
+    .sme-card{
+        margin: 5px auto;
+    }
+
+}

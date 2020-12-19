@@ -1,0 +1,83 @@
+@import'../../../../css/sme-registration.css';
+.type-of-jobs-list
+{
+    padding-left: 0;
+}
+.type-of-jobs-list li{
+
+    list-style-type: none;
+    padding: 5px 10px 0 0;
+    display: inline-block;
+}
+.example-margin {
+    padding-right: 11px;
+  }
+::ng-deep.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+    border-color: rgb(66, 134, 244);
+
+}
+  
+::ng-deep.mat-radio-button.mat-accent .mat-radio-inner-circle {
+      background-color: #408cff;
+      size: 10px;
+
+  }
+  .choose-specialization
+  {
+    font-weight: 400;
+    color: #337ab7;
+    border: 1px solid transparent;
+    cursor: pointer;
+    font-size: 14px;
+  }
+.error
+{
+    color: red;
+    padding: 0px 0px 0px 3px;
+    font-size: 10px;
+}
+.salaryError
+{
+    color:#f44336;
+    font-size: 13px;
+}
+.course-name
+{
+    font-size: 14px;
+}
+.remove-icon
+{
+
+}
+.material-icons {
+    font-size: 16px;
+}
+.remove-spec
+{
+
+}
+.specialization-name
+{
+    padding:0 0 0 12px;
+}
+.preview
+{
+    margin-left: 15%;
+}
+.button
+{
+    margin: auto
+}
+.mat-raised-button
+{
+    width: auto;
+}
+.form-control{
+    height: 30px;
+    font-size: 14px;
+    width: 80%;
+    margin: 17px;
+}
+.filter-search-input{
+    height: 34px;
+}

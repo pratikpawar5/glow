@@ -1,0 +1,333 @@
+<div class="f-18 filter-menu">
+  Filters
+  <div
+    *ngIf="jobRoleFilterParams?.size>0 || jobLocationFilterParams?.size>0 || jobExperienceFilterParams?.size>0 || salaryFilterParams?.size>0 || selectedSMEsFilter?.length>0"
+    class="div-link text-uppercase float-right f-12" (click)="clearAllFilter()">
+    Clear all
+  </div>
+  <div
+    *ngIf="jobRoleFilterParams?.size>0 || jobLocationFilterParams?.size>0 || jobExperienceFilterParams?.size>0 || salaryFilterParams?.size>0 || selectedSMEsFilter?.length>0">
+    <div
+      *ngIf="jobRoleFilterParams?.size + jobLocationFilterParams?.size + jobExperienceFilterParams?.size + salaryFilterParams?.size + selectedSMEsFilter?.length < 5;else viewMore">
+      <span class="selected-filter f-10" *ngFor="let selectedRolefilter of jobRoleFilterParams;let i=index">
+        <span (click)="removeSelectedFilter(selectedRolefilter,'ROLE')">{{selectedRolefilter}} <b>X</b></span>
+      </span>
+      <span class="selected-filter f-10" *ngFor="let selectedLocfilter of jobLocationFilterParams;let i=index">
+        <span (click)="removeSelectedFilter(selectedLocfilter,'LOCATION')">{{selectedLocfilter}} <b>X</b></span>
+      </span>
+      <span class="selected-filter f-10" *ngFor="let selectedExpfilter of jobExperienceFilterParams;let i=index">
+        <span (click)="removeSelectedFilter(selectedExpfilter,'EXPERIENCE')">{{selectedExpfilter}} <b>X</b></span>
+      </span>
+      <span class="selected-filter f-10" *ngFor="let selectedSalfilter of salaryFilterParams;let i=index">
+        <span (click)="removeSelectedFilter(selectedSalfilter,'SALARY')">{{selectedSalfilter}} <b>X</b></span>
+      </span>
+      <span class="selected-filter f-10" *ngFor="let sme of selectedSMEsFilter;let i=index">
+        <span (click)="removeSelectedFilter(sme.sUuid,'SME')">{{sme.smeName}} <b>X</b></span>
+      </span>
+    </div>
+    <ng-template #viewMore>
+      <div id="demo" class="collapse">
+        <span class="selected-filter f-10" *ngFor="let selectedRolefilter of jobRoleFilterParams;let i=index">
+          <span (click)="removeSelectedFilter(selectedRolefilter,'ROLE')">{{selectedRolefilter}} <b>X</b></span>
+        </span>
+        <span class="selected-filter f-10" *ngFor="let selectedLocfilter of jobLocationFilterParams;let i=index">
+          <span (click)="removeSelectedFilter(selectedLocfilter,'LOCATION')">{{selectedLocfilter}} <b>X</b></span>
+        </span>
+        <span class="selected-filter f-10" *ngFor="let selectedExpfilter of jobExperienceFilterParams;let i=index">
+          <span (click)="removeSelectedFilter(selectedExpfilter,'EXPERIENCE')">{{selectedExpfilter}} <b>X</b></span>
+        </span>
+        <span class="selected-filter f-10" *ngFor="let selectedSalfilter of salaryFilterParams;let i=index">
+          <span (click)="removeSelectedFilter(selectedSalfilter,'SALARY')">{{selectedSalfilter}} <b>X</b></span>
+        </span>
+        <span class="selected-filter f-10" *ngFor="let sme of selectedSMEsFilter;let i=index">
+          <span (click)="removeSelectedFilter(sme.sUuid,'SME')">{{sme.smeName}} <b>X</b></span>
+        </span>
+      </div>
+    </ng-template>
+    <div
+      *ngIf="jobRoleFilterParams?.size + jobLocationFilterParams?.size + jobExperienceFilterParams?.size + salaryFilterParams?.size + selectedSMEsFilter?.length > 5"
+      class="f-12">
+      <div class="div-link" data-toggle="collapse" aria-expanded="false" data-target="#demo">
+      </div>
+    </div>
+  </div>
+</div>
+<div id="accordion">
+  <div class="card">
+    <div class="card-header" data-toggle="collapse" href="#collapseOne">
+      Job Role
+      <i class="material-icons cust-icon">
+        keyboard_arrow_down
+      </i>
+    </div>
+    <div id="collapseOne" class="collapse show col-margin " *ngIf="isDesktop || isTablet">
+      <div class="search-control">
+        <span *ngIf="jobRoleFilterParams?.size>0">
+          <span class="clear-all" (click)="removeSelectedFilter(undefined,'CLEAR_ALL_ROLE')">Clear all <b>X</b></span>
+        </span>
+        <input type="text" [formControl]="searchJobRole" class="form-control filter-search-input" placeholder="Search">
+      </div>
+      <div *ngIf="jobRolesFilter?.length > 0;else noresult">
+        <div class="card-body scrollbar">
+          <div *ngFor="let jobRole of jobRolesFilter">
+            <mat-checkbox [ngModel]="jobRole.selected" (click)="filterByJobRole(jobRole.jobRole)">
+              <div class="smeName" matTooltip="{{jobRole.jobRole}}"> {{jobRole.jobRole| smeVacancyFilterName}} </div>
+            </mat-checkbox>
+            <div class="float-right f-12">
+              ({{jobRole.totalVacancies}}) </div>
+          </div>
+        </div>
+      </div>
+      <ng-template #noresult>
+        <span class="filter-search-not-found">No results found..</span>
+      </ng-template>
+    </div>
+    <div id="collapseOne" class="collapse col-margin " *ngIf="isMobile">
+      <div class="search-control">
+        <span *ngIf="jobRoleFilterParams?.size>0">
+          <span class="clear-all" (click)="removeSelectedFilter(undefined,'CLEAR_ALL_ROLE')">Clear all <b>X</b></span>
+        </span>
+        <input type="text" [formControl]="searchJobRole" class="form-control filter-search-input" placeholder="Search">
+      </div>
+      <div *ngIf="jobRolesFilter?.length > 0;else noresult">
+        <div class="card-body scrollbar">
+          <div *ngFor="let jobRole of jobRolesFilter">
+            <mat-checkbox [ngModel]="jobRole.selected" (click)="filterByJobRole(jobRole.jobRole)">
+              <div class="smeName" matTooltip="{{jobRole.jobRole}}"> {{jobRole.jobRole| smeVacancyFilterName}} </div>
+            </mat-checkbox>
+            <div class="float-right f-12">
+              ({{jobRole.totalVacancies}}) </div>
+          </div>
+        </div>
+      </div>
+      <ng-template #noresult>
+        <span class="filter-search-not-found">No results found..</span>
+      </ng-template>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" data-toggle="collapse" href="#collapseTwo">
+      Job Location
+      <i class="material-icons cust-icon">
+        keyboard_arrow_down
+      </i>
+    </div>
+    <div id="collapseTwo" class="collapse show col-margin " *ngIf="isDesktop || isTablet">
+      <div class="search-control">
+        <span *ngIf="jobLocationFilterParams?.size>0">
+          <span class="clear-all" (click)="removeSelectedFilter(undefined,'CLEAR_ALL_LOCATION')">Clear all
+            <b>X</b></span>
+        </span>
+        <input type="text" [formControl]="searchLocation" class="form-control filter-search-input" placeholder="Search">
+      </div>
+      <div *ngIf="locationsFilter?.length > 0;else noresult">
+        <div class="card-body scrollbar">
+          <div *ngFor="let location of locationsFilter">
+            <mat-checkbox [ngModel]="location.selected" (click)="filterByLocation(location.location)">
+              <div class="smeName" matTooltip="{{location.location}}"> {{location.location}} </div>
+            </mat-checkbox>
+            <div class="float-right f-12">
+              ({{location.totalVacancies}}) </div>
+          </div>
+        </div>
+      </div>
+      <ng-template #noresult>
+        <span class="filter-search-not-found">No results found..</span>
+      </ng-template>
+    </div>
+    <div id="collapseTwo" class="collapse col-margin " *ngIf="isMobile">
+      <div class="search-control">
+        <span *ngIf="jobLocationFilterParams?.size>0">
+          <span class="clear-all" (click)="removeSelectedFilter(undefined,'CLEAR_ALL_LOCATION')">Clear all
+            <b>X</b></span>
+        </span>
+        <input type="text" [formControl]="searchLocation" class="form-control filter-search-input" placeholder="Search">
+      </div>
+      <div *ngIf="locationsFilter?.length > 0;else noresult">
+        <div class="card-body scrollbar">
+          <div *ngFor="let location of locationsFilter">
+            <mat-checkbox [ngModel]="location.selected" (click)="filterByLocation(location.location)">
+              <div class="smeName" matTooltip="{{location.location}}"> {{location.location}} </div>
+            </mat-checkbox>
+            <div class="float-right f-12">
+              ({{location.totalVacancies}}) </div>
+          </div>
+        </div>
+      </div>
+      <ng-template #noresult>
+        <span class="filter-search-not-found">No results found..</span>
+      </ng-template>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" data-toggle="collapse" href="#collapseThree">
+      Experience
+      <i class="material-icons cust-icon">
+        keyboard_arrow_down
+      </i>
+    </div>
+    <div id="collapseThree" class="collapse show col-margin " *ngIf="isDesktop || isTablet">
+      <div class="search-control">
+        <span *ngIf="jobExperienceFilterParams?.size>0">
+          <span class="clear-all" (click)="removeSelectedFilter(undefined,'CLEAR_ALL_EXPERIENCE')">Clear all
+            <b>X</b></span>
+        </span>
+        <input type="text" [formControl]="searchLocation" class="form-control filter-search-input" placeholder="Search">
+      </div>
+      <div *ngIf="experiencesFilter?.length > 0;else noresult">
+        <div class="card-body scrollbar">
+          <div *ngFor="let exp of experiencesFilter">
+            <mat-checkbox [ngModel]="exp.selected" (click)="filterByExperience(exp.formattedExperience)">
+              <div class="smeName" matTooltip="{{exp.formattedExperience}">{{exp.formattedExperience}} </div>
+            </mat-checkbox>
+            <div class=" float-right f-12">
+                ({{exp.totalVacancies}}) </div>
+          </div>
+        </div>
+      </div>
+      <ng-template #noresult>
+        <span class="filter-search-not-found">No results found..</span>
+      </ng-template>
+    </div>
+    <div id="collapseThree" class="collapse  col-margin " *ngIf="isMobile">
+      <div class="search-control">
+        <span *ngIf="jobExperienceFilterParams?.size>0">
+          <span class="clear-all" (click)="removeSelectedFilter(undefined,'CLEAR_ALL_EXPERIENCE')">Clear all
+            <b>X</b></span>
+        </span>
+        <input type="text" [formControl]="searchLocation" class="form-control filter-search-input" placeholder="Search">
+      </div>
+      <div *ngIf="experiencesFilter?.length > 0;else noresult">
+        <div class="card-body scrollbar">
+          <div *ngFor="let exp of experiencesFilter">
+            <mat-checkbox [ngModel]="exp.selected" (click)="filterByExperience(exp.formattedExperience)">
+              <div class="smeName" matTooltip="{{exp.formattedExperience}">{{exp.formattedExperience}} </div>
+              </mat-checkbox>
+              <div class=" float-right f-12">
+                ({{exp.totalVacancies}}) </div>
+          </div>
+        </div>
+      </div>
+      <ng-template #noresult>
+        <span class="filter-search-not-found">No results found..</span>
+      </ng-template>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" data-toggle="collapse" href="#collapseFour">
+      Salary
+      <i class="material-icons cust-icon">
+        keyboard_arrow_down
+      </i>
+    </div>
+    <div id="collapseFour" class="collapse show col-margin " *ngIf="isDesktop || isTablet">
+      <div class="search-control">
+        <span *ngIf="salaryFilterParams?.size>0">
+          <span class="clear-all" (click)="removeSelectedFilter(undefined,'CLEAR_ALL_SALARY')">Clear all <b>X</b></span>
+        </span>
+        <input type="text" [formControl]="searchLocation" class="form-control filter-search-input" placeholder="Search">
+      </div>
+      <div *ngIf="salariesFilter?.length > 0;else noresult">
+        <div class="card-body scrollbar">
+          <div *ngFor="let salary of salariesFilter">
+            <mat-checkbox [ngModel]="salary.selected" (click)="filterBySalary(salary.formattedSalary)">
+              <div class="smeName" matTooltip="{{salary.formattedSalary}}">
+                {{salary.formattedSalary}} </div>
+            </mat-checkbox>
+            <div class=" float-right f-12">
+              ({{salary.totalVacancies}}) </div>
+          </div>
+        </div>
+      </div>
+      <ng-template #noresult>
+        <span class="filter-search-not-found">No results found..</span>
+      </ng-template>
+    </div>
+    <div id="collapseFour" class="collapse col-margin " *ngIf="isMobile">
+      <div class="search-control">
+        <span *ngIf="salaryFilterParams?.size>0">
+          <span class="clear-all" (click)="removeSelectedFilter(undefined,'CLEAR_ALL_SALARY')">Clear all <b>X</b></span>
+        </span>
+        <input type="text" [formControl]="searchLocation" class="form-control filter-search-input" placeholder="Search">
+      </div>
+      <div *ngIf="salariesFilter?.length > 0;else noresult">
+        <div class="card-body scrollbar">
+          <div *ngFor="let salary of salariesFilter">
+            <mat-checkbox [ngModel]="salary.selected" (click)="filterBySalary(salary.formattedSalary)">
+              <div class="smeName" matTooltip="{{salary.formattedSalary}}">
+                {{salary.formattedSalary}} </div>
+            </mat-checkbox>
+            <div class=" float-right f-12">
+              ({{salary.totalVacancies}}) </div>
+          </div>
+        </div>
+      </div>
+      <ng-template #noresult>
+        <span class="filter-search-not-found">No results found..</span>
+      </ng-template>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" data-toggle="collapse" href="#collapseFive">
+      SME
+      <i class="material-icons cust-icon">
+        keyboard_arrow_down
+      </i>
+    </div>
+    <div id="collapseFive" class="collapse show col-margin " *ngIf="isDesktop || isTablet">
+      <div class="search-control">
+        <span *ngIf="smeFilterParams?.size>0">
+          <span class="clear-all" (click)="removeSelectedFilter(undefined,'CLEAR_ALL_SME')">Clear all <b>X</b></span>
+        </span>
+        <input type="text" [formControl]="searchLocation" class="form-control filter-search-input" placeholder="Search">
+      </div>
+
+      <div *ngIf="smesFilter?.length > 0;else noresult">
+        <div class="card-body scrollbar">
+          <div *ngFor="let sme of smesFilter">
+            <mat-checkbox [ngModel]="sme.selected" class="example-margin" (click)="filterBySme(sme.sUuid)">
+              <div class="smeName" matTooltip="{{sme.smeName}}">
+                {{sme.smeName | smeVacancyFilterName}} </div>
+            </mat-checkbox>
+            <div class=" float-right f-12">
+              ({{sme.totalVacancies}}) </div>
+          </div>
+        </div>
+      </div>
+
+      <ng-template #noresult>
+        <span class="filter-search-not-found">No results found..</span>
+      </ng-template>
+    </div>
+    <div id="collapseFive" class="collapse  col-margin " *ngIf="isMobile">
+      <div class="search-control">
+        <span *ngIf="smeFilterParams?.size>0">
+          <span class="clear-all" (click)="removeSelectedFilter(undefined,'CLEAR_ALL_SME')">Clear all <b>X</b></span>
+        </span>
+        <input type="text" [formControl]="searchLocation" class="form-control filter-search-input" placeholder="Search">
+      </div>
+
+      <div *ngIf="smesFilter?.length > 0;else noresult">
+        <div class="card-body scrollbar">
+          <div *ngFor="let sme of smesFilter">
+            <mat-checkbox [ngModel]="sme.selected" class="example-margin" (click)="filterBySme(sme.sUuid)">
+              <div class="smeName" matTooltip="{{sme.smeName}}">
+                {{sme.smeName | smeVacancyFilterName}} </div>
+            </mat-checkbox>
+            <div class=" float-right f-12">
+              ({{sme.totalVacancies}}) </div>
+          </div>
+        </div>
+      </div>
+
+      <ng-template #noresult>
+        <span class="filter-search-not-found">No results found..</span>
+      </ng-template>
+    </div>
+  </div>
+
+</div>

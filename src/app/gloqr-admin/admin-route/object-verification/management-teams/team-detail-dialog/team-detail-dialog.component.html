@@ -1,0 +1,117 @@
+<i class="material-icons close-icon" (click)="close()">close</i>
+
+<div class="container-fluid">
+    <h2> Managment Team Details</h2>
+    <div *ngIf="data">
+
+        <div class="row sub-title-wrap mb-3">
+            <div class="col-md-2">
+                <span class="titile"> Full Name: </span>
+            </div>
+
+            <div class="col-md-10">
+                <span class="sub-titile"> {{data.fullName}}</span>
+            </div>
+        </div>
+
+        <div class="row sub-title-wrap mb-3">
+            <div class="col-md-2">
+                <span class="titile">Designation: </span>
+            </div>
+
+            <div class="col-md-10">
+                <span class="sub-titile">{{data.designation}}</span>
+            </div>
+        </div>
+
+        <div class="row sub-title-wrap mb-3" *ngIf="data.profileDesc">
+            <div class="col-md-2">
+                <span class="titile">Description: </span>
+            </div>
+
+            <div class="col-md-10">
+                <span class="sub-titile">{{data.profileDesc}}</span>
+            </div>
+        </div>
+
+        <div class="row sub-title-wrap mb-3" *ngIf="data.mail">
+            <div class="col-md-2">
+                <span class="titile">Email Id: </span>
+            </div>
+
+            <div class="col-md-10">
+                <span class="sub-titile">{{data.mail}}</span>
+            </div>
+        </div>
+        <div class="row sub-title-wrap mb-3" *ngIf="data.experience">
+            <div class="col-md-2">
+                <span class="titile">Experience: </span>
+            </div>
+
+            <div class="col-md-10">
+                <span class="sub-titile">{{data.experience}} years</span>
+            </div>
+        </div>
+
+        <div class="row sub-title-wrap mb-3" *ngIf="data.fbLink">
+            <div class="col-md-2">
+                <span class="titile">Facebook Link: </span>
+            </div>
+
+            <div class="col-md-10">
+                <span class="sub-titile">{{data.fbLink}}</span>
+            </div>
+        </div>
+
+        <div class="row sub-title-wrap mb-3" *ngIf="data.twitterLink">
+            <div class="col-md-2">
+                <span class="titile">Twitter Link:: </span>
+            </div>
+
+            <div class="col-md-10">
+                <span class="sub-titile">{{data.twitterLink}}</span>
+            </div>
+        </div>
+
+        <div class="row sub-title-wrap mb-3" *ngIf="data.linkedinLink">
+            <div class="col-md-2">
+                <span class="titile">Linked-In: </span>
+            </div>
+
+            <div class="col-md-10">
+                <span class="sub-titile">{{data.linkedinLink}}</span>
+            </div>
+        </div>
+        <div>
+            <span class="titile">Profile Image</span>
+            <img alt="Team" [src]="contentServer + data.profileImageUrl" class="profile-img">
+        </div>
+        
+        <div class="mb-3">
+            <mat-form-field appearance="outline">
+                <mat-label>Feedback</mat-label>
+                <textarea #input matInput [formControl]="feedbackMessage" [ngModel]="data.frontFeedBackMessage"
+                    rows="2"></textarea>
+                <mat-hint align="end">{{input.value?.length || 0}}/500</mat-hint>
+            </mat-form-field>
+        </div>
+
+        <div class="row action-button mb-2">
+            <div class="b">
+                <span *ngIf="data.isApprove">
+                    <span class="text-bold">Current State: Already Approved</span>
+                </span>
+                <span *ngIf="data.isReject">
+                    <span class="text-bold">Current State: Already Rejected</span>
+                </span>
+            </div>
+
+            <div class="approve-button b">
+                <button type="button" class="btn btn-success" (click)="onApprove()">Add to Approval</button>
+            </div>
+            <div class="reject-button b">
+                <button type="button" class="btn btn-danger" (click)="onReject()">Add to Rejection</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,24 @@
+.block {
+    display: block;
+    width: 90%;
+    border: none;
+    padding: 8px 0px;
+    font-size: 20px;
+    cursor: pointer;
+    text-align: center;
+    margin: auto;
+    background-color: #3374b6;
+}
+.block:hover{
+    background: orange;
+    color: #000;
+}
+.block-disabled {
+    display: block;
+    width: 90%;
+    border: none;
+    padding: 8px 0px;
+    font-size: 20px;
+    text-align: center;
+    margin: auto;
+}

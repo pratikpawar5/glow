@@ -1,0 +1,63 @@
+<div class="container">
+  <h5>Login</h5>
+  <form [formGroup]="loginForm">
+    <div class="mt-3 mb-2">
+      <mat-form-field>
+        <input formControlName="username" matInput placeholder="Enter Mobile number/Email"
+          (keydown)="onKeydown($event)">
+        <mat-error *ngIf="loginForm.get('username').hasError('required') ">
+          Please enter valid Email ID/Mobile number
+        </mat-error>
+        <mat-error *ngIf="loginForm.get('username').hasError('invalidCredentials') ">
+          Your username or password is incorrect
+        </mat-error>
+        <mat-error *ngIf="loginForm.get('username').hasError('userNotFound') ">
+          You are not registered with us. Please sign up
+        </mat-error>
+        <mat-error *ngIf="loginForm.get('username').hasError('invalidUsername') ">
+          {{invalidUsernameErrorMSg}}
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field>
+        <input type="password" formControlName="password" matInput placeholder="Enter Password">
+        <button type="button" class="btn btn-link div-link" matSuffix (click)="generateOtp('FORGOT_PASS')">Forgot?</button>
+        <mat-error *ngIf="loginForm.get('password').hasError('required') ">
+          Please enter password
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="mt-3">
+      <button type="submit" mat-raised-button class="login-btn" (click)="onLogin()">Login</button>
+    </div>
+
+    <p class="custom-or f-12">OR</p>
+
+    <div>
+      <button mat-raised-button class="login-with-otp-btn" (click)="generateOtp('OTP_LOGIN')">
+        Login with OTP
+      </button>
+    </div>
+  </form>
+  <p class="custom-or f-12">OR Continue With</p>
+
+  <div class="social-login row">
+    <div class="col-md-2"></div>
+    <div class="col-md-4">
+      <button mat-button (click)="signInWithGoogle()">
+        <img alt="Google" src="../../../../assets/logo/google_logo.png" class="social-img">
+        Google
+      </button>
+    </div>
+    <div class="col-md-4">
+      <button mat-button (click)="signInWithFacebook()">
+        <img alt="Facebook" src="../../../../assets/logo/facebook_logo.png" class="social-img">
+        Facebook
+      </button>
+    </div>
+  </div>
+
+</div>

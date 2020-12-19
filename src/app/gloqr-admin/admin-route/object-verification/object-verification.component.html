@@ -1,0 +1,37 @@
+<div class="fluid-container">
+    <div class="mat-tab">
+        <mat-tab-group>
+            <mat-tab label="SME Details" *ngIf="sUuid">
+                <app-sme-basic-details [sUuid]="sUuid"></app-sme-basic-details>
+            </mat-tab>
+            <mat-tab label="Products" *ngIf="sUuid && uuid">
+                <app-products [sUuid]="sUuid" [uuid]="uuid"></app-products>
+            </mat-tab>
+            <mat-tab label="Services" *ngIf="sUuid && uuid">
+                <app-services [sUuid]="sUuid" [uuid]="uuid"></app-services>
+            </mat-tab>
+
+            <mat-tab label="Certificates" *ngIf="sUuid">
+                <app-certificates [sUuid]="sUuid"></app-certificates>
+            </mat-tab>
+            <mat-tab label="Infrastructure" *ngIf="sUuid">
+                <app-infrastructures [sUuid]="sUuid"></app-infrastructures>
+            </mat-tab>
+            <mat-tab label="Management Team" *ngIf="sUuid">
+                <app-management-teams [sUuid]="sUuid"></app-management-teams>
+            </mat-tab>
+            <mat-tab label="Gallery" *ngIf="sUuid">
+                <app-galleries [sUuid]="sUuid"></app-galleries>
+            </mat-tab>
+            <mat-tab label="Jobs" *ngIf="sUuid && uuid">
+                <app-vacancies [sUuid]="sUuid" [uuid]="uuid"></app-vacancies>
+            </mat-tab>
+            <mat-tab label="Business Post" *ngIf="sUuid && uuid">
+                <app-business-posts [sUuid]="sUuid" [uuid]="uuid"></app-business-posts>
+            </mat-tab>
+            <mat-tab label="Package Details" *ngIf="sUuid && uuid">
+                <app-package-details [sUuid]="sUuid" [uuid]="uuid"></app-package-details>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+</div>

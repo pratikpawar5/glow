@@ -1,0 +1,35 @@
+<div class="wrap">
+
+    <div class="title">
+        <h4>Infrastructure</h4>
+    </div>
+
+    <div class="sme-objects">
+        <div class="col-md-12">
+            <mat-card class="item-card" *ngFor="let smeInfrastructure of smeInfrastructures;let i=index">
+                <div class="item-title">
+                        {{smeInfrastructure.machineName}}
+                </div>
+
+                <div class="item-desc">
+                    <div class="row">
+                        <div class="col-md-2 sub-title">
+                            Images:
+                        </div>
+                        <div class="col-md-10 sub-title-desc" *ngIf="showImages">
+                            <ngx-gallery [options]="galleryOptions"
+                                [images]="getImageFromInfraMap(smeInfrastructure.infraUuid)"></ngx-gallery>
+                        </div>
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+    </div>
+    <div *ngIf="showSpinner" class="spinner">
+        <mat-spinner strokeWidth="5" [diameter]="50"></mat-spinner>
+    </div>
+
+    <div *ngIf="notFound">
+        <img alt="Not Found" class="not-found-image" src="../../../../assets/not-found/no-data-found.png">
+    </div>
+</div>

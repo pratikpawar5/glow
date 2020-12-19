@@ -1,0 +1,12 @@
+@import '../css/back-to-top.css';
+.padding{
+    padding-left: 20px;
+}
+.sme-sidebar {
+    padding: 0;
+    background: #343a40;
+}
+.spinner{
+    padding: 145px 50%;
+    
+}

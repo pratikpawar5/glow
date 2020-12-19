@@ -1,0 +1,27 @@
+<ul class="breadcrumb">
+  <li>
+    <a href [routerLink]="['/']">Home</a>
+  </li>
+  <li>
+    <a href [routerLink]="['/products']">Products</a>
+  </li>
+  <li *ngIf="product.active && (product.productState === 'APPROVED')">
+    <a href [routerLink]="['/','products',product.subCategory.productCategory.urlName]"
+      [queryParams]="{c:product.subCategory.productCategory.categoryUuid }">
+      {{product.subCategory.productCategory.categoryName}}
+    </a>
+  </li>
+  <li *ngIf="product.active && (product.productState === 'APPROVED')">
+    <a href [routerLink]="['/','products',product.subCategory.productCategory.urlName,product.subCategory.urlName]"
+      [queryParams]="{c:product.subCategory.subCategoryUuid }">
+      {{product.subCategory.subCategoryName}}
+    </a>
+  </li>
+  <li class="truncate">
+    {{product.productName}}
+  </li>
+</ul>
+<div class="share-link" (click)="onClickShare()">
+  <i class="fa fa-share-alt" aria-hidden="true"></i>
+  Share
+</div>
